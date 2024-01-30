@@ -1,0 +1,33 @@
+
+.bienvenida{
+    /* background-image: url(../../assets/IMG/landing.png); */
+    background-color: antiquewhite;
+    height: 25rem;
+    display: flex;
+}
+
+.bienvenida_pic{
+    background-color: blueviolet;
+    width: 18rem;
+    height: 18rem;
+    margin-left: 12%;
+    margin-top: 3%;
+}
+
+.message{
+    margin-left: 5%;
+    padding-top: 5%;
+    width: 100%;
+}
+
+.message h1{
+    font-size: 2.8rem;
+}
+
+.message p{
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    margin-left: 3%;
+
+}
