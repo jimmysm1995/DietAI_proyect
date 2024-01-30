@@ -1,22 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { BienvenidaComponent } from './bienvenida/bienvenida.component';
-import { InfoComponent } from './info/info.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
+import { InfoComponent } from './components/info/info.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { RegisterComponent } from './views/register/register.component';
+import { LoginComponent } from './views/login/login.component';
+import { LandingComponent } from './views/landing/landing.component';
+import { FormRegisterComponent } from './components/form-register/form-register.component';
 
+
+const routes:Routes = [
+  {path: '', component: LandingComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+
+]
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BienvenidaComponent,
     InfoComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent,
+    LoginComponent,
+    LandingComponent,
+    FormRegisterComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule
   ],
