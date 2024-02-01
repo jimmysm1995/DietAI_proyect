@@ -12,7 +12,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/login/login.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
-
+import { FormLoginComponent } from './components/form-login/form-login.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -30,7 +30,8 @@ const routes:Routes = [
     RegisterComponent,
     LoginComponent,
     LandingComponent,
-    FormRegisterComponent
+    FormRegisterComponent,
+    FormLoginComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
