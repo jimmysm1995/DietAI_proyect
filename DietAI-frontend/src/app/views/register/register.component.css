@@ -1,10 +1,13 @@
 .container{
     display: flex;
     width: 100%;
-    gap: 2rem;
-    justify-content: center;
-    box-shadow: rgb(195, 194, 194) 15px 15px 15px, rgb(0, 0, 0) -15px -15px 15px;
-    margin: 0;
+    max-width: 50%;
+    /* gap: 3rem; */
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: rgb(195, 194, 194) 15px 15px 15px, rgb(195, 194, 194) -15px -15px 15px;
+    margin: auto;
+    padding: 0;
 }
 
 img{

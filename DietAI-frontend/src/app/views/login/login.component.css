@@ -1,11 +1,15 @@
 .container{
+    /* background-color: blueviolet; */
     display: flex;
     width: 100%;
-    gap: 2rem;
-    justify-content: center;
+    max-width: 50%;
+    /* gap: 3rem; */
+    
+    justify-content: flex-start;
     align-items: center;
-    box-shadow: rgb(195, 194, 194) 15px 15px 15px, rgb(0, 0, 0) -15px -15px 15px;
-    margin: 0;
+    box-shadow: rgb(195, 194, 194) 15px 15px 15px, rgb(195, 194, 194) -15px -15px 15px;
+    margin: auto;
+    padding: 0;
 }
 
 img{
@@ -14,9 +18,10 @@ img{
 }
 
 .imgRegistro{
-    background-image: url(../../../assets/IMG/register.jpg);
+    background-image: url(../../../assets/IMG/login.jpg);
     background-size: cover;
     background-position: center;
     width: 50%;
     height: 100vh;
+    /* margin-left: -30rem; */
 }
