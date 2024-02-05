@@ -6,32 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
     @Autowired
-    UserRepository usuarioRepository;
+    UserRepository userRepository;
 
-    public void crearUsuario(User usuario){
-        usuarioRepository.save(usuario);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public void eliminarUsuario(User usuario){
-        usuarioRepository.delete(usuario);
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
-    public User encontrarUsuario(Long id){
-        return usuarioRepository.findById(id).orElse(null);
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
-    public User encontrarUsuarioPornombre(String nombre){ return usuarioRepository.findByName(nombre).orElse(null);}
-
-    public User encontrarUsuarioPorEmail(String email){ return usuarioRepository.findByEmail(email).orElse(null);}
-
-    public List<User> listarUsuarios(){
-        return usuarioRepository.findAll();
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 
+    public Optional<User> loginUser(String username, String pass) {
+        return userRepository.findByUserNameAndPass(username, pass);
+    }
+
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public Optional findUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public Optional findUserByName(String name){
+        return userRepository.findByName(name);
+    }
 }

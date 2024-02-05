@@ -33,8 +33,8 @@ public class Entrenamiento {
     @Column(name = "distribucion", columnDefinition = "Varchar(50)")
     private String distribucion;
 
-    @OneToMany(mappedBy = "entrenamiento")
-    private List<Usuario> usuarios;
+//    @OneToMany(mappedBy = "entrenamiento")
+//    private List<User> usuarios;
 
     @OneToMany(mappedBy = "entrenamiento")
     private List<EjerciciosEntrenamiento> ejerciciosEntrenamientos;

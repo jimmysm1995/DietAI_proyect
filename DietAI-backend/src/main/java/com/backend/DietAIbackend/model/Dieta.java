@@ -24,6 +24,6 @@ public class Dieta {
     @OneToMany(mappedBy = "dietas")
     private List<RecetaDieta> recetaDietas;
 
-    @OneToMany(mappedBy = "dieta")
-    private List<Usuario> usuarios;
+//    @OneToMany(mappedBy = "dieta")
+//    private List<User> usuarios;
 }
