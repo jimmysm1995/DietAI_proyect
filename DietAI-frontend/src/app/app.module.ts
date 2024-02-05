@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +36,8 @@ const routes:Routes = [
     FormLoginComponent
   ],
   imports: [
+    HttpClientModule,
+    FormsModule, // Agrega FormsModule a la lista de importaciones
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule
