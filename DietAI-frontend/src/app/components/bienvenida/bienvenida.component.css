@@ -1,17 +1,19 @@
 
 .bienvenida{
     /* background-image: url(../../assets/IMG/landing.png); */
-    background-color: antiquewhite;
+    background-image: url(../../../assets/IMG/cemento.jpg);
     height: 25rem;
     display: flex;
 }
 
 .bienvenida_pic{
-    background-color: blueviolet;
-    width: 18rem;
-    height: 18rem;
+    background-image: url(../../../assets/IMG/landingMujer.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 25rem;
+    height: 23rem;
     margin-left: 12%;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 .message{

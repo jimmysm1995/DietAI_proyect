@@ -13,11 +13,13 @@ import { LoginComponent } from './views/login/login.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'contacto', component: ContactoComponent}
 
 ]
 @NgModule({
@@ -31,7 +33,8 @@ const routes:Routes = [
     LoginComponent,
     LandingComponent,
     FormRegisterComponent,
-    FormLoginComponent
+    FormLoginComponent,
+    ContactoComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
