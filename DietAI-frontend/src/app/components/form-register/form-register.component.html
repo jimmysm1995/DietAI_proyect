@@ -1,22 +1,26 @@
-<form>
+<form #userForm="ngForm" (ngSubmit)="registrarUsuario(userForm.value)">
     <h2>Sign up</h2>
 
     <div class="form-group">
-        <label for="username">Full Name</label>
+        <label for="name">Name</label>
         <input
             type="text"
             class="form-control"
-            id="Ful Name"
-            placeholder="Name"
+            id="name"
+            name="name"
+            placeholder="name"
+            ngModel required
         />
     </div>
     <div class="form-group">
-        <label for="username">Username</label>
+        <label for="userName">Username</label>
         <input
             type="text"
             class="form-control"
-            id="username"
+            id="userName"
+            name="userName"
             placeholder="Username"
+            ngModel required
         />
     </div>
     <div class="form-group">
@@ -25,38 +29,41 @@
             type="email"
             class="form-control"
             id="email"
-            abria-describedy="emailHelp"
+            name="email"
             placeholder="email"
+            ngModel required
         />
         <small id="emailHelp" class="form-text text-muted"
             >We'll never share your email with anyone else.
         </small>
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="pass">Password</label>
         <input
             type="password"
             class="form-control"
-            id="password"
+            id="pass"
+            name="pass"
             placeholder="************"
+            ngModel required
         />
     </div>
-    <div class="form-group">
-        <label for="password">Repeat Password</label>
+    <!-- <div class="form-group">
+        <label for="repeatPassword">Repeat Password</label>
         <input
             type="password"
             class="form-control"
-            id="password"
+            id="repeatPassword"
             placeholder="************"
+            required
         />
-    </div>
+    </div> -->
     <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1"
-            >I agree to sale my soul to <strong>the Devil</strong>
+        <input type="checkbox" class="form-check-input" id="agreeCheckbox" required />
+        <label class="form-check-label" for="agreeCheckbox"
+            >I agree to sell my soul to <strong>the Devil</strong>
         </label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Sign up</button>
-    <a href="/login" class="btn-link">Sign in</a>
+    <button type="submit" [disabled]="userForm.invalid">Register</button>
 </form>
