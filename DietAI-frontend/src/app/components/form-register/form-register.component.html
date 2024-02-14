@@ -1,24 +1,12 @@
 <form #userForm="ngForm" (ngSubmit)="registrarUsuario(userForm.value)">
     <h2>Sign up</h2>
-
     <div class="form-group">
-        <label for="name">Name</label>
+        <label for="username">Username</label>
         <input
             type="text"
             class="form-control"
-            id="name"
-            name="name"
-            placeholder="name"
-            ngModel required
-        />
-    </div>
-    <div class="form-group">
-        <label for="userName">Username</label>
-        <input
-            type="text"
-            class="form-control"
-            id="userName"
-            name="userName"
+            id="username"
+            name="username"
             placeholder="Username"
             ngModel required
         />
@@ -38,12 +26,12 @@
         </small>
     </div>
     <div class="form-group">
-        <label for="pass">Password</label>
+        <label for="password">Password</label>
         <input
             type="password"
             class="form-control"
-            id="pass"
-            name="pass"
+            id="password"
+            name="password"
             placeholder="************"
             ngModel required
         />
@@ -64,6 +52,8 @@
             >I agree to sell my soul to <strong>the Devil</strong>
         </label>
     </div>
-
-    <button type="submit" [disabled]="userForm.invalid">Register</button>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Register</button>
 </form>

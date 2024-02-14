@@ -1,22 +1,26 @@
-<form>
+<form #userForm="ngForm" (ngSubmit)="logearUsuario(userForm.value)">
     <h2>Log in</h2>
-
     <div class="form-group">
-        <label for="username">Username or Email</label>
+        <label for="username">Username</label>
         <input
             type="text"
             class="form-control"
             id="username"
-            placeholder="Username or Email"
+            name="username"
+            placeholder="Username"
+            ngModel required
         />
     </div>
+    <input type="hidden" name="email">
     <div class="form-group">
         <label for="password">Password</label>
         <input
             type="password"
             class="form-control"
             id="password"
+            name="password"
             placeholder="************"
+            ngModel required
         />
     </div>
 
@@ -26,7 +30,9 @@
             >I agree to sale my soul to <strong>the Devil</strong>
         </label>
     </div>
-
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Sign in</button>
     <a href="/register" class="btn-link">I dont´t have an account</a>
 </form>

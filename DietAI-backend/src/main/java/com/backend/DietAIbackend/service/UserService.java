@@ -34,19 +34,11 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Optional<User> loginUser(String username, String pass) {
-        return userRepository.findByUserNameAndPass(username, pass);
-    }
-
     public User registerUser(User user) {
         return userRepository.save(user);
     }
 
-    public Optional findUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
-
-    public Optional findUserByName(String name){
-        return userRepository.findByName(name);
+    public Optional<User> findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 }
