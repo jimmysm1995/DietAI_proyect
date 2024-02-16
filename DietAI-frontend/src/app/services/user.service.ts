@@ -32,16 +32,32 @@ export class UserService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
-  loginUser(user: any): Observable<User> {
-    return this.http.post<any>(`${this.baseUrl}/login`, user);
+  loginUser(userData: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/login`, userData)
+    .pipe(
+      catchError((error) => {
+        let errorMessage = 'Something bad happened; please try again later.';
+        if (error.error instanceof ErrorEvent) {
+          // Error del lado del cliente
+          console.error('An error occurred:', error.error.message);
+        } else if (error.status === 200) {
+          // Si el código de estado es 200, pero el cuerpo de la respuesta es un objeto, se debe manejar como un error del lado del servidor
+          console.error(`Backend returned code ${error.status}, but response body could not be parsed.`);
+        } else {
+          // Error del lado del servidor con cuerpo en formato JSON
+          console.error(`Backend returned code ${error.status}, body was:`, error.error);
+          errorMessage = error.error; // Puedes ajustar esto según el formato real del error devuelto por el backend
+        }
+        return throwError(errorMessage);
+      })
+    );
   }
 
-  registerUser(userData: any): Observable<User> {
-    return this.http.post<any>('http://localhost:8080/api/users/register', userData)
+  registerUser(userData: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/register`, userData)
       .pipe(
         catchError((error) => {
           let errorMessage = 'Something bad happened; please try again later.';
-          
           if (error.error instanceof ErrorEvent) {
             // Error del lado del cliente
             console.error('An error occurred:', error.error.message);
@@ -53,7 +69,6 @@ export class UserService {
             console.error(`Backend returned code ${error.status}, body was:`, error.error);
             errorMessage = error.error; // Puedes ajustar esto según el formato real del error devuelto por el backend
           }
-          
           return throwError(errorMessage);
         })
       );
