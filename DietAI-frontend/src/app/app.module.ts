@@ -16,12 +16,15 @@ import { LandingComponent } from './views/landing/landing.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { HomeComponent } from './views/home/home.component';
+import { HeaderHomeComponent } from './components/header-home/header-home.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'contacto', component: ContactoComponent}
+  {path: 'contacto', component: ContactoComponent},
+  {path: 'home', component: HomeComponent}
 
 ]
 @NgModule({
@@ -36,7 +39,9 @@ const routes:Routes = [
     LandingComponent,
     FormRegisterComponent,
     FormLoginComponent,
-    ContactoComponent
+    ContactoComponent,
+    HomeComponent,
+    HeaderHomeComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,7 +1,6 @@
 
 <form (ngSubmit)="hacerLogin()">
 
-
 <form #userForm="ngForm" (ngSubmit)="logearUsuario(userForm.value)">
 
     <h2>Log in</h2>
@@ -14,15 +13,6 @@
             class="form-control"
             id="username"
             placeholder="Username or Email"
-            [(ngModel)]="username"
-            />
-        <label for="username">Username</label>
-        <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            placeholder="Username"
             ngModel required
         />
     </div>
@@ -51,6 +41,6 @@
     <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
     </div>
-    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Sign in</button>
+    <button type="submit" [disabled]="userForm.invalid"  class="btn btn-primary">Sign in</button>
     <a href="/register" class="btn-link">I dont´t have an account</a>
 </form>
