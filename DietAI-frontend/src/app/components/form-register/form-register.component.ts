@@ -12,24 +12,17 @@ import { NgForm } from '@angular/forms';
 })
 export class FormRegisterComponent {
     errorMessage: string = '';
-    @ViewChild('userForm') userForm!: NgForm; 
+    @ViewChild('userForm') userForm!: NgForm;
 
     constructor(private userService: UserService, private router: Router) {}
 
     registrarUsuario(userData: User): void {
-        this.userService.registerUser(userData).subscribe(
-            (response: any) => {
-                console.log('User registered successfully');
-                // Redirigir al usuario a la página de inicio
+        this.userService.registerUser(userData).then((user: User) => {
+            if (user.username) {
                 this.router.navigate(['/login']);
-            },
-            (error) => {
-                console.error('Error registering user:', error);
-                // Mostrar mensaje de error en el cliente
-                console.log(error);
-                this.errorMessage = error; // error.error contiene el mensaje de error del backend
-                this.userForm.reset();
             }
-        );
+        }).catch((error) => {
+            this.errorMessage = 'Usuario ya registrado';
+        })
     }
 }
