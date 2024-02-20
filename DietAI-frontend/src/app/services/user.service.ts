@@ -1,76 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import axios from 'axios';
 import { User } from '../models/User';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   
-  private baseUrl: string = 'http://localhost:8080/api/users';
+  private baseUrl: string = environment.apiUrl+'/api/users';
 
-  constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<any[]>(this.baseUrl);
+  getUsers(): Promise<User[]> {
+    return axios.get(this.baseUrl).then((response) => response.data);
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+  getUser(id: number): Promise<User> {
+    return axios.get(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
-  createUser(user: any): Observable<User> {
-    return this.http.post<any>(this.baseUrl, user);
+  createUser(user: any): Promise<User> {
+    return axios.post(this.baseUrl, user).then((response) => response.data);
   }
 
-  updateUser(user: any): Observable<User> {
-    return this.http.put<any>(`${this.baseUrl}/${user.idUser}`, user);
+  updateUser(user: any): Promise<User> {
+    return axios.put(`${this.baseUrl}/${user.idUser}`, user).then((response) => response.data);
   }
 
-  deleteUser(id: number): Observable<User> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  deleteUser(id: number): Promise<User> {
+    return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
-  loginUser(userData: User): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/login`, userData)
-    .pipe(
-      catchError((error) => {
-        let errorMessage = 'Something bad happened; please try again later.';
-        if (error.error instanceof ErrorEvent) {
-          // Error del lado del cliente
-          console.error('An error occurred:', error.error.message);
-        } else if (error.status === 200) {
-          // Si el código de estado es 200, pero el cuerpo de la respuesta es un objeto, se debe manejar como un error del lado del servidor
-          console.error(`Backend returned code ${error.status}, but response body could not be parsed.`);
-        } else {
-          // Error del lado del servidor con cuerpo en formato JSON
-          console.error(`Backend returned code ${error.status}, body was:`, error.error);
-          errorMessage = error.error; // Puedes ajustar esto según el formato real del error devuelto por el backend
-        }
-        return throwError(errorMessage);
-      })
-    );
+  loginUser(userData: User): Promise<User> {
+    return axios.post(`${this.baseUrl}/login`, userData).then((response) => response.data);
+
   }
 
-  registerUser(userData: User): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/register`, userData)
-      .pipe(
-        catchError((error) => {
-          let errorMessage = 'Something bad happened; please try again later.';
-          if (error.error instanceof ErrorEvent) {
-            // Error del lado del cliente
-            console.error('An error occurred:', error.error.message);
-          } else if (error.status === 200) {
-            // Si el código de estado es 200, pero el cuerpo de la respuesta es un objeto, se debe manejar como un error del lado del servidor
-            console.error(`Backend returned code ${error.status}, but response body could not be parsed.`);
-          } else {
-            // Error del lado del servidor con cuerpo en formato JSON
-            console.error(`Backend returned code ${error.status}, body was:`, error.error);
-            errorMessage = error.error; // Puedes ajustar esto según el formato real del error devuelto por el backend
-          }
-          return throwError(errorMessage);
-        })
-      );
+  registerUser(userData: User): Promise<User> {
+    return axios.post(`${this.baseUrl}/register`, userData).then((response) => response.data);
+      
   }
 }

@@ -37,20 +37,14 @@ export class FormLoginComponent {
   constructor(private userService: UserService, private router: Router) {}
 
   logearUsuario(userData: User): void {
-    this.userService.loginUser(userData).subscribe(
-      (response: any) => {
-        console.log('User logged in successfully');
-        // Redirigir al usuario a la página de inicio
+    this.userService.loginUser(userData).then((user: User) => {
+      if (user.username) {
         this.router.navigate(['/home']);
-      },
-      (error) => {
-        console.error('Error logging in user:', error);
-        // Mostrar mensaje de error en el cliente
-        console.log(error);
-        this.errorMessage = error; // error.error contiene el mensaje de error del backend
-        this.userForm.reset();
       }
-    );
+      
+    }).catch((error) => {
+      this.errorMessage = 'Usuario o contraseña incorrecta';
+    })
   }
 
 }

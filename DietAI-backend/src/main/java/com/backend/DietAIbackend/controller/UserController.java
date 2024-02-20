@@ -34,10 +34,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hola mundo";
-    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto user) {
@@ -51,10 +47,6 @@ public class UserController {
         if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
-
-
-        log.info(userModel.getUsername());
-        log.info(userModel.getPassword());
 
         String hashedPassword = passwordEncoder.encode(userModel.getPassword());
         userModel.setPassword(hashedPassword);
