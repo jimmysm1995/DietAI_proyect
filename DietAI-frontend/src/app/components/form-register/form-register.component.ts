@@ -17,12 +17,11 @@ export class FormRegisterComponent {
     constructor(private userService: UserService, private router: Router) {}
 
     registrarUsuario(userData: User): void {
-        this.userService.registerUser(userData).then((user: User) => {
-            if (user.username) {
-                this.router.navigate(['/login']);
-            }
+        this.userService.registerUser(userData).then((User: User) => {
+            this.router.navigate(['/login']);
         }).catch((error) => {
-            this.errorMessage = 'Usuario ya registrado';
+            this.errorMessage = error;
+            this.userForm.resetForm();
         })
     }
 }

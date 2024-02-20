@@ -73,15 +73,15 @@ public class UserController {
                     return ResponseEntity.status(HttpStatus.ACCEPTED).body((foundUserOptional));
                 } else {
                     // La contraseña no coincide
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
                 }
             } else {
                 // Usuario no encontrado
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
             }
         } catch (Exception e) {
             log.error("Error al intentar autenticar al usuario", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor al intentar autenticar al usuario");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("The access has been denied");
         }
     }
 }

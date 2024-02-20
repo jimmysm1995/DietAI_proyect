@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { User } from '../models/User';
-import { environment } from '../../environment/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,13 +31,27 @@ export class UserService {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
-  loginUser(userData: User): Promise<User> {
-    return axios.post(`${this.baseUrl}/login`, userData).then((response) => response.data);
-
+  loginUser(userData: User): Promise< User> {
+    return axios.post(`${this.baseUrl}/login`, userData)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response && error.response.data) {
+          return Promise.reject(error.response.data);
+      } else {
+          return Promise.reject('Error desconocido');
+      }
+  });
   }
 
-  registerUser(userData: User): Promise<User> {
-    return axios.post(`${this.baseUrl}/register`, userData).then((response) => response.data);
-      
+  registerUser(userData: User): Promise<User>{
+    return axios.post(`${this.baseUrl}/register`, userData)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response && error.response.data) {
+          return Promise.reject(error.response.data);
+      } else {
+          return Promise.reject('Error desconocido');
+      }
+  });
   }
 }
