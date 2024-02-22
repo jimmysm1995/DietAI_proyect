@@ -18,6 +18,8 @@ import { FormLoginComponent } from './components/form-login/form-login.component
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { HomeComponent } from './views/home/home.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ClientFormComponent } from './components/client-form/client-form.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -41,7 +43,9 @@ const routes:Routes = [
     FormLoginComponent,
     ContactoComponent,
     HomeComponent,
-    HeaderHomeComponent
+    HeaderHomeComponent,
+    ProfileComponent,
+    ClientFormComponent
   ],
   imports: [
     HttpClientModule,
