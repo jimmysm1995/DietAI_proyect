@@ -20,13 +20,15 @@ import { HomeComponent } from './views/home/home.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientFormComponent } from './components/client-form/client-form.component';
+import { LogroComponent } from './components/logro/logro.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'contacto', component: ContactoComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'form', component: ClientFormComponent}
 
 ]
 @NgModule({
@@ -45,7 +47,8 @@ const routes:Routes = [
     HomeComponent,
     HeaderHomeComponent,
     ProfileComponent,
-    ClientFormComponent
+    ClientFormComponent,
+    LogroComponent
   ],
   imports: [
     HttpClientModule,

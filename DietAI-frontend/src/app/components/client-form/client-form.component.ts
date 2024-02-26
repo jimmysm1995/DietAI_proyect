@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-client-form',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./client-form.component.css']
 })
 export class ClientFormComponent {
+    @Output() aceptarFormulario = new EventEmitter();
 
+    aceptar(){
+        this.aceptarFormulario.emit();
+    }
 }

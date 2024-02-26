@@ -17,5 +17,8 @@ export class ProfileComponent {
       this.user = user;
     })
   }
+  cerrarModal() {
+    document.getElementById('close')?.click();
+  }
   
 }
