@@ -23,7 +23,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService usuarioService;
+    private UserService userService;
 
     @Autowired
     private UserMapper userMapper;
@@ -33,6 +33,24 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+
+        try {
+            Optional<User> user = userService.getUserById(userId);
+
+            if (user.isPresent()){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(
+                        userMapper.modelToDto(user.get())
+                );
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was an error");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There was an error.");
+        }
+    }
 
 
     @PostMapping("/register")
@@ -52,7 +70,7 @@ public class UserController {
         userModel.setPassword(hashedPassword);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(usuarioService.registerUser(userModel)));
+                userMapper.modelToDto(userService.registerUser(userModel)));
     }
 
     @PostMapping("/login")
@@ -60,12 +78,10 @@ public class UserController {
 
         User userModel = userMapper.dtoToModel(user);
 
-        log.info(userModel.getUsername());
-        log.info(userModel.getPassword());
 
         try {
             // Buscar usuario por correo electrónico
-            Optional<User> foundUserOptional = usuarioService.findByUsername(userModel.getUsername());
+            Optional<User> foundUserOptional = userService.findByUsername(userModel.getUsername());
             if (foundUserOptional.isPresent()) {
                 User foundUser = foundUserOptional.get();
                 if (passwordEncoder.matches(userModel.getPassword(), foundUser.getPassword())) {
