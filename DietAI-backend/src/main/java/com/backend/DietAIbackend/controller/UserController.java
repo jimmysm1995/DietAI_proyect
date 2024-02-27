@@ -1,16 +1,21 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.config.JwtTokenProvider;
+import com.backend.DietAIbackend.dto.LoginRequest;
+import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.model.User;
-import com.backend.DietAIbackend.model.UserAuthority;
 import com.backend.DietAIbackend.repository.UserRepository;
 import com.backend.DietAIbackend.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +39,12 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
 
@@ -54,9 +65,9 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserDto user) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
 
-        User userModel = userMapper.dtoToModel(user);
+        User userModel = userMapper.dtoToModel(userDTO);
 
         if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
@@ -66,38 +77,26 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
 
-        String hashedPassword = passwordEncoder.encode(userModel.getPassword());
-        userModel.setPassword(hashedPassword);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 userMapper.modelToDto(userService.registerUser(userModel)));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserDto user) {
-
-        User userModel = userMapper.dtoToModel(user);
-
-
+    public ResponseEntity<?> login(@RequestBody UserDto userDto){
         try {
-            // Buscar usuario por correo electrónico
-            Optional<User> foundUserOptional = userService.findByUsername(userModel.getUsername());
-            if (foundUserOptional.isPresent()) {
-                User foundUser = foundUserOptional.get();
-                if (passwordEncoder.matches(userModel.getPassword(), foundUser.getPassword())) {
-                    // La contraseña coincide, autenticación exitosa
-                    return ResponseEntity.status(HttpStatus.ACCEPTED).body((foundUserOptional));
-                } else {
-                    // La contraseña no coincide
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
-                }
-            } else {
-                // Usuario no encontrado
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
-            }
-        } catch (Exception e) {
-            log.error("Error al intentar autenticar al usuario", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("The access has been denied");
+            Authentication authDTO = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword());
+
+            Authentication authentication = this.authenticationManager.authenticate(authDTO);
+            User user = (User) authentication.getPrincipal();
+
+            String token = this.jwtTokenProvider.generetaToken(authentication);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginResponse(user.getUsername(),
+                    user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
+                    token));
+
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
         }
     }
 }
