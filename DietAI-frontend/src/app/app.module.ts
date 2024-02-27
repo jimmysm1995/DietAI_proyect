@@ -21,15 +21,15 @@ import { HeaderHomeComponent } from './components/header-home/header-home.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { LogroComponent } from './components/logro/logro.component';
+import { AuthGuard } from './router/auth.guard';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'contacto', component: ContactoComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'form', component: ClientFormComponent}
-
 ]
 @NgModule({
   declarations: [

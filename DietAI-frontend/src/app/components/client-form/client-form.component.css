@@ -1,5 +1,46 @@
-.form{
+.form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+input,
+select {
+    border: none;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    border-radius: 0;
+}
+
+input:focus,
+select:focus {
+    box-shadow: none;
+}
+
+.btnAceptar {
+    margin-top: 2rem;
+}
+
+.select-group {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+}
+
+select::after {
+    content: "\25BC"; /* Unicode para la flecha hacia abajo */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.flecha {
+    color: rgb(142, 142, 142);
+}
+
+label{
+    font-weight: 500;
 }

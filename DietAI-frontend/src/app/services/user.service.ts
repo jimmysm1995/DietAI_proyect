@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
+import { LoginResponse } from '../models/loginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class UserService {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
-  loginUser(userData: User): Promise< User> {
+  loginUser(userData: User): Promise< LoginResponse> {
     return axios.post(`${this.baseUrl}/login`, userData)
     .then((response) => response.data)
     .catch((error) => {

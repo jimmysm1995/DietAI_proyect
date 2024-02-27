@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { LoginResponse } from 'src/app/models/loginResponse';
 
 @Component({
     selector: 'app-form-login',
@@ -10,7 +11,6 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./form-login.component.css'],
 })
 export class FormLoginComponent {
-
     username: string = '';
     password: string = '';
 
@@ -31,18 +31,21 @@ export class FormLoginComponent {
             });
     }
 
-  errorMessage: string = '';
-  @ViewChild('userForm') userForm!: NgForm; 
+    errorMessage: string = '';
+    @ViewChild('userForm') userForm!: NgForm;
 
-  constructor(private userService: UserService, private router: Router) {}
+    constructor(private userService: UserService, private router: Router) {}
 
-  logearUsuario(userData: User): void {
-      this.userService.loginUser(userData).then((User: User) => {
-      this.router.navigate(['/home']);
-    }).catch((error) => {
-      this.errorMessage = error;
-      this.userForm.resetForm();
-    })
-  }
-
+    logearUsuario(userData: User): void {
+        this.userService
+            .loginUser(userData)
+            .then((response: LoginResponse) => {
+                localStorage.setItem('sesion', response.token);
+                this.router.navigate(['/home']);
+            })
+            .catch((error) => {
+                this.errorMessage = error;
+                this.userForm.resetForm();
+            });
+    }
 }
