@@ -4,5 +4,8 @@ header {
     align-items: center;
     justify-content: space-around;
     height: 20rem;
-    background-color: aqua;
+    background-image: url(../../../assets/IMG/home-bc.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }

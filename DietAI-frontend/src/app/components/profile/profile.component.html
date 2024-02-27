@@ -1,7 +1,32 @@
 <div class="profile">
+
+    <div class="modal fade" id="formulario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Formulario</h5>
+                    <button type="button" id="close" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-client-form (aceptarFormulario)="cerrarModal()"></app-client-form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="pic"></div>
     <div class="info"> 
         <h3>{{user.username}}</h3>
         <p> esto es una descrpción</p>
+    </div>
+    <div class="formularioCliente">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formulario">Formulario</button>
+    </div>
+    <div class="logros">
+        <app-logro nombre="Dietas" [numero]=1 ></app-logro>
+        <app-logro nombre="Ejercicios" [numero]=2></app-logro>
+        <app-logro nombre="holaquease" [numero]=3></app-logro>
     </div>
 </div>

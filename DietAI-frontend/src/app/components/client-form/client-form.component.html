@@ -1,3 +1,149 @@
-<form action="" method="post">
-    <input type="text">
+<form action="" method="post" class="form">
+
+    <div class="form-group">
+
+        <label for="edad">Edad</label>
+        <input 
+            name="edad"
+            type="text"
+            class="form-control"
+            id="edad"
+            placeholder="Edad"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+
+        <label for="genero">Genero</label>
+        <input
+            name="genero"
+            type="text"
+            class="form-control"
+            id="genero"
+            name="genero"
+            placeholder="Genero"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+
+        <label for="peso">Peso</label>
+        <input
+            name="peso"
+            type="text"
+            class="form-control"
+            id="peso"
+            name="peso"
+            placeholder="Peso"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+
+        <label for="altura">Altura</label>
+        <input
+            name="altura"
+            type="text"
+            class="form-control"
+            id="altura"
+            name="altura"
+            placeholder="Altura"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+
+        <label for="objetivo">Objetivo</label>
+        <input
+            name="objetivo"
+            type="text"
+            class="form-control"
+            id="objetivo"
+            name="objetivo"
+            placeholder="Objetivo"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+
+        <label for="lesiones">Lesiones</label>
+        <input
+            name="lesiones"
+            type="text"
+            class="form-control"
+            id="lesiones"
+            name="lesiones"
+            placeholder="Lesiones"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="alergias">Alergias</label>
+        <input
+            name="alergias"
+            type="text"
+            class="form-control"
+            id="alergias"
+            name="alergias"
+            placeholder="Alergias"
+            ngModel required
+        />
+    </div>
+
+    <div class="form-group"> 
+        <label for="tipoDeTrabajo">Tipo de trabajo</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
+            <option value="1">Sedentario</option>
+            <option value="2">Activo</option>
+            <option value="3">Muy Activo</option>
+        </select>
+    </div>
+
+    <div class="form-group"> 
+        <label for="consumo">¿Consumes alguna de estas sustancias?</label>
+        <select name="consumo" id="" class="form-control">
+            <option value="1">Alcohol</option>
+            <option value="2">Tabaco</option>
+            <option value="3">Las dos</option>
+            <option value="3">Ninguno</option>
+        </select>
+    </div>
+
+    <div class="form-group"> 
+        <label for="nivelPrevio">Nivel Previo</label>
+        <select name="nivelPrevio" class="form-control">
+            <option value="1">No he entrenado nunca</option>
+            <option value="2">Entreno a veces</option>
+            <option value="3">Entreno a diario</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tiempoParaEntrenar">Tiempo para entrenar</label>
+        <select name="tiempoParaEntrenar" id="" class="form-control">
+            <option value="1">1 día a la semana</option>
+            <option value="2">2 días a la semana</option>
+            <option value="3">3 días a la semana</option>
+            <option value="4">4 días a la semana</option>
+            <option value="5">5 días a la semana</option>
+            <option value="6">Todos los días de la semana</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="crearTabla">Cada cuánto quieres crear una dieta y ejercicios</label>
+        <select name="crearTabla" id="" class="form-control">
+            <option value="1">Todos los meses</option>
+            <option value="2">Cada dos semanas</option>
+        </select>
+    </div>
+
+    <button type="submit" (click)="aceptar()" class="btn btn-primary">Aceptar</button>
+
 </form>
