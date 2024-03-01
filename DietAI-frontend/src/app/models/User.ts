@@ -5,5 +5,6 @@ export class User {
   email: string = "";
   password: string = "";
   client?: Client;
+  img: string='';
   
 }

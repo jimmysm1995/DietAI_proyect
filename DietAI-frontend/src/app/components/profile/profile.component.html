@@ -15,8 +15,8 @@
             </div>
         </div>
     </div>
-
-    <div class="pic"></div>
+    <app-update-img></app-update-img>
+        <img class="pic" [src]="user.img" alt="" data-bs-toggle="modal" data-bs-target="#modalImgUpdate">
     <div class="info"> 
         <h3>{{user.username}}</h3>
         <p> esto es una descrpción</p>
@@ -27,6 +27,6 @@
     <div class="logros">
         <app-logro nombre="Dietas" [numero]=1 ></app-logro>
         <app-logro nombre="Ejercicios" [numero]=2></app-logro>
-        <app-logro nombre="holaquease" [numero]=3></app-logro>
+        <app-logro nombre="Días entrenados" [numero]=3></app-logro>
     </div>
 </div>

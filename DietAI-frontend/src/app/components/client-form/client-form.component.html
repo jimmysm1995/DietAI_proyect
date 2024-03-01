@@ -13,22 +13,18 @@
         />
     </div>
 
-    <div class="form-group">
-        <!-- <label for="genero">Genero</label> -->
-        <input
-            name="genero"
-            type="text"
-            class="form-control"
-            id="genero"
-            name="genero"
-            placeholder="Genero"
-            ngModel
-            required
-        />
+    <div class="form-group select-group">
+        <label for="genero">Género</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
+            <option value=""></option>
+            <option value="1">Masculino</option>
+            <option value="2">Femenino</option>
+            <option value="3">Prefiero no decirlo</option>
+        </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group">
-        <!-- <label for="peso">Peso</label> -->
         <input
             name="peso"
             type="text"
@@ -55,18 +51,16 @@
         />
     </div>
 
-    <div class="form-group">
-        <!-- <label for="objetivo">Objetivo</label> -->
-        <input
-            name="objetivo"
-            type="text"
-            class="form-control"
-            id="objetivo"
-            name="objetivo"
-            placeholder="Objetivo"
-            ngModel
-            required
-        />
+    <div class="form-group select-group" >
+        <label for="objetivo">Objetivo</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
+            <option value=""></option>
+            <option value="1">Perder peso</option>
+            <option value="2">Aumentar peso</option>
+            <option value="3">Tonificar</option>
+            <option value="3">Mantener</option>
+        </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group">

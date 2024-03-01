@@ -1,7 +1,7 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.config.JwtTokenProvider;
-import com.backend.DietAIbackend.dto.LoginRequest;
+//import com.backend.DietAIbackend.dto.LoginRequest;
 import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.mapper.UserMapper;

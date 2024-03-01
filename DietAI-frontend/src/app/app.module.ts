@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { LogroComponent } from './components/logro/logro.component';
 import { AuthGuard } from './router/auth.guard';
+import { UpdateImgComponent } from './views/update-img/update-img.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -48,7 +49,8 @@ const routes:Routes = [
     HeaderHomeComponent,
     ProfileComponent,
     ClientFormComponent,
-    LogroComponent
+    LogroComponent,
+    UpdateImgComponent
   ],
   imports: [
     HttpClientModule,
