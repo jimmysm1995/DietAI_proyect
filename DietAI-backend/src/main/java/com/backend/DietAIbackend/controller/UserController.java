@@ -63,6 +63,8 @@ public class UserController {
         }
     }
 
+//76
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
@@ -92,6 +94,7 @@ public class UserController {
             String token = this.jwtTokenProvider.generetaToken(authentication);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginResponse(user.getUsername(),
+                    user.getIdUser(),
                     user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
                     token));
 

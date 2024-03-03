@@ -1,7 +1,8 @@
 import { User } from './User';
 
 export class LoginResponse { 
-    token: string = '';
-    authorities: string[] = [];
     username:string = '';
+    idUser: number = 0;
+    authorities: string[] = [];
+    token: string = '';
 }

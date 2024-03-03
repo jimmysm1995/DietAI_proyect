@@ -1,9 +1,11 @@
 package com.backend.DietAIbackend.dto;
 
 import com.backend.DietAIbackend.model.*;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Data
 public class ClientDto {
@@ -18,9 +20,27 @@ public class ClientDto {
 
     private Gender gender;
 
-    private UserDto user;
+    private Float weight;
 
-    private InfoClientDto infoClient;
+    private Float height;
+
+    private Goal goal;
+
+    private String injuries;
+
+    private ArrayList<AllergyDto> allergies;
+
+    private String jobType;
+
+    private String previousLevel;
+
+    private String consumedSubstances;
+
+    private Integer trainingTime;
+
+    private String dietAndExerciseFrequency;
+
+    private UserDto user;
 
     private TrainingDto training;
 

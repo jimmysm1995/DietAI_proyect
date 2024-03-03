@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ public class Client {
     @Column(name = "idClient", columnDefinition = "tinyint")
     private Long idClient;
 
-    @Column(name = "name", columnDefinition = "varchar(100)",nullable = false, unique = true)
+    @Column(name = "name", columnDefinition = "varchar(100)")
     private String name;
 
     @Column(name = "lastName", columnDefinition = "varchar(100)")
@@ -32,12 +33,40 @@ public class Client {
     @Column(name = "gender", columnDefinition = "varchar(10)")
     private Gender gender;
 
+    @Column(name = "weight", columnDefinition = "decimal")
+    private Float weight;
+
+    @Column(name = "height", columnDefinition = "decimal")
+    private Float height;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "goal", columnDefinition = "varchar(255)")
+    private Goal goal;
+
+    @Column(columnDefinition = "varchar(255)")
+    private String injuries;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ArrayList<Allergy> allergies;
+
+    @Column(name = "jobType", columnDefinition = "varchar(255)")
+    private String jobType;
+
+    @Column(name = "previousLevel", columnDefinition = "varchar(255)")
+    private String previousLevel;
+
+    @Column(name = "consumed_substances", columnDefinition = "varchar(255)")
+    private String consumedSubstances;
+
+    @Column(name = "trainingTime", columnDefinition = "tinyint")
+    private Integer trainingTime;
+
+    @Column(name = "dietAndExerciseFrequency", columnDefinition = "varchar(255)")
+    private String dietAndExerciseFrequency;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     private User user;
-
-    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
-    private InfoClient infoClient;
 
     @ManyToOne
     @JoinColumn(name = "idTraining", columnDefinition = "tinyint")

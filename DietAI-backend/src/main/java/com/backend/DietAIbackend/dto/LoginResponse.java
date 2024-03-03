@@ -2,5 +2,5 @@ package com.backend.DietAIbackend.dto;
 
 import java.util.List;
 
-public record LoginResponse(String username, List<String> authorities, String token) {
+public record LoginResponse(String username,Long idUser, List<String> authorities, String token) {
 }
