@@ -8,7 +8,7 @@ import { Client } from '../models/Client';
 })
 export class ClientService {
 
-  private baseUrl: string = environment.apiUrl+'/api/client';
+  private baseUrl: string = environment.apiUrl+'/api/clients';
 
   getClients(): Promise<Client[]> {
     return axios.get(this.baseUrl).then((response) => response.data);

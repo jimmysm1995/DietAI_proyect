@@ -1,7 +1,9 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.dto.UserDto;
+import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.User;
+import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +19,12 @@ public class UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    ClientService clientService;
+
+    @Autowired
+    ClientRepository clientRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -45,7 +53,8 @@ public class UserService {
     public User registerUser(User user){
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
 
-        return userRepository.save(user);
+        return user;
     }
 }

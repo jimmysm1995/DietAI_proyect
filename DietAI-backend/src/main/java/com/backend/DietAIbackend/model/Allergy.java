@@ -13,10 +13,7 @@ public class Allergy {
     @Column(name = "idAllergy", columnDefinition = "tinyint")
     private Long idAllergy;
 
-    @Enumerated(EnumType.STRING)
-    private AllergyType type;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private Client client;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 }

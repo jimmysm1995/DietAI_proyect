@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -46,8 +47,9 @@ public class Client {
     @Column(columnDefinition = "varchar(255)")
     private String injuries;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ArrayList<Allergy> allergies;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "allergy", columnDefinition = "varchar(50)")
+    private AllergyType allergy;
 
     @Column(name = "jobType", columnDefinition = "varchar(255)")
     private String jobType;

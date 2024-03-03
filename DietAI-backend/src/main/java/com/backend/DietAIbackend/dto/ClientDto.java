@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class ClientDto {
@@ -28,7 +29,7 @@ public class ClientDto {
 
     private String injuries;
 
-    private ArrayList<AllergyDto> allergies;
+    private AllergyType allergy;
 
     private String jobType;
 

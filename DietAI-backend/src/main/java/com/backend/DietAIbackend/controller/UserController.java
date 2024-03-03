@@ -63,9 +63,6 @@ public class UserController {
         }
     }
 
-//76
-
-
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
 

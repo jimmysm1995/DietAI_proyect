@@ -5,7 +5,7 @@ import com.backend.DietAIbackend.model.Client;
 
 public class AllergyDto {
 
-    private AllergyType type;
-
-    private ClientDto clientDto;
+//    private AllergyType type;
+//
+//    private ClientDto clientDto;
 }
