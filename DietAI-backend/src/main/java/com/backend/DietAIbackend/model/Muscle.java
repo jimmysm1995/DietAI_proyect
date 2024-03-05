@@ -1,21 +1,26 @@
 package com.backend.DietAIbackend.model;
 
-public enum Muscle {
-    CHEST("Chest"),
-    BACK("Back"),
-    SHOULDERS("Shoulders"),
-    BICEPS("Biceps"),
-    TRICEPS("Triceps"),
-    LEGS("Legs"),
-    ABS("Abdominals");
+import jakarta.persistence.*;
+import lombok.Data;
 
-    private final String muscleName;
+import java.util.List;
 
-    Muscle(String muscleName) {
-        this.muscleName = muscleName;
-    }
+@Entity
+@Data
+@Table(name = "muscle")
+public class Muscle {
 
-    public String getMuscleName() {
-        return muscleName;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idMuscle;
+
+    @Column(name = "name", columnDefinition = "Varchar(100)" ,nullable = false, unique = true)
+    private String name;
+
+    @OneToMany(mappedBy = "muscle")
+    private List<HomeExerciseMuscle> homeExerciseMuscles;
+
+    @OneToMany(mappedBy = "muscle")
+    private List<GymExerciseMuscle> gymExerciseMuscles;
+
 }

@@ -15,7 +15,7 @@ public class ClientDto {
 
     private String lastName;
 
-    private LocalDate fechaNacimiento;
+    private LocalDate birthDate;
 
     private Plan plan;
 
@@ -29,7 +29,7 @@ public class ClientDto {
 
     private String injuries;
 
-    private AllergyType allergy;
+    private Allergy allergy;
 
     private String jobType;
 

@@ -5,7 +5,7 @@ import { User } from './User';
 export class Client {
     name?: string = "";
     lastName?: string = "";
-    birthDate?: Date | null = null;
+    birthDate?: Date;
     plan?: string = "";
     gender?: string = "";
     weight?: number = 0;

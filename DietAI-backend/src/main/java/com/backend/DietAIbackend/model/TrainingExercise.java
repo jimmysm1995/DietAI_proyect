@@ -3,6 +3,8 @@ package com.backend.DietAIbackend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.DayOfWeek;
+
 @Entity
 @Data
 @Table(name = "trainingExercise")
@@ -18,6 +20,10 @@ public class TrainingExercise {
 
     @Column(name = "repetitions",columnDefinition = "INT")
     private int repetitions;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dayWeek", columnDefinition = "varchar(10)")
+    private DayOfWeek dayWeek;
 
     @ManyToOne
     @JoinColumn(name = "idTraining")

@@ -17,15 +17,14 @@ public class GymExercise {
     @Column(name = "name", columnDefinition = "Varchar(100)" ,nullable = false, unique = true)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "muscles", columnDefinition = "Varchar(20)")
-    private List<Muscle> muscles;
-
     @Column(name = "difficult", columnDefinition = "int")
     private Integer difficult;
 
     @Column(name = "explanation", columnDefinition = "Varchar(255)")
     private String explanation;
+
+    @OneToMany(mappedBy = "gymExercise")
+    private List<GymExerciseMuscle> gymExerciseMuscles;
 
     @OneToMany(mappedBy = "gymExercise")
     private List<TrainingExercise> trainingExercises;

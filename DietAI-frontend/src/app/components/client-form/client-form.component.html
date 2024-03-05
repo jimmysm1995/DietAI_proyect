@@ -2,40 +2,29 @@
 
     <div class="form-group">
         <label for="name">Nombre</label>
-        <input 
-        type="text" 
-        class="form-control" 
-        id="name" 
-        placeholder="Nombre" 
-        name="name" 
-        ngModel required>
+        <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" ngModel required>
     </div>
 
     <div class="form-group">
         <label for="lastName">Apellido</label>
-        <input 
-        type="text" 
-        class="form-control" 
-        id="lastName" 
-        placeholder="Apellido" 
-        name="lastName" 
-        ngModel required>
+        <input type="text" class="form-control" id="lastName" placeholder="Apellido" name="lastName" ngModel required>
     </div>
 
     <div class="form-group">
         <label for="birthDate">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="birthDate" placeholder="Fecha de Nacimiento" name="birthDate" ngModel required>
+        <input type="date" class="form-control" id="birthDate" placeholder="Fecha de Nacimiento" name="birthDate"
+            ngModel required>
     </div>
 
     <div class="form-group select-group">
-        <label for="genero">Género</label>
-        <select class="form-control" id="genero" name="gender" ngModel required>
+        <label for="gender">Género</label>
+        <select class="form-control" id="gender" name="gender" ngModel required>
             <option value=""></option>
             <option value="MALE">Masculino</option>
             <option value="FEMALE">Femenino</option>
         </select>
     </div>
-    
+
     <div class="form-group select-group">
         <label for="plan">Plan</label>
         <select class="form-control" id="plan" name="plan" ngModel required>
@@ -44,7 +33,7 @@
             <option value="PREMIUM">Premium</option>
         </select>
     </div>
-    
+
     <div class="form-group">
         <label for="weight">Peso</label>
         <input type="number" class="form-control" id="weight" placeholder="Peso" name="weight" ngModel required>
@@ -56,8 +45,8 @@
     </div>
 
     <div class="form-group select-group">
-        <label for="objetivo">Objetivo</label>
-        <select class="form-control" id="objetivo" name="goal" ngModel required>
+        <label for="goal">Objetivo</label>
+        <select class="form-control" id="goal" name="goal" ngModel required>
             <option value=""></option>
             <option value="BUILD_MUSCLE_MASS">Desarrollar masa muscular</option>
             <option value="INCREASE_STRENGTH_ENDURANCE">Incrementar resistencia y fuerza</option>
@@ -66,12 +55,15 @@
             <option value="ENHANCE_FLEXIBILITY_MOBILITY">Mejorar la flexibilidad / Movilidad</option>
             <option value="IMPROVE_OVERALL_HEALTH_WELLBEING">Mejorar la salud / Bienestar general</option>
             <option value="TRAIN_FOR_SPECIFIC_SPORT_EVENT">Entrenar para un evento deportivo específico</option>
-            <option value="REHABILITATE_FROM_INJURY_MEDICAL_CONDITION">Rehabilitarse de una lesión / Condición médica</option>
-            <option value="BOOST_ENERGY_LEVELS_REDUCE_STRESS">Aumentar los niveles de energía / Reducir el estrés</option>
-            <option value="ACHIEVE_SPECIFIC_AESTHETIC_PHYSIQUE_GOAL">Lograr un objetivo estético / físico específico</option>
+            <option value="REHABILITATE_FROM_INJURY_MEDICAL_CONDITION">Rehabilitarse de una lesión / Condición médica
+            </option>
+            <option value="BOOST_ENERGY_LEVELS_REDUCE_STRESS">Aumentar los niveles de energía / Reducir el estrés
+            </option>
+            <option value="ACHIEVE_SPECIFIC_AESTHETIC_PHYSIQUE_GOAL">Lograr un objetivo estético / físico específico
+            </option>
         </select>
     </div>
-    
+
 
     <div class="form-group">
         <label for="injuries">Lesiones</label>
@@ -79,9 +71,9 @@
     </div>
 
     <div class="form-group select-group">
-        <label for="alergias">Alergias</label>
-        <select class="form-control" id="alergias" name="alergias">
-            <option value="POLLEN">Pollen</option>
+        <label for="allergy">Alergias</label>
+        <select class="form-control" id="allergy" name="allergy" ngModel required>
+            <option value=""></option>
             <option value="PEANUTS">Peanuts</option>
             <option value="DAIRY">Dairy</option>
             <option value="GLUTEN">Gluten</option>
@@ -90,70 +82,63 @@
             <option value="EGG">Egg</option>
             <option value="FISH">Fish</option>
             <option value="TREE_NUTS">Tree Nuts</option>
-            <option value="INSECT_STINGS">Insect Stings</option>
-            <option value="LATEX">Latex</option>
-            <option value="PET_DANDER">Pet Dander</option>
-            <option value="MOLD">Mold</option>
-            <option value="DRUGS">Drugs</option>
-            <option value="LACTOSE">Lactose</option>
             <option value="WHEAT">Wheat</option>
             <option value="SESAME">Sesame</option>
-            <option value="SULFITES">Sulfites</option>
         </select>
     </div>
-    
+
     <div class="form-group select-group">
-        <label for="tipoDeTrabajo">Tipo de trabajo</label>
-        <select class="form-control" id="tipoDeTrabajo" name="jobType" ngModel required>
+        <label for="jobType">Tipo de trabajo</label>
+        <select class="form-control" id="jobType" name="jobType" ngModel required>
             <option value=""></option>
-            <option value="Sedentario">Sedentario</option>
-            <option value="Activo">Activo</option>
-            <option value="Muy Activo">Muy Activo</option>
+            <option value="SEDENTARY">Sedentario</option>
+            <option value="ACTIVE">Activo</option>
+            <option value="VERYACTIVE">Muy Activo</option>
         </select>
     </div>
 
     <div class="form-group select-group">
-        <label for="nivelPrevio">Nivel Previo</label>
-        <select class="form-control" id="nivelPrevio" name="previousLevel" ngModel required>
+        <label for="previousLevel">Nivel Previo</label>
+        <select class="form-control" id="previousLevel" name="previousLevel" ngModel required>
             <option value=""></option>
-            <option value="No he entrenado nunca">No he entrenado nunca</option>
-            <option value="Entreno a veces">Entreno a veces</option>
-            <option value="Entreno a diario">Entreno a diario</option>
+            <option value="NUNCA_ENTRENADO">No he entrenado nunca</option>
+            <option value="A_VECES">Entreno a veces</option>
+            <option value="A_DIARIO">Entreno a diario</option>
         </select>
     </div>
 
     <div class="form-group select-group">
-        <label for="consumo">¿Consumes alguna de estas sustancias?</label>
-        <select class="form-control" id="consumo" name="consumo" ngModel required>
+        <label for="consumedSubstances">¿Consumes alguna de estas sustancias?</label>
+        <select class="form-control" id="consumedSubstances" name="consumedSubstances" ngModel required>
             <option value=""></option>
-            <option value="Alcohol">Alcohol</option>
-            <option value="Tabaco">Tabaco</option>
-            <option value="Ambas">Ambas</option>
-            <option value="Ninguna">Ninguna</option>
+            <option value="ALCOHOL">Alcohol</option>
+            <option value="TABACO">Tabaco</option>
+            <option value="BOTH">Ambas</option>
+            <option value="NONE">Ninguna</option>
         </select>
     </div>
 
     <div class="form-group select-group">
-        <label for="tiempoParaEntrenar">Tiempo para entrenar</label>
-        <select class="form-control" id="tiempoParaEntrenar" name="trainingTime" ngModel required>
-          <option value=""></option>
-          <option value="1">1 día a la semana</option>
-          <option value="2">2 días a la semana</option>
-          <option value="3">3 días a la semana</option>
-          <option value="4">4 días a la semana</option>
-          <option value="5">5 días a la semana</option>
-          <option value="6">Todos los días de la semana</option>
+        <label for="trainingTime">Tiempo para entrenar</label>
+        <select class="form-control" id="trainingTime" name="trainingTime" ngModel required>
+            <option value=""></option>
+            <option value="1">1 día a la semana</option>
+            <option value="2">2 días a la semana</option>
+            <option value="3">3 días a la semana</option>
+            <option value="4">4 días a la semana</option>
+            <option value="5">5 días a la semana</option>
+            <option value="6">Todos los días de la semana</option>
         </select>
-      </div>
+    </div>
 
-      <div class="form-group select-group">
-        <label for="crearTabla">Cada cuánto quieres crear una dieta y ejercicios</label>
-        <select class="form-control" id="crearTabla" name="dietAndExerciseFrequency" ngModel required>
-          <option value=""></option>
-          <option value="Todos los meses">Todos los meses</option>
-          <option value="Cada dos semanas">Cada dos semanas</option>
+    <div class="form-group select-group">
+        <label for="dietAndExerciseFrequency">Cada cuánto quieres crear una dieta y ejercicios</label>
+        <select class="form-control" id="dietAndExerciseFrequency" name="dietAndExerciseFrequency" ngModel required>
+            <option value=""></option>
+            <option value="Todos los meses">Todos los meses</option>
+            <option value="Cada dos semanas">Cada dos semanas</option>
         </select>
-      </div>
+    </div>
 
     <button type="submit" [disabled]="clientForm.invalid" class="btn btn-primary btnAceptar">
         Aceptar

@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,7 +22,7 @@ public class Client {
     private String lastName;
 
     @Column(name = "birthDate", columnDefinition = "date")
-    private LocalDate fechaNacimiento;
+    private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "plan", columnDefinition = "varchar(10)")
@@ -49,16 +47,19 @@ public class Client {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "allergy", columnDefinition = "varchar(50)")
-    private AllergyType allergy;
+    private Allergy allergy;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "jobType", columnDefinition = "varchar(255)")
-    private String jobType;
+    private JobType jobType;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "previousLevel", columnDefinition = "varchar(255)")
-    private String previousLevel;
+    private PreviusLevel previousLevel;
 
-    @Column(name = "consumed_substances", columnDefinition = "varchar(255)")
-    private String consumedSubstances;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "consumedSubstances", columnDefinition = "varchar(255)")
+    private ConsumedSubstances consumedSubstances;
 
     @Column(name = "trainingTime", columnDefinition = "tinyint")
     private Integer trainingTime;
