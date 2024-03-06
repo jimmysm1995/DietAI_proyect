@@ -16,15 +16,23 @@ export class UserService {
     return axios.get(this.baseUrl).then((response) => response.data);
   }
 
+  obtenerImagen(username : string): Promise<string> {
+    return axios.get<string>(`${this.baseUrl}/imagen`).then((response) => response.data);
+  }
+
   getUser(id: number): Promise<User> {
     return axios.get(`${this.baseUrl}/${id}`).then((response) => response.data);
+  }
+
+  getUserByUsername(username: string): Promise<User> {
+    return axios.get(`${this.baseUrl}/user/${username}`).then((response) => response.data);
   }
 
   createUser(user: any): Promise<User> {
     return axios.post(this.baseUrl, user).then((response) => response.data);
   }
 
-  updateUser(user: any): Promise<User> {
+  updateUser(user: User): Promise<User> {
     return axios.put(`${this.baseUrl}/${user.idUser}`, user).then((response) => response.data);
   }
 

@@ -50,6 +50,7 @@ export class FormLoginComponent {
                 localStorage.setItem('username', response.username);
                 //guardamos el usuario que devuelve el servidor en la store para utilizarlo más adelante en otra parte del código
                 this.userStore.user.username = response.username;
+                this.userStore.user.idUser = response.idUser;
                 this.router.navigate(['/home']);
             })
             .catch((error) => {

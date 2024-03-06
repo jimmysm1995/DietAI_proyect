@@ -63,6 +63,26 @@ public class UserController {
         }
     }
 
+    @GetMapping("/user/{username}")
+    public User getUserByUsername(@PathVariable String username){
+
+        return userService.findByUsername(username).orElse(null);
+    }
+
+    @GetMapping("/imagen/{username}")
+    public String obtenerImagen(@PathVariable String username) {
+
+        User user = userService.findByUsername(username).orElse(null);
+        // Lógica para obtener la imagen correspondiente al nombre de usuario
+        // Aquí deberías implementar la lógica para recuperar la imagen desde tu base de datos o desde donde esté almacenada
+
+        // Supongamos que tienes un servicio UserService que se encarga de manejar la lógica relacionada con los usuarios
+        // Puedes llamar a un método en este servicio para obtener la imagen según el username
+        String imagen = user.getImg();
+
+        return imagen;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
 
@@ -78,6 +98,22 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 userMapper.modelToDto(userService.registerUser(userModel)));
+    }
+
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
+
+        // Verifica si el usuario que se está actualizando es el mismo que se proporciona en el cuerpo de la solicitud
+        if (user.getIdUser() == null || !user.getIdUser().equals(userId)) {
+            throw new IllegalArgumentException("User ID in path variable must match user ID in request body");
+        }
+
+        User realUser = userService.getUserById(userId).orElse(null);
+
+        realUser.setImg(user.getImg());
+
+        // Realiza la actualización del usuario en la base de datos
+        return userService.updateUser(realUser);
     }
 
     @PostMapping("/login")

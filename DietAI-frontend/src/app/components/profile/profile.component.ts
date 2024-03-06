@@ -8,7 +8,7 @@ import { UserStore } from '../../store/userStore';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  
+
 })
 export class ProfileComponent {
   public user: User = new User();
@@ -27,5 +27,5 @@ export class ProfileComponent {
   cerrarModal() {
     document.getElementById('close')?.click();
   }
-  
+
 }

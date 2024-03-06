@@ -1,21 +1,66 @@
 import { Component } from '@angular/core';
 import { UserStore } from 'src/app/store/userStore';
+import { ImagenProfileService } from '../../services/imagen-profile.service';
+import { UserService } from '../../services/user.service';
+import { User } from 'src/app/models/User';
 
 @Component({
-  selector: 'app-update-img',
-  templateUrl: './update-img.component.html',
-  styleUrls: ['./update-img.component.css']
+    selector: 'app-update-img',
+    templateUrl: './update-img.component.html',
+    styleUrls: ['./update-img.component.css'],
 })
-
 export class UpdateImgComponent {
+    public urls: string[] = [];
 
-  constructor(private userStore: UserStore) { }
+    constructor(
+        private userStore: UserStore,
+        private imagenProfileService: ImagenProfileService,
+        private userService: UserService
+    ) {
+        this.loadUrls();
+        this.getImage();
+    }
+    getImage() {
+        var username = this.userStore.user.username;
+        this.userService.getUserByUsername(username).then((user: User) => {
+            this.userService
+                .updateUser(user)
+                .then((updatedUser: User) => {
+                    console.log('User updated successfully:', user);
+                    // Actualiza el usuario en el userStore con los datos actualizados
+                    this.userStore.user.img = updatedUser.img;
+                })
+                .catch((error) => {
+                    console.error('Error updating user:', error);
+                });
+        });
+    }
 
-  public urls: string[] = ['https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg', 'https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg', 'https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg','https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg', 'https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg', 'https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg'];
+    loadUrls(): Promise<void> {
+        return this.imagenProfileService
+            .getAllImageUrls()
+            .then((urls) => {
+                this.urls = urls;
+            })
+            .catch((error) => {
+                console.error('Error fetching image URLs:', error);
+            });
+    }
 
-  updateImg(url: string) {
-    var user = this.userStore.user;
-    user.img = url;
-    this.userStore.updateUser(user);
-  }
+    updateImg(url: string) {
+        var username = this.userStore.user.username;
+        this.userService.getUserByUsername(username).then((user: User) => {
+            user.img = url;
+            this.userService
+                .updateUser(user)
+                .then((updatedUser: User) => {
+                    console.log('User updated successfully:', user);
+                    // Actualiza el usuario en el userStore con los datos actualizados
+                    this.userStore.user.img = updatedUser.img;
+                })
+                .catch((error) => {
+                    console.error('Error updating user:', error);
+                });
+        });
+    }
 }

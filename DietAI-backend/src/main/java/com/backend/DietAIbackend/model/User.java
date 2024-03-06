@@ -28,6 +28,9 @@ public class User implements UserDetails{
     @Column(name = "password", columnDefinition = "varchar(100)",nullable = false)
     private String password;
 
+    @Column(name = "img", columnDefinition = "varchar(255)")
+    private String img;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Client client;
 
