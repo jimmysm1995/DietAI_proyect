@@ -1,0 +1,72 @@
+h1{
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-text {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita el número de líneas a mostrar */
+    -webkit-box-orient: vertical;
+    white-space: normal; /* Permite que el texto se muestre en múltiples líneas */
+}
+
+/**ESTILOS MENU NAVEGACIÓN**/
+.fixed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+    padding: 10px 20px;
+  }
+  
+  .logo-container h1 {
+    color: #000; /* Color del texto en negro */
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+    margin-left: 20%;
+    font-family: 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .nav-menu {
+    flex-grow: 1;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 10px;
+  }
+  
+  .nav-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-items li {
+    display: inline-block;
+    margin-right: 20px; 
+  }
+  
+  .nav-items li:last-child {
+    margin-right: 0; 
+  }
+  
+  .nav-items li a {
+    color: #000; 
+    text-decoration: none;
+  }
+  
+/**FIN DE ESTILOS MENU NAVEGACIÓN**/
