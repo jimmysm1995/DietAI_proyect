@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { User } from 'src/app/models/User';
+import { UserStore } from 'src/app/store/userStore';
+
 
 @Component({
   selector: 'app-update-profile',
@@ -6,5 +10,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./update-profile.component.css']
 })
 export class UpdateProfileComponent {
+  constructor(
+    private userService: UserService, 
+    private userStore: UserStore) {
+  }
 
+  public user: User = new User();
+
+  ngOnInit(): void {
+    this.userService.getUser(this.userStore.user.idUser!).then((user: User) => {
+      this.user = user;
+      console.log("hola que ase2", this.user);
+    });
+
+  }
 }

@@ -9,10 +9,7 @@ export class HeaderHomeComponent {
   constructor(private elementRef: ElementRef) {}
 
   openProfileModal() {
-    console.log('Abriendo modal de perfil...');
-    const modal = this.elementRef.nativeElement.querySelector('#updateProfileModal');
-    modal.classList.add('show');
-    document.body.classList.add('modal-open');
+    
   }
   
 

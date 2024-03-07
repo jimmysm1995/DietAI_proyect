@@ -1,126 +1,133 @@
-<form #clientForm="ngForm" (ngSubmit)="registrarCliente(clientForm.value)">
-
+<form action="" method="post" class="form">
     <div class="form-group">
-        <label for="name">Nombre</label>
-        <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" ngModel required>
-    </div>
-
-    <div class="form-group">
-        <label for="lastName">Apellido</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Apellido" name="lastName" ngModel required>
-    </div>
-
-    <div class="form-group">
-        <label for="birthDate">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" id="birthDate" placeholder="Fecha de Nacimiento" name="birthDate"
-            ngModel required>
+        <!-- 
+        <label for="edad">Edad</label> -->
+        <input
+            name="edad"
+            type="text"
+            class="form-control"
+            id="edad"
+            placeholder="Edad"
+            ngModel
+            required
+        />
     </div>
 
     <div class="form-group select-group">
-        <label for="gender">Género</label>
-        <select class="form-control" id="gender" name="gender" ngModel required>
+        <label for="genero">Género</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
             <option value=""></option>
-            <option value="MALE">Masculino</option>
-            <option value="FEMALE">Femenino</option>
+            <option value="1">Masculino</option>
+            <option value="2">Femenino</option>
+            <option value="3">Prefiero no decirlo</option>
         </select>
-    </div>
-
-    <div class="form-group select-group">
-        <label for="plan">Plan</label>
-        <select class="form-control" id="plan" name="plan" ngModel required>
-            <option value=""></option>
-            <option value="BASICO">Basico</option>
-            <option value="PREMIUM">Premium</option>
-        </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group">
-        <label for="weight">Peso</label>
-        <input type="number" class="form-control" id="weight" placeholder="Peso" name="weight" ngModel required>
+        <input
+            name="peso"
+            type="text"
+            class="form-control"
+            id="peso"
+            name="peso"
+            placeholder="Peso"
+            ngModel
+            required
+        />
     </div>
 
     <div class="form-group">
-        <label for="height">Altura</label>
-        <input type="number" class="form-control" id="height" placeholder="Altura" name="height" ngModel required>
+        <!-- <label for="altura">Altura</label> -->
+        <input
+            name="altura"
+            type="text"
+            class="form-control"
+            id="altura"
+            name="altura"
+            placeholder="Altura"
+            ngModel
+            required
+        />
     </div>
 
-    <div class="form-group select-group">
-        <label for="goal">Objetivo</label>
-        <select class="form-control" id="goal" name="goal" ngModel required>
+    <div class="form-group select-group" >
+        <label for="objetivo">Objetivo</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
             <option value=""></option>
-            <option value="BUILD_MUSCLE_MASS">Desarrollar masa muscular</option>
-            <option value="INCREASE_STRENGTH_ENDURANCE">Incrementar resistencia y fuerza</option>
-            <option value="IMPROVE_CARDIOVASCULAR_FITNESS">Mejorar la condición cardiovascular</option>
-            <option value="LOSE_WEIGHT_REDUCE_BODY_FAT">Perder peso / Reducir grasa corporal</option>
-            <option value="ENHANCE_FLEXIBILITY_MOBILITY">Mejorar la flexibilidad / Movilidad</option>
-            <option value="IMPROVE_OVERALL_HEALTH_WELLBEING">Mejorar la salud / Bienestar general</option>
-            <option value="TRAIN_FOR_SPECIFIC_SPORT_EVENT">Entrenar para un evento deportivo específico</option>
-            <option value="REHABILITATE_FROM_INJURY_MEDICAL_CONDITION">Rehabilitarse de una lesión / Condición médica
-            </option>
-            <option value="BOOST_ENERGY_LEVELS_REDUCE_STRESS">Aumentar los niveles de energía / Reducir el estrés
-            </option>
-            <option value="ACHIEVE_SPECIFIC_AESTHETIC_PHYSIQUE_GOAL">Lograr un objetivo estético / físico específico
-            </option>
+            <option value="1">Perder peso</option>
+            <option value="2">Aumentar peso</option>
+            <option value="3">Tonificar</option>
+            <option value="3">Mantener</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
-
 
     <div class="form-group">
-        <label for="injuries">Lesiones</label>
-        <input type="text" class="form-control" id="injuries" placeholder="Lesiones" name="injuries" ngModel required>
+        <!-- <label for="lesiones">Lesiones</label> -->
+        <input
+            name="lesiones"
+            type="text"
+            class="form-control"
+            id="lesiones"
+            name="lesiones"
+            placeholder="Lesiones"
+            ngModel
+            required
+        />
+    </div>
+
+    <div class="form-group">
+        <!-- <label for="alergias">Alergias</label> -->
+        <input
+            name="alergias"
+            type="text"
+            class="form-control"
+            id="alergias"
+            name="alergias"
+            placeholder="Alergias"
+            ngModel
+            required
+        />
     </div>
 
     <div class="form-group select-group">
-        <label for="allergy">Alergias</label>
-        <select class="form-control" id="allergy" name="allergy" ngModel required>
+        <label for="tipoDeTrabajo">Tipo de trabajo</label>
+        <select name="tipoDeTrabajo" id="" class="form-control">
             <option value=""></option>
-            <option value="PEANUTS">Peanuts</option>
-            <option value="DAIRY">Dairy</option>
-            <option value="GLUTEN">Gluten</option>
-            <option value="SHELLFISH">Shellfish</option>
-            <option value="SOY">Soy</option>
-            <option value="EGG">Egg</option>
-            <option value="FISH">Fish</option>
-            <option value="TREE_NUTS">Tree Nuts</option>
-            <option value="WHEAT">Wheat</option>
-            <option value="SESAME">Sesame</option>
+            <option value="1">Sedentario</option>
+            <option value="2">Activo</option>
+            <option value="3">Muy Activo</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
-        <label for="jobType">Tipo de trabajo</label>
-        <select class="form-control" id="jobType" name="jobType" ngModel required>
+        <label for="consumo">¿Consumes alguna de estas sustancias? </label>
+        <select name="consumo" id="" class="form-control">
             <option value=""></option>
-            <option value="SEDENTARY">Sedentario</option>
-            <option value="ACTIVE">Activo</option>
-            <option value="VERYACTIVE">Muy Activo</option>
+            <option value="1">Alcohol</option>
+            <option value="2">Tabaco</option>
+            <option value="3">Las dos</option>
+            <option value="3">Ninguno</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
-        <label for="previousLevel">Nivel Previo</label>
-        <select class="form-control" id="previousLevel" name="previousLevel" ngModel required>
+        <label for="nivelPrevio">Nivel Previo</label>
+        <select name="nivelPrevio" class="form-control">
             <option value=""></option>
-            <option value="NUNCA_ENTRENADO">No he entrenado nunca</option>
-            <option value="A_VECES">Entreno a veces</option>
-            <option value="A_DIARIO">Entreno a diario</option>
+            <option value="1">No he entrenado nunca</option>
+            <option value="2">Entreno a veces</option>
+            <option value="3">Entreno a diario</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
-        <label for="consumedSubstances">¿Consumes alguna de estas sustancias?</label>
-        <select class="form-control" id="consumedSubstances" name="consumedSubstances" ngModel required>
-            <option value=""></option>
-            <option value="ALCOHOL">Alcohol</option>
-            <option value="TABACO">Tabaco</option>
-            <option value="BOTH">Ambas</option>
-            <option value="NONE">Ninguna</option>
-        </select>
-    </div>
-
-    <div class="form-group select-group">
-        <label for="trainingTime">Tiempo para entrenar</label>
-        <select class="form-control" id="trainingTime" name="trainingTime" ngModel required>
+        <label for="tiempoParaEntrenar">Tiempo para entrenar</label>
+        <select name="tiempoParaEntrenar" id="" class="form-control">
             <option value=""></option>
             <option value="1">1 día a la semana</option>
             <option value="2">2 días a la semana</option>
@@ -129,18 +136,26 @@
             <option value="5">5 días a la semana</option>
             <option value="6">Todos los días de la semana</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
-        <label for="dietAndExerciseFrequency">Cada cuánto quieres crear una dieta y ejercicios</label>
-        <select class="form-control" id="dietAndExerciseFrequency" name="dietAndExerciseFrequency" ngModel required>
+        <label for="crearTabla"
+            >Cada cuánto quieres crear <br> una dieta y ejercicios</label
+        >
+        <select name="crearTabla" id="" class="form-control">
             <option value=""></option>
-            <option value="Todos los meses">Todos los meses</option>
-            <option value="Cada dos semanas">Cada dos semanas</option>
+            <option value="1">Todos los meses</option>
+            <option value="2">Cada dos semanas</option>
         </select>
+        <i class="fas fa-caret-down flecha"></i>
     </div>
 
-    <button type="submit" [disabled]="clientForm.invalid" class="btn btn-primary btnAceptar">
+    <button
+        type="submit"
+        (click)="aceptar()"
+        class="btn btn-primary btnAceptar"
+    >
         Aceptar
     </button>
 </form>

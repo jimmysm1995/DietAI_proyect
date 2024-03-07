@@ -17,7 +17,9 @@ export class ClientFormComponent {
     idUser: string = '';
     @Output() aceptarFormulario = new EventEmitter();
 
-    constructor(private ClientService: ClientService,private userStore: UserStore, private router: Router) {}
+    constructor(private ClientService: ClientService,
+      private userStore: UserStore, 
+      private router: Router) {}
 
     aceptar(){
         this.aceptarFormulario.emit();
