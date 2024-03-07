@@ -11,7 +11,6 @@ export class UserService {
   
   private baseUrl: string = environment.apiUrl+'/api/users';
 
-
   getUsers(): Promise<User[]> {
     return axios.get(this.baseUrl).then((response) => response.data);
   }

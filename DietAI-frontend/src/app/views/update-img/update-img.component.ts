@@ -26,7 +26,6 @@ export class UpdateImgComponent {
             this.userService
                 .updateUser(user)
                 .then((updatedUser: User) => {
-                    console.log('User updated successfully:', user);
                     // Actualiza el usuario en el userStore con los datos actualizados
                     this.userStore.user.img = updatedUser.img;
                 })
