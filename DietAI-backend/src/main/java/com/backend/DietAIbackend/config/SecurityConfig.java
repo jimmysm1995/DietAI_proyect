@@ -30,9 +30,11 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(HttpSecurity http,
                                                        PasswordEncoder passwordEncoder,
                                                        UserDetailsService userDetailsService) throws Exception{
+
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder)
                 .and().build();
+
     }
 
     @Bean
@@ -44,6 +46,11 @@ public class SecurityConfig {
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeHttpRequests()
+                .requestMatchers("/auth/**").permitAll()
+                .anyRequest()
+                .authenticated();
 
         return http.build();
     }

@@ -83,22 +83,6 @@ public class UserController {
         return imagen;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
-
-        User userModel = userMapper.dtoToModel(userDTO);
-
-        if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
-        }
-
-        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
-        }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.registerUser(userModel)));
-    }
 
     @PutMapping("/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User user) {
@@ -116,23 +100,8 @@ public class UserController {
         return userService.updateUser(realUser);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto userDto){
-        try {
-            Authentication authDTO = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword());
-
-            Authentication authentication = this.authenticationManager.authenticate(authDTO);
-            User user = (User) authentication.getPrincipal();
-
-            String token = this.jwtTokenProvider.generetaToken(authentication);
-
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginResponse(user.getUsername(),
-                    user.getIdUser(),
-                    user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
-                    token));
-
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
-        }
+    @DeleteMapping("/delete/{userId}")
+    public void deleteUser(@PathVariable Long userId){
+        userService.deleteUserById(userId);
     }
 }
