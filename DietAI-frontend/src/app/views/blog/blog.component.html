@@ -1,0 +1,31 @@
+<header class="fixed-header">
+    <div class="logo-container">
+        <h1>DietAI Trainer</h1>
+    </div>
+    <nav class="nav-menu">
+        <ul class="nav-items">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/quienesSomos">Quienes somos</a></li>
+            <li><a href="/contacto">Contáctanos</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h1 class="text-center">Blog</h1>
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4" *ngFor="let blog of blogs">
+        <div class="card">
+          <img class="card-img-top" [src]="blog.image" alt="Blog Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text">{{ blog.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -9,3 +9,25 @@ header {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+/* MENU NAVEGACIÓN SUPERIOR DERECHA */
+.fixed-header nav{
+    width: fit-content;
+}
+
+.fixed-header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.fixed-header nav ul li {
+    margin-right: 20px;
+}
+
+.fixed-header nav a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */
+  

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UpdateImgComponent } from './update-img.component';
 
 describe('UpdateImgComponent', () => {

@@ -23,6 +23,8 @@ import { ClientFormComponent } from './components/client-form/client-form.compon
 import { LogroComponent } from './components/logro/logro.component';
 import { AuthGuard } from './router/auth.guard';
 import { UpdateImgComponent } from './views/update-img/update-img.component';
+import { UpdateProfileComponent } from './views/update-profile/update-profile.component';
+import { BlogComponent } from './views/blog/blog.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -30,7 +32,8 @@ const routes:Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'form', component: ClientFormComponent}
+  {path: 'form', component: ClientFormComponent},
+  {path: 'blog', component: BlogComponent}
 ]
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ const routes:Routes = [
     ProfileComponent,
     ClientFormComponent,
     LogroComponent,
-    UpdateImgComponent
+    UpdateImgComponent,
+    UpdateProfileComponent,
+    BlogComponent
   ],
   imports: [
     HttpClientModule,
