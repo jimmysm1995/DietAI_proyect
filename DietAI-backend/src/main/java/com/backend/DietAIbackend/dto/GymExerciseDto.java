@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class GymExerciseDto {
 
+    private Long idGymExercise;
+
     private String name;
 
     private List<Muscle> muscles;

@@ -26,58 +26,29 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class UserController {
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
 
-        try {
-            Optional<User> user = userService.getUserById(userId);
-
-            if (user.isPresent()){
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(
-                        userMapper.modelToDto(user.get())
-                );
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There was an error");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There was an error.");
-        }
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
     }
 
-    @GetMapping("/user/{username}")
-    public User getUserByUsername(@PathVariable String username){
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
 
-        return userService.findByUsername(username).orElse(null);
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
+
     }
 
     @GetMapping("/imagen/{username}")
     public String obtenerImagen(@PathVariable String username) {
 
-        User user = userService.findByUsername(username).orElse(null);
-        // Lógica para obtener la imagen correspondiente al nombre de usuario
-        // Aquí deberías implementar la lógica para recuperar la imagen desde tu base de datos o desde donde esté almacenada
+        User user = userService.findByUsername(username);
 
-        // Supongamos que tienes un servicio UserService que se encarga de manejar la lógica relacionada con los usuarios
-        // Puedes llamar a un método en este servicio para obtener la imagen según el username
         String imagen = user.getImg();
 
         return imagen;
@@ -92,7 +63,7 @@ public class UserController {
             throw new IllegalArgumentException("User ID in path variable must match user ID in request body");
         }
 
-        User realUser = userService.getUserById(userId).orElse(null);
+        User realUser = userService.findById(userId);
 
         realUser.setImg(user.getImg());
 
@@ -100,7 +71,7 @@ public class UserController {
         return userService.updateUser(realUser);
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable Long userId){
         userService.deleteUserById(userId);
     }

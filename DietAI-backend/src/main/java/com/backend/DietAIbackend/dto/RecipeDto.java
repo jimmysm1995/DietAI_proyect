@@ -7,6 +7,8 @@ import java.util.List;
 @Data
 public class RecipeDto {
 
+    private Long idRecipe;
+
     private String name;
 
     private List<RecipeDietDto> recipeDiets;

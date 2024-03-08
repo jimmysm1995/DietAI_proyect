@@ -23,7 +23,7 @@ public class Diet {
     private String name;
 
     @Column(name = "calories", columnDefinition = "int")
-    private Integer calorias;
+    private Integer calories;
 
     @OneToMany(mappedBy = "diet")
     private List<RecipeDiet> recipeDiets;

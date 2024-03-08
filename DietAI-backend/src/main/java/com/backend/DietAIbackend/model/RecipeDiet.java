@@ -14,8 +14,8 @@ public class RecipeDiet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idrecipeDiet", columnDefinition = "tinyint")
-    private Long idrecipeDiet;
+    @Column(name = "idRecipeDiet", columnDefinition = "tinyint")
+    private Long idRecipeDiet;
 
     @ManyToOne
     @JoinColumn(name = "idDiet")
@@ -32,6 +32,4 @@ public class RecipeDiet {
     @Enumerated(EnumType.STRING)
     @Column(name = "mealTime", columnDefinition = "varchar(10)")
     private MealTime mealTime;
-
-
 }

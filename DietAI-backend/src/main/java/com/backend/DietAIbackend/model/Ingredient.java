@@ -14,7 +14,7 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIngredient;
 
-    @Column(name = "name", columnDefinition = "varchar(100)")
+    @Column(name = "name", columnDefinition = "varchar(100)", unique = true)
     private String name;
 
     @Column(name = "protein", columnDefinition = "DOUBLE")
@@ -25,6 +25,9 @@ public class Ingredient {
 
     @Column(name = "fats" ,columnDefinition = "DOUBLE")
     private double fats; // Fats in grams
+
+    @Column(name = "calories", columnDefinition = "int")
+    private Integer calories;
 
     @OneToMany(mappedBy = "ingredient")
     private List<IngredientRecipe> ingredientRecipe;

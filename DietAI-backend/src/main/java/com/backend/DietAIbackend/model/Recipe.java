@@ -14,8 +14,11 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRecipe;
 
-    @Column(name = "name", columnDefinition = "varchar(100)")
+    @Column(name = "name", columnDefinition = "varchar(100)", unique = true)
     private String name;
+
+    @Column(name = "calories", columnDefinition = "int")
+    private Integer calories;
 
     @OneToMany(mappedBy = "recipe")
     private List<RecipeDiet> recipeDiets;

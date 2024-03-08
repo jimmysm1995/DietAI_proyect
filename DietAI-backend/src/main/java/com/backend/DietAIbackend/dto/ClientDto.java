@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 public class ClientDto {
 
+    private Long idClient;
+
     private String name;
 
     private String lastName;
@@ -31,11 +33,11 @@ public class ClientDto {
 
     private Allergy allergy;
 
-    private String jobType;
+    private JobType jobType;
 
-    private String previousLevel;
+    private PreviusLevel previousLevel;
 
-    private String consumedSubstances;
+    private ConsumedSubstances consumedSubstances;
 
     private Integer trainingTime;
 

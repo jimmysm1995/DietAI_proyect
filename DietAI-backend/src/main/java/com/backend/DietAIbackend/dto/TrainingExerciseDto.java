@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class TrainingExerciseDto {
 
+    private Long idTrainingExercise;
+
     private int sets;
 
     private int repetitions;

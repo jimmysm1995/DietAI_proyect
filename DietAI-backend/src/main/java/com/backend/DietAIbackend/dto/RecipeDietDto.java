@@ -8,6 +8,8 @@ import java.time.DayOfWeek;
 @Data
 public class RecipeDietDto {
 
+    private Long idRecipeDiet;
+
     private DietDto diet;
 
     private RecipeDto recipe;

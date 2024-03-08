@@ -24,8 +24,6 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         log.debug("loadUserByUsername {}", username);
 
-        return this.userService.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("User not found")
-        );
+        return this.userService.findByUsername(username);
     }
 }

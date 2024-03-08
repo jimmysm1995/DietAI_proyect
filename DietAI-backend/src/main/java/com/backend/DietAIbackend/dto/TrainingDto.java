@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class TrainingDto {
 
+    private Long idTraining;
+
     private String name;
 
     private TypeTraining typeTraining;

@@ -1,19 +1,18 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.ClientDto;
-import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.mapper.ClientMapper;
 import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.User;
-import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.service.ClientService;
 import com.backend.DietAIbackend.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,24 +25,52 @@ public class ClientController {
     ClientService clientService;
 
     @Autowired
-    ClientRepository clientRepository;
-
-    @Autowired
     UserService userService;
 
     @Autowired
     ClientMapper clientMapper;
 
-    @PostMapping("/register")
-    public void registerClient(@RequestBody ClientDto clientDto){
+    @PostMapping
+    public ResponseEntity<ClientDto> registerClient(@RequestBody ClientDto clientDto){
 
         Client client = clientMapper.dtoToModel(clientDto);
 
-        User user = userService.findByUsername(clientDto.getUser().getUsername()).orElse(null);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.registerClient(client)));
+    }
 
-        client.setUser(user);
+    @GetMapping
+    public List<Client>findAllClient(){
+        return clientService.findAllClient();
+    }
 
-        clientRepository.save(client);
+    @GetMapping("/{idClient}")
+    public ResponseEntity<ClientDto> findClientById(Long id){
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.findClientById(id)));
 
     }
+
+    @PutMapping
+    public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
+
+        Client client = clientMapper.dtoToModel(clientDto);
+
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.updateClient(client)));
+
+    }
+
+    @DeleteMapping
+    public void deleteClient(@RequestBody ClientDto clientDto){
+
+        Client client = clientMapper.dtoToModel(clientDto);
+
+        clientService.deleteClient(client);
+    }
+
+    @DeleteMapping("{idClient}")
+    public void deleteClient(@PathVariable Long idClient){
+
+        clientService.deleteClient(idClient);
+    }
+
 }
