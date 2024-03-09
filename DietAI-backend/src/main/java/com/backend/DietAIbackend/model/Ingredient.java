@@ -1,12 +1,14 @@
 package com.backend.DietAIbackend.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Entity
 @Data
+@Builder
 @Table(name = "ingredient")
 public class Ingredient {
 

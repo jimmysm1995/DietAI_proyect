@@ -58,7 +58,7 @@ public class AuthController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.registerUser(userModel)));
+                userMapper.modelToDto(userService.register(userModel)));
     }
 
     @PostMapping("/auth/login")

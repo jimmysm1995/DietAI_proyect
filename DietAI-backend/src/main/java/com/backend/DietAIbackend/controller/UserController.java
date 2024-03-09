@@ -19,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,6 +36,14 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
 
         return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUser(){
+
+        List<User> userList = userService.findAll();
+        List<UserDto> userDtoList = userMapper.listModelToDto(userList);
+        return ResponseEntity.ok().body(userDtoList);
     }
 
     @GetMapping("/{username}")
@@ -68,11 +77,11 @@ public class UserController {
         realUser.setImg(user.getImg());
 
         // Realiza la actualización del usuario en la base de datos
-        return userService.updateUser(realUser);
+        return userService.update(realUser);
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId){
-        userService.deleteUserById(userId);
+    public void deleteByID(@PathVariable Long userId){
+        userService.deleteByID(userId);
     }
 }

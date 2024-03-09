@@ -25,29 +25,30 @@ public class ClientService {
     @Autowired
     UserService userService;
 
-    public Client registerClient(Client client){
-
-        log.info(client.getUser().getIdUser().toString());
+    public Client save(Client client){
 
         User user = userService.findById(client.getUser().getIdUser());
 
         client.setUser(user);
+        client.setIdClient(user.getIdUser());
 
         user.setClient(client);
+
+        userService.update(user);
 
         return clientRepository.save(client);
     }
 
-    public Client findClientById(Long id){
+    public Client findById(Long id){
         return clientRepository.findById(id).orElse(null);
     }
 
-    public List<Client> findAllClient(){return clientRepository.findAll();}
-    public void deleteClient(Client client){ clientRepository.delete(client);}
+    public List<Client> findAll(){return clientRepository.findAll();}
+    public void delete(Client client){ clientRepository.delete(client);}
 
-    public void deleteClient(Long id){ clientRepository.deleteById(id);}
+    public void deleteById(Long id){ clientRepository.deleteById(id);}
 
-    public Client updateClient(Client client) {
+    public Client update(Client client) {
         try {
             clientRepository.findById(client.getIdClient());
         } catch (EntityNotFoundException e){

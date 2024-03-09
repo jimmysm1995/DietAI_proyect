@@ -30,15 +30,14 @@ public class UserService implements IUserService{
         return userRepository.findById(id).orElse(null);
     }
 
-    public User registerUser(User user){
+    public User register(User user){
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
 
-        return user;
+        return userRepository.save(user);
     }
 
-    public User updateUser(User user) {
+    public User update(User user) {
 
         try {
             userRepository.findById(user.getIdUser());
@@ -48,9 +47,9 @@ public class UserService implements IUserService{
         return userRepository.save(user);
     }
 
-    public void deleteUser(User user) { userRepository.delete(user); }
+    public void delete(User user) { userRepository.delete(user); }
 
-    public void deleteUserById(Long id) {
+    public void deleteByID(Long id) {
         userRepository.deleteById(id);
     }
 

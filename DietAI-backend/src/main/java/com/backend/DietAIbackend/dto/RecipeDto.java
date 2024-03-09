@@ -11,6 +11,8 @@ public class RecipeDto {
 
     private String name;
 
+    private Integer calories;
+
     private List<RecipeDietDto> recipeDiets;
 
     private List<IngredientRecipeDto> ingredientRecipe;

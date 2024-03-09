@@ -1,10 +1,12 @@
 package com.backend.DietAIbackend.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class IngredientDto {
 
     private Long idIngredient;
