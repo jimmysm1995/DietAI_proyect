@@ -12,11 +12,12 @@ public class GymExerciseDto {
 
     private String name;
 
-    private List<Muscle> muscles;
-
     private Integer difficult;
 
     private String explanation;
 
     private List<TrainingExerciseDto> trainingExercises;
+
+    private List<GymExerciseMuscleDto> gymExerciseMuscles;
+
 }

@@ -32,7 +32,7 @@ public class ClientController {
     ClientMapper clientMapper;
 
     @GetMapping("/{idClient}")
-    public ResponseEntity<ClientDto> findClientById(Long id){
+    public ResponseEntity<ClientDto> findClientById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.findById(id)));
     }
 
@@ -72,6 +72,24 @@ public class ClientController {
     public void deleteClient(@PathVariable Long idClient){
 
         clientService.deleteById(idClient);
+    }
+
+    @PostMapping("/diet/{idClient}")
+    public ResponseEntity<ClientDto> asignarDieta(@PathVariable Long idClient){
+
+        Client client = clientService.findById(idClient);
+
+        return  ResponseEntity.ok().body(clientMapper.modelToDto(clientService.asignarDieta(client)));
+
+    }
+
+    @PostMapping("/training/{idClient}")
+    public ResponseEntity<ClientDto> asignarEntrenamiento(@PathVariable Long idClient){
+
+        Client client = clientService.findById(idClient);
+
+        return  ResponseEntity.ok().body(clientMapper.modelToDto(clientService.asignarEntrenamiento(client)));
+
     }
 
 }

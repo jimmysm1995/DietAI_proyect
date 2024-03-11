@@ -16,8 +16,8 @@ public class GymExerciseService {
     @Autowired
     GymExerciseRepository gymExerciseRepository;
 
-    public GymExercise save(GymExercise homeExercise){
-        return gymExerciseRepository.save(homeExercise);
+    public GymExercise save(GymExercise gymExercise){
+        return gymExerciseRepository.save(gymExercise);
     }
 
     public GymExercise findById(Long id){

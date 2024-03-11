@@ -116,9 +116,9 @@ VALUES
 (3, 10,'WEDNESDAY', 1, 1, null),
 (3, 10,'WEDNESDAY', 1, 2, null),
 (3, 10,'WEDNESDAY', 1, 3, null),
-(3, 10,'Friday', 1, 1, null),
-(3, 10,'Friday', 1, 2, null),
-(3, 10,'Friday', 1, 3, null);
+(3, 10,'FRIDAY', 1, 1, null),
+(3, 10,'FRIDAY', 1, 2, null),
+(3, 10,'FRIDAY', 1, 3, null);
 
 
 -- Insertar datos en la tabla de ingredientes

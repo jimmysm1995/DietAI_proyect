@@ -13,6 +13,8 @@ import java.util.List;
 public interface ClientMapper {
 
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "diet", ignore = true)
+    @Mapping(target = "training", ignore = true)
     ClientDto modelToDto(Client client);
 
     Client dtoToModel(ClientDto clientDto);

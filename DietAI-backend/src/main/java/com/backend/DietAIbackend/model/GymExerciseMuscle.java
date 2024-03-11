@@ -10,7 +10,7 @@ public class GymExerciseMuscle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idgymExerciseMuscle;
+    private Long idGymExerciseMuscle;
 
     @ManyToOne
     @JoinColumn(name = "idGymExercise")
