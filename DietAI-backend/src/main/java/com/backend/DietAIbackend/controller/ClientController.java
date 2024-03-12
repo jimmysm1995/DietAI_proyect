@@ -7,8 +7,13 @@ import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.service.ClientService;
 import com.backend.DietAIbackend.service.UserService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +26,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class ClientController {
+    @Value("${app.security.jwt.secret}")
+    private String jwtSecret;
 
     @Autowired
     ClientService clientService;
@@ -90,6 +97,16 @@ public class ClientController {
 
         return  ResponseEntity.ok().body(clientMapper.modelToDto(clientService.asignarEntrenamiento(client)));
 
+    }
+
+    @GetMapping("/currentUser")
+    public ResponseEntity<ClientDto> getCurrentUser(@RequestHeader("Authorization") String token){
+        JwtParser validator = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build();
+        Claims claims = validator.parseClaimsJws(token).getBody();
+        claims.getId();
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getId()))));
     }
 
 }
