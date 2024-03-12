@@ -22,6 +22,9 @@ public class UserService implements IUserService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    ClientRepository clientRepository;
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -57,5 +60,4 @@ public class UserService implements IUserService{
 
         return this.userRepository.findByUsername(username).orElse(null);
     }
-
 }

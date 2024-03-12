@@ -123,4 +123,8 @@ public class ClientService {
 
         return clientRepository.save(client);
     }
+
+    public Client findCurrentClient(long userId){
+        return this.clientRepository.findClientByUserId(userId);
+    }
 }

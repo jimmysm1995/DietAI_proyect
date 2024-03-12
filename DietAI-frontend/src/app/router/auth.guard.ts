@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { UserStore } from '../store/userStore';
 import { UserService } from '../services/user.service';
-import { User } from '../models/User';
+import { Client } from '../models/Client';
 
 @Injectable({
     providedIn: 'root',
@@ -25,14 +25,15 @@ class PermissionsService {
         if (localStorage.getItem('sesion')) {
             if(!this.userStore.user.username){
                 this.userStore.user.username = localStorage.getItem('username') + '';
-                //cuando esté disponible el echoService hay que cambiar la línea de abajo para que llame a ese servicio y no obtenga los datos de localStorage 
-            //     return this.userService.getUserByUsername(localStorage.getItem('username') + '').then((user: User) => {
+                //cuando esté disponible el echoService hay que cambiar la línea de abajo para que llame a ese servicio y no obtenga los datos de localStorage
+                 
+                // this.userService.getCurrentUser().then((client: Client) => {
                     
-            //         this.userStore.user = user;
-            //         return true;
-            //     }) 
-             }
-             return true
+                //     this.userStore.user = user;
+                //     return true;
+                // }) 
+            }
+            return true
         }
         this.router.navigate(['/login']);
         return false;

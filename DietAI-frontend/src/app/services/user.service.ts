@@ -3,6 +3,7 @@ import axios from 'axios';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/loginResponse';
+import { Client } from '../models/Client';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class UserService {
   }
 
   loginUser(userData: User): Promise< LoginResponse> {
-    return axios.post(`${this.baseUrl}/login`, userData)
+    return axios.post(`${environment.apiUrl}/auth/login`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
@@ -52,7 +53,7 @@ export class UserService {
   }
 
   registerUser(userData: User): Promise<User>{
-    return axios.post(`${this.baseUrl}/register`, userData)
+    return axios.post(`${environment.apiUrl}/auth/register`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
@@ -61,5 +62,10 @@ export class UserService {
           return Promise.reject('Error desconocido');
       }
   });
+  }
+
+  getCurrentUser():Promise<Client>{
+    return axios.get(`${this.baseUrl}/currentUser`).then((response) => response.data);
+
   }
 }

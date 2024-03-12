@@ -5,11 +5,14 @@ import com.backend.DietAIbackend.config.JwtTokenProvider;
 import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.mapper.UserMapper;
+import com.backend.DietAIbackend.mapper.ClientMapper;
+import com.backend.DietAIbackend.dto.ClientDto;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.repository.UserRepository;
 import com.backend.DietAIbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +21,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +36,15 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class UserController {
+    @Value("${app.security.jwt.secret}")
+    private String jwtSecret;
     @Autowired
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ClientMapper clientMapper;
+
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
@@ -84,4 +98,16 @@ public class UserController {
     public void deleteByID(@PathVariable Long userId){
         userService.deleteByID(userId);
     }
+
+    @GetMapping("/currentUser")
+    public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
+        JwtParser validator = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build();
+        Claims claims = validator.parseClaimsJws(token).getBody();
+        claims.getId();
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getId()))));
+    }
+
+
 }
