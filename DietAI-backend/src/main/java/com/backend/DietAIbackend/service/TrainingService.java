@@ -1,13 +1,14 @@
 package com.backend.DietAIbackend.service;
 
-import com.backend.DietAIbackend.model.Recipe;
-import com.backend.DietAIbackend.model.Training;
+import com.backend.DietAIbackend.dto.ExercisesInTraining;
+import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.TrainingRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,4 +41,38 @@ public class TrainingService {
         }
         return trainingRepository.save(training);
     }
+
+    public List<ExercisesInTraining> findExercisesById(Long id) {
+
+        Training training = trainingRepository.findById(id).orElse(null);
+
+        List<ExercisesInTraining> exercisesInTrainings = new ArrayList<>();
+
+        for (TrainingExercise trainingExercise: training.getTrainingExercises()
+        ) {
+            exercisesInTrainings.add(new ExercisesInTraining(
+                    trainingExercise.getGymExercise().getName(),
+                    trainingExercise.getSets(),
+                    trainingExercise.getRepetitions(),
+                    trainingExercise.getDayWeek()
+            ));
+        }
+
+        return exercisesInTrainings;
+    }
+
+    public List<HomeExercise> findHomeExercisesById(Long id) {
+
+        Training training = trainingRepository.findById(id).orElse(null);
+
+        List<HomeExercise> homeExerciseList = new ArrayList<>();
+
+        for (TrainingExercise trainingExercise: training.getTrainingExercises()
+        ) {
+            homeExerciseList.add(trainingExercise.getHomeExercise());
+        }
+
+        return homeExerciseList;
+    }
+
 }

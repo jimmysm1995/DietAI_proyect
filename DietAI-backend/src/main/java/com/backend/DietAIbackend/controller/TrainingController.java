@@ -1,9 +1,8 @@
 package com.backend.DietAIbackend.controller;
 
-import com.backend.DietAIbackend.dto.ClientDto;
-import com.backend.DietAIbackend.dto.GymExerciseDto;
-import com.backend.DietAIbackend.dto.TrainingDto;
+import com.backend.DietAIbackend.dto.*;
 import com.backend.DietAIbackend.mapper.GymExerciseMapper;
+import com.backend.DietAIbackend.mapper.HomeExerciseMapper;
 import com.backend.DietAIbackend.mapper.TrainingMapper;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.service.TrainingService;
@@ -32,6 +31,9 @@ public class TrainingController {
     @Autowired
     GymExerciseMapper gymExerciseMapper;
 
+    @Autowired
+    HomeExerciseMapper homeExerciseMapper;
+
     @GetMapping("/{id}")
     public ResponseEntity<TrainingDto> findTrainingById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.modelToDto(trainingService.findById(id)));
@@ -44,19 +46,19 @@ public class TrainingController {
         return ResponseEntity.ok().body(trainingDtoList);
     }
 
-    @GetMapping("/exercises/{id}")
-    public ResponseEntity<List<GymExerciseDto>> findExercisesById(@PathVariable Long id){
+    @GetMapping("/gym/exercises/{id}")
+    public ResponseEntity<List<ExercisesInTraining>> findExercisesById(@PathVariable Long id){
 
-        List<GymExercise> gymExerciseList = new ArrayList<>();
+        List<ExercisesInTraining> exerciseList = trainingService.findExercisesById(id);
 
-        Training training = trainingService.findById(id);
+        return ResponseEntity.ok().body(exerciseList);
+    }
 
-        for (TrainingExercise trainingExercise: training.getTrainingExercises()
-        ) {
-            gymExerciseList.add(trainingExercise.getGymExercise());
-        }
+    @GetMapping("/home/exercises/{id}")
+    public ResponseEntity<List<HomeExerciseDto>> findHomeExercisesById(@PathVariable Long id){
 
-        return ResponseEntity.ok().body(gymExerciseMapper.listModelToDto(gymExerciseList));
+        List<HomeExercise> homeExerciseList = trainingService.findHomeExercisesById(id);
 
+        return ResponseEntity.ok().body(homeExerciseMapper.listModelToDto(homeExerciseList));
     }
 }
