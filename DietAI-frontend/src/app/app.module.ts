@@ -25,6 +25,7 @@ import { AuthGuard } from './router/auth.guard';
 import { UpdateImgComponent } from './views/update-img/update-img.component';
 import { UpdateProfileComponent } from './views/update-profile/update-profile.component';
 import { BlogComponent } from './views/blog/blog.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -62,7 +63,8 @@ const routes:Routes = [
     FormsModule, // Agrega FormsModule a la lista de importaciones
     RouterModule.forRoot(routes),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SelectDropDownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
