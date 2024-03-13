@@ -64,7 +64,7 @@ export class UserService {
   });
   }
 
-  getCurrentUser():Promise<Client>{
+  getCurrentUser():Promise<User>{
     return axios.get(`${this.baseUrl}/currentUser`).then((response) => response.data);
 
   }

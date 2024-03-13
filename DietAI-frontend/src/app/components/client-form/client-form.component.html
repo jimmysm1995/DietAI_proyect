@@ -4,7 +4,7 @@
         <label for="edad">Edad</label> -->
         <input
             name="edad"
-            type="text"
+            type="number"
             class="form-control"
             id="edad"
             placeholder="Edad"
@@ -27,11 +27,11 @@
     <div class="form-group">
         <input
             name="peso"
-            type="text"
+            type="number"
             class="form-control"
             id="peso"
             name="peso"
-            placeholder="Peso"
+            placeholder="Peso (kg)"
             ngModel
             required
         />
@@ -41,11 +41,11 @@
         <!-- <label for="altura">Altura</label> -->
         <input
             name="altura"
-            type="text"
+            type="number"
             class="form-control"
             id="altura"
             name="altura"
-            placeholder="Altura"
+            placeholder="Altura(cm)"
             ngModel
             required
         />
@@ -76,10 +76,11 @@
             required
         />
     </div>
-
-    <div class="form-group">
+    
+    <div class="form-group" >
+        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'label', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="['luis', 'pedro']"  ></ngx-select-dropdown>
         <!-- <label for="alergias">Alergias</label> -->
-        <input
+        <!-- <input
             name="alergias"
             type="text"
             class="form-control"
@@ -88,7 +89,7 @@
             placeholder="Alergias"
             ngModel
             required
-        />
+        /> -->
     </div>
 
     <div class="form-group select-group">

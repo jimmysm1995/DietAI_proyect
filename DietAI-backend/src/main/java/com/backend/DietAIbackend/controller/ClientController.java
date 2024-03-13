@@ -99,8 +99,8 @@ public class ClientController {
 
     }
 
-    @GetMapping("/currentUser")
-    public ResponseEntity<ClientDto> getCurrentUser(@RequestHeader("Authorization") String token){
+    @GetMapping("/currentClient")
+    public ResponseEntity<ClientDto> getCurrentClient(@RequestHeader("Authorization") String token){
         JwtParser validator = Jwts.parser()
                 .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .build();
