@@ -16,5 +16,17 @@
 }
 
 .container img.selected{
-    border: 1px solid red;
+    border: 1px solid rgb(79, 79, 79);
+}
+
+.close{
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
 }

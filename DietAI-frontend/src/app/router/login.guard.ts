@@ -13,34 +13,27 @@ import { User } from '../models/User';
 @Injectable({
     providedIn: 'root',
 })
-class AuthGuardService {
+class LoginGuardService {
     constructor(
         private router: Router,
-        private userStore: UserStore,
-        private userService: UserService) {}
+    ){}
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): Promise<boolean> | boolean {
+    ): boolean {
+        //si existe sesión redirije a /home
         if (localStorage.getItem('sesion')) {
-            if(!this.userStore.user.username){
-                return this.userService.getCurrentUser().then((user: User) => {
-                    
-                    this.userStore.user = user;
-                    return true;
-                }) 
-            }
-            return true
+            this.router.navigate(['/home']);
+            return false; //deniegas acceso a login
         }
-        this.router.navigate(['/login']);
-        return false;
+        return true; // si no hay sesion iniciada permite entrar en login
     }
 }
 
-export const AuthGuard: CanActivateFn = (
+export const LoginGuard: CanActivateFn = (
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-): Promise <boolean> | boolean => {
-    return inject(AuthGuardService).canActivate(next, state);
+): boolean => {
+    return inject(LoginGuardService).canActivate(next, state);
 };

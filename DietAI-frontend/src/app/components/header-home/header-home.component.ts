@@ -1,4 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-home',
@@ -6,7 +7,9 @@ import { Component, ElementRef } from '@angular/core';
   styleUrls: ['./header-home.component.css']
 })
 export class HeaderHomeComponent {
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private router : Router) {}
 
   openProfileModal() {
     
@@ -18,4 +21,11 @@ export class HeaderHomeComponent {
     modal.classList.remove('show');
     document.body.classList.remove('modal-open');
   }
+
+  logout() {
+    localStorage.removeItem('sesion');
+    this.router.navigate(['/login']);
+  }
 }
+
+

@@ -49,3 +49,15 @@ label{
 .w-100{
     width: 100%;
 }
+
+.close{
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}
