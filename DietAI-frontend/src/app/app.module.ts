@@ -26,14 +26,14 @@ import { UpdateImgComponent } from './views/update-img/update-img.component';
 import { UpdateProfileComponent } from './views/update-profile/update-profile.component';
 import { BlogComponent } from './views/blog/blog.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
+import { LoginGuard } from './router/login.guard';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
+  {path: 'register', component: RegisterComponent, canActivate: [LoginGuard]},
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'form', component: ClientFormComponent},
   {path: 'blog', component: BlogComponent}
 ]
 @NgModule({
