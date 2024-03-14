@@ -11,8 +11,51 @@ INSERT INTO Muscle (name) VALUES
 ('Abdominales'),
 ('Oblicuos');
 
+-- Insertar datos en la tabla Allergy
+INSERT INTO Allergy (name)
+VALUES
+('Cacahuetes'),
+('Frutos secos'),
+('Mariscos'),
+('Pescado'),
+('Leche'),
+('Huevo'),
+('Trigo'),
+('Soja'),
+('Sésamo'),
+('Sulfitos');
+
+-- Insertar datos en la tabla Quotes
+INSERT INTO Quotes (name)
+VALUES
+('El éxito no es definitivo, el fracaso no es fatal: es el coraje para continuar lo que cuenta.'),
+('Cada día es una nueva oportunidad para cambiar tu vida.'),
+('Las montañas más altas surgen de las grietas más profundas.'),
+('Nunca subestimes el poder de tus sueños y la influencia positiva que pueden tener en el mundo.'),
+('El optimismo es la fe que conduce al logro. Nada puede hacerse sin esperanza y confianza.'),
+('No importa cuántas veces caigas, lo importante es levantarse una vez más.'),
+('La única forma de hacer un gran trabajo es amar lo que haces.'),
+('Cree en ti mismo y en todo lo que eres. Sabes que hay algo dentro de ti que es más grande que cualquier obstáculo.'),
+('La diferencia entre lo imposible y lo posible está en la determinación de una persona.');
+
+
+INSERT INTO Injury (name)
+VALUES
+('Esguince de tobillo'),
+('Codo de tenista'),
+('Rodilla del corredor'),
+('Lesión del manguito rotador'),
+('Codo de golfista'),
+('Distensión del tendón de la corva'),
+('Síndrome de la cintilla iliotibial'),
+('Tendinitis del tendón de Aquiles'),
+('Conmoción cerebral'),
+('Tirón en la ingle');
+
+
 -- Insertar datos en la tabla Imagen_profile
-INSERT INTO Imagen_profile (url) VALUES
+INSERT INTO Imagen_profile (url)
+VALUES
 ('https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg'),
 ('https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg'),
 ('https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg'),

@@ -29,9 +29,9 @@ public class ClientDto {
 
     private Goal goal;
 
-    private String injuries;
+    private List<ClientInjuryDto> injuries;
 
-    private Allergy allergy;
+    private List<ClientAllergyDto> allergy;
 
     private JobType jobType;
 

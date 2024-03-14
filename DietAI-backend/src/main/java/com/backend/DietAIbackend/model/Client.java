@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -42,13 +43,6 @@ public class Client {
     @Column(name = "goal", columnDefinition = "varchar(255)")
     private Goal goal;
 
-    @Column(columnDefinition = "varchar(255)")
-    private String injuries;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "allergy", columnDefinition = "varchar(50)")
-    private Allergy allergy;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "jobType", columnDefinition = "varchar(255)")
     private JobType jobType;
@@ -66,6 +60,12 @@ public class Client {
 
     @Column(name = "dietAndExerciseFrequency", columnDefinition = "varchar(255)")
     private String dietAndExerciseFrequency;
+
+    @OneToMany(mappedBy = "client")
+    private List<ClientAllergy> clientAllergy;
+
+    @OneToMany(mappedBy = "client")
+    private List<ClientInjury> clientInjury;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
