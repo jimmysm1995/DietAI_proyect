@@ -13,27 +13,26 @@ export class UpdateImgComponent {
     public urls: string[] = [];
 
     constructor(
-        private userStore: UserStore,
+        public userStore: UserStore,
         private imagenProfileService: ImagenProfileService,
         private userService: UserService
     ) {
         this.loadUrls();
-        this.getImage();
     }
-    getImage() {
-        var username = this.userStore.user.username;
-        this.userService.getUserByUsername(username).then((user: User) => {
-            this.userService
-                .updateUser(user)
-                .then((updatedUser: User) => {
-                    // Actualiza el usuario en el userStore con los datos actualizados
-                    this.userStore.user.img = updatedUser.img;
-                })
-                .catch((error) => {
-                    console.error('Error updating user:', error);
-                });
-        });
-    }
+    // getImage() {
+    //     ;
+    //     this.userService.getUserByUsername(username).then((user: User) => {
+    //         this.userService
+    //             .updateUser(user)
+    //             .then((updatedUser: User) => {
+    //                 // Actualiza el usuario en el userStore con los datos actualizados
+    //                 this.userStore.user.img = updatedUser.img;
+    //             })
+    //             .catch((error) => {
+    //                 console.error('Error updating user:', error);
+    //             });
+    //     });
+    // }
 
     loadUrls(): Promise<void> {
         return this.imagenProfileService
@@ -47,19 +46,17 @@ export class UpdateImgComponent {
     }
 
     updateImg(url: string) {
-        var username = this.userStore.user.username;
-        this.userService.getUserByUsername(username).then((user: User) => {
-            user.img = url;
+        let prepUrl = this.userStore.user.img;
+        this.userStore.user.img = url;
             this.userService
-                .updateUser(user)
+                .updateUser(this.userStore.user)
                 .then((updatedUser: User) => {
-                    console.log('User updated successfully:', user);
                     // Actualiza el usuario en el userStore con los datos actualizados
                     this.userStore.user.img = updatedUser.img;
                 })
                 .catch((error) => {
                     console.error('Error updating user:', error);
+                    this.userStore.user.img = prepUrl;
                 });
-        });
     }
 }

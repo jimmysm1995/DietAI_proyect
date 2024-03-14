@@ -26,6 +26,7 @@ select:focus {
     display: flex;
     white-space: nowrap;
     align-items: center;
+    gap: 1rem;
 }
 
 select::after {
@@ -43,4 +44,8 @@ select::after {
 
 label{
     font-weight: 500;
+}
+
+.w-100{
+    width: 100%;
 }

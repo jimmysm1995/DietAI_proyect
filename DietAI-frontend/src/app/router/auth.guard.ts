@@ -25,9 +25,6 @@ class PermissionsService {
     ): Promise<boolean> | boolean {
         if (localStorage.getItem('sesion')) {
             if(!this.userStore.user.username){
-                this.userStore.user.username = localStorage.getItem('username') + '';
-                //cuando esté disponible el echoService hay que cambiar la línea de abajo para que llame a ese servicio y no obtenga los datos de localStorage
-                 
                 return this.userService.getCurrentUser().then((user: User) => {
                     
                     this.userStore.user = user;

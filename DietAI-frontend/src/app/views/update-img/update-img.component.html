@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <img [src]="url" alt="" *ngFor="let url of urls" (click)="updateImg(url)">
+                    <img [src]="url" alt="" *ngFor="let url of urls" (click)="updateImg(url)" [ngClass]="{ 'selected': url === userStore.user.img }">
                 </div>
             </div>
         </div>

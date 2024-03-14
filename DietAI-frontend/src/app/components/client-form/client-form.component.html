@@ -63,33 +63,14 @@
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
-    <div class="form-group">
-        <!-- <label for="lesiones">Lesiones</label> -->
-        <input
-            name="lesiones"
-            type="text"
-            class="form-control"
-            id="lesiones"
-            name="lesiones"
-            placeholder="Lesiones"
-            ngModel
-            required
-        />
+    <div class="form-group select-group" >
+        <label for="alergias">Lesiones</label>
+        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'label', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="['yoquese', 'hola']" class="w-100" ></ngx-select-dropdown>
     </div>
     
-    <div class="form-group" >
-        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'label', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="['luis', 'pedro']"  ></ngx-select-dropdown>
-        <!-- <label for="alergias">Alergias</label> -->
-        <!-- <input
-            name="alergias"
-            type="text"
-            class="form-control"
-            id="alergias"
-            name="alergias"
-            placeholder="Alergias"
-            ngModel
-            required
-        /> -->
+    <div class="form-group select-group" >
+        <label for="alergias">Alergias</label>
+        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'label', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="['caca', 'pedo']" class="w-100" ></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
