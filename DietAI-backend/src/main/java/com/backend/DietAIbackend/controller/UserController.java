@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -60,7 +61,7 @@ public class UserController {
         return ResponseEntity.ok().body(userDtoList);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
 
         return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
@@ -101,12 +102,18 @@ public class UserController {
 
     @GetMapping("/currentUser")
     public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
+
+        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
+            token = token.substring("Bearer ".length());
+        }
+
         JwtParser validator = Jwts.parser()
                 .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .build();
+
         Claims claims = validator.parseClaimsJws(token).getBody();
         claims.getId();
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getId()))));
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
     }
 
 
