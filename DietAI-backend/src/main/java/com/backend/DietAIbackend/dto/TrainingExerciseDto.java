@@ -7,7 +7,7 @@ import java.time.DayOfWeek;
 @Data
 public class TrainingExerciseDto {
 
-    private Long idTrainingExercise;
+    private Long id;
 
     private int sets;
 

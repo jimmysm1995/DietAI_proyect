@@ -10,7 +10,7 @@ public class ClientInjury {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idClientInjury;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "idClient")

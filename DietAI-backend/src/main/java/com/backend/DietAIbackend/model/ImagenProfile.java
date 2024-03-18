@@ -9,8 +9,8 @@ import lombok.Data;
 public class ImagenProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idImagen", columnDefinition = "tinyint")
-    private Long idImagen;
+    @Column(name = "id", columnDefinition = "tinyint")
+    private Long id;
 
     @Column(name = "url", columnDefinition = "varchar(255)")
     private String url;

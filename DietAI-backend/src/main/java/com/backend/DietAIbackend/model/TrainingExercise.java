@@ -12,8 +12,7 @@ public class TrainingExercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTrainingExercise", columnDefinition = "tinyint")
-    private Long idTrainingExercise;
+    private Long id;
 
     @Column(name = "sets",columnDefinition = "INT")
     private int sets;

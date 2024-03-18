@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class RecipeDto {
 
-    private Long idRecipe;
+    private Long id;
 
     private String name;
 

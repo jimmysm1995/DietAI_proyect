@@ -16,8 +16,7 @@ public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUser", columnDefinition = "tinyint")
-    private Long idUser;
+    private Long id;
 
     @Column(name = "username", columnDefinition = "varchar(100)",nullable = false, unique = true)
     private String username;
@@ -31,8 +30,8 @@ public class User implements UserDetails{
     @Column(name = "img", columnDefinition = "varchar(255)")
     private String img;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Client client;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Client client;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -58,7 +57,7 @@ public class User implements UserDetails{
     }
 
     public Long getIdUser() {
-        return idUser;
+        return id;
     }
 
     public String getEmail() {
@@ -69,12 +68,12 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public Client getClient() {
-        return client;
-    }
+//    public Client getClient() {
+//        return client;
+//    }
 
-    public User(Long idUser, String username, String email, String password) {
-        this.idUser = idUser;
+    public User(Long id, String username, String email, String password) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;

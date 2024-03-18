@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class MuscleDto {
 
-    private Long idMuscle;
+    private Long id;
 
     private String name;
 

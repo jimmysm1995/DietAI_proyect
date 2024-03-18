@@ -1,10 +1,8 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.AllergyDto;
-import com.backend.DietAIbackend.dto.IngredientDto;
 import com.backend.DietAIbackend.mapper.AllergyMapper;
 import com.backend.DietAIbackend.model.Allergy;
-import com.backend.DietAIbackend.model.Ingredient;
 import com.backend.DietAIbackend.service.AllergyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

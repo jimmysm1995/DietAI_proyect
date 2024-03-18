@@ -8,8 +8,7 @@ import java.util.List;
 @Data
 public class InjuryDto {
 
-    private Long idInjury;
-
+    private Long id;
     private String name;
 
     private List<ClientInjuryDto> clientInjury;

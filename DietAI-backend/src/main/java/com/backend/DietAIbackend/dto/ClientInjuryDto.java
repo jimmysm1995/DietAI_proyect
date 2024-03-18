@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ClientInjuryDto {
 
-    private Long idClientInjury;
+    private Long id;
 
     private ClientDto client;
 

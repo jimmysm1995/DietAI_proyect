@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ClientAllergyDto {
 
-    private Long idClientAllergy;
+    private Long id;
 
     private ClientDto client;
 

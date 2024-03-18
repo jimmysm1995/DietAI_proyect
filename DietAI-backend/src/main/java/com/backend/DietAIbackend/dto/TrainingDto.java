@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class TrainingDto {
 
-    private Long idTraining;
+    private Long id;
 
     private String name;
 

@@ -12,7 +12,7 @@ public class Allergy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAllergy;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "Varchar(100)" ,nullable = false, unique = true)
     private String name;

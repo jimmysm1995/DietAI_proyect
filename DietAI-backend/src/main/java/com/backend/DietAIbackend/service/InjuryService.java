@@ -30,7 +30,7 @@ public class InjuryService {
 
     public Injury update(Injury injury) {
         try {
-            injuryRepository.findById(injury.getIdInjury());
+            injuryRepository.findById(injury.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No exista la lesion en cuestion");
         }

@@ -10,8 +10,7 @@ public class Quotes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idQuotes", columnDefinition = "tinyint")
-    private Long idQuotes;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "varchar(255)")
     private String name;

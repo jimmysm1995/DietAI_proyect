@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class IngredientDto {
 
-    private Long idIngredient;
+    private Long id;
 
     private String name;
 

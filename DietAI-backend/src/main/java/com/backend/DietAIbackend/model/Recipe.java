@@ -12,7 +12,7 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRecipe;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "varchar(100)", unique = true)
     private String name;

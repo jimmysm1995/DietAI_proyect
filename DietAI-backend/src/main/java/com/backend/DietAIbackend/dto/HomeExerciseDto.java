@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class HomeExerciseDto {
 
-    private Long idHomeExercise;
+    private Long id;
 
     private String name;
 

@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class AllergyDto {
 
-    private Long idAllergy;
+    private Long id;
 
     private String name;
 

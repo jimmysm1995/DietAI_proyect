@@ -31,7 +31,7 @@ public class IngredientService {
 
     public Ingredient update(Ingredient ingredient) {
         try {
-            ingredientRepository.findById(ingredient.getIdIngredient());
+            ingredientRepository.findById(ingredient.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

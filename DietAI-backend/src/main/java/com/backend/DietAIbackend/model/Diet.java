@@ -16,8 +16,7 @@ public class Diet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDiet", columnDefinition = "tinyint")
-    private Long idDiet;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "varchar(100)",nullable = false, unique = true)
     private String name;

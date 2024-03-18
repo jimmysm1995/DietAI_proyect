@@ -35,7 +35,6 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = this.extractToken(request);
 
         if (this.tokenProvider.isValidToken(token)){
-
             String username = this.tokenProvider.getUsernameFromToken(token);
             UserDetails user =this.userService.loadUserByUsername(username);
 

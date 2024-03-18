@@ -13,8 +13,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idClient", columnDefinition = "tinyint")
-    private Long idClient;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "varchar(100)")
     private String name;
@@ -67,8 +66,8 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<ClientInjury> clientInjury;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser")
+    @OneToOne
+    @MapsId
     private User user;
 
     @ManyToOne

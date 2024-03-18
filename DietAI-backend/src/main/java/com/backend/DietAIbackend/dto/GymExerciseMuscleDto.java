@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class GymExerciseMuscleDto {
 
-    private Long idGymExerciseMuscle;
+    private Long id;
 
     private GymExerciseDto gymExercise;
 

@@ -35,7 +35,7 @@ public class TrainingService {
 
     public Training update(Training training) {
         try {
-            trainingRepository.findById(training.getIdTraining());
+            trainingRepository.findById(training.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

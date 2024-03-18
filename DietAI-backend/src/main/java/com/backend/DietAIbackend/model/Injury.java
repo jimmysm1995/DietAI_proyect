@@ -12,7 +12,7 @@ public class Injury {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idInjury;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "Varchar(255)" ,nullable = false, unique = true)
     private String name;

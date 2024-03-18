@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class DietDto {
 
-    private Long idDiet;
+    private Long id;
 
     private String name;
 

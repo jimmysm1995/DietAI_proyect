@@ -1,7 +1,6 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.config.JwtTokenProvider;
-//import com.backend.DietAIbackend.dto.LoginRequest;
 import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.mapper.UserMapper;
@@ -47,10 +46,12 @@ public class UserController {
     private ClientMapper clientMapper;
 
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
 
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
+        log.info("Pasa por aqui");
+        log.info(id.toString());
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(id)));
     }
 
     @GetMapping
@@ -73,26 +74,39 @@ public class UserController {
 
         User user = userService.findByUsername(username);
 
+        log.info(user.getImg());
+
         String imagen = user.getImg();
 
         return imagen;
     }
 
 
-    @PutMapping("/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
 
         // Verifica si el usuario que se está actualizando es el mismo que se proporciona en el cuerpo de la solicitud
-        if (user.getIdUser() == null || !user.getIdUser().equals(userId)) {
+        if (user.getId() == null || !user.getId().equals(id)) {
             throw new IllegalArgumentException("User ID in path variable must match user ID in request body");
         }
 
-        User realUser = userService.findById(userId);
+        log.info(user.getImg());
+
+        User realUser = userService.findById(id);
 
         realUser.setImg(user.getImg());
 
         // Realiza la actualización del usuario en la base de datos
         return userService.update(realUser);
+    }
+
+    @PutMapping
+    public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {
+
+        User user = userMapper.dtoToModel(userDto);
+
+        // Realiza la actualización del usuario en la base de datos
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(user)));
     }
 
     @DeleteMapping("/{userId}")

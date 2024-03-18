@@ -34,7 +34,7 @@ public class RecipeService {
 
     public Recipe update(Recipe recipe) {
         try {
-            recetaRepository.findById(recipe.getIdRecipe());
+            recetaRepository.findById(recipe.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

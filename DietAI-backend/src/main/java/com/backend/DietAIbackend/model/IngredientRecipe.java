@@ -10,7 +10,7 @@ public class IngredientRecipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idIngredientRecipe;
+    private Long id;
 
     @Column(name = "quantity", columnDefinition = "int")
     private Integer quantity;

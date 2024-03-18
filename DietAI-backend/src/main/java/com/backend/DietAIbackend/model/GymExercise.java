@@ -11,8 +11,7 @@ import java.util.List;
 public class GymExercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idGymExercise", columnDefinition = "tinyint")
-    private Long idGymExercise;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "Varchar(100)" ,nullable = false, unique = true)
     private String name;

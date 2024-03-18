@@ -32,7 +32,7 @@ public class AllergyService {
 
     public Allergy update(Allergy allergy) {
         try {
-            allergyRepository.findById(allergy.getIdAllergy());
+            allergyRepository.findById(allergy.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No exista la alergia en cuestion");
         }

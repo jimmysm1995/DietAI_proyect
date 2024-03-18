@@ -32,6 +32,7 @@ public class JwtTokenProvider {
                 .setSubject(Long.toString(user.getIdUser()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + (jwtDurationSeconds * 1000)))
+                .claim("id", user.getId())
                 .claim("username", user.getUsername())
                 .claim("email", user.getEmail())
                 .compact();

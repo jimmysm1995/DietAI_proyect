@@ -14,8 +14,7 @@ public class RecipeDiet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idRecipeDiet", columnDefinition = "tinyint")
-    private Long idRecipeDiet;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "idDiet")

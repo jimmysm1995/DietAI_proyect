@@ -32,7 +32,8 @@ public class SecurityConfig {
                                                        UserDetailsService userDetailsService) throws Exception{
 
         return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder)
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder)
                 .and().build();
 
     }
@@ -45,12 +46,12 @@ public class SecurityConfig {
         http.sessionManagement((sessionManagement) ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
         http.authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
                 .anyRequest()
                 .authenticated();
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

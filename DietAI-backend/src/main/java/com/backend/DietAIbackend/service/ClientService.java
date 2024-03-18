@@ -1,10 +1,7 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.model.*;
-import com.backend.DietAIbackend.repository.ClientRepository;
-import com.backend.DietAIbackend.repository.DietRepository;
-import com.backend.DietAIbackend.repository.TrainingRepository;
-import com.backend.DietAIbackend.repository.UserRepository;
+import com.backend.DietAIbackend.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.Data;
@@ -27,6 +24,12 @@ public class ClientService {
     ClientRepository clientRepository;
 
     @Autowired
+    ClientAllergyRepository clientAllergyRepository;
+
+    @Autowired
+    ClientInjuryRepository clientInjuryRepository;
+
+    @Autowired
     DietRepository dietRepository;
 
     @Autowired
@@ -35,18 +38,45 @@ public class ClientService {
     @Autowired
     UserService userService;
 
-    public Client save(Client client){
+    @Transactional
+    public Client save(Client client, List<Injury>injuryList, List<Allergy>allergyList){
 
-        User user = userService.findById(client.getUser().getIdUser());
+        User user = userService.findById(client.getUser().getId());
+
+        log.info(user.getUsername());
 
         client.setUser(user);
-        client.setIdClient(user.getIdUser());
 
-        user.setClient(client);
+        log.info(client.getName());
 
-        userService.update(user);
+        clientRepository.save(client);
 
-        return clientRepository.save(client);
+        if (!allergyList.isEmpty()){
+            log.info("Recorre lista");
+            for (Allergy allergy : allergyList) {
+                ClientAllergy clientAllergy = new ClientAllergy();
+                clientAllergy.setClient(client);
+                clientAllergy.setAllergy(allergy);
+                clientAllergyRepository.save(clientAllergy);
+            }
+        } else {
+            log.info("La lista de alergias esta vacia");
+        }
+
+        if (!injuryList.isEmpty()){
+            log.info("Recorre lista");
+            for (Injury injury : injuryList) {
+                ClientInjury clientInjury = new ClientInjury();
+                log.info(injury.getId().toString());
+                clientInjury.setClient(client);
+                clientInjury.setInjury(injury);
+                clientInjuryRepository.save(clientInjury);
+            }
+        } else {
+            log.info("La lista de lesiones esta vacia");
+        }
+
+        return client;
     }
 
     public Client findById(Long id){
@@ -60,11 +90,14 @@ public class ClientService {
 
     public Client update(Client client) {
         try {
-            clientRepository.findById(client.getIdClient());
+            User user = userService.findById(client.getUser().getIdUser());
+            client.setUser(user);
+            log.info("Pasa por aqui");
+            clientRepository.findById(client.getUser().getIdUser());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }
-
+        log.info("Pasa por aqui");
         return clientRepository.save(client);
     }
 

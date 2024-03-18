@@ -32,7 +32,7 @@ public class HomeExerciseService {
 
     public HomeExercise update(HomeExercise homeExercise) {
         try {
-            homeExerciseRepository.findById(homeExercise.getIdHomeExercise());
+            homeExerciseRepository.findById(homeExercise.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

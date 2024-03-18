@@ -59,9 +59,9 @@ VALUES
 ('https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg'),
 ('https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg'),
 ('https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg'),
-('https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg'),
-('https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg'),
-('https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg');
+('https://static5.depositphotos.com/1036149/437/i/950/depositphotos_4371432-stock-photo-frog-3d-animated.jpg'),
+('https://st3.depositphotos.com/1036149/17335/i/1600/depositphotos_173359428-stock-photo-fun-frog-illustration.jpg'),
+('https://st.depositphotos.com/1036149/4411/i/950/depositphotos_44117537-stock-photo-strong-red-frog.jpg');
 
 -- Insertar datos en la tabla Home_exercise
 INSERT INTO Home_exercise (name, difficult, explanation)

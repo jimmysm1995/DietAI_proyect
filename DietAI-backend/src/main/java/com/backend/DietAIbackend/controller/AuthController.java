@@ -47,18 +47,18 @@ public class AuthController {
     @PostMapping("/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
 
-        User userModel = userMapper.dtoToModel(userDTO);
+        User user = userMapper.dtoToModel(userDTO);
 
-        if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
         }
 
-        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.register(userModel)));
+                userMapper.modelToDto(userService.register(user)));
     }
 
     @PostMapping("/auth/login")

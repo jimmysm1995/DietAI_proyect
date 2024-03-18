@@ -31,7 +31,7 @@ public class GymExerciseService {
 
     public GymExercise update(GymExercise gymExercise) {
         try {
-            gymExerciseRepository.findById(gymExercise.getIdGymExercise());
+            gymExerciseRepository.findById(gymExercise.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

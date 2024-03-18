@@ -32,7 +32,7 @@ public class DietService {
 
     public Diet update(Diet diet) {
         try {
-            dietRepository.findById(diet.getIdDiet());
+            dietRepository.findById(diet.getId());
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el cliente en cuestion");
         }

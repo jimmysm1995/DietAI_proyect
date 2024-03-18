@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class ClientDto {
 
-    private Long idClient;
+    private Long id;
 
     private String name;
 
@@ -29,9 +29,9 @@ public class ClientDto {
 
     private Goal goal;
 
-    private List<ClientInjuryDto> injuries;
+    private List<InjuryDto> injury;
 
-    private List<ClientAllergyDto> allergy;
+    private List<AllergyDto> allergy;
 
     private JobType jobType;
 
