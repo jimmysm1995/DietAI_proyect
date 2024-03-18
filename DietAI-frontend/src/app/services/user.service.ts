@@ -21,6 +21,7 @@ export class UserService {
   }
 
   getUser(id: number): Promise<User> {
+    console.log
     return axios.get(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
@@ -33,7 +34,7 @@ export class UserService {
   }
 
   updateUser(user: User): Promise<User> {
-    return axios.put(`${this.baseUrl}/${user.idUser}`, user).then((response) => response.data);
+    return axios.put(`${this.baseUrl}/${user.id}`, user).then((response) => response.data);
   }
 
   deleteUser(id: number): Promise<User> {
@@ -66,6 +67,5 @@ export class UserService {
 
   getCurrentUser():Promise<User>{
     return axios.get(`${this.baseUrl}/currentUser`).then((response) => response.data);
-
   }
 }

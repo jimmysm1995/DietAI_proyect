@@ -46,17 +46,17 @@ export class UpdateImgComponent {
     }
 
     updateImg(url: string) {
-        let prepUrl = this.userStore.user.img;
-        this.userStore.user.img = url;
-            this.userService
-                .updateUser(this.userStore.user)
+            this.userService.getCurrentUser()
                 .then((updatedUser: User) => {
-                    // Actualiza el usuario en el userStore con los datos actualizados
-                    this.userStore.user.img = updatedUser.img;
+                    updatedUser.img = url;
+                    this.userService.updateUser(updatedUser)
+                        .then((updatedUser: User) => {
+                            // Actualiza el usuario en el userStore con los datos actualizados
+                            this.userStore.user.img = updatedUser.img;
+                        })
                 })
                 .catch((error) => {
                     console.error('Error updating user:', error);
-                    this.userStore.user.img = prepUrl;
                 });
     }
 }

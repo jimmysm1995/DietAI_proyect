@@ -18,7 +18,7 @@ export class UpdateProfileComponent {
   public user: User = new User();
 
   ngOnInit(): void {
-    this.userService.getUser(this.userStore.user.idUser!).then((user: User) => {
+    this.userService.getCurrentUser().then((user: User) => {
       this.user = user;
       console.log("hola que ase2", this.user);
     });
