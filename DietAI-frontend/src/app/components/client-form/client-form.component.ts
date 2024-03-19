@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { UserService } from 'src/app/services/user.service';
 import { UserStore } from 'src/app/store/userStore';
-
+import { InjuryService } from 'src/app/services/injury.service';
+import { AllergyService } from 'src/app/services/allergy.service';
+import { Allergy } from 'src/app/models/Allergy'; 
+import { Injury } from 'src/app/models/Injury';
 
 @Component({
   selector: 'app-client-form',
@@ -18,9 +21,23 @@ export class ClientFormComponent {
     idUser: string = '';
     @Output() aceptarFormulario = new EventEmitter();
 
+  public allergies: Allergy[] = [];
+  public injuries: Injury[] = [];
+
     constructor(private ClientService: ClientService,
       private userStore: UserStore, 
-      private router: Router) {}
+      private router: Router,
+      private injuryService: InjuryService,
+      private allergyService: AllergyService) {}
+
+    ngOnInit(): void {
+      this.injuryService.getInjuries().then(injuries=>{
+        this.injuries = injuries;
+      });
+      this.allergyService.getAllergies().then(allergies=>{
+        this.allergies = allergies;
+      });
+    }
 
     aceptar(){
         this.aceptarFormulario.emit();
@@ -35,4 +52,8 @@ export class ClientFormComponent {
           this.clientForm.resetForm();
         })
     }
+
+
+
+
 }
