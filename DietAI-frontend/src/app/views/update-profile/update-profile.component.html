@@ -11,12 +11,12 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="username">Nombre de usuario:</label>
-                        <input type="text" class="form-control" id="username" placeholder="" ngModel="user.username"> 
+                        <label for="username">Editar nombre de usuario:</label>
+                        <input type="text" class="form-control" id="username" placeholder="" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
                     </div>
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" [ngModel]="user.email" >
+                        <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" disabled="true">
                     </div>
                     <!-- <div class="form-group">
                         <label for="password">Editar Contraseña:</label>

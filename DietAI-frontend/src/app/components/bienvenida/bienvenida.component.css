@@ -1,7 +1,9 @@
 
 .bienvenida{
     /* background-image: url(../../assets/IMG/landing.png); */
-    background-image: url(../../../assets/IMG/cemento.jpg);
+    background-image: url(../../../assets/IMG/onda.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 25rem;
     display: flex;
 }
@@ -31,5 +33,14 @@
     margin: 0;
     padding: 0;
     margin-left: 3%;
+
+}
+
+.onda{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 10rem;
 
 }

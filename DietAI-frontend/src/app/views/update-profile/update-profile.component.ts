@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/User';
 import { UserStore } from 'src/app/store/userStore';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-update-profile',
@@ -18,7 +18,7 @@ export class UpdateProfileComponent {
   public user: User = new User();
 
   ngOnInit(): void {
-    this.userService.getUser(this.userStore.user.idUser!).then((user: User) => {
+    this.userService.getCurrentUser().then((user: User) => {
       this.user = user;
       console.log("hola que ase2", this.user);
     });

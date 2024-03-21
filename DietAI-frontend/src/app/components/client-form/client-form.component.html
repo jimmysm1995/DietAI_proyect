@@ -17,9 +17,7 @@
         <label for="genero">Género</label>
         <select name="tipoDeTrabajo" id="" class="form-control">
             <option value=""></option>
-            <option value="1">Masculino</option>
-            <option value="2">Femenino</option>
-            <option value="3">Prefiero no decirlo</option>
+            <option *ngFor="let item of gender" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
@@ -55,10 +53,7 @@
         <label for="objetivo">Objetivo</label>
         <select name="tipoDeTrabajo" id="" class="form-control">
             <option value=""></option>
-            <option value="1">Perder peso</option>
-            <option value="2">Aumentar peso</option>
-            <option value="3">Tonificar</option>
-            <option value="3">Mantener</option>
+            <option *ngFor="let item of goal" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
@@ -75,11 +70,9 @@
 
     <div class="form-group select-group">
         <label for="tipoDeTrabajo">Tipo de trabajo</label>
-        <select name="tipoDeTrabajo" id="" class="form-control">
+        <select name="tipoDeTrabajo" id="" class="form-control" >
             <option value=""></option>
-            <option value="1">Sedentario</option>
-            <option value="2">Activo</option>
-            <option value="3">Muy Activo</option>
+            <option *ngFor="let item of jobTypes" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
@@ -88,10 +81,7 @@
         <label for="consumo">¿Consumes alguna de estas sustancias? </label>
         <select name="consumo" id="" class="form-control">
             <option value=""></option>
-            <option value="1">Alcohol</option>
-            <option value="2">Tabaco</option>
-            <option value="3">Las dos</option>
-            <option value="3">Ninguno</option>
+            <option *ngFor="let item of consumedSubstances" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
@@ -100,9 +90,7 @@
         <label for="nivelPrevio">Nivel Previo</label>
         <select name="nivelPrevio" class="form-control">
             <option value=""></option>
-            <option value="1">No he entrenado nunca</option>
-            <option value="2">Entreno a veces</option>
-            <option value="3">Entreno a diario</option>
+            <option *ngFor="let item of previusLevel" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
