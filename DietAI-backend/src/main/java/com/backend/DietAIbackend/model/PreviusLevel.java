@@ -1,7 +1,17 @@
 package com.backend.DietAIbackend.model;
 
 public enum PreviusLevel {
-    NEVER,
-    SOME_TIMES,
-    DIARY
+    NEVER("Nunca"),
+    SOME_TIMES("A veces"),
+    DIARY("Diariamente");
+
+    private final String name;
+
+    PreviusLevel(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
