@@ -13,10 +13,6 @@ public class ClientDto {
 
     private Long idClient;
 
-    private String name;
-
-    private String lastName;
-
     private LocalDate birthDate;
 
     private Plan plan;
@@ -40,8 +36,6 @@ public class ClientDto {
     private ConsumedSubstances consumedSubstances;
 
     private Integer trainingTime;
-
-    private String dietAndExerciseFrequency;
 
     private UserDto user;
 

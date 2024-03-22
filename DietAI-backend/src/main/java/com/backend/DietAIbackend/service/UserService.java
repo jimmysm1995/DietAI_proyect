@@ -47,6 +47,15 @@ public class UserService implements IUserService{
         } catch (EntityNotFoundException e){
             throw new ServiceException("No existe el Usuario en cuestion");
         }
+
+        List<User> userList = userRepository.findAll();
+
+        userList.forEach(usuario -> {
+            if (usuario.getUsername().equals(user.getUsername()) && (!usuario.getIdUser().equals(user.getIdUser()))){
+                throw new ServiceException("Ya existe un usuario con ese nombre");
+            }
+        });
+
         return userRepository.save(user);
     }
 

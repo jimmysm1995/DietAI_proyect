@@ -16,12 +16,6 @@ public class Client {
     @Column(name = "idClient", columnDefinition = "tinyint")
     private Long idClient;
 
-    @Column(name = "name", columnDefinition = "varchar(100)")
-    private String name;
-
-    @Column(name = "lastName", columnDefinition = "varchar(100)")
-    private String lastName;
-
     @Column(name = "birthDate", columnDefinition = "date")
     private LocalDate birthDate;
 
@@ -57,9 +51,6 @@ public class Client {
 
     @Column(name = "trainingTime", columnDefinition = "tinyint")
     private Integer trainingTime;
-
-    @Column(name = "dietAndExerciseFrequency", columnDefinition = "varchar(255)")
-    private String dietAndExerciseFrequency;
 
     @OneToMany(mappedBy = "client")
     private List<ClientAllergy> clientAllergy;

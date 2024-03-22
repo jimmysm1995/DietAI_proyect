@@ -1,9 +1,9 @@
 package com.backend.DietAIbackend.model;
 
 public enum PreviusLevel {
-    NEVER("Nunca"),
-    SOME_TIMES("A veces"),
-    DIARY("Diariamente");
+    NEVER("No entreno nunca"),
+    SOME_TIMES("Suelo entrenar algunos dias"),
+    DIARY("Suelo entrenar Diariamente");
 
     private final String name;
 
