@@ -1,16 +1,29 @@
 package com.backend.DietAIbackend.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class UserDto {
+
+    @Schema(example = "1", description = "Id de el usuario")
     private Long idUser;
+
+    @Schema(example = "username", description = "Username de el usuario")
     private String username;
+
+    @Schema(example = "email", description = "Email del usuario")
     private String email;
+
+    @Schema(example = "password", description = "Contraseña del usuario")
     private String password;
+
+    @Schema(example = "client", description = "Datos del cliente con el que esta relacionado")
     private ClientDto client;
+
+    @Schema(example = "1", description = "Imagen de la foto de perfil el usuario")
     private String img;
 }
 
