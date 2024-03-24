@@ -20,10 +20,10 @@ public class UserDto {
     @Schema(example = "password", description = "Contraseña del usuario")
     private String password;
 
-    @Schema(example = "client", description = "Datos del cliente con el que esta relacionado")
+    @Schema(description = "Datos del cliente con el que esta relacionado")
     private ClientDto client;
 
-    @Schema(example = "1", description = "Imagen de la foto de perfil el usuario")
+    @Schema(example = "foto", description = "Imagen de la foto de perfil el usuario")
     private String img;
 }
 

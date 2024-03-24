@@ -82,7 +82,7 @@ public class ClientService {
 
         log.info(String.valueOf(edad));
 
-        if (client.getGender() == (Gender.MALE)) {
+        if (client.getGender() == (Gender.MASCULINO)) {
             tmb = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
         } else {
             tmb = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);

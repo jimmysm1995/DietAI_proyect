@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
@@ -19,13 +21,7 @@ import java.util.stream.Stream;
 public class JobTypeController {
 
     @GetMapping
-    public JobTypeDto[] getAllJobTypes() {
-        return Stream.of(JobType.values())
-                .map(jobTypes -> {
-                    JobTypeDto dto = new JobTypeDto();
-                    dto.setName(jobTypes.getName());
-                    return dto;
-                })
-                .toArray(JobTypeDto[]::new);
+    public List<JobType> getAllJobTypes() {
+        return Arrays.asList(JobType.values());
     }
 }

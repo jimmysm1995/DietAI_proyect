@@ -14,6 +14,6 @@ public class AllergyDto {
     @Schema(example = "name", description = "nombre de la alergia")
     private String name;
 
-    @Schema(example = "clientAllergy" , description = "Relacion para el cliente con la alergia")
+    @Schema(description = "Relacion para el cliente con la alergia")
     private List<ClientAllergyDto> clientAllergy;
 }
