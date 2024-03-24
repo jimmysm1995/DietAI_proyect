@@ -1,23 +1,28 @@
+import { Allergy } from './Allergy';
+import { ConsumedSubstances } from './ConsumedSubstances';
 import { Diet } from './Diet';
+import { Gender } from './Gender';
+import { Goal } from './Goal';
+import { Injury } from './Injury';
+import { JobType } from './JobType';
+import { PreviusLevel } from './PreviusLevel';
 import { Training } from './Training';
 import { User } from './User';
 
 export class Client {
-    name?: string = "";
-    lastName?: string = "";
+    idClient?: number = 0;
     birthDate?: Date;
     plan?: string = "";
     gender?: string = "";
     weight?: number = 0;
     height?: number = 0;
     goal?: string = "";
-    injuries?: string = "";
-    allergy?: string = "";
-    jobType?: string = "";
+    injury?: Injury[];
+    allergy?: Allergy[];
+    jobTypes?: string = "";
     previousLevel?: string = "";
     consumedSubstances?: string = "";
     trainingTime?: number = 0;
-    dietAndExerciseFrequency?: string = "";
     user?: User;
     training?: Training;
     diet?: Diet;

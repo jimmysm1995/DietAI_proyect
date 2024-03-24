@@ -33,7 +33,7 @@ export class ClientFormComponent {
 
   public allergies: Allergy[] = [];
   public injuries: Injury[] = [];
-  public jobTypes: JobType[] = [];
+  public jobTypes: String[] = [];
   public previusLevel: PreviusLevel[] = [];
   public consumedSubstances: ConsumedSubstances[] = [];
   public gender: Gender []=[];
@@ -51,11 +51,11 @@ export class ClientFormComponent {
       private goalService: GoalService ){}
 
     ngOnInit(): void {
-      this.injuryService.getInjuries().then(injuries=>{
-        this.injuries = injuries;
+      this.injuryService.getInjuries().then(injury=>{
+        this.injuries = injury;
       });
-      this.allergyService.getAllergies().then(allergies=>{
-        this.allergies = allergies;
+      this.allergyService.getAllergies().then(allergy=>{
+        this.allergies = allergy;
       });
       this.jobTypeService.getJobTypes().then(jobTypes=>{
         this.jobTypes = jobTypes;
@@ -79,16 +79,13 @@ export class ClientFormComponent {
     }
 
     registrarCliente(clientData: Client): void {
+        console.log(clientData);
         clientData.user = this.userStore.user;
-        this.ClientService.registerClient(clientData).then((Client: Client) => {
+        this.ClientService.registerClient(clientData).then((client: Client) => {
         this.aceptar();
         }).catch((error) => {
           this.errorMessage = error;
-          this.clientForm.resetForm();
+          // this.clientForm.resetForm();
         })
     }
-
-
-
-
 }

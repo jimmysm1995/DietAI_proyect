@@ -27,7 +27,7 @@ export class ClientService {
   }
 
   registerClient(userData: Client): Promise<Client>{
-    return axios.post(`${this.baseUrl}/register`, userData)
+    return axios.post(this.baseUrl, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {

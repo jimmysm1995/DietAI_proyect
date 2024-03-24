@@ -10,7 +10,7 @@ export class JobTypeService {
 
   private baseUrl: string = environment.apiUrl+'/api/jobType';
 
-  getJobTypes(): Promise<JobType[]> {
+  getJobTypes(): Promise<String[]> {
     return axios.get(this.baseUrl).then((response) => response.data);
   }
 }

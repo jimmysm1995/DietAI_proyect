@@ -1,12 +1,12 @@
-<form action="" method="post" class="form">
+<form (ngSubmit)="registrarCliente(clientForm.value)" class="form" #clientForm="ngForm">
     <div class="form-group">
         <!-- 
         <label for="edad">Edad</label> -->
         <input
-            name="edad"
-            type="number"
+            type="date"
             class="form-control"
-            id="edad"
+            id="birthDate"
+            name="birthDate"
             placeholder="Edad"
             ngModel
             required
@@ -14,21 +14,21 @@
     </div>
 
     <div class="form-group select-group">
-        <label for="genero">Género</label>
-        <select name="tipoDeTrabajo" id="" class="form-control">
+        <label for="gender">Género</label>
+        <select name="gender" id="gender" class="form-control" ngModel required>
             <option value=""></option>
-            <option *ngFor="let item of gender" [value]="item.name">{{item.name}}</option>
+            <option *ngFor="let item of gender" value="{{item}}">{{item | transformadorEnum}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group">
         <input
-            name="peso"
+            name="weight"
             type="number"
             class="form-control"
-            id="peso"
-            name="peso"
+            id="weight"
+            name="weight"
             placeholder="Peso (kg)"
             ngModel
             required
@@ -38,11 +38,11 @@
     <div class="form-group">
         <!-- <label for="altura">Altura</label> -->
         <input
-            name="altura"
+            name="height"
             type="number"
             class="form-control"
-            id="altura"
-            name="altura"
+            id="height"
+            name="height"
             placeholder="Altura(cm)"
             ngModel
             required
@@ -51,53 +51,53 @@
 
     <div class="form-group select-group" >
         <label for="objetivo">Objetivo</label>
-        <select name="tipoDeTrabajo" id="" class="form-control">
+        <select name="goal" id="goal" class="form-control" ngModel required>
             <option value=""></option>
-            <option *ngFor="let item of goal" [value]="item.name">{{item.name}}</option>
+            <option *ngFor="let item of goal" value="{{item}}">{{item | transformadorEnum}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
-    <div class="form-group select-group" >
-        <label for="alergias">Lesiones</label>
-        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries" class="w-100" ></ngx-select-dropdown>
+    <div class="form-group select-group">
+        <label for="injury">Lesiones</label>
+        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="injury" [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries" class="w-100" ></ngx-select-dropdown>
     </div>
     
     <div class="form-group select-group" >
-        <label for="alergias">Alergias</label>
-        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="allergies" class="w-100" ></ngx-select-dropdown>
+        <label for="allergy">Alergias</label>
+        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="allergy" [config]="{displayKey: 'name',  search: true, placeholder:'Alergias'}" [multiple]="true" [options]="allergies" class="w-100" ></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
         <label for="tipoDeTrabajo">Tipo de trabajo</label>
-        <select name="tipoDeTrabajo" id="" class="form-control" >
+        <select name="jobType" id="jobType" class="form-control" ngModel>
             <option value=""></option>
-            <option *ngFor="let item of jobTypes" [value]="item.name">{{item.name}}</option>
+            <option *ngFor="let item of jobTypes" [value]="item">{{item | transformadorEnum}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
         <label for="consumo">¿Consumes alguna de estas sustancias? </label>
-        <select name="consumo" id="" class="form-control">
+        <select name="consumedSubstances" id="consumedSubstances" class="form-control" ngModel>
             <option value=""></option>
-            <option *ngFor="let item of consumedSubstances" [value]="item.name">{{item.name}}</option>
+            <option *ngFor="let item of consumedSubstances" [value]="item">{{item | transformadorEnum}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
         <label for="nivelPrevio">Nivel Previo</label>
-        <select name="nivelPrevio" class="form-control">
+        <select name="previousLevel" class="form-control" ngModel>
             <option value=""></option>
-            <option *ngFor="let item of previusLevel" [value]="item.name">{{item.name}}</option>
+            <option *ngFor="let item of previusLevel" [value]="item">{{item | transformadorEnum}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
     <div class="form-group select-group">
-        <label for="tiempoParaEntrenar">Tiempo para entrenar</label>
-        <select name="tiempoParaEntrenar" id="" class="form-control">
+        <label for="trainingTime">Tiempo para entrenar</label>
+        <select name="trainingTime" id="trainingTime" class="form-control" ngModel>
             <option value=""></option>
             <option value="1">1 día a la semana</option>
             <option value="2">2 días a la semana</option>
@@ -109,7 +109,7 @@
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
-    <div class="form-group select-group">
+    <!-- <div class="form-group select-group">
         <label for="crearTabla"
             >Cada cuánto quieres crear <br> una dieta y ejercicios</label
         >
@@ -119,7 +119,7 @@
             <option value="2">Cada dos semanas</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
-    </div>
+    </div> -->
 
     <button
         type="submit"

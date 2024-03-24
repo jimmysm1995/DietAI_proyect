@@ -27,6 +27,7 @@ import { UpdateProfileComponent } from './views/update-profile/update-profile.co
 import { BlogComponent } from './views/blog/blog.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { LoginGuard } from './router/login.guard';
+import { TransformadorEnumPipe } from './transformador-enum.pipe';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -56,7 +57,8 @@ const routes:Routes = [
     LogroComponent,
     UpdateImgComponent,
     UpdateProfileComponent,
-    BlogComponent
+    BlogComponent,
+    TransformadorEnumPipe
   ],
   imports: [
     HttpClientModule,
