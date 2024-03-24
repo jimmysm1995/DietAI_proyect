@@ -33,9 +33,15 @@ public class ClientService {
     TrainingRepository trainingRepository;
 
     @Autowired
+    ClientAllergyService clientAllergyService;
+
+    @Autowired
+    ClientInjuryService clientInjuryService;
+
+    @Autowired
     UserService userService;
 
-    public Client save(Client client){
+    public Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList){
 
         User user = userService.findById(client.getUser().getIdUser());
 
@@ -46,7 +52,18 @@ public class ClientService {
 
         userService.update(user);
 
-        return clientRepository.save(client);
+        clientRepository.save(client);
+
+
+        for (Allergy allergy : allergyList) {
+            clientAllergyService.save(client,allergy);
+        }
+
+        for (Injury injury : injuryList) {
+            clientInjuryService.save(client,injury);
+        }
+
+        return client;
     }
 
     public Client findById(Long id){

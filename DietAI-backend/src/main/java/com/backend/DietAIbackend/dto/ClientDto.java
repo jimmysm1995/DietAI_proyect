@@ -38,10 +38,10 @@ public class ClientDto {
     private Goal goal;
 
     @Schema(description = "Lista de lesiones del cliente")
-    private List<ClientInjuryDto> injuries;
+    private List<InjuryDto> injury;
 
     @Schema(description = "Lista de alergias del cliente")
-    private List<ClientAllergyDto> allergy;
+    private List<AllergyDto> allergy;
 
     @Schema(description = "Tipo de trabajo del cliente")
     private JobType jobType;
@@ -52,7 +52,7 @@ public class ClientDto {
     @Schema(description = "Sustancias consumidas por el cliente")
     private ConsumedSubstances consumedSubstances;
 
-    @Schema(example = "120", description = "Tiempo de entrenamiento semanal en minutos")
+    @Schema(example = "4", description = "Tiempo de entrenamiento semanal en dias")
     private Integer trainingTime;
 
     @Schema(description = "Usuario asociado al cliente")
