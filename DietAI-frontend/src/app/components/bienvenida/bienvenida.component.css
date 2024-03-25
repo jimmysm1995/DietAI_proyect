@@ -1,10 +1,10 @@
 
 .bienvenida{
     /* background-image: url(../../assets/IMG/landing.png); */
-    background-image: url(../../../assets/IMG/onda.svg);
+    background-image: url(../../../assets/IMG/wavebg2.png);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 25rem;
+    height: 35rem;
     display: flex;
 }
 
@@ -16,6 +16,7 @@
     height: 23rem;
     margin-left: 12%;
     margin-top: 1%;
+    border-radius: 5%;
 }
 
 .message{
