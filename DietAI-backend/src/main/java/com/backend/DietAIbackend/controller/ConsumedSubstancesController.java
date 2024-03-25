@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
@@ -19,13 +21,7 @@ import java.util.stream.Stream;
 public class ConsumedSubstancesController {
 
     @GetMapping
-    public ConsumedSubstancesDto[] getAllConsumedSubstances() {
-        return Stream.of(ConsumedSubstances.values())
-                .map(consumedSubstances -> {
-                    ConsumedSubstancesDto dto = new ConsumedSubstancesDto();
-                    dto.setName(consumedSubstances.getName());
-                    return dto;
-                })
-                .toArray(ConsumedSubstancesDto[]::new);
+    public List<ConsumedSubstances> getAllConsumedSubstances() {
+        return Arrays.asList(ConsumedSubstances.values());
     }
 }

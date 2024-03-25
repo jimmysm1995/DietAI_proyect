@@ -47,12 +47,11 @@ public class SecurityConfig {
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.authorizeHttpRequests()
-                .requestMatchers("/auth/**").permitAll()
-                .anyRequest()
-                .authenticated();
+//        http.authorizeHttpRequests()
+//                .requestMatchers("/auth/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+//                .anyRequest()
+//                .authenticated();
 
         return http.build();
     }
-
 }

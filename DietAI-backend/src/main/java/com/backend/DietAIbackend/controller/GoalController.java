@@ -2,6 +2,7 @@ package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.GoalDto;
 import com.backend.DietAIbackend.dto.JobTypeDto;
+import com.backend.DietAIbackend.model.Gender;
 import com.backend.DietAIbackend.model.Goal;
 import com.backend.DietAIbackend.model.JobType;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
@@ -19,13 +22,7 @@ import java.util.stream.Stream;
 public class GoalController {
 
     @GetMapping
-    public GoalDto[] getAllGoal() {
-        return Stream.of(Goal.values())
-                .map(goal -> {
-                    GoalDto dto = new GoalDto();
-                    dto.setName(goal.getName());
-                    return dto;
-                })
-                .toArray(GoalDto[]::new);
+    public List<Goal> getAllGoal() {
+        return Arrays.asList(Goal.values());
     }
 }

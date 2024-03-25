@@ -33,9 +33,15 @@ public class ClientService {
     TrainingRepository trainingRepository;
 
     @Autowired
+    ClientAllergyService clientAllergyService;
+
+    @Autowired
+    ClientInjuryService clientInjuryService;
+
+    @Autowired
     UserService userService;
 
-    public Client save(Client client){
+    public Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList){
 
         User user = userService.findById(client.getUser().getIdUser());
 
@@ -46,7 +52,18 @@ public class ClientService {
 
         userService.update(user);
 
-        return clientRepository.save(client);
+        clientRepository.save(client);
+
+
+        for (Allergy allergy : allergyList) {
+            clientAllergyService.save(client,allergy);
+        }
+
+        for (Injury injury : injuryList) {
+            clientInjuryService.save(client,injury);
+        }
+
+        return client;
     }
 
     public Client findById(Long id){
@@ -82,7 +99,7 @@ public class ClientService {
 
         log.info(String.valueOf(edad));
 
-        if (client.getGender() == (Gender.MALE)) {
+        if (client.getGender() == (Gender.MASCULINO)) {
             tmb = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
         } else {
             tmb = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);

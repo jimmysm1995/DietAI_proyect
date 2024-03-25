@@ -1,9 +1,12 @@
 package com.backend.DietAIbackend.controller;
 
-import com.backend.DietAIbackend.dto.ClientDto;
-import com.backend.DietAIbackend.dto.UserDto;
+import com.backend.DietAIbackend.dto.*;
+import com.backend.DietAIbackend.mapper.AllergyMapper;
 import com.backend.DietAIbackend.mapper.ClientMapper;
+import com.backend.DietAIbackend.mapper.InjuryMapper;
+import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.Client;
+import com.backend.DietAIbackend.model.Injury;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.service.ClientService;
 import com.backend.DietAIbackend.service.UserService;
@@ -38,6 +41,12 @@ public class ClientController {
     @Autowired
     ClientMapper clientMapper;
 
+    @Autowired
+    AllergyMapper allergyMapper;
+
+    @Autowired
+    InjuryMapper injuryMapper;
+
     @GetMapping("/{idClient}")
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.findById(id)));
@@ -52,8 +61,13 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<ClientDto> registerClient(@RequestBody ClientDto clientDto){
+
+        List<Allergy> allergyList = allergyMapper.listDtoToModel(clientDto.getAllergy());
+
+        List<Injury> injuryList = injuryMapper.listDtoToModel(clientDto.getInjury());
+
         Client client = clientMapper.dtoToModel(clientDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.save(client)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.save(client, allergyList, injuryList)));
     }
 
 
