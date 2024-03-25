@@ -27,6 +27,8 @@ import { UpdateProfileComponent } from './views/update-profile/update-profile.co
 import { BlogComponent } from './views/blog/blog.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { LoginGuard } from './router/login.guard';
+import { EntradasBlogComponent } from './components/entradas-blog/entradas-blog.component';
+import { UtilidadesComponent } from './components/utilidades/utilidades.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -56,7 +58,9 @@ const routes:Routes = [
     LogroComponent,
     UpdateImgComponent,
     UpdateProfileComponent,
-    BlogComponent
+    BlogComponent,
+    EntradasBlogComponent,
+    UtilidadesComponent
   ],
   imports: [
     HttpClientModule,
