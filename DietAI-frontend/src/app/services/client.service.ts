@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/Client';
+import { AltaCliente } from '../models/AltaCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class ClientService {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
-  registerClient(userData: Client): Promise<Client>{
-    return axios.post(`${this.baseUrl}/register`, userData)
+  registerClient(userData: AltaCliente): Promise<Client>{
+    return axios.post(`${this.baseUrl}/registerClient`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
@@ -37,4 +38,5 @@ export class ClientService {
       }
   });
   }
+
 }

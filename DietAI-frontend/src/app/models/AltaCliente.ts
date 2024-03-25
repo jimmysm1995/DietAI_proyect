@@ -4,13 +4,20 @@ import { JobType } from './JobType';
 import { ConsumedSubstances } from './ConsumedSubstances';
 import { Goal } from './Goal';
 import { PreviusLevel } from './PreviusLevel';
+import { Allergy } from './Allergy';
+import { Injury } from './Injury';
 
-export class AltaClienre {
+export class AltaCliente {
+
+    idClient: number = 0;
+
+    birthday: Date = new Date();
+
     gender: Gender = new Gender();
 
-    weight: string = '';
+    height: number = 0;
 
-    height: string = '';
+    weight: number =0;
 
     goal: Goal = new Goal();
 
@@ -20,7 +27,14 @@ export class AltaClienre {
 
     consumedSubstances: ConsumedSubstances = new ConsumedSubstances();
 
-    //   trainingTime: TrainingTime;
+    allergy: Allergy = new Allergy();
+
+    injury: Injury = new Injury();
+
+    trainingTime: number = 0;
+
+    plan: string = "";
+
 
     //  dietAndExerciseFrequency: DietAndExerciseFrequency;
 

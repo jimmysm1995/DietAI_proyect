@@ -1,28 +1,29 @@
 <form action="" method="post" class="form">
-    <div class="form-group">
-        <!-- 
-        <label for="edad">Edad</label> -->
+    <div class="form-group select-group">
+        <label for="edad">Fecha de nacimiento</label> 
         <input
-            name="edad"
-            type="number"
+            name="fecha de nacimiento"
+            type="date"
             class="form-control"
             id="edad"
             placeholder="Edad"
-            ngModel
+            [(ngModel)]="altaCliente.birthday" 
+            [ngModelOptions]="{standalone: true}"
             required
         />
     </div>
 
     <div class="form-group select-group">
         <label for="genero">Género</label>
-        <select name="tipoDeTrabajo" id="" class="form-control">
+        <select name="tipoDeTrabajo" id="" class="form-control" [(ngModel)]="altaCliente.gender" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option *ngFor="let item of gender" [value]="item.name">{{item.name}}</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
 
-    <div class="form-group">
+    <div class="form-group select-group">
+        <label for="altura">Peso</label>
         <input
             name="peso"
             type="number"
@@ -30,13 +31,14 @@
             id="peso"
             name="peso"
             placeholder="Peso (kg)"
-            ngModel
+            [(ngModel)]="altaCliente.weight" 
+            [ngModelOptions]="{standalone: true}"
             required
         />
     </div>
 
-    <div class="form-group">
-        <!-- <label for="altura">Altura</label> -->
+    <div class="form-group select-group">
+        <label for="altura">Altura</label>
         <input
             name="altura"
             type="number"
@@ -44,14 +46,15 @@
             id="altura"
             name="altura"
             placeholder="Altura(cm)"
-            ngModel
+            [(ngModel)]="altaCliente.height"
+            [ngModelOptions]="{standalone: true}"
             required
         />
     </div>
 
     <div class="form-group select-group" >
         <label for="objetivo">Objetivo</label>
-        <select name="tipoDeTrabajo" id="" class="form-control">
+        <select name="tipoDeTrabajo" id="" class="form-control" [(ngModel)]="altaCliente.goal" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option *ngFor="let item of goal" [value]="item.name">{{item.name}}</option>
         </select>
@@ -60,17 +63,17 @@
 
     <div class="form-group select-group" >
         <label for="alergias">Lesiones</label>
-        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries" class="w-100" ></ngx-select-dropdown>
+        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries" class="w-100" [(ngModel)]="altaCliente.injury" [ngModelOptions]="{standalone: true}"></ngx-select-dropdown>
     </div>
     
     <div class="form-group select-group" >
         <label for="alergias">Alergias</label>
-        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="allergies" class="w-100" ></ngx-select-dropdown>
+        <ngx-select-dropdown [instanceId]="'instance1'" [config]="{displayKey: 'name', search: true, placeholder:'Alergias'}" [multiple]="true" [options]="allergies" class="w-100" [(ngModel)]="altaCliente.allergy" [ngModelOptions]="{standalone: true}"></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
         <label for="tipoDeTrabajo">Tipo de trabajo</label>
-        <select name="tipoDeTrabajo" id="" class="form-control" >
+        <select name="tipoDeTrabajo" id="" class="form-control" [(ngModel)]="altaCliente.jobType" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option *ngFor="let item of jobTypes" [value]="item.name">{{item.name}}</option>
         </select>
@@ -79,7 +82,7 @@
 
     <div class="form-group select-group">
         <label for="consumo">¿Consumes alguna de estas sustancias? </label>
-        <select name="consumo" id="" class="form-control">
+        <select name="consumo" id="" class="form-control" [(ngModel)]="altaCliente.consumedSubstances" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option *ngFor="let item of consumedSubstances" [value]="item.name">{{item.name}}</option>
         </select>
@@ -88,7 +91,7 @@
 
     <div class="form-group select-group">
         <label for="nivelPrevio">Nivel Previo</label>
-        <select name="nivelPrevio" class="form-control">
+        <select name="nivelPrevio" class="form-control" [(ngModel)]="altaCliente.previusLevel" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option *ngFor="let item of previusLevel" [value]="item.name">{{item.name}}</option>
         </select>
@@ -97,7 +100,7 @@
 
     <div class="form-group select-group">
         <label for="tiempoParaEntrenar">Tiempo para entrenar</label>
-        <select name="tiempoParaEntrenar" id="" class="form-control">
+        <select name="tiempoParaEntrenar" id="" class="form-control" [(ngModel)]="altaCliente.trainingTime" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option value="1">1 día a la semana</option>
             <option value="2">2 días a la semana</option>
@@ -113,7 +116,7 @@
         <label for="crearTabla"
             >Cada cuánto quieres crear <br> una dieta y ejercicios</label
         >
-        <select name="crearTabla" id="" class="form-control">
+        <select name="crearTabla" id="" class="form-control" [(ngModel)]="altaCliente.plan" [ngModelOptions]="{standalone: true}">
             <option value=""></option>
             <option value="1">Todos los meses</option>
             <option value="2">Cada dos semanas</option>
@@ -123,7 +126,7 @@
 
     <button
         type="submit"
-        (click)="aceptar()"
+        (click)="registrarCliente()"
         class="btn btn-primary btnAceptar"
     >
         Aceptar
