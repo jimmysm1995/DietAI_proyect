@@ -1,9 +1,7 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.*;
-import com.backend.DietAIbackend.mapper.AllergyMapper;
-import com.backend.DietAIbackend.mapper.ClientMapper;
-import com.backend.DietAIbackend.mapper.InjuryMapper;
+import com.backend.DietAIbackend.mapper.*;
 import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.Injury;
@@ -47,6 +45,12 @@ public class ClientController {
     @Autowired
     InjuryMapper injuryMapper;
 
+    @Autowired
+    private DietMapper dietMapper;
+
+    @Autowired
+    private TrainingMapper trainingMapper;
+
     @GetMapping("/{idClient}")
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.findById(id)));
@@ -69,6 +73,7 @@ public class ClientController {
         Client client = clientMapper.dtoToModel(clientDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.save(client, allergyList, injuryList)));
     }
+
 
 
 
@@ -121,6 +126,16 @@ public class ClientController {
         Claims claims = validator.parseClaimsJws(token).getBody();
         claims.getId();
         return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getId()))));
+    }
+
+    @GetMapping("/diet/getDiet/{idClient}")
+    public ResponseEntity<DietDto> getDietByClient(@PathVariable Long idClient){
+
+        Client client = clientService.findById(idClient);
+
+
+        return ResponseEntity.ok().body(dietMapper.modelToDto(clientService.getDietByUser(client)));
+
     }
 
 }

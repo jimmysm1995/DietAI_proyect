@@ -15,7 +15,7 @@ public class DietDto {
     private String name;
 
     @Schema(example = "2000", description = "Cantidad de calorías")
-    private Integer calorias;
+    private Integer calories;
 
     @Schema(description = "Lista de recetas asociadas a la dieta")
     private List<RecipeDietDto> recipeDiets;
