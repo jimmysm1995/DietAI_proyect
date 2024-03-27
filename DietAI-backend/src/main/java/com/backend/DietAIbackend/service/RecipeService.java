@@ -40,4 +40,8 @@ public class RecipeService {
         }
         return recetaRepository.save(recipe);
     }
+
+    public void actualizarCalorias(){
+        recetaRepository.actualizarCalories();
+    }
 }

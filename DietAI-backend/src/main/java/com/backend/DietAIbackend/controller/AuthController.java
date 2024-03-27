@@ -7,8 +7,13 @@ import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.repository.UserRepository;
 import com.backend.DietAIbackend.service.UserService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,10 +21,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +46,9 @@ public class AuthController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Value("${app.security.jwt.secret}")
+    private String jwtSecret;
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
@@ -79,5 +85,21 @@ public class AuthController {
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
         }
+    }
+
+    @GetMapping("/auth/currentUser")
+    public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
+
+        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
+            token = token.substring("Bearer ".length());
+        }
+
+        JwtParser validator = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build();
+
+        Claims claims = validator.parseClaimsJws(token).getBody();
+        claims.getId();
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
     }
 }

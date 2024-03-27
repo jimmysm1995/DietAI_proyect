@@ -144,4 +144,9 @@ public class ClientService {
     public Client findCurrentClient(long userId){
         return this.clientRepository.findClientByUserId(userId);
     }
+
+    public Diet getDietByUser(Client client) {
+
+        return client.getDiet();
+    }
 }

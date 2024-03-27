@@ -2,6 +2,7 @@ package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.model.Client;
+import com.backend.DietAIbackend.model.Diet;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.repository.UserRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{
+
     @Autowired
     UserRepository userRepository;
 
@@ -69,4 +71,5 @@ public class UserService implements IUserService{
 
         return this.userRepository.findByUsername(username).orElse(null);
     }
+
 }

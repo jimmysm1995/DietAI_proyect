@@ -25,12 +25,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class UserController {
-    @Value("${app.security.jwt.secret}")
-    private String jwtSecret;
     @Autowired
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private ClientMapper clientMapper;
 
@@ -57,18 +56,20 @@ public class UserController {
     }
 
     @GetMapping("/imagen/{username}")
-    public String obtenerImagen(@PathVariable String username) {
+    public ResponseEntity<String> obtenerImagen(@PathVariable String username) {
 
         User user = userService.findByUsername(username);
 
         String imagen = user.getImg();
 
-        return imagen;
+        return ResponseEntity.ok().body(imagen);
     }
 
 
     @PutMapping("/{userId}")
-    public User updateImagenUser(@PathVariable Long userId, @RequestBody User user) {
+    public ResponseEntity<UserDto> updateImagenUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+
+        User user = userMapper.dtoToModel(userDto);
 
         // Verifica si el usuario que se está actualizando es el mismo que se proporciona en el cuerpo de la solicitud
         if (user.getIdUser() == null || !user.getIdUser().equals(userId)) {
@@ -80,7 +81,8 @@ public class UserController {
         realUser.setImg(user.getImg());
 
         // Realiza la actualización del usuario en la base de datos
-        return userService.update(realUser);
+
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(realUser)));
     }
 
     @PutMapping
@@ -95,22 +97,5 @@ public class UserController {
     public void deleteByID(@PathVariable Long userId){
         userService.deleteByID(userId);
     }
-
-    @GetMapping("/currentUser")
-    public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
-
-        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
-            token = token.substring("Bearer ".length());
-        }
-
-        JwtParser validator = Jwts.parser()
-                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
-                .build();
-
-        Claims claims = validator.parseClaimsJws(token).getBody();
-        claims.getId();
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
-    }
-
 
 }
