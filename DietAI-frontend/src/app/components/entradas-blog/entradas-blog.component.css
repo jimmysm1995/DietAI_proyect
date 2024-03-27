@@ -1,0 +1,9 @@
+.card-text {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita el número de líneas a mostrar */
+    -webkit-box-orient: vertical;
+    white-space: normal; /* Permite que el texto se muestre en múltiples líneas */
+}

@@ -28,6 +28,8 @@ import { BlogComponent } from './views/blog/blog.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { LoginGuard } from './router/login.guard';
 import { TransformadorEnumPipe } from './transformador-enum.pipe';
+import { EntradasBlogComponent } from './components/entradas-blog/entradas-blog.component';
+import { UtilidadesComponent } from './components/utilidades/utilidades.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -58,7 +60,9 @@ const routes:Routes = [
     UpdateImgComponent,
     UpdateProfileComponent,
     BlogComponent,
-    TransformadorEnumPipe
+    TransformadorEnumPipe,
+    EntradasBlogComponent,
+    UtilidadesComponent
   ],
   imports: [
     HttpClientModule,

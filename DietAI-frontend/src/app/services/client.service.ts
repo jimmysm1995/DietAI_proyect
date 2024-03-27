@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/Client';
+import { AltaCliente } from '../models/AltaCliente';
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +38,5 @@ export class ClientService {
       }
   });
   }
+
 }
