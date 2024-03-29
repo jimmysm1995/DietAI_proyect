@@ -20,6 +20,7 @@ import { GenderService } from '../../services/gender-controller.service';
 import { Goal } from 'src/app/models/Goal';
 import { GoalService } from '../../services/goal.service';
 import { AltaCliente } from 'src/app/models/AltaCliente';
+import { ClientStore } from 'src/app/store/clientStore';
 
 @Component({
     selector: 'app-client-form',
@@ -32,13 +33,13 @@ export class ClientFormComponent {
     idUser: string = '';
     @Output() aceptarFormulario = new EventEmitter();
 
-  public allergies: Allergy[] = [];
-  public injuries: Injury[] = [];
-  public jobTypes: String[] = [];
-  public previusLevel: PreviusLevel[] = [];
-  public consumedSubstances: ConsumedSubstances[] = [];
-  public gender: Gender []=[];
-  public goal: Goal []=[];
+    public allergies: Allergy[] = [];
+    public injuries: Injury[] = [];
+    public jobTypes: String[] = [];
+    public previusLevel: PreviusLevel[] = [];
+    public consumedSubstances: ConsumedSubstances[] = [];
+    public gender: Gender[] = [];
+    public goal: Goal[] = [];
 
     constructor(
         private clientService: ClientService,
@@ -50,7 +51,8 @@ export class ClientFormComponent {
         private previusLevelService: PreviusLevelService,
         private consumedSubstancesService: ConsumedSubstancesService,
         private genderService: GenderService,
-        private goalService: GoalService
+        private goalService: GoalService,
+        private clientStore: ClientStore
     ) {}
 
     ngOnInit(): void {
@@ -77,10 +79,6 @@ export class ClientFormComponent {
         this.goalService.getGoal().then((goal) => {
             this.goal = goal;
         });
-
-        this.clientService.getCurrentClient().then((client) => {
-          this
-        })
     }
 
     aceptar() {
@@ -90,11 +88,15 @@ export class ClientFormComponent {
     registrarCliente(clientData: Client): void {
         console.log(clientData);
         clientData.user = this.userStore.user;
-        this.clientService.registerClient(clientData).then((client: Client) => {
-        this.aceptar();
-        }).catch((error) => {
-          this.errorMessage = error;
-          // this.clientForm.resetForm();
-        })
+        this.clientService
+            .registerClient(clientData)
+            .then((client: Client) => {
+                this.clientStore.client = client;
+                this.aceptar();
+            })
+            .catch((error) => {
+                this.errorMessage = error;
+                // this.clientForm.resetForm();
+            });
     }
 }

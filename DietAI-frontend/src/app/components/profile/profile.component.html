@@ -42,29 +42,23 @@
         <h3>{{ user.username }}</h3>
         <p>{{ frase }}</p>
     </div>
-    <div class="formularioCliente">
-        <button
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#formulario"
-        >
-            Formulario
-        </button>
-    </div>
+
     <div class="logros">
         <app-logro nombre="Dietas" [numero]="1"></app-logro>
         <app-logro nombre="Ejercicios" [numero]="2"></app-logro>
         <app-logro nombre="Días entrenados" [numero]="3"></app-logro>
     </div>
+
     <div class="formularioCliente">
         <button
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#formulario"
-            (click)="obtenerDieta()"
         >
-            Entrenamiento
+            Completa el Formulario
         </button>
+    </div>
+
         <div class="formularioCliente">
             <button
                 class="btn btn-primary"

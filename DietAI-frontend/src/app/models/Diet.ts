@@ -2,9 +2,7 @@ import { User } from "./User";
 
 export class Diet {
     name: string = '';
-    difficulty?: number;
-    days?: number;
-    distribution?: string;
-    usuarios?: User[];
+    idRecipe?: number = 0;
+    calories?: number = 0;
     idDiet?: number = 0;
 }
