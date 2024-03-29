@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -120,12 +121,18 @@ public class ClientController {
 
     @GetMapping("/currentClient")
     public ResponseEntity<ClientDto> getCurrentClient(@RequestHeader("Authorization") String token){
+
+        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
+            token = token.substring("Bearer ".length());
+        }
+
         JwtParser validator = Jwts.parser()
                 .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .build();
+
         Claims claims = validator.parseClaimsJws(token).getBody();
         claims.getId();
-        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getId()))));
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getSubject()))));
     }
 
     @GetMapping("/diet/getDiet/{idClient}")

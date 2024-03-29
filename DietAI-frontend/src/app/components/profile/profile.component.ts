@@ -33,4 +33,10 @@ export class ProfileComponent {
     document.getElementById('close')?.click();
   }
 
+  obtenerDieta() {
+    // this.dietServicce.getDieta().then(dieta => {
+      
+    // })
+  }
+
 }

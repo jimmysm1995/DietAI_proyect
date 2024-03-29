@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: space-evenly;
+    margin-bottom: 10rem;
+}
+
+.pic1 {
+    background-color: blueviolet;
+    height: 200px;
+    width: 200px;
+}
+
+.modal {
+    z-index: 9999;
+}
+
+.modal-backdrop {
+
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog{
+    background-color: white;
+    opacity: 1;
+}
+
+.modal-content{
+    background-color: white;
+}
+

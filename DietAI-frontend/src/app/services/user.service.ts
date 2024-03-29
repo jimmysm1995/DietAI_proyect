@@ -66,6 +66,5 @@ export class UserService {
 
   getCurrentUser():Promise<User>{
     return axios.get(`${environment.apiUrl}/auth/currentUser`).then((response) => response.data);
-
   }
 }

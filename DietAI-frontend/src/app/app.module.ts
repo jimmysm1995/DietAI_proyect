@@ -30,6 +30,7 @@ import { LoginGuard } from './router/login.guard';
 import { TransformadorEnumPipe } from './transformador-enum.pipe';
 import { EntradasBlogComponent } from './components/entradas-blog/entradas-blog.component';
 import { UtilidadesComponent } from './components/utilidades/utilidades.component';
+import { EntrenameintoComponent } from './components/entrenameinto/entrenameinto.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -62,7 +63,8 @@ const routes:Routes = [
     BlogComponent,
     TransformadorEnumPipe,
     EntradasBlogComponent,
-    UtilidadesComponent
+    UtilidadesComponent,
+    EntrenameintoComponent
   ],
   imports: [
     HttpClientModule,

@@ -9,6 +9,8 @@ import { UserStore } from '../store/userStore';
 import { UserService } from '../services/user.service';
 import { Client } from '../models/Client';
 import { User } from '../models/User';
+import { ClientService } from '../services/client.service';
+import { ClientStore } from '../store/clientStore';
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +19,9 @@ class AuthGuardService {
     constructor(
         private router: Router,
         private userStore: UserStore,
-        private userService: UserService) {}
+        private userService: UserService,
+        private clientService: ClientService,
+        private clientStore: ClientStore ) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -25,11 +29,13 @@ class AuthGuardService {
     ): Promise<boolean> | boolean {
         if (localStorage.getItem('sesion')) {
             if(!this.userStore.user.username){
-                return this.userService.getCurrentUser().then((user: User) => {
-                    
-                    this.userStore.user = user;
-                    return true;
-                }) 
+                return Promise.all([
+                    this.userService.getCurrentUser(),this.clientService.getCurrentClient()
+                ]).then(([user,client]) => {
+                    this.userStore.user = user
+                    this.clientStore.client = client
+                    return true
+                })
             }
             return true
         }

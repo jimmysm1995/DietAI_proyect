@@ -41,7 +41,7 @@ export class ClientFormComponent {
   public goal: Goal []=[];
 
     constructor(
-        private ClientService: ClientService,
+        private clientService: ClientService,
         private userStore: UserStore,
         private router: Router,
         private injuryService: InjuryService,
@@ -77,6 +77,10 @@ export class ClientFormComponent {
         this.goalService.getGoal().then((goal) => {
             this.goal = goal;
         });
+
+        this.clientService.getCurrentClient().then((client) => {
+          this
+        })
     }
 
     aceptar() {
@@ -86,7 +90,7 @@ export class ClientFormComponent {
     registrarCliente(clientData: Client): void {
         console.log(clientData);
         clientData.user = this.userStore.user;
-        this.ClientService.registerClient(clientData).then((client: Client) => {
+        this.clientService.registerClient(clientData).then((client: Client) => {
         this.aceptar();
         }).catch((error) => {
           this.errorMessage = error;

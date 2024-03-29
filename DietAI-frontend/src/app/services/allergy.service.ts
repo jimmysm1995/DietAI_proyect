@@ -8,7 +8,6 @@ import { Allergy } from '../models/Allergy';
 })
 export class AllergyService {
 
-
   private baseUrl: string = environment.apiUrl+'/api/allergy';
 
   getAllergies(): Promise<Allergy[]> {

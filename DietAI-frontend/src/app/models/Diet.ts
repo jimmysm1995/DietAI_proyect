@@ -6,4 +6,5 @@ export class Diet {
     days?: number;
     distribution?: string;
     usuarios?: User[];
+    idDiet?: number = 0;
 }

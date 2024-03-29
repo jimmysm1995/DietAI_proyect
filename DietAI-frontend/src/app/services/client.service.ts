@@ -38,5 +38,9 @@ export class ClientService {
       }
   });
   }
+  
+  getCurrentClient():Promise<Client>{
+    return axios.get(`${this.baseUrl}/currentClient`).then((response) => response.data);
+  }
 
 }

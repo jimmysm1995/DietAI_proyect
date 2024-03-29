@@ -11,7 +11,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Formulario</h5>
-                    <a role="button" id="close" class="close" data-bs-dismiss="modal" aria-label="Close"> X
+                    <a
+                        role="button"
+                        id="close"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        X
                     </a>
                 </div>
                 <div class="modal-body">
@@ -33,7 +40,7 @@
     <app-update-profile></app-update-profile>
     <div class="info">
         <h3>{{ user.username }}</h3>
-        <p>{{frase}}</p>
+        <p>{{ frase }}</p>
     </div>
     <div class="formularioCliente">
         <button
@@ -49,4 +56,23 @@
         <app-logro nombre="Ejercicios" [numero]="2"></app-logro>
         <app-logro nombre="Días entrenados" [numero]="3"></app-logro>
     </div>
+    <div class="formularioCliente">
+        <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#formulario"
+            (click)="obtenerDieta()"
+        >
+            Entrenamiento
+        </button>
+        <div class="formularioCliente">
+            <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#formulario"
+            >
+                Dieta
+            </button>
+    </div>
 </div>
+
