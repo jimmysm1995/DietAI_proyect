@@ -13,7 +13,19 @@
 }
 
 .pic1 {
-    background-color: blueviolet;
+    display: block; 
+    background-image: url("https://www.entrenamientos.com/uploads/exercise/aperturas-pectoral-trx-init-pos-8706.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 200px;
+}
+
+.pic2 {
+    display: block; 
+    background-image: url("https://www.entrenamientos.com/uploads/exercise/pasos-patinaje-hielo-trx-init-pos-5869.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
     height: 200px;
     width: 200px;
 }
