@@ -2,12 +2,22 @@
 header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 20rem;
+    justify-content: space-between;
+    height: 5rem;
+    padding: 3rem;
+    background-color: rgb(107, 107, 107);
+    
+    
+
+}
+
+.headerBg{
     background-image: url(../../../assets/IMG/home-bc.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
+    height: 70vh;
+    color: aliceblue;
 }
 
 /* MENU NAVEGACIÓN SUPERIOR DERECHA */
@@ -21,12 +31,13 @@ header {
 }
 
 .fixed-header nav ul li {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .fixed-header nav a {
     text-decoration: none;
-    color: #000000;
+    color: aliceblue;
+    /* color: #000000; */
 }
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */

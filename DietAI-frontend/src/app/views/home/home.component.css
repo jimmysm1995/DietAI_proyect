@@ -4,8 +4,13 @@
     width: 100%;
     position: relative;
     background-color: rgb(255, 255, 255);
+    /* margin-top: 20rem; */
 }
 
 .entrenamiento{
     margin-top: 100rem;
+}
+
+.trainingDiet{
+    padding: 5rem;
 }

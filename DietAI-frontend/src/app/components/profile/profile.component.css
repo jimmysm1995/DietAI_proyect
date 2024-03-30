@@ -61,3 +61,11 @@
     gap: 1rem;
     margin-top: 3rem;
 }
+
+.quote{
+    font-style: italic;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+    max-width: 80%;
+}
