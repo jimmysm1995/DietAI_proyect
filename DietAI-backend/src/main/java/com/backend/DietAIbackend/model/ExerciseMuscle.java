@@ -5,16 +5,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "gymExerciseMuscle")
-public class GymExerciseMuscle {
+@Table(name = "exerciseMuscle")
+public class ExerciseMuscle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idGymExerciseMuscle;
+    private Long idExerciseMuscle;
 
     @ManyToOne
-    @JoinColumn(name = "idGymExercise")
-    private GymExercise gymExercise;
+    @JoinColumn(name = "idExercise")
+    private Exercise exercise;
 
     @ManyToOne
     @JoinColumn(name = "idMuscle")

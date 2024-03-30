@@ -63,65 +63,86 @@ VALUES
 ('https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg'),
 ('https://st.depositphotos.com/1036149/3669/i/600/depositphotos_36692137-stock-photo-strong-frog.jpg');
 
--- Insertar datos en la tabla Home_exercise
-INSERT INTO Home_exercise (name, difficult, explanation)
-VALUES
-('Flexiones', 3, 'Ejercicio básico para entrenar el pecho y los tríceps.'),
-('Sentadillas', 2, 'Ejercicio para fortalecer las piernas y glúteos.'),
-('Plancha', 3, 'Ejercicio para fortalecer el core y los hombros.'),
-('Zancadas', 2, 'Ejercicio para piernas y glúteos.'),
-('Abdominales', 2, 'Ejercicio para fortalecer los abdominales.'),
-('Burpees', 4, 'Ejercicio completo que involucra pecho, piernas, tríceps y abdomen.'),
-('Mountain climbers', 3, 'Ejercicio cardiovascular que trabaja piernas, abdominales y brazos.'),
-('Plancha lateral', 3, 'Ejercicio que fortalece oblicuos y abdomen.'),
-('Flexiones diamante', 3, 'Variante de flexiones para trabajar tríceps.'),
-('Sentadilla sumo', 2, 'Variante de sentadilla que enfoca en glúteos e interior de muslos.');
-
-
 -- Insertar datos en la tabla Home_exercise_muscle
-INSERT INTO Home_exercise_muscle (id_home_exercise, id_muscle)
-VALUES
-(1, 1), -- Flexiones - Pecho
-(1, 4), -- Flexiones - Tríceps
-(2, 6), -- Sentadillas - Piernas
-(2, 7), -- Sentadillas - Glúteos
-(3, 9), -- Plancha - Abdominales
-(3, 5), -- Plancha - Hombros
-(4, 6), -- Zancadas - Piernas
-(4, 7), -- Zancadas - Glúteos
-(5, 9), -- Abdominales - Abdominales
-(6, 1), -- Burpees - Pecho
-(6, 6), -- Burpees - Piernas
-(6, 4), -- Burpees - Tríceps
-(6, 9), -- Burpees - Abdominales
-(7, 6), -- Mountain climbers - Piernas
-(7, 9), -- Mountain climbers - Abdominales
-(7, 5), -- Mountain climbers - Brazos
-(8, 9), -- Plancha lateral - Abdominales
-(8, 10), -- pancha lateral - Oblicuos
-(9, 4), -- Flexiones diamante - Tríceps
-(9, 7), -- Sentadilla sumo - Glúteos
-(9, 4); -- Sentadilla sumo - Piernas
+--INSERT INTO Home_exercise_muscle (id_home_exercise, id_muscle)
+--VALUES
+--(1, 1), -- Flexiones - Pecho
+--(1, 4), -- Flexiones - Tríceps
+--(2, 6), -- Sentadillas - Piernas
+--(2, 7), -- Sentadillas - Glúteos
+--(3, 9), -- Plancha - Abdominales
+--(3, 5), -- Plancha - Hombros
+--(4, 6), -- Zancadas - Piernas
+--(4, 7), -- Zancadas - Glúteos
+--(5, 9), -- Abdominales - Abdominales
+--(6, 1), -- Burpees - Pecho
+--(6, 6), -- Burpees - Piernas
+--(6, 4), -- Burpees - Tríceps
+--(6, 9), -- Burpees - Abdominales
+--(7, 6), -- Mountain climbers - Piernas
+--(7, 9), -- Mountain climbers - Abdominales
+--(7, 5), -- Mountain climbers - Brazos
+--(8, 9), -- Plancha lateral - Abdominales
+--(8, 10), -- pancha lateral - Oblicuos
+--(9, 4), -- Flexiones diamante - Tríceps
+--(9, 7), -- Sentadilla sumo - Glúteos
+--(9, 4); -- Sentadilla sumo - Piernas
 
 
 -- Insertar datos en la tabla Gym_exercise
-INSERT INTO Gym_Exercise (name, difficult, explanation)
+INSERT INTO Exercise (name,img_exercise,initial_position,execution,advices,type_training)
 VALUES
-('Press de pecho en máquina', 3, 'Ejercicio para desarrollar el pectoral mayor.'),
-('Prensa de piernas', 3, 'Ejercicio para fortalecer los cuádriceps y glúteos.'),
-('Peso muerto con barra', 4, 'Ejercicio compuesto para trabajar la espalda baja, piernas y glúteos.'),
-('Remo con barra', 3, 'Ejercicio para fortalecer la espalda y bíceps.'),
-('Press militar con mancuernas', 3, 'Ejercicio para desarrollar los hombros y tríceps.'),
-('Sentadillas con barra', 4, 'Ejercicio compuesto para trabajar piernas y glúteos.'),
-('Leg press', 3, 'Ejercicio para trabajar los cuádriceps, glúteos y músculos de la parte inferior del cuerpo.'),
-('Pull-up', 4, 'Ejercicio para fortalecer la espalda, bíceps y hombros.'),
-('Pulldown en máquina', 3, 'Ejercicio para trabajar los músculos de la espalda, especialmente el dorsal ancho.'),
-('Curl de bíceps con barra', 3, 'Ejercicio para aislar y fortalecer los músculos del bíceps.'),
-('Extensiones de tríceps en polea alta', 3, 'Ejercicio para fortalecer los músculos del tríceps.'),
-('Prensa de hombros con mancuernas', 3, 'Ejercicio para desarrollar los músculos del hombro y tríceps.');
+('Press de pecho en barra',
+    'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/press-de-banca-con-barra-init-pos-3832.png',
+    'Seleccione la cantidad de discos apropiada para ponerlos en la barra. Túmbese boca arriba en un banco plano, sus ojos deben estar debajo de la barra. Sus pies deben tocar el suelo.',
+    'Descienda suavemente la barra hacia el pecho mientras inhala Después de 1 seg., empuje la barra de vuelta a la posición de inicio mientras exhala. Repita el movimiento hasta que comprete las repeticiones .',
+    'Centrese en empujar la barra con los musculos del pecho y apriete los gluteos cuando lo haga Si usted es un principiante, utilice un ayudante. So no hay ninguno, sea conservador con la carga que utiliza.',
+    'GYM'),
+('Prensa de piernas',
+    'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/prensa-de-piernas-inclinada-init-pos-4016.png',
+    'Seleccione la cantidad de discos apropiada para ponerlos en la máquina. Siéntese en la máquina y coloque los pies en la plataforma, separados al ancho de los hombros. Agarre las asas laterales de la máquina.',
+    'Baje la plataforma con un movimiento suave hasta que sus rodillas formen un ángulo de 90 grados mientras inhala. Aguante 1 seg. Empuje la plataforma desde los talones de sus pies y vuelva a la posición inicial mientras exhala.',
+    'Compruebe siempre si ha bloqueado correctamente la máquina después de repeticiones. Si usted es un principiante sea conservador con la carga que utiliza.',
+    'GYM'),
+('Peso muerto con barra',
+    'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/peso-muerto-rumano-o-con-piernas-estiradas-init-pos-6354.png',
+    'Sostenga una barra al nivel de la cadera con un agarre prono y con las manos al ancho de los hombros. Separe los pies al ancho de las caderas. Retraiga sus omoplatos. Contraiga el suelo pelvico y el core mientras mantiene su pecho levantado.',
+    'Baje la barra moviendo su trasero hacia atrás hasta donde pueda mantener la barra cerca de sus piernas. Asegúrese de no mover la espalda y de hacer el ejercicio con las caderas.',
+    'Centrese en apretar la columna todo el tiempo usando sus musculos del core.',
+    'GYM'),
+('Remo con barra',
+    'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/remo-con-barra-de-pie-init-pos-6237.png',
+     'Sostenga una barra al nivel de la cadera con un agarre prono y con las manos al ancho de los hombros. Separe los pies al ancho de las caderas. Retraiga sus omoplatos. Manteniendo el arco natural de su espalda.',
+     'Tire de la barra hacia su torso retrayendo las escápulas mientras exhala hasta que toque los abdominales. Vuelva a la posición inicial con un suave movimiento.',
+     'Mientras hace el ejercicio, mueva solo los brazos, asegúrese de no mover ninguna otra parte de su cuerpo. La clave del ejercicio es la calidad sobre la cantidad. El truco es realizar el ejercicio con la forma adecuada.',
+     'GYM'),
+('Press militar con mancuernas',
+    'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/press-militar-o-de-hombros-con-mancuernas-de-pie-init-pos-1697.png',
+    'Coja las mancuernas a los lados de los hombros mientras mantiene los codos doblados y en línea con su torso. Las manos deben estar ligeramente más separadas que el ancho de los hombros.',
+    'Extienda los brazos para empujar las mancuernas hacia arriba hasta que los codos estén extendidos pero no bloqueados. Baje lentamente el peso hasta que sus manos estén justo por encima de los hombros.',
+    'Modifique su agarre (neutral, ancho, angosto e inverso) de vez en cuando para entrenar los músculos desde múltiples ángulos. La clave del ejercicio es la calidad sobre la cantidad. El truco es realizar el ejercicio con la forma adecuada.',
+    'GYM'
+    );
+--('Sentadillas con barra', 4, 'Ejercicio compuesto para trabajar piernas y glúteos.'),
+--('Leg press', 3, 'Ejercicio para trabajar los cuádriceps, glúteos y músculos de la parte inferior del cuerpo.'),
+--('Pull-up', 4, 'Ejercicio para fortalecer la espalda, bíceps y hombros.'),
+--('Pulldown en máquina', 3, 'Ejercicio para trabajar los músculos de la espalda, especialmente el dorsal ancho.'),
+--('Curl de bíceps con barra', 3, 'Ejercicio para aislar y fortalecer los músculos del bíceps.'),
+--('Extensiones de tríceps en polea alta', 3, 'Ejercicio para fortalecer los músculos del tríceps.'),
+--('Prensa de hombros con mancuernas', 3, 'Ejercicio para desarrollar los músculos del hombro y tríceps.'),
+--('Flexiones', 3, 'Ejercicio básico para entrenar el pecho y los tríceps.'),
+--('Sentadillas', 2, 'Ejercicio para fortalecer las piernas y glúteos.'),
+--('Plancha', 3, 'Ejercicio para fortalecer el core y los hombros.'),
+--('Zancadas', 2, 'Ejercicio para piernas y glúteos.'),
+--('Abdominales', 2, 'Ejercicio para fortalecer los abdominales.'),
+--('Burpees', 4, 'Ejercicio completo que involucra pecho, piernas, tríceps y abdomen.'),
+--('Mountain climbers', 3, 'Ejercicio cardiovascular que trabaja piernas, abdominales y brazos.'),
+--('Plancha lateral', 3, 'Ejercicio que fortalece oblicuos y abdomen.'),
+--('Flexiones diamante', 3, 'Variante de flexiones para trabajar tríceps.'),
+--('Sentadilla sumo', 2, 'Variante de sentadilla que enfoca en glúteos e interior de muslos.');
 
 -- Insertar datos en la tabla Gym_Exercise_Muscle
-INSERT INTO Gym_Exercise_Muscle (id_Gym_Exercise, id_Muscle)
+INSERT INTO Exercise_Muscle (id_Exercise, id_Muscle)
 VALUES
 (1, 1), -- Press de pecho en máquina - Pecho
 (2, 6), -- Prensa de piernas - Piernas
@@ -132,36 +153,57 @@ VALUES
 (4, 2), -- Remo con barra - Espalda
 (4, 3), -- Remo con barra - Bíceps
 (5, 5), -- Press militar con mancuernas - Hombros
-(5, 4), -- Press militar con mancuernas - Tríceps
-(6, 6), -- Sentadillas con barra - Piernas
-(6, 7), -- Sentadillas con barra - Glúteos
-(7, 6), -- Leg press - Piernas
-(7, 7), -- Leg press - Glúteos
-(8, 2), -- Pull-up - Espalda
-(8, 3), -- Pull-up - Bíceps
-(8, 5), -- Pull-up - Hombros
-(9, 2), -- Pulldown en máquina - Espalda
-(10, 3), -- Curl de bíceps con barra - Bíceps
-(11, 4), -- Extensiones de tríceps en polea alta - Tríceps
-(12, 5), -- Prensa de hombros con mancuernas - Hombros
-(12, 4); -- Prensa de hombros con mancuernas - Tríceps
+(5, 4); -- Press militar con mancuernas - Tríceps
+--(6, 6), -- Sentadillas con barra - Piernas
+--(6, 7), -- Sentadillas con barra - Glúteos
+--(7, 6), -- Leg press - Piernas
+--(7, 7), -- Leg press - Glúteos
+--(8, 2), -- Pull-up - Espalda
+--(8, 3), -- Pull-up - Bíceps
+--(8, 5), -- Pull-up - Hombros
+--(9, 2), -- Pulldown en máquina - Espalda
+--(10, 3), -- Curl de bíceps con barra - Bíceps
+--(11, 4), -- Extensiones de tríceps en polea alta - Tríceps
+--(12, 5), -- Prensa de hombros con mancuernas - Hombros
+--(12, 4), -- Prensa de hombros con mancuernas - Tríceps
+--(13, 1), -- Flexiones - Pecho
+--(13, 4), -- Flexiones - Tríceps
+--(14, 6), -- Sentadillas - Piernas
+--(14, 7), -- Sentadillas - Glúteos
+--(15, 9), -- Plancha - Abdominales
+--(15, 5), -- Plancha - Hombros
+--(16, 6), -- Zancadas - Piernas
+--(16, 7), -- Zancadas - Glúteos
+--(17, 9), -- Abdominales - Abdominales
+--(18, 1), -- Burpees - Pecho
+--(18, 6), -- Burpees - Piernas
+--(18, 4), -- Burpees - Tríceps
+--(18, 9), -- Burpees - Abdominales
+--(19, 6), -- Mountain climbers - Piernas
+--(19, 9), -- Mountain climbers - Abdominales
+--(19, 5), -- Mountain climbers - Brazos
+--(20, 9), -- Plancha lateral - Abdominales
+--(20, 10), -- pancha lateral - Oblicuos
+--(21, 4), -- Flexiones diamante - Tríceps
+--(22, 7), -- Sentadilla sumo - Glúteos
+--(22, 4); -- Sentadilla sumo - Piernas
 
 -- Insertar datos en la tabla training
 INSERT INTO training (name, type_training, difficulty, days, distribution)
 VALUES ('Entrenamiento prueba', 'GYM', 6, 3, 'Full body');
 
 -- Insertar datos en la tabla TrainingExercise
-INSERT INTO Training_exercise (sets, repetitions, day_week, id_training, id_Gym_Exercise, id_home_exercise)
+INSERT INTO Training_exercise (sets, repetitions, day_week, id_training, id_exercise)
 VALUES
-(3, 10,'MONDAY', 1, 1, null),
-(3, 10,'MONDAY', 1, 2, null),
-(3, 10,'MONDAY', 1, 3, null),
-(3, 10,'WEDNESDAY', 1, 1, null),
-(3, 10,'WEDNESDAY', 1, 2, null),
-(3, 10,'WEDNESDAY', 1, 3, null),
-(3, 10,'FRIDAY', 1, 1, null),
-(3, 10,'FRIDAY', 1, 2, null),
-(3, 10,'FRIDAY', 1, 3, null);
+(3, 10,'MONDAY', 1, 1),
+(3, 10,'MONDAY', 1, 2),
+(3, 10,'MONDAY', 1, 3),
+(3, 10,'WEDNESDAY', 1, 1),
+(3, 10,'WEDNESDAY', 1, 2),
+(3, 10,'WEDNESDAY', 1, 3),
+(3, 10,'FRIDAY', 1, 1),
+(3, 10,'FRIDAY', 1, 2),
+(3, 10,'FRIDAY', 1, 3);
 
 
 -- Insertar datos en la tabla de ingredientes

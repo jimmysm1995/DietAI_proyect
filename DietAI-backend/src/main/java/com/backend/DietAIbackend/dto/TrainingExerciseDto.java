@@ -17,7 +17,5 @@ public class TrainingExerciseDto {
 
     private TrainingDto training;
 
-    private GymExerciseDto gymExercise;
-
-    private HomeExerciseDto homeExercise;
+    private ExerciseDto exercise;
 }

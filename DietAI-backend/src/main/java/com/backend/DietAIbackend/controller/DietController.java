@@ -1,13 +1,15 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.dto.RecipeInDiet;
+import com.backend.DietAIbackend.mapper.DietMapper;
+import com.backend.DietAIbackend.mapper.RecipeMapper;
 import com.backend.DietAIbackend.service.DietService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/diet")
@@ -17,5 +19,21 @@ public class DietController {
 
     @Autowired
     DietService dietService;
+
+    @Autowired
+    DietMapper dietMapper;
+
+    @Autowired
+    RecipeMapper recipeMapper;
+
+    @GetMapping("/recipes/{id}")
+    public ResponseEntity<List<RecipeInDiet>> findRecipesByDiet(@PathVariable Long id){
+
+        List<RecipeInDiet> recipeList = dietService.findRecipesByDiet(id);
+
+        return ResponseEntity.ok().body(recipeList);
+
+    }
+
 
 }

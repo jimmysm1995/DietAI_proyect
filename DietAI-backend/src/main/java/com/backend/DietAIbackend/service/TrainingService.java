@@ -51,7 +51,7 @@ public class TrainingService {
         for (TrainingExercise trainingExercise: training.getTrainingExercises()
         ) {
             exercisesInTrainings.add(new ExercisesInTraining(
-                    trainingExercise.getGymExercise().getName(),
+                    trainingExercise.getExercise().getName(),
                     trainingExercise.getSets(),
                     trainingExercise.getRepetitions(),
                     trainingExercise.getDayWeek()
@@ -61,18 +61,5 @@ public class TrainingService {
         return exercisesInTrainings;
     }
 
-    public List<HomeExercise> findHomeExercisesById(Long id) {
-
-        Training training = trainingRepository.findById(id).orElse(null);
-
-        List<HomeExercise> homeExerciseList = new ArrayList<>();
-
-        for (TrainingExercise trainingExercise: training.getTrainingExercises()
-        ) {
-            homeExerciseList.add(trainingExercise.getHomeExercise());
-        }
-
-        return homeExerciseList;
-    }
 
 }

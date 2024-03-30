@@ -1,6 +1,5 @@
 package com.backend.DietAIbackend.service;
 
-import com.backend.DietAIbackend.model.GymExercise;
 import com.backend.DietAIbackend.model.Recipe;
 import com.backend.DietAIbackend.repository.RecipeRepository;
 import jakarta.persistence.EntityNotFoundException;

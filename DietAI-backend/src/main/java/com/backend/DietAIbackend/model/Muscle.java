@@ -18,9 +18,6 @@ public class Muscle {
     private String name;
 
     @OneToMany(mappedBy = "muscle")
-    private List<HomeExerciseMuscle> homeExerciseMuscles;
-
-    @OneToMany(mappedBy = "muscle")
-    private List<GymExerciseMuscle> gymExerciseMuscles;
+    private List<ExerciseMuscle> exerciseMuscles;
 
 }

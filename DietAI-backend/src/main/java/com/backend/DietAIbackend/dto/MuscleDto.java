@@ -1,7 +1,5 @@
 package com.backend.DietAIbackend.dto;
 
-import com.backend.DietAIbackend.model.GymExerciseMuscle;
-import com.backend.DietAIbackend.model.HomeExerciseMuscle;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -17,9 +15,7 @@ public class MuscleDto {
     private String name;
 
     @Schema(description = "Lista de ejercicios de entrenamiento en casa que implican este músculo")
-    private List<HomeExerciseMuscleDto> homeExerciseMuscles;
+    private List<ExerciseMuscleDto> exerciseMuscles;
 
-    @Schema(description = "Lista de ejercicios de gimnasio que implican este músculo")
-    private List<GymExerciseMuscleDto> gymExerciseMuscles;
 }
 

@@ -30,11 +30,8 @@ public class TrainingExercise {
     private Training training;
 
     @ManyToOne
-    @JoinColumn(name = "idGymExercise")
-    private GymExercise gymExercise;
+    @JoinColumn(name = "idExercise")
+    private Exercise exercise;
 
-    @ManyToOne
-    @JoinColumn(name = "idHomeExercise")
-    private HomeExercise homeExercise;
 
 }
