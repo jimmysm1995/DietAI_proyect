@@ -32,6 +32,7 @@ import { EntradasBlogComponent } from './components/entradas-blog/entradas-blog.
 import { UtilidadesComponent } from './components/utilidades/utilidades.component';
 import { EntrenameintoComponent } from './components/entrenameinto/entrenameinto.component';
 import { DietComponent } from './components/diet/diet.component';
+import { RecipeComponent } from './components/recipe/recipe.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -66,7 +67,8 @@ const routes:Routes = [
     EntradasBlogComponent,
     UtilidadesComponent,
     EntrenameintoComponent,
-    DietComponent
+    DietComponent,
+    RecipeComponent
   ],
   imports: [
     HttpClientModule,

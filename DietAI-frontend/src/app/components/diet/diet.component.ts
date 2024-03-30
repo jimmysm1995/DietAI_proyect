@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DietService } from 'src/app/services/diet.service';
 import { Diet } from 'src/app/models/Diet';
+import { RecipeComponent } from '../recipe/recipe.component';
 
 @Component({
     selector: 'app-diet',
