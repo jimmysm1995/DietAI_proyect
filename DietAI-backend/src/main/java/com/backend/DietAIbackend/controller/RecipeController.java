@@ -1,9 +1,11 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.dto.ExerciseDto;
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeDto;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
+import com.backend.DietAIbackend.model.Exercise;
 import com.backend.DietAIbackend.model.Recipe;
 import com.backend.DietAIbackend.service.RecipeService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +40,12 @@ public class RecipeController {
         List<IngredientInRecipe> ingredientInRecipeList = request.getIngredientInRecipeList();
 
         return ResponseEntity.ok().body(recipeMapper.modelToDto(recipeService.save(recipe, ingredientInRecipeList)));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RecipeDto>>findAll(){
+
+        return ResponseEntity.ok().body(recipeMapper.listModelToDto(recipeService.findAll()));
     }
 
 }
