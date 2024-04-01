@@ -33,6 +33,9 @@ import { UtilidadesComponent } from './components/utilidades/utilidades.componen
 import { EntrenameintoComponent } from './components/entrenameinto/entrenameinto.component';
 import { DietComponent } from './components/diet/diet.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
+import { AdminComponent } from './views/admin/admin.component';
+import { IngridientComponent } from './components/ingridient/ingridient.component';
+import { RecipeAdminComponent } from './components/recipe-admin/recipe-admin.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -40,7 +43,8 @@ const routes:Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [LoginGuard]},
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'blog', component: BlogComponent}
+  {path: 'blog', component: BlogComponent},
+  {path: 'admin', component: AdminComponent}
 ]
 @NgModule({
   declarations: [
@@ -68,7 +72,10 @@ const routes:Routes = [
     UtilidadesComponent,
     EntrenameintoComponent,
     DietComponent,
-    RecipeComponent
+    RecipeComponent,
+    AdminComponent,
+    IngridientComponent,
+    RecipeAdminComponent
   ],
   imports: [
     HttpClientModule,
