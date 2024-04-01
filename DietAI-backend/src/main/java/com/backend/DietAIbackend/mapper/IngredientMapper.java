@@ -12,9 +12,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IngredientMapper {
 
+    @Mapping(target = "ingredientRecipe", ignore = true)
     Ingredient dtoToModel(IngredientDto ingredientDto);
 
-    @Mapping(target = "ingredientRecipe", ignore = true)
     IngredientDto modelToDto(Ingredient ingredient);
 
     List<IngredientDto> listModelToDto(List<Ingredient> ingredientList);

@@ -73,12 +73,15 @@ public class User implements UserDetails{
         return client;
     }
 
-    public User(Long idUser, String username, String email, String password) {
-        this.idUser = idUser;
+    public User( String username, String email, String password, Boolean admin) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.authorities.add(UserAuthority.READ);
+        if (admin){
+            this.authorities.add(UserAuthority.ADMIN);
+        } else {
+            this.authorities.add(UserAuthority.USER);
+        }
     }
 
     @Override

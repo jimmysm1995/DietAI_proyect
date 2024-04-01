@@ -67,6 +67,23 @@ public class AuthController {
                 userMapper.modelToDto(userService.register(userModel)));
     }
 
+    @PostMapping("/auth/register/admin")
+    public ResponseEntity<?> registerAdmin(@RequestBody UserDto userDTO) {
+
+        User userModel = userMapper.dtoToModel(userDTO);
+
+        if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
+        }
+
+        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                userMapper.modelToDto(userService.registerAdmin(userModel)));
+    }
+
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody UserDto userDto){
         try {

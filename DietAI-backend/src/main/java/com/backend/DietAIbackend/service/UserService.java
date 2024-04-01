@@ -4,6 +4,7 @@ import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.Diet;
 import com.backend.DietAIbackend.model.User;
+import com.backend.DietAIbackend.model.UserAuthority;
 import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -39,7 +40,18 @@ public class UserService implements IUserService{
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        return userRepository.save(user);
+        User registerUser = new User(user.getUsername(), user.getEmail(), user.getPassword() ,false);
+
+        return userRepository.save(registerUser);
+    }
+
+    public User registerAdmin(User user){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        User registerUser = new User(user.getUsername(), user.getEmail(), user.getPassword(),true);
+
+        return userRepository.save(registerUser);
     }
 
     public User update(User user) {

@@ -34,7 +34,7 @@ import { EntrenameintoComponent } from './components/entrenameinto/entrenameinto
 import { DietComponent } from './components/diet/diet.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { AdminComponent } from './views/admin/admin.component';
-import { IngridientComponent } from './components/ingridient/ingridient.component';
+import { IngredientComponent } from './components/ingredient/ingredient.component';
 import { RecipeAdminComponent } from './components/recipe-admin/recipe-admin.component';
 
 const routes:Routes = [
@@ -74,7 +74,7 @@ const routes:Routes = [
     DietComponent,
     RecipeComponent,
     AdminComponent,
-    IngridientComponent,
+    IngredientComponent,
     RecipeAdminComponent
   ],
   imports: [

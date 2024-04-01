@@ -1,0 +1,24 @@
+<h4>Enter ingridients:</h4>
+<form class="ingridient-form" (ngSubmit)="saveIngredient()">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="ingredient.name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="calories">Calories:</label>
+        <input type="number" class="form-control" id="calories" placeholder="Calories" [(ngModel)]="ingredient.calories" name="calories" required>
+    </div>
+    <div class="form-group">
+        <label for="carbohydrates">Carbohydrates:</label>
+        <input type="number" class="form-control" id="carbohydrates" placeholder="Carbohydrates" [(ngModel)]="ingredient.carbohydrates" name="carbohydrates" required>
+    </div>
+    <div class="form-group">
+        <label for="fats">Fats:</label>
+        <input type="number" class="form-control" id="fats" placeholder="Fats" [(ngModel)]="ingredient.fats" name="fats" required>
+    </div>
+    <div class="form-group">
+        <label for="protein">Protein:</label>
+        <input type="number" class="form-control" id="protein" placeholder="Protein" [(ngModel)]="ingredient.protein" name="protein" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
