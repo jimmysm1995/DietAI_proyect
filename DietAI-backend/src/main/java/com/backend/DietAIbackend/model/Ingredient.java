@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
 @Table(name = "ingredient")
 public class Ingredient {
 
@@ -35,4 +34,5 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     @JsonIgnore
     private List<IngredientRecipe> ingredientRecipe;
+
 }

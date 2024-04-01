@@ -51,9 +51,10 @@ public class ExerciseController {
 
     @GetMapping
     public ResponseEntity<List<ExerciseDto>>findAllExercise(){
+
         List<Exercise> exercises = exerciseService.findAll();
-        List<ExerciseDto> exerciseDtoList = exerciseMapper.listModelToDto(exercises);
-        return ResponseEntity.ok().body(exerciseDtoList);
+
+        return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exercises));
     }
 
     @GetMapping("/muscles/{idExercise}")

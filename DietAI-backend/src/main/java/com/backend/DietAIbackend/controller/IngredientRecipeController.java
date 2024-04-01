@@ -1,13 +1,9 @@
 package com.backend.DietAIbackend.controller;
 
-import com.backend.DietAIbackend.dto.IngredientDto;
 import com.backend.DietAIbackend.dto.IngredientRecipeDto;
-import com.backend.DietAIbackend.mapper.IngredientMapper;
 import com.backend.DietAIbackend.mapper.IngredientRecipeMapper;
-import com.backend.DietAIbackend.model.Ingredient;
 import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.service.IngredientRecipeService;
-import com.backend.DietAIbackend.service.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/ingredientRecipe")
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
-public class ingredientRecipeController {
+public class IngredientRecipeController {
 
     @Autowired
     IngredientRecipeService ingredientRecipeService;

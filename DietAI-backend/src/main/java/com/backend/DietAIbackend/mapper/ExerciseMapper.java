@@ -11,6 +11,7 @@ import java.util.List;
 public interface ExerciseMapper {
 
     @Mapping(target = "muscles", ignore = true)
+    @Mapping(target = "trainingExercises", ignore = true)
     ExerciseDto modelToDto(Exercise exercise);
 
     Exercise dtoToModel(ExerciseDto exerciseDto);

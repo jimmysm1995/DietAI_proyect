@@ -12,7 +12,7 @@ public class IngredientRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIngredientRecipe;
 
-    @Column(name = "quantity", columnDefinition = "decimal")
+    @Column(name = "quantity", columnDefinition = "decimal(10,2)")
     private double quantity;
 
     @ManyToOne
@@ -22,6 +22,4 @@ public class IngredientRecipe {
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-
-
 }

@@ -34,6 +34,7 @@ public class TrainingController {
 
     @GetMapping
     public ResponseEntity<List<TrainingDto>>findAllTraining(){
+
         List<Training> trainingList = trainingService.findAll();
         List<TrainingDto> trainingDtoList = trainingMapper.listModelToDto(trainingList);
         return ResponseEntity.ok().body(trainingDtoList);

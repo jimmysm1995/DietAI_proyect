@@ -5,6 +5,7 @@ import com.backend.DietAIbackend.dto.MuscleDto;
 import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.Muscle;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
