@@ -2,8 +2,10 @@ package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.ExerciseDto;
 import com.backend.DietAIbackend.mapper.ExerciseMapper;
+import com.backend.DietAIbackend.mapper.MuscleMapper;
 import com.backend.DietAIbackend.model.Exercise;
 import com.backend.DietAIbackend.model.ExerciseMuscle;
+import com.backend.DietAIbackend.model.Muscle;
 import com.backend.DietAIbackend.service.ExerciseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/homeExercises")
+@RequestMapping("/api/exercises")
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class ExerciseController {
@@ -25,6 +27,21 @@ public class ExerciseController {
 
     @Autowired
     ExerciseMapper exerciseMapper;
+
+    @Autowired
+    MuscleMapper muscleMapper;
+
+    @PostMapping
+    public ResponseEntity<ExerciseDto> save(@RequestBody ExerciseDto exerciseDto){
+
+        List<Muscle> muscleList = muscleMapper.listDtoToModel(exerciseDto.getMuscles());
+
+        Exercise exercise = exerciseMapper.dtoToModel(exerciseDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(exerciseMapper.modelToDto(exerciseService.save(exercise, muscleList)));
+
+
+    }
 
 
     @GetMapping("/{idExercise}")

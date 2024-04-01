@@ -1,8 +1,13 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.dto.ExercisesInTraining;
+import com.backend.DietAIbackend.dto.IngredientInRecipe;
+import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.model.Recipe;
+import com.backend.DietAIbackend.model.TrainingExercise;
 import com.backend.DietAIbackend.repository.RecipeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +20,28 @@ public class RecipeService {
     @Autowired
     RecipeRepository recetaRepository;
 
-    public void save(Recipe receta){
-        recetaRepository.save(receta);
+    @Autowired
+    IngredientRecipeService ingredientRecipeService;
+
+    @Transactional
+    public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList) {
+
+        Recipe recipe = recetaRepository.save(receta);
+
+        for (IngredientInRecipe ingredientInRecipe : ingredientInRecipeList
+        ) {
+            if (ingredientInRecipe.ingredient() != null){
+                IngredientRecipe ingredientRecipe = new IngredientRecipe();
+                ingredientRecipe.setRecipe(recipe);
+                ingredientRecipe.setQuantity(ingredientInRecipe.quantity());
+                ingredientRecipe.setIngredient(ingredientInRecipe.ingredient());
+                ingredientRecipeService.save(ingredientRecipe);
+            }
+        }
+
+        actualizarCalorias();
+
+        return recipe;
     }
 
     public void delete(Recipe receta){

@@ -12,8 +12,8 @@ public class IngredientRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIngredientRecipe;
 
-    @Column(name = "quantity", columnDefinition = "int")
-    private Integer quantity;
+    @Column(name = "quantity", columnDefinition = "decimal")
+    private double quantity;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id")

@@ -32,5 +32,5 @@ public class ExerciseDto {
     private List<TrainingExerciseDto> trainingExercises;
 
     @Schema(description = "Lista de músculos trabajados por este ejercicio en casa")
-    private List<ExerciseMuscleDto> ExerciseMuscles;
+    private List<MuscleDto> muscles;
 }

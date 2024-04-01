@@ -40,11 +40,21 @@ public class TrainingController {
     }
 
     @GetMapping("/exercises/{id}")
-    public ResponseEntity<List<ExercisesInTraining>> findGymExercisesById(@PathVariable Long id){
+    public ResponseEntity<List<ExercisesInTraining>> findExercisesById(@PathVariable Long id){
 
         List<ExercisesInTraining> exerciseList = trainingService.findExercisesById(id);
 
         return ResponseEntity.ok().body(exerciseList);
+    }
+
+    @PostMapping
+    public ResponseEntity<TrainingDto> save(@RequestBody TrainingWithExercisesRequest request){
+
+        Training training = trainingMapper.dtoToModel(request.getTraining());
+
+        List<ExercisesInTraining> exercisesInTrainingList = request.getExercisesInTraining();
+
+        return ResponseEntity.ok().body(trainingMapper.modelToDto(trainingService.save(training, exercisesInTrainingList)));
     }
 
 }

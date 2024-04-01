@@ -17,8 +17,27 @@ public class TrainingService {
     @Autowired
     TrainingRepository trainingRepository;
 
-    public void save(Training training){
-        trainingRepository.save(training);
+    @Autowired
+    TrainingExerciseService trainingExerciseService;
+
+    public Training save(Training training, List<ExercisesInTraining> exercisesInTrainingList){
+
+        Training entrenamiento = trainingRepository.save(training);
+
+        for (ExercisesInTraining exercisesInTraining: exercisesInTrainingList
+             ) {
+            if (exercisesInTraining != null){
+                TrainingExercise trainingExercise = new TrainingExercise();
+                trainingExercise.setTraining(training);
+                trainingExercise.setExercise(exercisesInTraining.exercise());
+                trainingExercise.setSets(exercisesInTraining.sets());
+                trainingExercise.setRepetitions(exercisesInTraining.reps());
+                trainingExercise.setDayWeek(exercisesInTraining.dia());
+                trainingExerciseService.save(trainingExercise);
+            }
+        }
+
+        return entrenamiento;
     }
 
     public void delete(Training training){
@@ -51,7 +70,7 @@ public class TrainingService {
         for (TrainingExercise trainingExercise: training.getTrainingExercises()
         ) {
             exercisesInTrainings.add(new ExercisesInTraining(
-                    trainingExercise.getExercise().getName(),
+                    trainingExercise.getExercise(),
                     trainingExercise.getSets(),
                     trainingExercise.getRepetitions(),
                     trainingExercise.getDayWeek()

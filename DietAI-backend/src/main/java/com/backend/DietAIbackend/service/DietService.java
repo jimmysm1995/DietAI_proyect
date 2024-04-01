@@ -1,9 +1,11 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeInDiet;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.DietRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,30 @@ public class DietService {
     @Autowired
     RecipeService recipeService;
 
-    public Diet save(Diet diet){
-        return dietRepository.save(diet);
+    @Transactional
+    public Diet save(Diet diet, List<RecipeInDiet> recipeInDietList) {
+
+        Diet dieta = dietRepository.save(diet);
+
+        for (RecipeInDiet recipeInDiet : recipeInDietList
+        ) {
+            if (recipeInDiet.recipe() != null){
+                RecipeDiet recipeDiet = new RecipeDiet();
+                recipeDiet.setDiet(diet);
+                recipeDiet.setRecipe(recipeInDiet.recipe());
+                recipeDiet.setDayOfWeek(recipeInDiet.day());
+                recipeDiet.setMealTime(recipeInDiet.mealTime());
+                recipeDietService.save(recipeDiet);
+            }
+        }
+        
+        actualizarCalorias();
+
+        return dieta;
+    }
+
+    private void actualizarCalorias() {
+        dietRepository.actualizarCalories();
     }
 
     public Diet findById(Long id){
@@ -56,9 +80,7 @@ public class DietService {
              ) {
             if (recipeDiet.getDiet().getIdDiet().equals(id)){
                 Recipe recipe = recipeService.findById(recipeDiet.getRecipe().getIdRecipe());
-                recipeList.add(new RecipeInDiet(recipe.getIdRecipe(),
-                        recipe.getName(),
-                        recipe.getCalories(),
+                recipeList.add(new RecipeInDiet(recipe,
                         recipeDiet.getDayOfWeek(),
                         recipeDiet.getMealTime()));
             }

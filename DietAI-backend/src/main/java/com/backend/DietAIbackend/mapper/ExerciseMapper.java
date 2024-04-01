@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ExerciseMapper {
 
-    @Mapping(target = "exerciseMuscles", ignore = true)
+    @Mapping(target = "muscles", ignore = true)
     ExerciseDto modelToDto(Exercise exercise);
 
     Exercise dtoToModel(ExerciseDto exerciseDto);
