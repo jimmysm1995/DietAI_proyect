@@ -4,6 +4,7 @@ import com.backend.DietAIbackend.dto.ExercisesInTraining;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.TrainingRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class TrainingService {
 
     @Autowired

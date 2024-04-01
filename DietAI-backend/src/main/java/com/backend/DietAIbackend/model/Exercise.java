@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -35,9 +36,10 @@ public class Exercise {
     private TypeTraining typeTraining;
 
     @OneToMany(mappedBy = "exercise")
+    @JsonIgnore
     private List<ExerciseMuscle> exerciseMuscles;
 
     @OneToMany(mappedBy = "exercise")
+    @JsonIgnore
     private List<TrainingExercise> trainingExercises;
-
 }

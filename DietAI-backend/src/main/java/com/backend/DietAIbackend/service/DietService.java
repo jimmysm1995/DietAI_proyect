@@ -80,7 +80,8 @@ public class DietService {
              ) {
             if (recipeDiet.getDiet().getIdDiet().equals(id)){
                 Recipe recipe = recipeService.findById(recipeDiet.getRecipe().getIdRecipe());
-                recipeList.add(new RecipeInDiet(recipe,
+                recipeList.add(new RecipeInDiet(
+                        recipe,
                         recipeDiet.getDayOfWeek(),
                         recipeDiet.getMealTime()));
             }

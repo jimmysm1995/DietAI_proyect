@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,8 +22,10 @@ public class Recipe {
     private Integer calories;
 
     @OneToMany(mappedBy = "recipe")
+    @JsonIgnore
     private List<RecipeDiet> recipeDiets;
 
     @OneToMany(mappedBy = "recipe")
+    @JsonIgnore
     private List<IngredientRecipe> ingredientRecipe;
 }

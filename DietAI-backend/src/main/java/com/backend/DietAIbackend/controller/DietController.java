@@ -1,15 +1,13 @@
 package com.backend.DietAIbackend.controller;
 
-import com.backend.DietAIbackend.dto.DietDto;
-import com.backend.DietAIbackend.dto.DietWithRecipesRequest;
-import com.backend.DietAIbackend.dto.RecipeInDiet;
-import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
+import com.backend.DietAIbackend.dto.*;
 import com.backend.DietAIbackend.mapper.DietMapper;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
 import com.backend.DietAIbackend.model.Diet;
 import com.backend.DietAIbackend.service.DietService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +34,11 @@ public class DietController {
         List<RecipeInDiet> recipeList = dietService.findRecipesByDiet(id);
 
         return ResponseEntity.ok().body(recipeList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DietDto> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.CREATED).body(dietMapper.modelToDto(dietService.findById(id)));
     }
 
     @PostMapping
