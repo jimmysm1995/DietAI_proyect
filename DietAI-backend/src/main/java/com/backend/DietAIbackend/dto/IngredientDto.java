@@ -30,7 +30,7 @@ public class IngredientDto {
     @Schema(example = "100", description = "Cantidad de calorías")
     private Integer calories;
 
-    @Schema(description = "Lista de ingredientes en recetas que contienen este ingrediente")
-    private List<IngredientRecipeDto> ingredientRecipe;
+//    @Schema(description = "Lista de ingredientes en recetas que contienen este ingrediente")
+//    private List<IngredientRecipeDto> ingredientRecipe;
 }
 

@@ -19,4 +19,7 @@ public interface IngredientRecipeMapper {
     IngredientRecipe dtoToModel(IngredientRecipeDto ingredientRecipeDto);
     List<IngredientRecipeDto> listModelToDto(List<IngredientRecipe> ingredientRecipeList);
 
+    List<IngredientRecipe> listDtoToModel(List<IngredientRecipeDto> ingredientRecipeDtoList);
+
+
 }

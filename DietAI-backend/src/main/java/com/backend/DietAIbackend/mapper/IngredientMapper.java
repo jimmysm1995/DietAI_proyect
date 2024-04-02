@@ -18,4 +18,6 @@ public interface IngredientMapper {
     IngredientDto modelToDto(Ingredient ingredient);
 
     List<IngredientDto> listModelToDto(List<Ingredient> ingredientList);
+
+    List<Ingredient> listDtoToModel(List<IngredientDto> ingredientDtoList);
 }

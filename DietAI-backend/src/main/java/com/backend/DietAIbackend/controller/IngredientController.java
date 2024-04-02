@@ -29,20 +29,15 @@ public class IngredientController {
     @PostMapping
     public ResponseEntity<IngredientDto> guardarIngrediente(@RequestBody IngredientDto ingredientDto){
 
-        log.info("Pasa por aqui {}", ingredientDto.getName());
-
         Ingredient ingredient = ingredientMapper.dtoToModel(ingredientDto);
-
-        log.info("Pasa por aqui {}", ingredient.getName());
-
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(ingredientMapper.modelToDto(ingredientService.save(ingredient)));
     }
 
     @GetMapping
-    public ResponseEntity<List<IngredientDto>>getAllIngredient(){
+    public ResponseEntity<List<Ingredient>>getAllIngredient(){
 
-        return ResponseEntity.ok().body(ingredientMapper.listModelToDto(ingredientService.findAll()));
+        return ResponseEntity.ok().body(ingredientService.findAll());
     }
 
     @GetMapping("/{idIngredient}")
