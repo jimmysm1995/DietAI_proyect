@@ -1,9 +1,17 @@
+<form (ngSubmit)="registrarRecipe(recipeForm.value)" class="form" #recipeForm="ngForm">
+    <label for="name">Nombre de la receta:</label>
+    <input type="text" id="name" name="name" ngModel>
+    <button type="submit">Enviar</button>
+  </form>
 
-<h4>Enter Recipe:</h4>
-<form action="">
-    <div class="form-group">
-        Name: <input type="text" class="form-control" placeholder="Name" />
-        ingridients: <input type="text" class="form-control" placeholder="calories" />
-        quantity: <input type="number" class="form-control" placeholder="carbohydrates" />
-    </div>
-</form>
+  <form (ngSubmit)="registraIngredientInRecipe(ingredientInRecipeForm.value)" class="form" #ingredientInRecipeForm="ngForm">
+    <label for="quantity">Cantidad:</label>
+    <input type="number" id="quantity" name="quantity" ngModel>
+  
+    <label for="ingredient">Tipo de trabajo</label>
+    <select name="ingredient" id="ingredient" class="form-control" ngModel>
+        <option value=""></option>
+        <option *ngFor="let item of ingredient" [ngValue]="item">{{item.name}}</option>
+    </select>
+    <button type="submit">Enviar</button>
+  </form>

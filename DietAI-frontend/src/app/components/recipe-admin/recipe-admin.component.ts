@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RecipeAdminService } from 'src/app/services/recipe-admin.service';
 import { recipeAdmin } from 'src/app/models/recipeAdmin';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { IngredientService } from '../../services/ingredient.service';
+import { Ingredient } from '../../models/Ingredient';
+import { RecipeWithIngredientsRequest } from '../../models/RecipeWithIngredientsRequest';
+import { IngredientInRecipe } from '../../models/IngredientInRecipe';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from 'src/app/models/Recipe';
 
 
 @Component({
@@ -9,23 +16,34 @@ import { recipeAdmin } from 'src/app/models/recipeAdmin';
   styleUrls: ['./recipe-admin.component.css']
 })
 export class RecipeAdminComponent {
-  constructor(private recipeAdmin: RecipeAdminService) { }
+  @ViewChild('recipeForm') recipeForm!: NgForm;
+  @ViewChild('ingredientInRecipeForm') ingredientInRecipeForm!: NgForm;
 
-  // ingredientInRecipeList: ingredientInRecipeList = {
-  //   recipeDto: {},
-  //   ingredientInRecipeList: []
-  // };
+  public ingredient : Ingredient[] = [];
+  public ingredientsInRecipe: IngredientInRecipe[] = [];
+  public recipeWithIngredientsRequest: RecipeWithIngredientsRequest = new RecipeWithIngredientsRequest();
 
-  saveRecipe(): void {
-    // this.recipeService.saveRecipe(this.recipeAdmin).subscribe(
-    //   response => {
-    //     console.log('Receta guardada exitosamente:', response);
-    //     // Aquí puedes realizar cualquier acción adicional después de guardar la receta, como redirigir al usuario a otra página
-    //   },
-    //   error => {
-    //     console.error('Error al guardar la receta:', error);
-    //     // Aquí puedes manejar el error de alguna manera, por ejemplo, mostrando un mensaje al usuario
-    //   }
-    // );
+  constructor(private recipeAdminService: RecipeAdminService, private ingredientService: IngredientService,
+    private recipeService: RecipeService) { 
+
   }
+
+  ngOnInit(): void {
+    this.ingredientService.getAllIngredient().then((ingredient) => {
+        this.ingredient = ingredient;
+    });
+}
+
+registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
+  this.ingredientsInRecipe.push(ingredientInRecipe);
+  this.ingredientInRecipeForm.reset();
+}
+
+registrarRecipe(recipe : Recipe) {
+  this.recipeWithIngredientsRequest.recipe = recipe;
+  this.recipeWithIngredientsRequest.ingredientInRecipe = this.ingredientsInRecipe;
+  this.recipeService.postRecipe(this.recipeWithIngredientsRequest).then((newRecipe) => {
+    this.recipeForm.reset();
+  })
+}
 }

@@ -11,4 +11,12 @@ export class IngredientService {
 
   postIngredient(ingredient: Ingredient): Promise<Ingredient[]> {
     return axios.post(this.baseUrl, ingredient).then((response) => response.data);
-  }}
+  }
+
+  getAllIngredient(): Promise<Ingredient[]> {
+    return axios.get(this.baseUrl).then((response) => response.data);
+  }
+
+}
+
+
