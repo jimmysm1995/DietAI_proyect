@@ -1,7 +1,7 @@
 # DietAI_proyect
-Proyecto fin de grado DietAI
+Proyecto fin de grado Desarrollo de Aplicaciones Web 2022-2024
 
-**#Branch Code**  
+## **Branch Code**  
 [Develope](https://github.com/jimmysm1995/DietAI_proyect/tree/develop)
 
 # Enlace al anteproyecto
