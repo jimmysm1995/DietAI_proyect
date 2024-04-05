@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/injury")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${cors.allowed.origin}")
 @Slf4j
 public class InjuryController {
 

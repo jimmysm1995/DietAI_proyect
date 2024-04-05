@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/imagenProfiles")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${cors.allowed.origin}")
 @Slf4j
 public class ImagenProfileController {
 

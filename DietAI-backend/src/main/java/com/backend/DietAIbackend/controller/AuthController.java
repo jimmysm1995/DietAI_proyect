@@ -25,7 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${cors.allowed.origin}")
 @Slf4j
 public class AuthController {
 

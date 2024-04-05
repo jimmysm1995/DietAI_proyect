@@ -1,5 +1,5 @@
 -- Insertar datos en la tabla Muscle
-INSERT INTO Muscle (name) VALUES
+INSERT INTO muscle (name) VALUES
 ('Pecho'),
 ('Espalda'),
 ('Bíceps'),
@@ -12,7 +12,7 @@ INSERT INTO Muscle (name) VALUES
 ('Oblicuos');
 
 -- Insertar datos en la tabla Allergy
-INSERT INTO Allergy (name)
+INSERT INTO allergy (name)
 VALUES
 ('Cacahuetes'),
 ('Frutos secos'),
@@ -26,7 +26,7 @@ VALUES
 ('Sulfitos');
 
 -- Insertar datos en la tabla Quotes
-INSERT INTO Quotes (name)
+INSERT INTO quotes (name)
 VALUES
 ('El éxito no es definitivo, el fracaso no es fatal: es el coraje para continuar lo que cuenta.'),
 ('Cada día es una nueva oportunidad para cambiar tu vida.'),
@@ -39,7 +39,7 @@ VALUES
 ('La diferencia entre lo imposible y lo posible está en la determinación de una persona.');
 
 
-INSERT INTO Injury (name)
+INSERT INTO injury (name)
 VALUES
 ('Esguince de tobillo'),
 ('Codo de tenista'),
@@ -54,7 +54,7 @@ VALUES
 
 
 -- Insertar datos en la tabla Imagen_profile
-INSERT INTO Imagen_profile (url)
+INSERT INTO imagen_profile (url)
 VALUES
 ('https://st2.depositphotos.com/1036149/5790/i/600/depositphotos_57900109-stock-photo-fun-frog-in-suit-with.jpg'),
 ('https://st2.depositphotos.com/1036149/6187/i/450/depositphotos_61871905-stock-photo-strong-frog-3d.jpg'),
@@ -90,7 +90,7 @@ VALUES
 
 
 -- Insertar datos en la tabla Gym_exercise
-INSERT INTO Exercise (name,img_exercise,initial_position,execution,advices,type_training)
+INSERT INTO exercise (name,img_exercise,initial_position,execution,advices,type_training)
 VALUES
 ('Press de pecho en barra',
     'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/press-de-banca-con-barra-init-pos-3832.png',
@@ -142,7 +142,7 @@ VALUES
 --('Sentadilla sumo', 2, 'Variante de sentadilla que enfoca en glúteos e interior de muslos.');
 
 -- Insertar datos en la tabla Gym_Exercise_Muscle
-INSERT INTO Exercise_Muscle (id_Exercise, id_Muscle)
+INSERT INTO exercise_muscle (id_exercise, id_muscle)
 VALUES
 (1, 1), -- Press de pecho en máquina - Pecho
 (2, 6), -- Prensa de piernas - Piernas
@@ -193,7 +193,7 @@ INSERT INTO training (name, type_training, difficulty, days, distribution)
 VALUES ('Entrenamiento prueba', 'GYM', 6, 3, 'Full body');
 
 -- Insertar datos en la tabla TrainingExercise
-INSERT INTO Training_exercise (sets, repetitions, day_week, id_training, id_exercise)
+INSERT INTO training_exercise (sets, repetitions, day_week, id_training, id_exercise)
 VALUES
 (3, 10,'MONDAY', 1, 1),
 (3, 10,'MONDAY', 1, 2),

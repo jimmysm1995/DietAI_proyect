@@ -14,7 +14,6 @@ export class IngredientComponent {
 
     saveIngredient() {
       this.ingredientService.postIngredient(this.ingredient).then(Ingredient=>{
-        
       })
     }
 }

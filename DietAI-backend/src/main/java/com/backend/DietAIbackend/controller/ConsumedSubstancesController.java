@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/consumedSubstances")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${cors.allowed.origin}")
 @Slf4j
 public class ConsumedSubstancesController {
 

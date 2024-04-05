@@ -1,0 +1,37 @@
+version: "3"
+services:
+    db:
+        image: 'mysql:latest'
+        restart: always
+        container_name: 'database'
+        environment:
+            MYSQL_DATABASE: dietai_db
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+            - '3306:3306'
+            
+    phpmyadmin:
+        image: 'phpmyadmin:latest'
+        container_name: phpmyadmin
+        restart: always
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+        ports:
+            - '9000:80'
+        
+    backend:
+        image: backend:1.0
+        container_name: spring-backend
+        ports:
+            - 8080:8080
+        depends_on:
+            - db
+
+    frontend:
+        image: frontend:1.0
+        container_name: angular-frontend
+        ports:
+            - 80:80
+        depends_on:
+            - backend
