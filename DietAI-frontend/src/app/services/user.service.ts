@@ -54,7 +54,7 @@ export class UserService {
 
   registerUser(userData: User): Promise<User>{
     console.log("registerUser");
-    return axios.post(`${environment.apiUrl}/auth/register`, userData)
+    return axios.post(`${environment.apiUrl}/auth/register/admin`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {

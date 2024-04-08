@@ -44,6 +44,12 @@ registrarRecipe(recipe : Recipe) {
   this.recipeWithIngredientsRequest.ingredientInRecipe = this.ingredientsInRecipe;
   this.recipeService.postRecipe(this.recipeWithIngredientsRequest).then((newRecipe) => {
     this.recipeForm.reset();
+    this.ingredientsInRecipe = [];
+    this.ingredientInRecipeForm.reset();
   })
 }
+
+limpiarLista() {
+    this.ingredientsInRecipe = [];
+  }
 }
