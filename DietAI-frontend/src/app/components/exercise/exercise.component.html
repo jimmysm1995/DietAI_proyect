@@ -1,0 +1,67 @@
+<div class="container">
+    <div>
+        <h1>Administrar Ejercicios</h1>
+        <form (submit)="saveExercise()">
+            <label for="name">Nombre:</label><br />
+            <input
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="exercise.name"
+                required
+            /><br />
+
+            <label for="difficult">Dificultad:</label><br />
+            <input
+                type="number"
+                id="difficult"
+                name="difficult"
+                [(ngModel)]="exercise.difficult"
+                min="1"
+                max="10"
+            /><br />
+
+            <label for="explanation">Explicación:</label><br />
+            <textarea
+                id="explanation"
+                name="explanation"
+                [(ngModel)]="exercise.explanation"
+                rows="4"
+                cols="50"
+            ></textarea
+            ><br />
+            <button type="submit" class="btn btn-primary mt-2">
+                Guardar Ejercicio
+            </button>
+        </form>
+    </div>
+
+    <div class="child">
+        <form
+            (submit)="registraMuscleInExercise(muscleForm.value)"
+            #muscleForm="ngForm"
+        >
+            <div class="form-group col-md-6">
+                <label for="muscle">Músculos Involucrados:</label>
+                <select name="muscle" id="muscle" class="form-control" ngModel>
+                    <option value=""></option>
+                    <option *ngFor="let item of muscles" [ngValue]="item">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">
+                Guardar Músculo
+            </button>
+            <ul class="list-group mt-3">
+                <li
+                    class="list-group-item"
+                    *ngFor="let addedMuscle of muscleInExercise"
+                >
+                    {{ addedMuscle.muscle.name }}
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
