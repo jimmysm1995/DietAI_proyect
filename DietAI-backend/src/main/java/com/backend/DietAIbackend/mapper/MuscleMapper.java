@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MuscleMapper {
 
+    @Mapping(target = "exerciseMuscles", ignore = true)
     MuscleDto modelToDto(Muscle muscle);
 
     Muscle dtoToModel(MuscleDto muscleDto);
