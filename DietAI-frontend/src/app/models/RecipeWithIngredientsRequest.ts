@@ -4,3 +4,4 @@ export class RecipeWithIngredientsRequest {
     recipe: Recipe = new Recipe();
     ingredientInRecipe: IngredientInRecipe[]=[];
 }
+

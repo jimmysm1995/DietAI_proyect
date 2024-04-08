@@ -36,6 +36,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { AdminComponent } from './views/admin/admin.component';
 import { IngredientComponent } from './components/ingredient/ingredient.component';
 import { RecipeAdminComponent } from './components/recipe-admin/recipe-admin.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -75,7 +76,8 @@ const routes:Routes = [
     RecipeComponent,
     AdminComponent,
     IngredientComponent,
-    RecipeAdminComponent
+    RecipeAdminComponent,
+    ExerciseComponent
   ],
   imports: [
     HttpClientModule,
