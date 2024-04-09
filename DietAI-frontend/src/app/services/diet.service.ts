@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Diet } from '../models/Diet';
+import { DietWithRecipesRequest } from '../models/DietWithRecipesRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DietService {
     return axios.get(`${this.baseUrl}/diet/${dietname}`).then((response) => response.data);
   }
 
-  createDiet(diet: any): Promise<Diet> {
+  createDiet(diet: DietWithRecipesRequest): Promise<Diet> {
     return axios.post(this.baseUrl, diet).then((response) => response.data);
   }
 

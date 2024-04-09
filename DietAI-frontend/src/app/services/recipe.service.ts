@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { RecipeWithIngredientsRequest } from '../models/RecipeWithIngredientsRequest';
+import { Recipe } from '../models/Recipe';
 
 
 @Injectable({
@@ -14,6 +15,10 @@ export class RecipeService {
   private baseUrl: string = environment.apiUrl+'/api/recipe';
   getRecipe(idRecipe: number) {
     return axios.get(this.baseUrl + 'recipe/' + idRecipe);
+  }
+
+  getAllRecipe(): Promise<Recipe[]> {
+    return axios.get(this.baseUrl).then((response) => response.data);
   }
 
   postRecipe(recipe: RecipeWithIngredientsRequest) {

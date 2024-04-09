@@ -25,7 +25,6 @@ export class RecipeAdminComponent {
 
   constructor(private recipeAdminService: RecipeAdminService, private ingredientService: IngredientService,
     private recipeService: RecipeService) { 
-
   }
 
   ngOnInit(): void {
