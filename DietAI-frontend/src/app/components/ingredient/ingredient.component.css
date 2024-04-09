@@ -1,36 +1,14 @@
-.ingredient-form {
-    max-width: 400px;
-    margin: auto;
+
+.ingredient-form .form-group {
+    margin-bottom: 1rem; /* Puedes ajustar el valor según tu preferencia */
 }
 
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+label{
+    font-size:medium;
+    font-weight:500;
+    color: rgb(91, 90, 90);
+    
 }
-
-.form-group label {
-    flex: 0 0 120px; /* Ancho fijo para las etiquetas */
-    margin-right: 10px; /* Espacio entre las etiquetas y los campos de entrada */
-}
-
-.form-control {
-    flex: 1; /* Los campos de entrada ocupan el espacio restante */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
+input{
+    max-width: fit-content;
 }
