@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>Ingresa una nueva dieta</h4>
+        <form (ngSubmit)="registrarDiet(dietForm.value)" #dietForm="ngForm">
+            <div class="form-group">
+                <label for="name">Nombre de la dieta:</label>
+                <input type="text" class="form-control" id="name" name="name" ngModel>
+            </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th *ngFor="let mealTime of mealTime">{{ mealTime }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let day of dayOfWeek; let i = index">
+                            <td>{{ day }}</td>
+                            <td *ngFor="let mealTime of mealTime; let j = index">
+                                <select name="recipeInDiet" id="recipe" class="form-control" ngModel (ngModelChange)="saveIngredients($event, day, mealTime)" >
+                                    <option value=""></option>
+                                    <option *ngFor="let recipe of recipes" [ngValue]="recipe">{{ recipe.name }}</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <button type="button" class="btn btn-danger mt-2" (click)="limpiarLista()">Limpiar</button>
+            <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+        </form>
+    </div>
+</div>
