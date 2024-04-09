@@ -10,16 +10,16 @@
                     <thead>
                         <tr>
                             <th>Día</th>
-                            <th *ngFor="let mealTime of mealTime">{{ mealTime }}</th>
+                            <th *ngFor="let mealTime of mealTime">{{ mealTime | transformadorEnum }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let day of dayOfWeek; let i = index">
-                            <td>{{ day }}</td>
+                            <td>{{ day | transformadorEnum }}</td>
                             <td *ngFor="let mealTime of mealTime; let j = index">
                                 <select name="recipeInDiet" id="recipe" class="form-control" ngModel (ngModelChange)="saveIngredients($event, day, mealTime)" >
                                     <option value=""></option>
-                                    <option *ngFor="let recipe of recipes" [ngValue]="recipe">{{ recipe.name }}</option>
+                                    <option *ngFor="let recipe of recipes" [ngValue]="recipe">{{ recipe.name }} {{ recipe.calories }} calorias </option>
                                 </select>
                             </td>
                         </tr>
