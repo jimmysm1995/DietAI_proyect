@@ -26,11 +26,13 @@ public class ExerciseService {
     @Transactional
     public Exercise save(Exercise exercise, List<Muscle> muscleList){
 
+        Exercise saveExercise = exerciseRepository.save(exercise);
+
         for (Muscle muscle : muscleList) {
             exerciseMuscleService.save(exercise,muscle);
         }
 
-        return exerciseRepository.save(exercise);
+        return saveExercise;
     }
 
     public Exercise findById(Long id){
