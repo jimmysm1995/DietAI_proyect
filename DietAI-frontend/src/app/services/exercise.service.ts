@@ -28,6 +28,7 @@ export class ExerciseService {
 
   getMuscles(): Promise<Muscle[]> {
     return axios.get(environment.apiUrl+'/api/muscles').then((response) => response.data);
-
   }
+
+  
 }

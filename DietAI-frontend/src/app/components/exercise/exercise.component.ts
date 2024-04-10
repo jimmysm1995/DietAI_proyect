@@ -38,4 +38,8 @@ export class ExerciseComponent {
       this.muscles = muscles
     })
   }
+
+  limpiarLista() {
+    this.muscleInExercise = [];
+  }
 }

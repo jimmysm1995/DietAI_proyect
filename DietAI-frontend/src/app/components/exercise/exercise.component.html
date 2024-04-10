@@ -1,6 +1,7 @@
+<h1>Administrar Ejercicios</h1>
 <div class="container">
-    <div>
-        <h1>Administrar Ejercicios</h1>
+    <div class="father">
+        
         <form (submit)="saveExercise()">
             <label for="name">Nombre:</label><br />
             <input
@@ -11,25 +12,33 @@
                 required
             /><br />
 
-            <label for="difficult">Dificultad:</label><br />
-            <input
-                type="number"
-                id="difficult"
-                name="difficult"
-                [(ngModel)]="exercise.difficult"
-                min="1"
-                max="10"
-            /><br />
-
-            <label for="explanation">Explicación:</label><br />
+            <label for="explanation">Ejecución:</label><br />
             <textarea
-                id="explanation"
-                name="explanation"
-                [(ngModel)]="exercise.explanation"
+                id="execution"
+                name="execution"
+                [(ngModel)]="exercise.execution"
                 rows="4"
                 cols="50"
             ></textarea
             ><br />
+
+            <label for="advices">Advice:</label><br />
+            <input
+                type="text"
+                id="advices"
+                name="advices"
+                [(ngModel)]="exercise.advices"
+                rows="4"
+                cols="50"
+            /><br />
+
+            <label for="explanation">URL Imagen:</label><br />
+            <input
+                id="imgExercise"
+                name="imgExercise"
+                type="text"
+                [(ngModel)]="exercise.imgExercise"
+                /><br />
             <button type="submit" class="btn btn-primary mt-2">
                 Guardar Ejercicio
             </button>
@@ -62,6 +71,7 @@
                     {{ addedMuscle.muscle.name }}
                 </li>
             </ul>
+            <button class="btn btn-danger mt-3" (click)="limpiarLista()">Limpiar lista</button>
         </form>
     </div>
 </div>
