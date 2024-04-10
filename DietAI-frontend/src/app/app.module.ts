@@ -80,7 +80,7 @@ const routes:Routes = [
     IngredientComponent,
     RecipeAdminComponent,
     ExerciseComponent,
-    DietAdminComponent
+    DietAdminComponent,
     ExerciseComponent,
     TrainingComponent
   ],
