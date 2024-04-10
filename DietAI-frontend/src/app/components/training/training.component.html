@@ -12,13 +12,17 @@
             /><br />
 
             <label for="typeTraining">Tipo de Entrenamiento:</label><br />
-            <input
-                type="text"
+            <select
                 id="typeTraining"
                 name="typeTraining"
-                [(ngModel)]="training.typeTraining.name"
+                [(ngModel)]="training.typeTraining"
                 required
-            /><br />
+            >
+                <option value=""></option>
+                <option value="0">Home</option>
+                <option value="1">Gym</option>
+            </select>
+            <br />
 
             <label for="difficulty">Dificultad:</label><br />
             <input

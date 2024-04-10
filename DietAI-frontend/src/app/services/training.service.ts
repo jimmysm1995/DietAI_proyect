@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { Training } from '../models/Training';
+import { Training,  TrainingRequest} from '../models/Training';
+
 
 
 @Injectable({
@@ -13,7 +14,11 @@ export class TrainingService {
   constructor() { }
 
   postTraining(training: Training) {
-    return axios.post(`${this.baseUrl}/training}`, training).then((response) => response.data);
+    let trainingRequest: TrainingRequest = {
+      training: training,
+      exercisesInTraining: training.trainingExercises||[]
+    }
+    return axios.post(`${this.baseUrl}/trainings`, trainingRequest).then((response) => response.data);
   }
 
   getAllExercises() {
