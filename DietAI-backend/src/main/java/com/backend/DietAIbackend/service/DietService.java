@@ -1,6 +1,7 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
+import com.backend.DietAIbackend.dto.IngredientSummary;
 import com.backend.DietAIbackend.dto.RecipeInDiet;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.DietRepository;
@@ -45,6 +46,11 @@ public class DietService {
         actualizarCalorias();
 
         return dieta;
+    }
+
+    public List<IngredientSummary> getListaCompra(Long id){
+
+        return dietRepository.getIngredientSummaryByDietId(id);
     }
 
     private void actualizarCalorias() {

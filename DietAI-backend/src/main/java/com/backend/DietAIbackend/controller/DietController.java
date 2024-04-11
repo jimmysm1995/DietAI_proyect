@@ -41,6 +41,11 @@ public class DietController {
         return ResponseEntity.status(HttpStatus.CREATED).body(dietMapper.modelToDto(dietService.findById(id)));
     }
 
+    @GetMapping("/listaCompra/{id}")
+    public ResponseEntity<List<IngredientSummary>> getListaCompra(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.CREATED).body(dietService.getListaCompra(id));
+    }
+
     @PostMapping
     public ResponseEntity<DietDto> save(@RequestBody DietWithRecipesRequest request){
 
