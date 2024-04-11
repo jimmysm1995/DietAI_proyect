@@ -12,15 +12,9 @@
             /><br />
 
             <label for="typeTraining">Tipo de Entrenamiento:</label><br />
-            <select
-                id="typeTraining"
-                name="typeTraining"
-                [(ngModel)]="training.typeTraining"
-                required
-            >
+            <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" required>
                 <option value=""></option>
-                <option value="0">Home</option>
-                <option value="1">Gym</option>
+                <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
             </select>
             <br />
 
@@ -29,6 +23,8 @@
                 type="number"
                 id="difficulty"
                 name="difficulty"
+                min="0"
+                max="10"
                 [(ngModel)]="training.difficulty"
                 required
             /><br />
@@ -38,6 +34,8 @@
                 type="number"
                 id="days"
                 name="days"
+                min="1"
+                max="7"
                 [(ngModel)]="training.days"
                 required
             /><br />

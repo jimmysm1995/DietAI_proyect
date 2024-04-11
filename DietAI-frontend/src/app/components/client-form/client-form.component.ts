@@ -3,14 +3,12 @@ import { NgForm } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
-import { UserService } from 'src/app/services/user.service';
 import { UserStore } from 'src/app/store/userStore';
 import { InjuryService } from 'src/app/services/injury.service';
 import { AllergyService } from 'src/app/services/allergy.service';
 import { Allergy } from 'src/app/models/Allergy';
 import { Injury } from 'src/app/models/Injury';
 import { JobTypeService } from '../../services/job-type.service';
-import { JobType } from 'src/app/models/JobType';
 import { PreviusLevel } from 'src/app/models/PreviusLevel';
 import { PreviusLevelService } from 'src/app/services/previus-level.service';
 import { ConsumedSubstancesService } from '../../services/consumed-substances.service';
@@ -19,7 +17,6 @@ import { Gender } from '../../models/Gender';
 import { GenderService } from '../../services/gender-controller.service';
 import { Goal } from 'src/app/models/Goal';
 import { GoalService } from '../../services/goal.service';
-import { AltaCliente } from 'src/app/models/AltaCliente';
 import { ClientStore } from 'src/app/store/clientStore';
 
 @Component({

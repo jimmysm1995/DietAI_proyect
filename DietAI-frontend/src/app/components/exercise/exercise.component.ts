@@ -3,7 +3,7 @@ import { Exercise, Muscle } from 'src/app/models/Exercise';
 import { ExerciseService } from 'src/app/services/exercise.service';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { MuscleInExercise } from '../../models/Exercise';
+import { MuscleInExercise, TypeTraining } from '../../models/Exercise';
 
 @Component({
   selector: 'app-exercise',
@@ -16,30 +16,28 @@ export class ExerciseComponent {
   constructor(private exerciseService: ExerciseService){}
 
   public exercise: Exercise = new Exercise()
-  public muscles: Muscle[] = []
-  public muscleInExercise: MuscleInExercise[] = []
+  public muscle: Muscle[] = []
+  public typeTraining: string[] = []
 
   ngOnInit(): void {
     this.findMuscle()
+    this.findTypeTraining();
   }
   saveExercise() {
-    this.exercise.muscles = this.muscleInExercise;
+    console.log(this.exercise);
     this.exerciseService.postExercise(this.exercise).then(exercise=>{
     })
   }
 
-  registraMuscleInExercise(muscleInExercise: MuscleInExercise) {
-    this.muscleInExercise.push(muscleInExercise);
-    this.muscleForm.reset();
-  }
-
   findMuscle() {
     this.exerciseService.getMuscles().then((muscles: Muscle[]) => {
-      this.muscles = muscles
+      this.muscle = muscles
     })
   }
 
-  limpiarLista() {
-    this.muscleInExercise = [];
+  findTypeTraining() {
+    this.exerciseService.getTypeTraining().then((typeTraining: string[]) => {
+      this.typeTraining = typeTraining
+    })
   }
 }

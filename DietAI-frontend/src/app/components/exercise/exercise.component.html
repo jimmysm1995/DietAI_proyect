@@ -1,77 +1,40 @@
 <h1>Administrar Ejercicios</h1>
 <div class="container">
     <div class="father">
-        
+
         <form (submit)="saveExercise()">
             <label for="name">Nombre:</label><br />
-            <input
-                type="text"
-                id="name"
-                name="name"
-                [(ngModel)]="exercise.name"
-                required
-            /><br />
+            <input type="text" id="name" name="name" [(ngModel)]="exercise.name" required /><br />
 
-            <label for="explanation">Ejecución:</label><br />
-            <textarea
-                id="execution"
-                name="execution"
-                [(ngModel)]="exercise.execution"
-                rows="4"
-                cols="50"
-            ></textarea
-            ><br />
+            <label for="initialPosition">Posición inicial:</label><br />
+            <input type="text" id="initialPosition" name="initialPosition" [(ngModel)]="exercise.initialPosition"
+                required /><br />
+
+            <label for="execution">Ejecución:</label><br />
+            <textarea id="execution" name="execution" [(ngModel)]="exercise.execution" rows="4"
+                cols="50"></textarea><br />
 
             <label for="advices">Advice:</label><br />
-            <input
-                type="text"
-                id="advices"
-                name="advices"
-                [(ngModel)]="exercise.advices"
-                rows="4"
-                cols="50"
-            /><br />
+            <input type="text" id="advices" name="advices" [(ngModel)]="exercise.advices" rows="4" cols="50" /><br />
 
-            <label for="explanation">URL Imagen:</label><br />
-            <input
-                id="imgExercise"
-                name="imgExercise"
-                type="text"
-                [(ngModel)]="exercise.imgExercise"
-                /><br />
+            <label for="imgExercise">URL Imagen:</label><br />
+            <input id="imgExercise" name="imgExercise" type="text" [(ngModel)]="exercise.imgExercise" /><br />
+
+            <label for="typeTraining">Tipo de Entrenamiento:</label><br />
+            <select id="typeTraining" name="typeTraining" [(ngModel)]="exercise.typeTraining" required>
+                <option value=""></option>
+                <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
+            </select>
+
+            <div class="form-group select-group">
+                <label for="muscle">Musculos involucrados</label>
+                <ngx-select-dropdown [(ngModel)]="exercise.muscle" name="muscle"
+                    [config]="{displayKey: 'name',  search: true, placeholder:'Selecionar'}" [multiple]="true"
+                    [options]="muscle" class="w-100"></ngx-select-dropdown>
+            </div>
             <button type="submit" class="btn btn-primary mt-2">
                 Guardar Ejercicio
             </button>
-        </form>
-    </div>
-
-    <div class="child">
-        <form
-            (submit)="registraMuscleInExercise(muscleForm.value)"
-            #muscleForm="ngForm"
-        >
-            <div class="form-group col-md-6">
-                <label for="muscle">Músculos Involucrados:</label>
-                <select name="muscle" id="muscle" class="form-control" ngModel>
-                    <option value=""></option>
-                    <option *ngFor="let item of muscles" [ngValue]="item">
-                        {{ item.name }}
-                    </option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-2">
-                Guardar Músculo
-            </button>
-            <ul class="list-group mt-3">
-                <li
-                    class="list-group-item"
-                    *ngFor="let addedMuscle of muscleInExercise"
-                >
-                    {{ addedMuscle.muscle.name }}
-                </li>
-            </ul>
-            <button class="btn btn-danger mt-3" (click)="limpiarLista()">Limpiar lista</button>
         </form>
     </div>
 </div>

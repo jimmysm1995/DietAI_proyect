@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.dto;
 
+import com.backend.DietAIbackend.model.TypeTraining;
 import jakarta.persistence.Column;
 import lombok.Data;
 
@@ -32,5 +33,8 @@ public class ExerciseDto {
     private List<TrainingExerciseDto> trainingExercises;
 
     @Schema(description = "Lista de músculos trabajados por este ejercicio en casa")
-    private List<MuscleDto> muscles;
+    private List<MuscleDto> muscle;
+
+    @Schema(description = "GYM")
+    private TypeTraining typeTraining;
 }

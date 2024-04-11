@@ -7,6 +7,7 @@ import com.backend.DietAIbackend.model.Muscle;
 import com.backend.DietAIbackend.repository.ExerciseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ExerciseService {
 
     @Autowired
@@ -29,7 +31,7 @@ public class ExerciseService {
         Exercise saveExercise = exerciseRepository.save(exercise);
 
         for (Muscle muscle : muscleList) {
-            exerciseMuscleService.save(exercise,muscle);
+            exerciseMuscleService.save(exercise, muscle);
         }
 
         return saveExercise;

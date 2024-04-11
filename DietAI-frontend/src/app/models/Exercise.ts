@@ -8,8 +8,8 @@ export class Exercise {
     initialPosition: string='';
     execution: string='';
     advices: string='';
-    trainingExercises?: TrainingExercise[];
-    muscles?: MuscleInExercise[];
+    typeTraining: string='';
+    muscle?: Muscle[];
 }
 
 export class MuscleInExercise {
@@ -35,5 +35,5 @@ export class DayOfWeek {
 }
 
 export class TypeTraining {
-    name: number = 0;
+    name: string = '';
 }

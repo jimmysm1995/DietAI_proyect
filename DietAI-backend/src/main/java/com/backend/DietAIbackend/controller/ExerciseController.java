@@ -34,7 +34,7 @@ public class ExerciseController {
     @PostMapping
     public ResponseEntity<ExerciseDto> save(@RequestBody ExerciseDto exerciseDto){
 
-        List<Muscle> muscleList = muscleMapper.listDtoToModel(exerciseDto.getMuscles());
+        List<Muscle> muscleList = muscleMapper.listDtoToModel(exerciseDto.getMuscle());
 
         Exercise exercise = exerciseMapper.dtoToModel(exerciseDto);
 

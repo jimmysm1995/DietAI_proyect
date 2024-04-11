@@ -30,5 +30,9 @@ export class ExerciseService {
     return axios.get(environment.apiUrl+'/api/muscles').then((response) => response.data);
   }
 
+  getTypeTraining(): Promise<string[]> {
+    return axios.get(environment.apiUrl+'/api/typeTraining').then((response) => response.data);
+  }
+
   
 }
