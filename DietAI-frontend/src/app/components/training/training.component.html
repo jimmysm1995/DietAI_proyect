@@ -3,84 +3,62 @@
     <div class="father">
         <form (submit)="saveTraining()">
             <label for="name">Nombre:</label><br />
-            <input
-                type="text"
-                id="name"
-                name="name"
-                [(ngModel)]="training.name"
-                required
-            /><br />
+            <input type="text" id="name" name="name" [(ngModel)]="training.name" required /><br />
 
             <label for="typeTraining">Tipo de Entrenamiento:</label><br />
             <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" required>
                 <option value=""></option>
-                <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
+                <option value="0">Home</option>
+                <option value="1">Gym</option>
             </select>
             <br />
 
             <label for="difficulty">Dificultad:</label><br />
-            <input
-                type="number"
-                id="difficulty"
-                name="difficulty"
-                min="0"
-                max="10"
-                [(ngModel)]="training.difficulty"
-                required
-            /><br />
+            <input type="number" id="difficulty" name="difficulty" [(ngModel)]="training.difficulty" required /><br />
 
             <label for="days">Días:</label><br />
-            <input
-                type="number"
-                id="days"
-                name="days"
-                min="1"
-                max="7"
-                [(ngModel)]="training.days"
-                required
-            /><br />
+            <input type="number" id="days" name="days" [(ngModel)]="training.days" required /><br />
 
             <label for="distribution">Distribución:</label><br />
-            <input
-                type="text"
-                id="distribution"
-                name="distribution"
-                [(ngModel)]="training.distribution"
-                required
-            /><br />
+            <input type="text" id="distribution" name="distribution" [(ngModel)]="training.distribution"
+                required /><br />
 
             <button type="submit" class="btn btn-primary mt-2">
                 Guardar Entrenamiento
             </button>
         </form>
+        <ul class="list-group mt-6">
+            <li class="list-group-item" *ngFor="let addedExercise of exercisesInTraining">
+                {{ addedExercise.exercise.name }} - {{ addedExercise.reps }}x{{ addedExercise.sets }} 
+                - {{ addedExercise.orderWeek }} dia {{ addedExercise.orderDay }} lugar
+            </li>
+        </ul>
     </div>
     <div class="child">
-        <form (submit)="addExercise()" #trainingExerciseForm="ngForm">
+        <form (submit)="addExercise()">
             <div class="form-group col-md-6">
-                <label for="exercise">Ejercicios Similares:</label>
-                <select
-                    name="exercise"
-                    id="exercise"
-                    class="form-control"
-                    ngModel
-                >
+                <label for="exercise">Ejercicios:</label>
+                <select name="exercise" id="exercise" class="form-control"  [(ngModel)]="exerciseInTraining.exercise">
                     <option *ngFor="let item of exercises" [ngValue]="item">
                         {{ item.name }}
                     </option>
                 </select>
             </div>
+
+            <label for="reps">Reps:</label><br />
+            <input type="number" id="reps" name="reps" [(ngModel)]="exerciseInTraining.reps" required /><br />
+
+            <label for="sets">Sets:</label><br />
+            <input type="sets" id="sets" name="sets" [(ngModel)]="exerciseInTraining.sets" required /><br />
+
+            <label for="orderDay">Orden para realizarlo (dia)</label><br />
+            <input type="number" id="orderDay" name="orderDay" min="1" [(ngModel)]="exerciseInTraining.orderDay" required /><br />
+            
+            <label for="orderWeek">Orden para realizarlo (semana)</label><br />
+            <input type="number" id="orderWeek" name="orderWeek" min="1" [(ngModel)]="exerciseInTraining.orderWeek" required /><br />
             <button type="submit" class="btn btn-primary mt-2">
                 Guardar ejercicio
             </button>
-
-            <ul class="list-group mt-3">
-                <li
-                    class="list-group-item"
-                    *ngFor="let addedExercise of exerciseInTraining"
-                >
-                    {{ addedExercise.name }}
-                </li>
-            </ul>
             <button class="btn btn-danger mt-3" (click)="limpiarLista()">
                 Limpiar lista
             </button>

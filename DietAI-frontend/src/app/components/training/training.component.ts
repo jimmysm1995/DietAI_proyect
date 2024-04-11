@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Training } from 'src/app/models/Training';
 import { TrainingService } from 'src/app/services/training.service';
-import { TrainingExercise } from '../../models/Exercise';
 import { Exercise } from '../../models/Exercise';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { ExerciseInTraining } from 'src/app/models/ExercisesInTraining';
+import { TrainingWithExercisesRequest } from 'src/app/models/TrainingWithExercisesRequest';
 
 @Component({
   selector: 'app-training',
@@ -21,8 +22,10 @@ export class TrainingComponent {
 
   public training: Training = new Training();
   public exercises: Exercise[] = [];
-  public exerciseInTraining: Exercise[] = [];
+  public exercisesInTraining: ExerciseInTraining[] = [];
+  public exerciseInTraining: ExerciseInTraining = new ExerciseInTraining();
   public typeTraining: string[] = [];
+  public trainingWithExerciseRequest: TrainingWithExercisesRequest = new TrainingWithExercisesRequest();
 
   ngOnInit(): void {
     this.trainingService.getAllExercises().then((exercises) => {
@@ -32,12 +35,18 @@ export class TrainingComponent {
   }
 
   saveTraining() {
-    this.training.trainingExercises = [];
-    this.trainingService.postTraining(this.training);
+    this.trainingWithExerciseRequest.training = this.training;
+    this.trainingWithExerciseRequest.exercisesInTraining = this.exercisesInTraining;
+    this.trainingService.postTraining(this.trainingWithExerciseRequest).then((newTraining) => {
+      this.training = new Training();
+      this.exercisesInTraining = [];
+      this.exerciseInTraining = new ExerciseInTraining();
+    });
   }
 
   limpiarLista() {
-    this.exerciseInTraining = [];
+    this.exercisesInTraining = [];
+    this.exerciseInTraining = new ExerciseInTraining();
   }
 
   findTypeTraining() {
@@ -47,7 +56,9 @@ export class TrainingComponent {
   }
 
   addExercise() {
-    this.exerciseInTraining.push(this.trainingExerciseForm.value.exercise);
-    this.trainingExerciseForm.reset();
+      if (this.exerciseInTraining.exercise.idExercise != 0) {
+      this.exercisesInTraining.push(this.exerciseInTraining);
+      this.exerciseInTraining = new ExerciseInTraining();
+      }
   }
 }

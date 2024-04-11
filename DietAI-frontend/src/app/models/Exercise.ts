@@ -21,15 +21,6 @@ export class Muscle{
     idMuscle?: number;
 }
 
-export class TrainingExercise {
-    idTrainingExercise: number = 0;
-    sets: number=0;
-    repetitions: number=0;
-    dayWeek: DayOfWeek= new DayOfWeek();
-    training: Training = new Training();
-    exercise: Exercise= new Exercise();
-}
-
 export class DayOfWeek {
     day: number = 0;
 }
