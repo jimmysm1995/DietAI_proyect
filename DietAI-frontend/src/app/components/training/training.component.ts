@@ -57,8 +57,20 @@ export class TrainingComponent {
 
   addExercise() {
       if (this.exerciseInTraining.exercise.idExercise != 0) {
-      this.exercisesInTraining.push(this.exerciseInTraining);
-      this.exerciseInTraining = new ExerciseInTraining();
+
+        const existingIndex = this.exercisesInTraining.findIndex(exercise => 
+          exercise.orderWeek === this.exerciseInTraining.orderWeek &&
+          exercise.orderDay === this.exerciseInTraining.orderDay
+        );
+
+        if (existingIndex !== -1) {
+          this.exercisesInTraining[existingIndex] = this.exerciseInTraining;
+        } else {
+            this.exercisesInTraining.push(this.exerciseInTraining);
+        }
+        this.exerciseInTraining = new ExerciseInTraining();
       }
+      this.exercisesInTraining.sort((a, b) => (a.orderWeek - b.orderWeek));
+      this.exercisesInTraining.sort((a, b) => (a.orderDay - b.orderDay));
   }
 }
