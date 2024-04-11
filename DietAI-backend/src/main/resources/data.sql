@@ -193,17 +193,17 @@ INSERT INTO training (name, type_training, difficulty, days, distribution)
 VALUES ('Entrenamiento prueba', 'GYM', 6, 3, 'Full body');
 
 -- Insertar datos en la tabla TrainingExercise
-INSERT INTO training_exercise (sets, repetitions, day_week, id_training, id_exercise)
+INSERT INTO training_exercise (sets, reps, order_day, order_week, id_training, id_exercise)
 VALUES
-(3, 10,'MONDAY', 1, 1),
-(3, 10,'MONDAY', 1, 2),
-(3, 10,'MONDAY', 1, 3),
-(3, 10,'WEDNESDAY', 1, 1),
-(3, 10,'WEDNESDAY', 1, 2),
-(3, 10,'WEDNESDAY', 1, 3),
-(3, 10,'FRIDAY', 1, 1),
-(3, 10,'FRIDAY', 1, 2),
-(3, 10,'FRIDAY', 1, 3);
+(3, 10,1,1, 1, 1),
+(3, 10,2,1, 1, 2),
+(3, 10,3,1, 1, 3),
+(3, 10,1,2, 1, 1),
+(3, 10,2,2, 1, 2),
+(3, 10,2,3, 1, 3),
+(3, 10,3,1, 1, 1),
+(3, 10,3,2, 1, 2),
+(3, 10,3,3, 1, 3);
 
 
 -- Insertar datos en la tabla de ingredientes

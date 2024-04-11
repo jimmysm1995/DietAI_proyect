@@ -4,5 +4,5 @@ import com.backend.DietAIbackend.model.Exercise;
 
 import java.time.DayOfWeek;
 
-public record ExercisesInTraining(Exercise exercise, Integer sets, Integer reps, DayOfWeek dia) {
+public record ExercisesInTraining(Exercise exercise, Integer sets, Integer reps, Integer orderDay, Integer orderWeek) {
 }

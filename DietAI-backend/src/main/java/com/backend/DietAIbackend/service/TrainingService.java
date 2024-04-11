@@ -33,8 +33,9 @@ public class TrainingService {
                 trainingExercise.setTraining(training);
                 trainingExercise.setExercise(exercisesInTraining.exercise());
                 trainingExercise.setSets(exercisesInTraining.sets());
-                trainingExercise.setRepetitions(exercisesInTraining.reps());
-                trainingExercise.setDayWeek(exercisesInTraining.dia());
+                trainingExercise.setReps(exercisesInTraining.reps());
+                trainingExercise.setOrderDay(exercisesInTraining.orderDay());
+                trainingExercise.setOrderWeek(exercisesInTraining.orderWeek());
                 trainingExerciseService.save(trainingExercise);
             }
         }
@@ -74,8 +75,9 @@ public class TrainingService {
             exercisesInTrainings.add(new ExercisesInTraining(
                     trainingExercise.getExercise(),
                     trainingExercise.getSets(),
-                    trainingExercise.getRepetitions(),
-                    trainingExercise.getDayWeek()
+                    trainingExercise.getReps(),
+                    trainingExercise.getOrderDay(),
+                    trainingExercise.getOrderWeek()
             ));
         }
 

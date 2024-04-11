@@ -18,12 +18,14 @@ public class TrainingExercise {
     @Column(name = "sets",columnDefinition = "INT")
     private int sets;
 
-    @Column(name = "repetitions",columnDefinition = "INT")
-    private int repetitions;
+    @Column(name = "reps",columnDefinition = "INT")
+    private int reps;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "dayWeek", columnDefinition = "varchar(10)")
-    private DayOfWeek dayWeek;
+    @Column(name = "orderDay", columnDefinition = "INT")
+    private Integer orderDay;
+
+    @Column(name = "orderWeek", columnDefinition = "INT")
+    private Integer orderWeek;
 
     @ManyToOne
     @JoinColumn(name = "idTraining")
