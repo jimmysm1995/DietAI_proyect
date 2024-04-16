@@ -57,12 +57,10 @@ export class TrainingComponent {
 
   addExercise() {
       if (this.exerciseInTraining.exercise.idExercise != 0) {
-
         const existingIndex = this.exercisesInTraining.findIndex(exercise => 
           exercise.orderWeek === this.exerciseInTraining.orderWeek &&
           exercise.orderDay === this.exerciseInTraining.orderDay
         );
-
         if (existingIndex !== -1) {
           this.exercisesInTraining[existingIndex] = this.exerciseInTraining;
         } else {

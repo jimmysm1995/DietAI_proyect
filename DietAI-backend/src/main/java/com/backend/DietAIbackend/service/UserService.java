@@ -10,6 +10,7 @@ import com.backend.DietAIbackend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -73,10 +74,16 @@ public class UserService implements IUserService{
         return userRepository.save(user);
     }
 
-    public void delete(User user) { userRepository.delete(user); }
+    public ResponseEntity<Void> delete(User user) {
+        userRepository.delete(user);
 
-    public void deleteByID(Long id) {
+        return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity<Void> deleteByID(Long id) {
         userRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     public User findByUsername(String username){

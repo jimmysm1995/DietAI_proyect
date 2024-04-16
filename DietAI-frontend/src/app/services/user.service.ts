@@ -36,8 +36,12 @@ export class UserService {
     return axios.put(`${this.baseUrl}/${user.idUser}`, user).then((response) => response.data);
   }
 
-  deleteUser(id: number): Promise<User> {
+  deleteUserById(id?: number): Promise<User> {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
+  }
+
+  deleteUser(userData: any): Promise<User> {
+    return axios.delete(this.baseUrl, userData).then((response) => response.data);
   }
 
   loginUser(userData: User): Promise< LoginResponse> {
@@ -54,7 +58,7 @@ export class UserService {
 
   registerUser(userData: User): Promise<User>{
     console.log("registerUser");
-    return axios.post(`${environment.apiUrl}/auth/register/admin`, userData)
+    return axios.post(`${environment.apiUrl}/auth/register`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {

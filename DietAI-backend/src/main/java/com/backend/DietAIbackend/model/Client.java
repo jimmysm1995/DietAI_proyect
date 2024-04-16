@@ -52,10 +52,10 @@ public class Client {
     @Column(name = "trainingTime", columnDefinition = "tinyint")
     private Integer trainingTime;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ClientAllergy> clientAllergy;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ClientInjury> clientInjury;
 
     @OneToOne(fetch = FetchType.LAZY)
