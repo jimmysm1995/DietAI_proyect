@@ -35,7 +35,7 @@ public class Exercise {
     @Column(name = "typeTraining", columnDefinition = "Varchar(20)")
     private TypeTraining typeTraining;
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ExerciseMuscle> exerciseMuscles;
 

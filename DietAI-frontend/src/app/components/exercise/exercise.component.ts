@@ -6,38 +6,53 @@ import { ViewChild } from '@angular/core';
 import { MuscleInExercise, TypeTraining } from '../../models/Exercise';
 
 @Component({
-  selector: 'app-exercise',
-  templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css']
+    selector: 'app-exercise',
+    templateUrl: './exercise.component.html',
+    styleUrls: ['./exercise.component.css'],
 })
 export class ExerciseComponent {
-  @ViewChild('muscleForm') muscleForm!: NgForm;
+    @ViewChild('muscleForm') muscleForm!: NgForm;
 
-  constructor(private exerciseService: ExerciseService){}
+    constructor(private exerciseService: ExerciseService) {}
 
-  public exercise: Exercise = new Exercise()
-  public muscle: Muscle[] = []
-  public typeTraining: string[] = []
+    public exercise: Exercise = new Exercise();
+    public exercises: Exercise[] = [];
+    public muscle: Muscle[] = [];
+    public typeTraining: string[] = [];
+    public selectedExerciseId: number = 0;
 
-  ngOnInit(): void {
-    this.findMuscle()
-    this.findTypeTraining();
-  }
-  saveExercise() {
-    console.log(this.exercise);
-    this.exerciseService.postExercise(this.exercise).then(exercise=>{
-    })
-  }
+    ngOnInit(): void {
+        this.findMuscle();
+        this.findTypeTraining();
+        this.exerciseService.getAllExercises().then((exercises: Exercise[]) => {
+            this.exercises = exercises;
+        });
+    }
+    saveExercise() {
+        console.log(this.exercise);
+        this.exerciseService.postExercise(this.exercise).then((exercise) => {});
+    }
 
-  findMuscle() {
-    this.exerciseService.getMuscles().then((muscles: Muscle[]) => {
-      this.muscle = muscles
-    })
-  }
+    findMuscle() {
+        this.exerciseService.getMuscles().then((muscles: Muscle[]) => {
+            this.muscle = muscles;
+        });
+    }
 
-  findTypeTraining() {
-    this.exerciseService.getTypeTraining().then((typeTraining: string[]) => {
-      this.typeTraining = typeTraining
-    })
-  }
+    findTypeTraining() {
+        this.exerciseService
+            .getTypeTraining()
+            .then((typeTraining: string[]) => {
+                this.typeTraining = typeTraining;
+            });
+    }
+
+    deleteExercise() {
+        this.exerciseService
+            .deleteExercixe(this.selectedExerciseId)
+            .then(() => {
+                this.selectedExerciseId = 0;
+                this.ngOnInit();
+            });
+    }
 }
