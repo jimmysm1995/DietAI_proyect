@@ -26,6 +26,8 @@ export class DietAdminComponent {
     public recipesInDiet: RecipeInDiet[] = [];
     public dietWithRecipes: DietWithRecipesRequest =new DietWithRecipesRequest();
     public diet: Diet = new Diet();
+    public diets: Diet[] = [];
+    public selectedDietId: number = 0;
 
     constructor(
         private dietService: DietService,
@@ -44,6 +46,9 @@ export class DietAdminComponent {
         this.recipeService.getAllRecipe().then((recipe) => {
             this.recipes = recipe;
         });
+        this.dietService.getDiets().then((diet) => {
+            this.diets = diet;
+        })
     }
 
     saveIngredients(recipe: Recipe, dayOfWeek: string, mealTime: string) {
@@ -70,6 +75,14 @@ export class DietAdminComponent {
         this.recipesInDiet = [];
       });
     }
+
+    deleteDiet() {
+      console.log(this.selectedDietId);
+      this.dietService.deleteDiet(this.selectedDietId).then((diet) => {
+          this.selectedDietId = 0
+          this.ngOnInit();
+      })
+      }
 
     limpiarLista() {
       this.recipesInDiet = [];

@@ -49,4 +49,15 @@ public class RecipeController {
         return ResponseEntity.ok().body(recipeMapper.listModelToDto(recipeService.findAll()));
     }
 
+    @DeleteMapping("/{idRecipe}")
+    public ResponseEntity<Void>deleteRecipe(@PathVariable Long idRecipe){
+
+        try {
+            recipeService.deleteById(idRecipe);
+        } catch (Exception e){
+            log.error("Ha habido un problema al borrar la receta");
+        }
+        return ResponseEntity.noContent().build();
+    }
+
 }

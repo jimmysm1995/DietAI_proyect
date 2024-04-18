@@ -1,4 +1,4 @@
-<h1>Enter ingredients:</h1>
+<h1>Añadir ingredientes:</h1>
 <form class="ingredient-form" (ngSubmit)="saveIngredient()">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Name:</label>
@@ -35,4 +35,13 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
+</form>
+<form class="ingredient-select-form" (ngSubmit)="deleteIngredient()">
+    <div class="form-group">
+        <label for="ingredientSelect">Selecciona un ingrediente:</label>
+        <select class="form-control" id="ingredientSelect" [(ngModel)]="selectedIngredientId" name="ingredientSelect">
+            <option *ngFor="let ingredient of ingredients" [value]="ingredient.idIngredient">{{ ingredient.name }}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
 </form>

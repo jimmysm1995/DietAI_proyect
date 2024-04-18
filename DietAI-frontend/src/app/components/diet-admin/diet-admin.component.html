@@ -30,3 +30,12 @@
         </form>
     </div>
 </div>
+<form class="recipe-select-form" (ngSubmit)="deleteDiet()">
+    <div class="form-group">
+        <label for="dietSelect">Selecciona una dieta para eliminar:</label>
+        <select class="form-control" id="dietSelect" [(ngModel)]="selectedDietId" name="dietSelect">
+            <option *ngFor="let diet of diets" [value]="diet.idDiet">{{ diet.name }}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+  </form>

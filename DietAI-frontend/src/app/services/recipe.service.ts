@@ -21,6 +21,10 @@ export class RecipeService {
     return axios.get(this.baseUrl).then((response) => response.data);
   }
 
+  deleteRecipe(id: number): Promise<void> {
+    return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
+  }
+
   postRecipe(recipe: RecipeWithIngredientsRequest) {
     return axios.post(this.baseUrl, recipe)
     .then((response) => response.data)

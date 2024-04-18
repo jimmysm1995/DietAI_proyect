@@ -11,9 +11,28 @@ export class IngredientComponent {
     constructor(private ingredientService: IngredientService) {}
 
     public ingredient: Ingredient = new Ingredient();
+    public ingredients: Ingredient[] = [];
+    public selectedIngredientId: number = 0;
+
+    ngOnInit(): void {
+        this.ingredientService.getAllIngredient().then(ingredients => {
+            this.ingredients = ingredients;
+        });
+    }
 
     saveIngredient() {
-      this.ingredientService.postIngredient(this.ingredient).then(Ingredient=>{
+      this.ingredientService.postIngredient(this.ingredient).then(ingredient=>{
+          this.ingredient = new Ingredient
+          this.ngOnInit();
+      })
+    }
+
+    deleteIngredient() {
+      console.log(this.selectedIngredientId);
+      this.ingredientService.deleteIngredient(this.selectedIngredientId).then(ingredient=>{
+          this.ingredient = new Ingredient
+          this.selectedIngredientId = 0
+          this.ngOnInit();
       })
     }
 }

@@ -44,8 +44,8 @@ public class RecipeService {
         return recipe;
     }
 
-    public void delete(Recipe receta){
-        recetaRepository.delete(receta);
+    public void deleteById(Long id){
+        recetaRepository.deleteById(id);
     }
 
     public Recipe findById(Long id){
