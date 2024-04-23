@@ -43,8 +43,8 @@ public class TrainingService {
         return entrenamiento;
     }
 
-    public void delete(Training training){
-        trainingRepository.delete(training);
+    public void deleteById(Long id){
+        trainingRepository.deleteById(id);
     }
 
     public Training findById(Long id){

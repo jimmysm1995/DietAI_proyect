@@ -37,4 +37,13 @@
             </button>
         </form>
     </div>
+    <form class="exercise-select-form" (ngSubmit)="deleteExercise()">
+        <div class="form-group">
+            <label for="exerciseSelect">Selecciona un exercise para eliminar:</label>
+            <select class="form-control" id="exerciseSelect" [(ngModel)]="selectedExerciseId" name="exerciseSelect">
+                <option *ngFor="let exercise of exercises" [value]="exercise.idExercise">{{ exercise.name }}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+      </form>
 </div>

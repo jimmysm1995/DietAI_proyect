@@ -17,6 +17,10 @@ export class IngredientService {
     return axios.get(this.baseUrl).then((response) => response.data);
   }
 
+  deleteIngredient(id: number): Promise<void> {
+    return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
+  }
+
 }
 
 

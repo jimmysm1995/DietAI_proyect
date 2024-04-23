@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,20 @@ export class HeaderHomeComponent {
     private elementRef: ElementRef,
     private router : Router) {}
 
+    
+  isAdmin: boolean = false; 
+
   openProfileModal() {
     
   }
-  
 
+  ngOnInit(): void {
+    const auth = localStorage.getItem('autorities');
+    if (auth === 'ADMIN') {
+      this.isAdmin = true;
+    }
+  }
+  
   closeProfileModal() {
     const modal = this.elementRef.nativeElement.querySelector('#updateProfileModal');
     modal.classList.remove('show');

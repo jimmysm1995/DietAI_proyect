@@ -58,4 +58,14 @@ public class TrainingController {
         return ResponseEntity.ok().body(trainingMapper.modelToDto(trainingService.save(training, exercisesInTrainingList)));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>deleteTraining(@PathVariable Long id){
+        try {
+            trainingService.deleteById(id);
+        } catch (Exception e){
+            log.error("Ha habido un problema al borrar el entrenamiento");
+        }
+        return ResponseEntity.noContent().build();
+    }
+
 }

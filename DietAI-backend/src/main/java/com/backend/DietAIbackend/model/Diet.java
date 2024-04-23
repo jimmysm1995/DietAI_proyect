@@ -25,7 +25,7 @@ public class Diet {
     @Column(name = "calories", columnDefinition = "int")
     private Integer calories;
 
-    @OneToMany(mappedBy = "diet")
+    @OneToMany(mappedBy = "diet" , cascade = CascadeType.ALL)
     private List<RecipeDiet> recipeDiets;
 
     @OneToMany(mappedBy = "diet")

@@ -28,6 +28,12 @@ public class DietController {
     @Autowired
     RecipeMapper recipeMapper;
 
+    @GetMapping
+    public ResponseEntity<List<DietDto>>findAll(){
+
+        return ResponseEntity.ok().body(dietMapper.listModelToDto(dietService.findAll()));
+    }
+
     @GetMapping("/recipes/{id}")
     public ResponseEntity<List<RecipeInDiet>> findRecipesByDiet(@PathVariable Long id){
 
@@ -54,6 +60,16 @@ public class DietController {
         List<RecipeInDiet> recipeInDietList = request.getRecipeInDiet();
 
         return ResponseEntity.ok().body(dietMapper.modelToDto(dietService.save(diet, recipeInDietList)));
+    }
+
+    @DeleteMapping("/{idDiet}")
+    public ResponseEntity<Void>deleteDiet(@PathVariable Long idDiet){
+        try {
+            dietService.deleteById(idDiet);
+        } catch (Exception e){
+            log.error("Ha habido un problema al borrar la dieta");
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }

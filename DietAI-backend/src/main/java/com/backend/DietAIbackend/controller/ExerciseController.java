@@ -71,4 +71,14 @@ public class ExerciseController {
 
         return ResponseEntity.ok().body(muscleList);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>deleteTraining(@PathVariable Long id){
+        try {
+            exerciseService.deleteById(id);
+        } catch (Exception e){
+            log.error("Ha habido un problema al borrar el ejercicio");
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -25,7 +25,7 @@ public class Recipe {
     @JsonIgnore
     private List<RecipeDiet> recipeDiets;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<IngredientRecipe> ingredientRecipe;
 }

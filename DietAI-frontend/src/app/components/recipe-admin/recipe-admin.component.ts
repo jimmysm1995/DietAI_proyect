@@ -22,6 +22,9 @@ export class RecipeAdminComponent {
   public ingredient : Ingredient[] = [];
   public ingredientsInRecipe: IngredientInRecipe[] = [];
   public recipeWithIngredientsRequest: RecipeWithIngredientsRequest = new RecipeWithIngredientsRequest();
+  public recipes : Recipe[] = [];
+  public recipe : Recipe = new Recipe();
+  public selectedRecipeId: number = 0;
 
   constructor(private recipeAdminService: RecipeAdminService, private ingredientService: IngredientService,
     private recipeService: RecipeService) { 
@@ -31,6 +34,9 @@ export class RecipeAdminComponent {
     this.ingredientService.getAllIngredient().then((ingredient) => {
         this.ingredient = ingredient;
     });
+    this.recipeService.getAllRecipe().then((recipe) => {
+        this.recipes = recipe;
+    })
 }
 
 registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
@@ -51,4 +57,12 @@ registrarRecipe(recipe : Recipe) {
 limpiarLista() {
     this.ingredientsInRecipe = [];
   }
+
+  deleteRecipe() {
+    console.log(this.selectedRecipeId);
+    this.recipeService.deleteRecipe(this.selectedRecipeId).then((recipe) => {
+        this.selectedRecipeId = 0
+        this.ngOnInit();
+    })
+    }
 }

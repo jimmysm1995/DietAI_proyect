@@ -26,11 +26,16 @@ export class TrainingComponent {
   public exerciseInTraining: ExerciseInTraining = new ExerciseInTraining();
   public typeTraining: string[] = [];
   public trainingWithExerciseRequest: TrainingWithExercisesRequest = new TrainingWithExercisesRequest();
+  public trainings: Training[] = [];
+  public selectedTrainingId: number = 0;
 
   ngOnInit(): void {
-    this.trainingService.getAllExercises().then((exercises) => {
+    this.exerciseService.getAllExercises().then((exercises) => {
       this.exercises = exercises;
     });
+    this.trainingService.getAllTrainings().then((trainings) => {
+      this.trainings = trainings;
+    })
     this.findTypeTraining();
   }
 
@@ -54,6 +59,13 @@ export class TrainingComponent {
       this.typeTraining = typeTraining
     })
   }
+
+  deleteTraining() {
+    this.trainingService.deleteTraining(this.selectedTrainingId).then(() => {
+      this.selectedTrainingId = 0;
+      this.ngOnInit();
+    })
+    }
 
   addExercise() {
       if (this.exerciseInTraining.exercise.idExercise != 0) {

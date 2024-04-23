@@ -49,11 +49,8 @@ export class FormLoginComponent {
             //cuadno el login es correcto guarda el token y redireciona a home
             .then((response: LoginResponse) => {
                 localStorage.setItem('sesion', response.token);
-                if (response.authorities.includes('ADMIN')) {
-                    this.router.navigate(['/admin']);
-                } else {
-                    this.router.navigate(['/home']);
-                }
+                localStorage.setItem('autorities', response.authorities[0]);
+                this.router.navigate(['/home']);
             })
             .catch((error) => {
                 this.errorMessage = error;

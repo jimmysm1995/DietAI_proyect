@@ -45,4 +45,14 @@ public class IngredientController {
 
         return ResponseEntity.ok().body(ingredientMapper.modelToDto(ingredientService.findById(idIngredient)));
     }
+
+    @DeleteMapping("/{idIngredient}")
+    public ResponseEntity<Void>deleteIngredient(@PathVariable Long idIngredient){
+        try {
+            ingredientService.deleteById(idIngredient);
+        } catch (Exception e){
+            log.error("Ha habido un problema al borrar el ingrediente");
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

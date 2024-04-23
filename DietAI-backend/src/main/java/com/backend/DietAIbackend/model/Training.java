@@ -34,7 +34,7 @@ public class Training {
     @OneToMany(mappedBy = "training")
     private List<Client> clients;
 
-    @OneToMany(mappedBy = "training")
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
     private List<TrainingExercise> trainingExercises;
 
 }
