@@ -88,6 +88,8 @@ export class ClientFormComponent {
         this.clientService
             .registerClient(clientData)
             .then((client: Client) => {
+                this.clientService.asignarDieta(client.idClient??0);
+                this.clientService.asignarEntrenamiento(client.idClient??0);
                 this.clientStore.client = client;
                 this.aceptar();
             })
@@ -96,4 +98,5 @@ export class ClientFormComponent {
                 // this.clientForm.resetForm();
             });
     }
+    
 }

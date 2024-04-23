@@ -22,5 +22,7 @@ export class TrainingService {
     return axios.get(`${this.baseUrl}/exercises`).then((response) => response.data);
   }
 
-
+  getById(idTraining: number) {
+    return axios.get(`${this.baseUrl}/trainings/exercises/${idTraining}`).then((response) => response.data);
+  }
 }

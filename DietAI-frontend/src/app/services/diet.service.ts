@@ -38,4 +38,5 @@ export class DietService {
   deleteDiet(id: number): Promise<Diet> {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
+  
 }

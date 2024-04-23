@@ -43,4 +43,12 @@ export class ClientService {
     return axios.get(`${this.baseUrl}/currentClient`).then((response) => response.data);
   }
 
+  asignarDieta(idClient: number):Promise<Client>{
+    return axios.post(`${this.baseUrl}/diet/${idClient}`).then((response) => response.data);
+  }
+
+  asignarEntrenamiento(idClient: number):Promise<Client>{
+    return axios.post(`${this.baseUrl}/training/${idClient}`).then((response) => response.data);
+  }
+
 }
