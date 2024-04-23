@@ -9,26 +9,21 @@
     height: auto;
     gap: 3rem;
     justify-content: center;
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
     
 }
 
-.pic1 {
+.pic {
     display: block; 
-    background-image: url("https://www.entrenamientos.com/uploads/exercise/aperturas-pectoral-trx-init-pos-8706.jpeg");
     background-size: contain;
     background-repeat: no-repeat;
     height: 200px;
     width: 200px;
 }
 
-.pic2 {
-    display: block; 
-    background-image: url("https://www.entrenamientos.com/uploads/exercise/pasos-patinaje-hielo-trx-init-pos-5869.jpeg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 200px;
-    width: 200px;
+.exerciseData{
+    display: flex;
+    justify-content: center;
 }
 
 .modal {

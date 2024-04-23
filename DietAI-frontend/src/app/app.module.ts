@@ -39,6 +39,7 @@ import { RecipeAdminComponent } from './components/recipe-admin/recipe-admin.com
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { DietAdminComponent } from './components/diet-admin/diet-admin.component';
 import { TrainingComponent } from './components/training/training.component';
+import { FilterTrainingPipe } from './components/entrenameinto/entrenamientoPipe';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -82,7 +83,8 @@ const routes:Routes = [
     ExerciseComponent,
     DietAdminComponent,
     ExerciseComponent,
-    TrainingComponent
+    TrainingComponent,
+    FilterTrainingPipe
   ],
   imports: [
     HttpClientModule,

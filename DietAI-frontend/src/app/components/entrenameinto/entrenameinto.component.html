@@ -1,28 +1,22 @@
 <h3>Entrenamiento</h3>
 <button class="btn btn-primary" (click)="verEntrenamiento()">Ver Entrenamiento</button>
-<div class="container">
-    <a
-        role="button"
-        data-bs-toggle="modal"
-        data-bs-target="#modalEntrenamiento"
-    >
-    <div class="pic1"></div>
-    </a>
-    <a
-        role="button"
-        data-bs-toggle="modal"
-        data-bs-target="#modalEntrenamiento"
-    >
-    <div class="pic2"></div>
-    </a>
-    <a
-        role="button"
-        data-bs-toggle="modal"
-        data-bs-target="#modalEntrenamiento"
-    >
-    <div class="pic1"></div>
-    </a>
+<div *ngFor="let dia of dias">
+    <h3>Día: {{dia}}</h3>
+    <div class="container">
+        <a *ngFor="let training of trainings | filterTraining: dia" 
+            
+            role="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modalEntrenamiento"
+        >
+        <div class="pic" [ngStyle]="{'background-image': 'url(' + training.exercise.imgExercise + ')'}"></div>
+        <p class="exerciseData"><b>{{training.exercise.name}}</b></p>
+        <p class="exerciseData">Sets: {{training.sets}}</p>
+        <p class="exerciseData">Repeticiones: {{training.reps}}</p>
+        </a>
+    </div>
 </div>
+
 <div
     class="modal fade modal-backdrop"
     id="modalEntrenamiento"
