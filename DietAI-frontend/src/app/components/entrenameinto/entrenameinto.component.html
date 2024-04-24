@@ -4,7 +4,7 @@
     <h3>Día: {{dia}}</h3>
     <div class="container">
         <a *ngFor="let training of trainings | filterTraining: dia" 
-            
+            (click)="mostrarEntrenamiento(training)"
             role="button"
             data-bs-toggle="modal"
             data-bs-target="#modalEntrenamiento"
@@ -52,7 +52,7 @@
                                         margin-bottom: 5px;
                                         border: 1px solid lightgrey;
                                     "
-                                    src="https://www.entrenamientos.com/uploads/exercise/aperturas-pectoral-trx-init-pos-8706.jpeg"
+                                    src={{training.exercise.imgExercise}}
                                     alt="Aperturas de pectoral Trx"
                                 />
                             </div>
@@ -60,32 +60,13 @@
                                 <p></p>
                                 <p><strong>POSICIÓN INICIAL:</strong></p>
                                 <p>
-                                    Suspenda su TRX a la altura de la rodilla.
-                                    Agarre las asas con un agarre neutro y
-                                    coloque sus piernas juntas detrás de usted.
-                                    Su posición debe verse como una posición de
-                                    push up. Mantenga su cuerpo en línea recta y
-                                    sus brazos completamente extendidos
-                                    retrayendo los omóplatos. Contraiga el suelo
-                                    pelvico y el core mientras mantiene su
-                                    cuerpo recto. Sus brazos deben estar
-                                    perpendiculares al suelo y sus hombros deben
-                                    estar justo debajo de las cuerdas del trx.
+                                    {{training.exercise.initialPosition}}
                                 </p>
                                 <p><strong> EJECUCIÓN:</strong></p>
                                 <p>
-                                    Comience a bajar abriendo las manos hasta
-                                    que su pecho esté a la altura de sus manos
-                                    mientras inhala. Empuje su torso hacia la
-                                    posición inicial apretando el resto del
-                                    cuerpo mientras exhala. Asegúrese de que sus
-                                    escápulas siempre están retraídas y de no
-                                    doblar los codos.
+                                    {{training.exercise.execution}}
                                 </p>
-                                <strong>CONSEJOS:</strong> La clave del
-                                ejercicio es la calidad sobre la cantidad. El
-                                truco es realizar el ejercicio con la forma
-                                adecuada. No deje que las caderas caigan.
+                                <strong>CONSEJOS:</strong> {{training.exercise.advices}}
                                 <p></p>
                             </div>
                         </div>

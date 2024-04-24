@@ -89,21 +89,26 @@ export class ClientFormComponent {
         this.aceptarFormulario.emit();
     }
 
-    registrarCliente(clientData: Client): void {
+    async registrarCliente(clientData: Client) {
         console.log(clientData);
         clientData.user = this.userStore.user;
-        this.clientService
-            .registerClient(clientData)
-            .then((client: Client) => {
-                this.clientService.asignarDieta(client.idClient??0);
-                this.clientService.asignarEntrenamiento(client.idClient??0);
-                this.clientStore.client = client;
-                this.aceptar();
-            })
-            .catch((error) => {
-                this.errorMessage = error;
-                // this.clientForm.resetForm();
-            });
+        //Para asignar client a clientStore espera a que la petición responda.
+        try {
+            this.clientStore.client = await this.clientService.registerClient(
+                clientData
+            );
+            await this.clientService.asignarDieta(
+                this.clientStore.client.idClient ?? 0
+            );
+            this.clientStore.client =
+                await this.clientService.asignarEntrenamiento(
+                    this.clientStore.client.idClient ?? 0
+                );
+            this.aceptar();
+        } catch (error) {
+            if (error instanceof Error) {
+                this.errorMessage = error.message;
+            }
+        }
     }
-    
 }

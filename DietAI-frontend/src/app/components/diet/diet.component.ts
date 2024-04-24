@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DietService } from 'src/app/services/diet.service';
 import { Diet } from 'src/app/models/Diet';
 import { RecipeComponent } from '../recipe/recipe.component';
+import { ClientStore } from '../../store/clientStore';
 
 @Component({
     selector: 'app-diet',
@@ -9,7 +10,10 @@ import { RecipeComponent } from '../recipe/recipe.component';
     styleUrls: ['./diet.component.css'],
 })
 export class DietComponent {
-    constructor(private dietService: DietService) {}
+    constructor(
+        private dietService: DietService,
+        private ClientStore: ClientStore
+    ) {}
 
     public diet: Diet = new Diet();
 
@@ -18,4 +22,6 @@ export class DietComponent {
             this.diet = Diet;
         });
     }
+
+    
 }
