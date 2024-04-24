@@ -64,7 +64,7 @@ public class AuthController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.register(userModel)));
+                userMapper.modelToDto(userService.save(userModel)));
     }
 
     @PostMapping("/auth/register/admin")

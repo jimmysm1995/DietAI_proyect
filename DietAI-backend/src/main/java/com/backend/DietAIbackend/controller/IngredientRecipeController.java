@@ -4,6 +4,7 @@ import com.backend.DietAIbackend.dto.IngredientRecipeDto;
 import com.backend.DietAIbackend.mapper.IngredientRecipeMapper;
 import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.service.IngredientRecipeService;
+import com.backend.DietAIbackend.service.IngredientRecipeServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,11 +30,5 @@ public class IngredientRecipeController {
 
         IngredientRecipe ingredientRecipe = ingredientRecipeMapper.dtoToModel(ingredientRecipeDto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(ingredientRecipeMapper.modelToDto(ingredientRecipeService.save(ingredientRecipe)));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<IngredientRecipeDto>>getAllIngredient(){
-
-        return ResponseEntity.ok().body(ingredientRecipeMapper.listModelToDto(ingredientRecipeService.findAll()));
     }
 }

@@ -3,6 +3,7 @@ package com.backend.DietAIbackend.controller;
 import com.backend.DietAIbackend.dto.MuscleDto;
 import com.backend.DietAIbackend.mapper.MuscleMapper;
 import com.backend.DietAIbackend.service.MuscleService;
+import com.backend.DietAIbackend.service.MuscleServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

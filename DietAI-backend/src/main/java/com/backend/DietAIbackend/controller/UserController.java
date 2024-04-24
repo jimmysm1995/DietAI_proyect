@@ -7,18 +7,11 @@ import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -94,17 +87,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteByID(@PathVariable Long userId){
 
-        userService.deleteByID(userId);
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping()
-    public ResponseEntity<Void> delete(@RequestBody UserDto userDto){
-
-        User user = userMapper.dtoToModel(userDto);
-
-        userService.delete(user);
+        userService.deleteById(userId);
 
         return ResponseEntity.noContent().build();
     }

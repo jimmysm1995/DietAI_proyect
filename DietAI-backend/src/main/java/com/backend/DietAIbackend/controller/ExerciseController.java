@@ -7,6 +7,7 @@ import com.backend.DietAIbackend.model.Exercise;
 import com.backend.DietAIbackend.model.ExerciseMuscle;
 import com.backend.DietAIbackend.model.Muscle;
 import com.backend.DietAIbackend.service.ExerciseService;
+import com.backend.DietAIbackend.service.ExerciseServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

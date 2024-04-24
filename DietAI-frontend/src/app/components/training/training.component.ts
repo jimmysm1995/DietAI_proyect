@@ -80,7 +80,7 @@ export class TrainingComponent {
         }
         this.exerciseInTraining = new ExerciseInTraining();
       }
-      this.exercisesInTraining.sort((a, b) => (a.orderWeek - b.orderWeek));
       this.exercisesInTraining.sort((a, b) => (a.orderDay - b.orderDay));
+      this.exercisesInTraining.sort((a, b) => (a.orderWeek - b.orderWeek));
   }
 }

@@ -5,6 +5,7 @@ import com.backend.DietAIbackend.mapper.ExerciseMapper;
 import com.backend.DietAIbackend.mapper.TrainingMapper;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.service.TrainingService;
+import com.backend.DietAIbackend.service.TrainingServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

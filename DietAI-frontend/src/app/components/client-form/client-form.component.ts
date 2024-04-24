@@ -18,6 +18,8 @@ import { GenderService } from '../../services/gender-controller.service';
 import { Goal } from 'src/app/models/Goal';
 import { GoalService } from '../../services/goal.service';
 import { ClientStore } from 'src/app/store/clientStore';
+import { TypeTraining } from '../../models/Exercise';
+import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
     selector: 'app-client-form',
@@ -37,6 +39,7 @@ export class ClientFormComponent {
     public consumedSubstances: ConsumedSubstances[] = [];
     public gender: Gender[] = [];
     public goal: Goal[] = [];
+    public typeTraining: string[] = [];
 
     constructor(
         private clientService: ClientService,
@@ -49,7 +52,8 @@ export class ClientFormComponent {
         private consumedSubstancesService: ConsumedSubstancesService,
         private genderService: GenderService,
         private goalService: GoalService,
-        private clientStore: ClientStore
+        private clientStore: ClientStore,
+        private exerciseService: ExerciseService
     ) {}
 
     ngOnInit(): void {
@@ -75,6 +79,9 @@ export class ClientFormComponent {
         });
         this.goalService.getGoal().then((goal) => {
             this.goal = goal;
+        });
+        this.exerciseService.getTypeTraining().then((typeTraining) => {
+            this.typeTraining = typeTraining;
         });
     }
 

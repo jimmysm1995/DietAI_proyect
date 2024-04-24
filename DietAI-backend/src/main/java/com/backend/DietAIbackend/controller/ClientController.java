@@ -5,9 +5,10 @@ import com.backend.DietAIbackend.mapper.*;
 import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.Injury;
-import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.service.ClientService;
+import com.backend.DietAIbackend.service.ClientServiceImp;
 import com.backend.DietAIbackend.service.UserService;
+import com.backend.DietAIbackend.service.UserServiceImp;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +22,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -87,15 +87,7 @@ public class ClientController {
 
     }
 
-    @DeleteMapping
-    public void deleteClient(@RequestBody ClientDto clientDto){
-
-        Client client = clientMapper.dtoToModel(clientDto);
-
-        clientService.delete(client);
-    }
-
-    @DeleteMapping("{idClient}")
+    @DeleteMapping("/{idClient}")
     public void deleteClient(@PathVariable Long idClient){
 
         clientService.deleteById(idClient);
@@ -139,7 +131,6 @@ public class ClientController {
     public ResponseEntity<DietDto> getDietByClient(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);
-
 
         return ResponseEntity.ok().body(dietMapper.modelToDto(clientService.getDietByUser(client)));
 

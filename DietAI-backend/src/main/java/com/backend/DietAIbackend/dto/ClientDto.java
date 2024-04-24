@@ -55,6 +55,9 @@ public class ClientDto {
     @Schema(example = "4", description = "Tiempo de entrenamiento semanal en dias")
     private Integer trainingTime;
 
+    @Schema(example = "GYM", description = "Donde va a realizar el entrenamiento")
+    private TypeTraining typeTraining;
+
     @Schema(description = "Usuario asociado al cliente")
     private UserDto user;
 

@@ -1,11 +1,10 @@
 package com.backend.DietAIbackend.controller;
 
-import com.backend.DietAIbackend.dto.ClientDto;
 import com.backend.DietAIbackend.dto.IngredientDto;
 import com.backend.DietAIbackend.mapper.IngredientMapper;
-import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.Ingredient;
 import com.backend.DietAIbackend.service.IngredientService;
+import com.backend.DietAIbackend.service.IngredientServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +51,7 @@ public class IngredientController {
             ingredientService.deleteById(idIngredient);
         } catch (Exception e){
             log.error("Ha habido un problema al borrar el ingrediente");
+            throw new RuntimeException("El ingrediente no se ha podido eliminar");
         }
         return ResponseEntity.noContent().build();
     }

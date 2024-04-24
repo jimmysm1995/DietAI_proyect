@@ -1,6 +1,7 @@
 package com.backend.DietAIbackend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -24,13 +25,15 @@ public class Client {
     private Plan plan;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", columnDefinition = "varchar(10)")
+    @Column(name = "gender", columnDefinition = "varchar(10)", nullable = false)
     private Gender gender;
 
-    @Column(name = "weight", columnDefinition = "decimal")
+    @Column(name = "weight", columnDefinition = "decimal(10,2)", nullable = false)
+    @Size(min = 0, message = "El peso no puede ser negativo")
     private Float weight;
 
-    @Column(name = "height", columnDefinition = "decimal")
+    @Column(name = "height", columnDefinition = "decimal(10,2)", nullable = false)
+    @Size(min = 0, message = "La altura no puede ser negativo")
     private Float height;
 
     @Enumerated(EnumType.STRING)
@@ -49,7 +52,11 @@ public class Client {
     @Column(name = "consumedSubstances", columnDefinition = "varchar(255)")
     private ConsumedSubstances consumedSubstances;
 
-    @Column(name = "trainingTime", columnDefinition = "tinyint")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "typeTraining", columnDefinition = "Varchar(20)", nullable = false)
+    private TypeTraining typeTraining;
+
+    @Column(name = "trainingTime", columnDefinition = "tinyint", nullable = false)
     private Integer trainingTime;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)

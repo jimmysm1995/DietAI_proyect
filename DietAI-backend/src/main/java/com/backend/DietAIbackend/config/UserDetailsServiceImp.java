@@ -1,10 +1,8 @@
 package com.backend.DietAIbackend.config;
 
-import com.backend.DietAIbackend.repository.UserRepository;
-import com.backend.DietAIbackend.service.UserService;
+import com.backend.DietAIbackend.service.UserServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImp implements UserDetailsService {
     Logger log = LoggerFactory.getLogger(UserDetailsServiceImp.class);
 
-    private final UserService userService;
+    private final UserServiceImp userService;
 
-    public UserDetailsServiceImp(UserService userService){
+    public UserDetailsServiceImp(UserServiceImp userService){
         this.userService = userService;
     }
     @Override

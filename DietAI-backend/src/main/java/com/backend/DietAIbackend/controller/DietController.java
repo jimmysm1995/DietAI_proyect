@@ -5,6 +5,7 @@ import com.backend.DietAIbackend.mapper.DietMapper;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
 import com.backend.DietAIbackend.model.Diet;
 import com.backend.DietAIbackend.service.DietService;
+import com.backend.DietAIbackend.service.DietServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

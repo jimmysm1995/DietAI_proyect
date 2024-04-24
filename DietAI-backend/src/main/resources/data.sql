@@ -97,31 +97,31 @@ VALUES
     'Seleccione la cantidad de discos apropiada para ponerlos en la barra. Túmbese boca arriba en un banco plano, sus ojos deben estar debajo de la barra. Sus pies deben tocar el suelo.',
     'Descienda suavemente la barra hacia el pecho mientras inhala Después de 1 seg., empuje la barra de vuelta a la posición de inicio mientras exhala. Repita el movimiento hasta que comprete las repeticiones .',
     'Centrese en empujar la barra con los musculos del pecho y apriete los gluteos cuando lo haga Si usted es un principiante, utilice un ayudante. So no hay ninguno, sea conservador con la carga que utiliza.',
-    'GYM'),
+    'GIMNASIO'),
 ('Prensa de piernas',
     'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/prensa-de-piernas-inclinada-init-pos-4016.png',
     'Seleccione la cantidad de discos apropiada para ponerlos en la máquina. Siéntese en la máquina y coloque los pies en la plataforma, separados al ancho de los hombros. Agarre las asas laterales de la máquina.',
     'Baje la plataforma con un movimiento suave hasta que sus rodillas formen un ángulo de 90 grados mientras inhala. Aguante 1 seg. Empuje la plataforma desde los talones de sus pies y vuelva a la posición inicial mientras exhala.',
     'Compruebe siempre si ha bloqueado correctamente la máquina después de repeticiones. Si usted es un principiante sea conservador con la carga que utiliza.',
-    'GYM'),
+    'GIMNASIO'),
 ('Peso muerto con barra',
     'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/peso-muerto-rumano-o-con-piernas-estiradas-init-pos-6354.png',
     'Sostenga una barra al nivel de la cadera con un agarre prono y con las manos al ancho de los hombros. Separe los pies al ancho de las caderas. Retraiga sus omoplatos. Contraiga el suelo pelvico y el core mientras mantiene su pecho levantado.',
     'Baje la barra moviendo su trasero hacia atrás hasta donde pueda mantener la barra cerca de sus piernas. Asegúrese de no mover la espalda y de hacer el ejercicio con las caderas.',
     'Centrese en apretar la columna todo el tiempo usando sus musculos del core.',
-    'GYM'),
+    'GIMNASIO'),
 ('Remo con barra',
     'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/remo-con-barra-de-pie-init-pos-6237.png',
      'Sostenga una barra al nivel de la cadera con un agarre prono y con las manos al ancho de los hombros. Separe los pies al ancho de las caderas. Retraiga sus omoplatos. Manteniendo el arco natural de su espalda.',
      'Tire de la barra hacia su torso retrayendo las escápulas mientras exhala hasta que toque los abdominales. Vuelva a la posición inicial con un suave movimiento.',
      'Mientras hace el ejercicio, mueva solo los brazos, asegúrese de no mover ninguna otra parte de su cuerpo. La clave del ejercicio es la calidad sobre la cantidad. El truco es realizar el ejercicio con la forma adecuada.',
-     'GYM'),
+     'GIMNASIO'),
 ('Press militar con mancuernas',
     'https://www.entrenamientos.com/media/cache/exercise_375/uploads/exercise/press-militar-o-de-hombros-con-mancuernas-de-pie-init-pos-1697.png',
     'Coja las mancuernas a los lados de los hombros mientras mantiene los codos doblados y en línea con su torso. Las manos deben estar ligeramente más separadas que el ancho de los hombros.',
     'Extienda los brazos para empujar las mancuernas hacia arriba hasta que los codos estén extendidos pero no bloqueados. Baje lentamente el peso hasta que sus manos estén justo por encima de los hombros.',
     'Modifique su agarre (neutral, ancho, angosto e inverso) de vez en cuando para entrenar los músculos desde múltiples ángulos. La clave del ejercicio es la calidad sobre la cantidad. El truco es realizar el ejercicio con la forma adecuada.',
-    'GYM'
+    'GIMNASIO'
     );
 --('Sentadillas con barra', 4, 'Ejercicio compuesto para trabajar piernas y glúteos.'),
 --('Leg press', 3, 'Ejercicio para trabajar los cuádriceps, glúteos y músculos de la parte inferior del cuerpo.'),
@@ -190,7 +190,7 @@ VALUES
 
 -- Insertar datos en la tabla training
 INSERT INTO training (name, type_training, difficulty, days, distribution)
-VALUES ('Entrenamiento prueba', 'GYM', 6, 3, 'Full body');
+VALUES ('Entrenamiento prueba', 'GIMNASIO', 6, 3, 'Full body');
 
 -- Insertar datos en la tabla TrainingExercise
 INSERT INTO training_exercise (sets, reps, order_day, order_week, id_training, id_exercise)
@@ -200,9 +200,9 @@ VALUES
 (3, 10,3,1, 1, 3),
 (3, 10,1,2, 1, 1),
 (3, 10,2,2, 1, 2),
-(3, 10,2,3, 1, 3),
-(3, 10,3,1, 1, 1),
-(3, 10,3,2, 1, 2),
+(3, 10,3,2, 1, 3),
+(3, 10,1,3, 1, 1),
+(3, 10,2,3, 1, 2),
 (3, 10,3,3, 1, 3);
 
 
