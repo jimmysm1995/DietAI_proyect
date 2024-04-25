@@ -30,9 +30,6 @@ export class TrainingComponent {
   public selectedTrainingId: number = 0;
 
   ngOnInit(): void {
-    this.exerciseService.getAllExercises().then((exercises) => {
-      this.exercises = exercises;
-    });
     this.trainingService.getAllTrainings().then((trainings) => {
       this.trainings = trainings;
     })
@@ -66,6 +63,22 @@ export class TrainingComponent {
       this.ngOnInit();
     })
     }
+
+    onTypeTrainingSelected() {
+      if (this.training.typeTraining == 'GIMNASIO') {
+          this.exerciseService.getGymExercises().then((exercises: Exercise[]) => {
+              this.exercises = exercises;
+          });
+      } if (this.training.typeTraining == 'CASA') {
+          this.exerciseService.getHomeExercises().then((exercises: Exercise[]) => {
+              this.exercises = exercises;
+          });
+      } else {
+          this.exerciseService.getAllExercises().then((exercises: Exercise[]) => {
+              this.exercises = exercises;
+          })
+      }
+  }
 
   addExercise() {
       if (this.exerciseInTraining.exercise.idExercise != 0) {

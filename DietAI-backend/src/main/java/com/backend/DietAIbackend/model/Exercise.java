@@ -19,16 +19,16 @@ public class Exercise {
     @Column(name = "name", columnDefinition = "Varchar(100)" ,nullable = false, unique = true)
     private String name;
 
-    @Column(name = "imgExercise", columnDefinition = "varchar(255)")
+    @Column(name = "imgExercise", length = 1000)
     private String imgExercise;
 
-    @Column(name = "initialPosition", columnDefinition = "Varchar(255)")
+    @Column(name = "initialPosition", length = 1000)
     private String initialPosition;
 
-    @Column(name = "execution", columnDefinition = "Varchar(255)")
+    @Column(name = "execution", length = 1000)
     private String execution;
 
-    @Column(name = "advices", columnDefinition = "Varchar(255)")
+    @Column(name = "advices", length = 1000)
     private String advices;
 
     @Enumerated(EnumType.STRING)

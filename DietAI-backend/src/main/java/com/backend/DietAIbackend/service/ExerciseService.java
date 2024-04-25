@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ExerciseService extends ICrudService<Exercise, Long> {
     Exercise save(Exercise exercise, List<Muscle> muscleList);
+    List<Exercise> findHomeExercises();
+    List<Exercise> findGymExercises();
 }

@@ -127,13 +127,20 @@ public class ClientController {
         return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getSubject()))));
     }
 
-    @GetMapping("/diet/getDiet/{idClient}")
+    @GetMapping("/getDiet/{idClient}")
     public ResponseEntity<DietDto> getDietByClient(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);
 
         return ResponseEntity.ok().body(dietMapper.modelToDto(clientService.getDietByUser(client)));
+    }
 
+    @GetMapping("/getTraining/{idClient}")
+    public ResponseEntity<TrainingDto> getTrainingByClient(@PathVariable Long idClient){
+
+        Client client = clientService.findById(idClient);
+
+        return ResponseEntity.ok().body(trainingMapper.modelToDto(clientService.getTrainingByClient(client)));
     }
 
 }

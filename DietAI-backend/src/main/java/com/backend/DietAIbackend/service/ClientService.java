@@ -1,9 +1,6 @@
 package com.backend.DietAIbackend.service;
 
-import com.backend.DietAIbackend.model.Allergy;
-import com.backend.DietAIbackend.model.Client;
-import com.backend.DietAIbackend.model.Diet;
-import com.backend.DietAIbackend.model.Injury;
+import com.backend.DietAIbackend.model.*;
 
 import java.util.List;
 
@@ -13,4 +10,5 @@ public interface ClientService extends ICrudService <Client, Long>{
     Client asignarEntrenamiento(Client client);
     Client findCurrentClient(long userId);
     Diet getDietByUser(Client client);
+    Training getTrainingByClient(Client client);
 }

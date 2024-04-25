@@ -3,6 +3,8 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/Client';
 import { AltaCliente } from '../models/AltaCliente';
+import { Diet } from '../models/Diet';
+import { Training } from '../models/Training';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +51,14 @@ export class ClientService {
 
   asignarEntrenamiento(idClient: number):Promise<Client>{
     return axios.post(`${this.baseUrl}/training/${idClient}`).then((response) => response.data);
+  }
+
+  getDietByClient(idClient: number):Promise<Diet>{
+    return axios.get(`${this.baseUrl}/getDiet/${idClient}`).then((response) => response.data);
+  }
+
+  getTrainingByClient(idClient: number):Promise<Training>{
+    return axios.get(`${this.baseUrl}/getTraining/${idClient}`).then((response) => response.data);
   }
 
 }

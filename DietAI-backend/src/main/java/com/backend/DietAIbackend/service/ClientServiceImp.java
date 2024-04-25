@@ -149,4 +149,9 @@ public class ClientServiceImp implements ClientService {
 
         return client.getDiet();
     }
+
+    @Override
+    public Training getTrainingByClient(Client client) {
+        return client.getTraining();
+    }
 }

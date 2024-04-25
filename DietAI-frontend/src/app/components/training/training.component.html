@@ -6,10 +6,9 @@
             <input type="text" id="name" name="name" [(ngModel)]="training.name" required /><br />
 
             <label for="typeTraining">Tipo de Entrenamiento:</label><br />
-            <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" required>
+            <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" (change)="onTypeTrainingSelected()" required>
                 <option value=""></option>
-                <option value="0">Home</option>
-                <option value="1">Gym</option>
+                <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
             </select>
             <br />
 

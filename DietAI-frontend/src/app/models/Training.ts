@@ -6,7 +6,7 @@ import { Exercise } from "./Exercise";
 export class Training {
     idTraining: number=0;
     name: string = '';
-    typeTraining: number=0;
+    typeTraining: string = '';
     difficulty: number=0;
     days: number=0;
     distribution: string='';

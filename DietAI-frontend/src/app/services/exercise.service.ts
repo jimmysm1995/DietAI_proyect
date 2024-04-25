@@ -30,6 +30,14 @@ export class ExerciseService {
     return axios.get(this.baseUrl).then((response) => response.data);
   }
 
+  getGymExercises() {
+    return axios.get(this.baseUrl+'/getGymExercises').then((response) => response.data);
+  }
+
+  getHomeExercises() {
+    return axios.get(this.baseUrl+'/getHomeExercises').then((response) => response.data);
+  }
+
   getMuscles(): Promise<Muscle[]> {
     return axios.get(environment.apiUrl+'/api/muscles').then((response) => response.data);
   }
@@ -41,5 +49,6 @@ export class ExerciseService {
   deleteExercixe(id: number): Promise<void> {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
+
   
 }

@@ -2,6 +2,7 @@ package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.model.Exercise;
 import com.backend.DietAIbackend.model.Muscle;
+import com.backend.DietAIbackend.model.TypeTraining;
 import com.backend.DietAIbackend.repository.ExerciseRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +23,6 @@ public class ExerciseServiceImp implements ExerciseService {
 
     @Autowired
     ExerciseMuscleService exerciseMuscleService;
-
 
     @Transactional
     @Override
@@ -48,6 +49,32 @@ public class ExerciseServiceImp implements ExerciseService {
 
     @Override
     public List<Exercise> findAll(){return exerciseRepository.findAll();}
+
+    public List<Exercise> findGymExercises(){
+
+        List<Exercise> gymExercises = new ArrayList<>();
+
+        for (Exercise exercise : exerciseRepository.findAll()) {
+            if (exercise.getTypeTraining().equals(TypeTraining.GIMNASIO)){
+                gymExercises.add(exercise);
+            }
+        }
+
+        return gymExercises;
+    }
+
+    public List<Exercise> findHomeExercises(){
+
+        List<Exercise> homeExercises = new ArrayList<>();
+
+        for (Exercise exercise : exerciseRepository.findAll()) {
+            if (exercise.getTypeTraining().equals(TypeTraining.CASA)){
+                homeExercises.add(exercise);
+            }
+        }
+
+        return homeExercises;
+    }
 
     @Override
     public void deleteById(Long id){ exerciseRepository.deleteById(id);}

@@ -40,8 +40,6 @@ public class ExerciseController {
         Exercise exercise = exerciseMapper.dtoToModel(exerciseDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(exerciseMapper.modelToDto(exerciseService.save(exercise, muscleList)));
-
-
     }
 
 
@@ -53,9 +51,19 @@ public class ExerciseController {
     @GetMapping
     public ResponseEntity<List<ExerciseDto>>findAllExercise(){
 
-        List<Exercise> exercises = exerciseService.findAll();
+        return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findAll()));
+    }
 
-        return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exercises));
+    @GetMapping("/getGymExercises")
+    public ResponseEntity<List<ExerciseDto>>findGymExercises(){
+
+        return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findGymExercises()));
+    }
+
+    @GetMapping("/getHomeExercises")
+    public ResponseEntity<List<ExerciseDto>>findHomeExercises(){
+
+        return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findHomeExercises()));
     }
 
     @GetMapping("/muscles/{idExercise}")
