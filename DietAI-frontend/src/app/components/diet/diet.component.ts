@@ -3,6 +3,8 @@ import { DietService } from 'src/app/services/diet.service';
 import { Diet } from 'src/app/models/Diet';
 import { RecipeComponent } from '../recipe/recipe.component';
 import { ClientStore } from '../../store/clientStore';
+import { Recipe } from 'src/app/models/Recipe';
+import { RecipeInDietResponse } from 'src/app/models/RecipeInDiet';
 
 @Component({
     selector: 'app-diet',
@@ -15,13 +17,18 @@ export class DietComponent {
         private ClientStore: ClientStore
     ) {}
 
-    public diet: Diet = new Diet();
+    public recipes: RecipeInDietResponse [] = [];
+
 
     ngOnInit(): void {
-        this.dietService.getDiet(1).then((diet: Diet) => {
-            this.diet = Diet;
+        this.dietService.getRecipesByDiet(1).then((recipes: RecipeInDietResponse[]) => {
+            this.recipes = recipes;
+            
         });
     }
 
+    findRecipe(day: string, mealTime: string): Recipe {
+        return{...(this.recipes.find(recipe => recipe.day === day && recipe.mealTime === mealTime)?.recipe || new Recipe())}
+    }
     
 }

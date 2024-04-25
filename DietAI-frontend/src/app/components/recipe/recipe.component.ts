@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from 'src/app/models/Recipe';
 
 @Component({
   selector: 'app-recipe',
@@ -9,15 +10,15 @@ import { RecipeService } from '../../services/recipe.service';
 })
 
 export class RecipeComponent {
-  @Input() recipe1: any; // Recibe la receta como entrada desde el componente padre
+  @Input() recipe: Recipe = new Recipe(); // Recibe la receta como entrada desde el componente padre
 
-  // ngOnInit() {
-  //   this.recipeService.getRecipe(this.recipe.id).(recipe => {
-  //     this.recipe = recipe
-  //   })
-  // }
+  ngOnInit() {
+    this.recipeService.getRecipe(this.recipe.idRecipe || 1).then ((recipe: Recipe ) => {
+      
+    })
+  }
 
-  public recipe = {
+  public recipeEjemplo = {
     title: 'Pollo al horno',
     description: 'Deliciosa receta de pollo al horno.',
     ingredients: ['1 pollo entero', 'Sal', 'Pimienta', 'Hierbas aromáticas'],

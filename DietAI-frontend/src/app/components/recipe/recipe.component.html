@@ -1,8 +1,8 @@
 
-<a class="recipeButton" role="button" data-bs-toggle="modal" data-bs-target="#recipeModal">{{ recipe.title }}</a>
+<a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe">{{ recipe.name }}</a>
 <div
     class="modal fade"
-    id="recipeModal"
+    [id]="'recipeModal' + recipe.idRecipe"
     tabindex="-1"
     role="dialog"
     aria-labelledby="recipeModalLabel"
@@ -12,7 +12,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="recipeModalLabel">
-                    {{ recipe.title }}
+                    {{ recipe.name }}
                 </h5>
                 <button
                     type="button"
@@ -24,21 +24,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img
+                <!-- <img
                     [src]="recipe.imageUrl"
-                    alt="{{ recipe.title }}"
+                    alt="{{ recipe.name }}"
                     class="img-fluid mb-3"
-                />
-                <p>{{ recipe.description }}</p>
+                /> -->
+                <!-- <p>{{ recipe.description }}</p> -->
                 <h6>Ingredientes:</h6>
                 <ul>
-                    <li *ngFor="let ingredient of recipe.ingredients">
+                    <!-- <li *ngFor="let ingredient of recipe.ingredients">
                         {{ ingredient }}
-                    </li>
+                    </li> -->
                 </ul>
                 <h6>Pasos:</h6>
                 <ol>
-                    <li *ngFor="let step of recipe.steps">{{ step }}</li>
+                    <!-- <li *ngFor="let step of recipe.steps">{{ step }}</li> -->
                 </ol>
             </div>
         </div>
