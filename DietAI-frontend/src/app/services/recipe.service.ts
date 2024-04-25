@@ -13,8 +13,8 @@ export class RecipeService {
   constructor() { }
 
   private baseUrl: string = environment.apiUrl+'/api/recipe';
-  getRecipe(idRecipe: number) {
-    return axios.get(this.baseUrl + 'recipe/' + idRecipe);
+  getRecipe(idRecipe: number) : Promise<Recipe> {
+    return axios.get(this.baseUrl + "/" + idRecipe);
   }
 
   getAllRecipe(): Promise<Recipe[]> {

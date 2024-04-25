@@ -4,3 +4,9 @@ export class RecipeInDiet {
     dayOfWeek: string = '';
     mealTime: string = '';
 }
+
+export class RecipeInDietResponse {
+    recipe: Recipe = new Recipe();
+    day: string = '';
+    mealTime: string = '';
+}

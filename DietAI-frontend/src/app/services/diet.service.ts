@@ -3,6 +3,8 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Diet } from '../models/Diet';
 import { DietWithRecipesRequest } from '../models/DietWithRecipesRequest';
+import { Recipe } from '../models/Recipe';
+import { RecipeInDietResponse } from '../models/RecipeInDiet';
 
 @Injectable({
   providedIn: 'root'
@@ -39,4 +41,7 @@ export class DietService {
     return axios.delete(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
   
+  getRecipesByDiet(id: number): Promise<RecipeInDietResponse[]> {
+    return axios.get(`${this.baseUrl}/recipes/${id}`).then((response) => response.data);
+  }
 }
