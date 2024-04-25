@@ -21,6 +21,12 @@ public class Recipe {
     @Column(name = "calories", columnDefinition = "int")
     private Integer calories;
 
+    @Column(name = "imagenUrl", columnDefinition = "varchar(255)")
+    private String imageUrl;
+
+    @Column(name = "steps", length = 1000)
+    private String steps;
+
     @OneToMany(mappedBy = "recipe")
     @JsonIgnore
     private List<RecipeDiet> recipeDiets;

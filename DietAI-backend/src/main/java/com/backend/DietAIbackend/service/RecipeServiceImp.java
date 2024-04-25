@@ -1,6 +1,8 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
+import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
+import com.backend.DietAIbackend.mapper.RecipeMapper;
 import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.model.Recipe;
 import com.backend.DietAIbackend.repository.RecipeRepository;
@@ -10,6 +12,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +24,9 @@ public class RecipeServiceImp implements RecipeService {
     @Autowired
     IngredientRecipeService ingredientRecipeService;
 
+    @Autowired
+    RecipeMapper recipeMapper;
+
     @Transactional
     public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList) {
 
@@ -28,11 +34,11 @@ public class RecipeServiceImp implements RecipeService {
 
         for (IngredientInRecipe ingredientInRecipe : ingredientInRecipeList
         ) {
-            if (ingredientInRecipe.ingredient() != null){
+            if (ingredientInRecipe.getIngredient() != null){
                 IngredientRecipe ingredientRecipe = new IngredientRecipe();
                 ingredientRecipe.setRecipe(recipe);
-                ingredientRecipe.setQuantity(ingredientInRecipe.quantity());
-                ingredientRecipe.setIngredient(ingredientInRecipe.ingredient());
+                ingredientRecipe.setQuantity(ingredientInRecipe.getQuantity());
+                ingredientRecipe.setIngredient(ingredientInRecipe.getIngredient());
                 ingredientRecipeService.save(ingredientRecipe);
             }
         }
@@ -40,6 +46,31 @@ public class RecipeServiceImp implements RecipeService {
         actualizarCalorias();
 
         return recipe;
+    }
+
+    @Override
+    public RecipeWithIngredientsRequest getRecipeWithIngredients(Long idRecipe) {
+
+        RecipeWithIngredientsRequest request = new RecipeWithIngredientsRequest();
+
+        Recipe recipe = findById(idRecipe);
+
+        List<IngredientInRecipe> ingredients = new ArrayList<>();
+
+        for (IngredientRecipe ingredientRecipe : ingredientRecipeService.findAll()
+        ) {
+            if (ingredientRecipe.getRecipe() == recipe){
+                IngredientInRecipe ingredient = new IngredientInRecipe();
+                ingredient.setIngredient(ingredientRecipe.getIngredient());
+                ingredient.setQuantity(ingredientRecipe.getQuantity());
+                ingredients.add(ingredient);
+            }
+        }
+
+        request.setRecipe(recipeMapper.modelToDto(recipe));
+        request.setIngredientInRecipe(ingredients);
+
+        return request;
     }
 
     public void deleteById(Long id){

@@ -18,7 +18,7 @@ export class RecipeComponent {
   // }
 
   public recipe = {
-    title: 'Pollo al horno',
+    name: 'Pollo al horno',
     description: 'Deliciosa receta de pollo al horno.',
     ingredients: ['1 pollo entero', 'Sal', 'Pimienta', 'Hierbas aromáticas'],
     steps: ['Precalentar el horno a 180°C.', 'Sazonar el pollo con sal, pimienta y hierbas aromáticas.', 'Hornear durante 1 hora o hasta que esté dorado y cocido.'],

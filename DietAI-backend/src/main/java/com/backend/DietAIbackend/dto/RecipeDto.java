@@ -19,6 +19,12 @@ public class RecipeDto {
     @Schema(example = "350", description = "Cantidad de calorías de la receta")
     private Integer calories;
 
+    @Schema(example = "imagen", description = "Imagen para la receta")
+    private String imageUrl;
+
+    @Schema(example = "remojar la pasta, añadir sal, ...", description = "Pasos para realizar la receta")
+    private String steps;
+
     @Schema(description = "Lista de dietas que incluyen esta receta")
     private List<RecipeDietDto> recipeDiets;
 

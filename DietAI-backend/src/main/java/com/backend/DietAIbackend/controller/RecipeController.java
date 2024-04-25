@@ -41,6 +41,13 @@ public class RecipeController {
         return ResponseEntity.ok().body(recipeMapper.listModelToDto(recipeService.findAll()));
     }
 
+    @GetMapping("/recipesWithIngredient/{idRecipe}")
+    public ResponseEntity<RecipeWithIngredientsRequest> getRecipeWithIngredients(@PathVariable Long idRecipe){
+
+        return ResponseEntity.ok().body(recipeService.getRecipeWithIngredients(idRecipe));
+
+    }
+
     @DeleteMapping("/{idRecipe}")
     public ResponseEntity<Void>deleteRecipe(@PathVariable Long idRecipe){
 

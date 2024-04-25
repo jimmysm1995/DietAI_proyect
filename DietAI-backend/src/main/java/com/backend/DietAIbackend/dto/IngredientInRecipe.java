@@ -1,6 +1,10 @@
 package com.backend.DietAIbackend.dto;
 
 import com.backend.DietAIbackend.model.Ingredient;
+import lombok.Data;
 
-public record IngredientInRecipe(Ingredient ingredient, double quantity ) {
+@Data
+public class IngredientInRecipe {
+    Ingredient ingredient;
+    double quantity;
 }
