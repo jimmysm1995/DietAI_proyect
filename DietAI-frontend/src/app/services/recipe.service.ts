@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { RecipeWithIngredientsRequest } from '../models/RecipeWithIngredientsRequest';
-import { Recipe } from '../models/Recipe';
+import { Recipe, RecipeWithIngredients } from '../models/Recipe';
 
 
 @Injectable({
@@ -36,5 +36,7 @@ export class RecipeService {
       }
   });
   }
-
+  getRecipeWithIngredients(idRecipe: number) : Promise<RecipeWithIngredients> {
+    return axios.get(this.baseUrl + /recipesWithIngredient/ + idRecipe).then((response) => response.data);
+  }
 }

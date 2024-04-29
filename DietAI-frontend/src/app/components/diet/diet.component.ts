@@ -28,7 +28,7 @@ export class DietComponent {
     }
 
     findRecipe(day: string, mealTime: string): Recipe {
-        return{...(this.recipes.find(recipe => recipe.day === day && recipe.mealTime === mealTime)?.recipe || new Recipe())}
+        return this.recipes.find(recipe => recipe.day === day && recipe.mealTime === mealTime)?.recipe || new Recipe()
     }
     
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { Recipe } from 'src/app/models/Recipe';
+import { Recipe, RecipeWithIngredients } from 'src/app/models/Recipe';
 
 @Component({
   selector: 'app-recipe',
@@ -12,9 +12,11 @@ import { Recipe } from 'src/app/models/Recipe';
 export class RecipeComponent {
   @Input() recipe: Recipe = new Recipe(); // Recibe la receta como entrada desde el componente padre
 
+  public isDataLoaded: boolean = false;
+  public completeRecipe: RecipeWithIngredients = new RecipeWithIngredients();
+
   ngOnInit() {
-    this.recipeService.getRecipe(this.recipe.idRecipe || 1).then ((recipe: Recipe ) => {
-    })
+    
   }
 
   public recipeEjemplo = {
@@ -26,4 +28,15 @@ export class RecipeComponent {
   }
 
   constructor(private recipeService: RecipeService ) { } 
+
+  public firstLoad(){
+    if(this.isDataLoaded){
+      return
+    }
+    this.recipeService.getRecipeWithIngredients(this.recipe.idRecipe || 1).then ((recipe: RecipeWithIngredients ) => {
+      this.isDataLoaded = true;
+      this.completeRecipe = recipe;
+      console.log(this.completeRecipe)
+    })
+  }
 }

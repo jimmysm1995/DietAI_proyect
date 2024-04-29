@@ -73,3 +73,10 @@ h3{
     align-items: center;
     gap: 0.5rem;
 }
+
+@media (max-width: 800px) {
+    .arcoContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}

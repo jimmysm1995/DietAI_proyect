@@ -9,3 +9,9 @@ export class Recipe{
     ingredients?: IngredientInRecipe[] = [];
     imageUrl?: string = '';
 }
+
+export class RecipeWithIngredients{
+    recipe: Recipe = new Recipe();
+    ingredientInRecipe: IngredientInRecipe[] = [];
+    
+}

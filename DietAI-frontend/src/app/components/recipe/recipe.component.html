@@ -1,7 +1,7 @@
 
-<a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe">{{ recipe.name }}</a>
+<a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe" (click)="firstLoad()">{{ recipe.name }}</a>
 <div
-    class="modal fade"
+    class="modal fade" 
     [id]="'recipeModal' + recipe.idRecipe"
     tabindex="-1"
     role="dialog"
@@ -24,21 +24,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- <img
-                    [src]="recipe.imageUrl"
+                <img
+                    [src]="completeRecipe.recipe.imageUrl"
                     alt="{{ recipe.name }}"
                     class="img-fluid mb-3"
-                /> -->
-                <!-- <p>{{ recipe.description }}</p> -->
+                />
+                <p>{{ completeRecipe.recipe.calories }} calorías</p>
                 <h6>Ingredientes:</h6>
                 <ul>
-                    <!-- <li *ngFor="let ingredient of recipe.ingredients">
-                        {{ ingredient }}
-                    </li> -->
+                    <li *ngFor="let ingredient of completeRecipe.ingredientInRecipe">
+                        <p>{{ingredient.ingredient?.name}}</p>
+                    </li>
                 </ul>
                 <h6>Pasos:</h6>
                 <ol>
-                    <!-- <li *ngFor="let step of recipe.steps">{{ step }}</li> -->
+                    <li *ngFor="let step of completeRecipe.recipe.steps">{{ step }}</li>
                 </ol>
             </div>
         </div>
