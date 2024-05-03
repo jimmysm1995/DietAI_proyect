@@ -5,7 +5,7 @@ export class Recipe{
     idRecipe?: number = 0
     name: string = '';
     calories?: number = 0;
-    steps: string = "";
+    steps: string = '';
     ingredients?: IngredientInRecipe[] = [];
     imageUrl?: string = '';
 }

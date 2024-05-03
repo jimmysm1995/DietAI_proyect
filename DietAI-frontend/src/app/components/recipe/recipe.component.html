@@ -33,12 +33,12 @@
                 <h6>Ingredientes:</h6>
                 <ul>
                     <li *ngFor="let ingredient of completeRecipe.ingredientInRecipe">
-                        <p>{{ingredient.ingredient?.name}}</p>
+                        <p> {{ingredient.quantity * 100}} gramos de {{ingredient.ingredient?.name}}</p>
                     </li>
                 </ul>
                 <h6>Pasos:</h6>
                 <ol>
-                    <li *ngFor="let step of completeRecipe.recipe.steps">{{ step }}</li>
+                    <li *ngFor="let step of steps">{{ step }}</li>
                 </ol>
             </div>
         </div>

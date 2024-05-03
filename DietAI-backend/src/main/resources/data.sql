@@ -280,11 +280,13 @@ VALUES ('Pollo', 25.0, 0.0, 3.0, 120), -- 1
         ('Aceitunas rellenas de anchoa', 1.0, 6.0, 10.0, 115);  --70
 
 -- Insertar datos en la tabla de recetas
-INSERT INTO recipe (name, calories)
-VALUES ('Tortilla con pavo', 245),
-       ('Pollo con pasta y platano', 650),
-       ('yogurt con nueces', 415),
-       ('Salmon con ensalada', 457);
+INSERT INTO recipe (name, calories, steps, image_url)
+VALUES
+('Tortilla con pavo', 245, 'Batimos el huevo. Calentamos aceite en sarten. echamos huevos batidos a la sarten. echamos el pavo. sacamos de la sarten.', 'https://www.hogarmania.com/archivos/202404/tortilla-de-habitas-tiernas-receta-848x477x80xX.jpg'),
+('Pollo con pasta y platano', 650, 'Asamos el pollo. cocemos la pasta. añadimos el platano.', 'https://www.hogarmania.com/archivos/202404/esparragos-blancos-cocidos-salteados-y-crudos-receta-848x477x80xX.jpg'),
+('yogurt con nueces', 415, 'Añadimos el yogurt al cuenco. añadimos las nueces. añadimos la miel.', 'https://www.hogarmania.com/archivos/202404/arroz-con-leche-principal-848x477x80xX.jpg'),
+('Salmon con ensalada', 457, 'Cocinamos el salmon. mezclamos con la ensalada.', 'https://www.hogarmania.com/archivos/201909/fogonero-tomate-xl-848x477x80xX.jpg');
+
 
 -- Insertar datos en la tabla de relación ingredient_recipe
 INSERT INTO ingredient_recipe (quantity, ingredient_id, recipe_id)

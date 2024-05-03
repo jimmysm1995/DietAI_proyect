@@ -21,7 +21,7 @@ public class Recipe {
     @Column(name = "calories", columnDefinition = "int")
     private Integer calories;
 
-    @Column(name = "imagenUrl", columnDefinition = "varchar(255)")
+    @Column(name = "imageUrl", columnDefinition = "varchar(255)")
     private String imageUrl;
 
     @Column(name = "steps", length = 1000)
