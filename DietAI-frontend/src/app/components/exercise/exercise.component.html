@@ -7,15 +7,16 @@
             <input type="text" id="name" name="name" [(ngModel)]="exercise.name" required /><br />
 
             <label for="initialPosition">Posición inicial:</label><br />
-            <input type="text" id="initialPosition" name="initialPosition" [(ngModel)]="exercise.initialPosition"
-                required /><br />
+            <textarea id="initialPosition" name="initialPosition" [(ngModel)]="exercise.initialPosition"rows="4"
+            cols="40"></textarea><br />
 
             <label for="execution">Ejecución:</label><br />
             <textarea id="execution" name="execution" [(ngModel)]="exercise.execution" rows="4"
-                cols="50"></textarea><br />
+                cols="40"></textarea><br />
 
             <label for="advices">Advice:</label><br />
-            <input type="text" id="advices" name="advices" [(ngModel)]="exercise.advices" rows="4" cols="50" /><br />
+            <textarea id="advices" name="advices" [(ngModel)]="exercise.advices" rows="4" 
+            cols="40" required></textarea><br />
 
             <label for="imgExercise">URL Imagen:</label><br />
             <input id="imgExercise" name="imgExercise" type="text" [(ngModel)]="exercise.imgExercise" /><br />

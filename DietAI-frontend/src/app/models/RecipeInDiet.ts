@@ -1,12 +1,12 @@
 import { Recipe } from './Recipe';
 export class RecipeInDiet {
     recipe: Recipe = new Recipe();
-    dayOfWeek: string = '';
+    dayWeek: string = '';
     mealTime: string = '';
 }
 
 export class RecipeInDietResponse {
     recipe: Recipe = new Recipe();
-    day: string = '';
+    dayWeek: string = '';
     mealTime: string = '';
 }

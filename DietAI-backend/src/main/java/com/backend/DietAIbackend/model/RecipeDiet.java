@@ -27,7 +27,7 @@ public class RecipeDiet {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "dayWeek", columnDefinition = "varchar(10)")
-    private DayOfWeek dayOfWeek;
+    private DayWeek dayWeek;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "mealTime", columnDefinition = "varchar(10)")

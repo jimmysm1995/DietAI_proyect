@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.dto;
 
+import com.backend.DietAIbackend.model.DayWeek;
 import com.backend.DietAIbackend.model.MealTime;
 import lombok.Data;
 
@@ -14,7 +15,7 @@ public class RecipeDietDto {
 
     private RecipeDto recipe;
 
-    private DayOfWeek dayOfWeek;
+    private DayWeek dayWeek;
 
     private MealTime mealTime;
 }

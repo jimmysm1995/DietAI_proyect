@@ -54,7 +54,7 @@ export class DietAdminComponent {
     saveIngredients(recipe: Recipe, dayOfWeek: string, mealTime: string) {
       for (let i = 0; i < this.recipesInDiet.length; i++) {
         if (
-          this.recipesInDiet[i].dayOfWeek === dayOfWeek &&
+          this.recipesInDiet[i].dayWeek === dayOfWeek &&
           this.recipesInDiet[i].mealTime === mealTime
         ) {
           this.recipesInDiet.splice(i, 1);
@@ -62,7 +62,7 @@ export class DietAdminComponent {
       }
         this.recipesInDiet.push({
             recipe: recipe,
-            dayOfWeek: dayOfWeek,
+            dayWeek: dayOfWeek,
             mealTime: mealTime,
         })
     }

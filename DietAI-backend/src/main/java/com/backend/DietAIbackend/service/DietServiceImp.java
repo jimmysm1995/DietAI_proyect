@@ -36,7 +36,7 @@ public class DietServiceImp implements DietService {
                 RecipeDiet recipeDiet = new RecipeDiet();
                 recipeDiet.setDiet(diet);
                 recipeDiet.setRecipe(recipeInDiet.recipe());
-                recipeDiet.setDayOfWeek(recipeInDiet.day());
+                recipeDiet.setDayWeek(recipeInDiet.dayWeek());
                 recipeDiet.setMealTime(recipeInDiet.mealTime());
                 recipeDietService.save(recipeDiet);
             }
@@ -91,7 +91,7 @@ public class DietServiceImp implements DietService {
                 Recipe recipe = recipeService.findById(recipeDiet.getRecipe().getIdRecipe());
                 recipeList.add(new RecipeInDiet(
                         recipe,
-                        recipeDiet.getDayOfWeek(),
+                        recipeDiet.getDayWeek(),
                         recipeDiet.getMealTime()));
             }
         }

@@ -5,6 +5,10 @@
       <div class="form-group">
         <label for="name">Nombre de la receta:</label>
         <input type="text" class="form-control" id="name" name="name" ngModel />
+        <label for="steps">Pasos de la receta (Separar por puntos):</label>
+        <textarea class="form-control" id="steps" name="steps" ngModel rows="4"  ></textarea>
+        <label for="imageUrl">Enlace para la foto de la receta:</label>
+        <input type="text" class="form-control" id="imageUrl" name="imageUrl" ngModel />
       </div>
       <button type="submit" class="btn btn-primary mt-2">Guardar</button>
     </form>

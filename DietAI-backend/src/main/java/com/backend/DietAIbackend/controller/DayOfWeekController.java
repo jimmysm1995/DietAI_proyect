@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.model.DayWeek;
 import com.backend.DietAIbackend.model.JobType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +19,7 @@ import java.util.List;
 public class DayOfWeekController {
 
     @GetMapping
-    public List<DayOfWeek> getAllDayOfWeek() {
-        return Arrays.asList(DayOfWeek.values());
+    public List<DayWeek> getAllDayOfWeek() {
+        return Arrays.asList(DayWeek.values());
     }
 }

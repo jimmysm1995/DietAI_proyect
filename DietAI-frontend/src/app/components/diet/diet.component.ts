@@ -5,6 +5,7 @@ import { RecipeComponent } from '../recipe/recipe.component';
 import { ClientStore } from '../../store/clientStore';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipeInDietResponse } from 'src/app/models/RecipeInDiet';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
     selector: 'app-diet',
@@ -14,21 +15,26 @@ import { RecipeInDietResponse } from 'src/app/models/RecipeInDiet';
 export class DietComponent {
     constructor(
         private dietService: DietService,
-        private ClientStore: ClientStore
+        private clientStore: ClientStore,
+        private clientService: ClientService
     ) {}
 
     public recipes: RecipeInDietResponse [] = [];
 
 
     ngOnInit(): void {
-        this.dietService.getRecipesByDiet(1).then((recipes: RecipeInDietResponse[]) => {
-            this.recipes = recipes;
-            
-        });
+        if (this.clientStore.client.idClient !== undefined) {
+            this.clientService.getDietByClient(this.clientStore.client.idClient || 0).then((diet) => {
+                this.dietService.getRecipesByDiet(diet.idDiet || 0).then((recipes: RecipeInDietResponse[]) => {
+                    this.recipes = recipes;
+                });
+            });
+        }
     }
+    
 
     findRecipe(day: string, mealTime: string): Recipe {
-        return this.recipes.find(recipe => recipe.day === day && recipe.mealTime === mealTime)?.recipe || new Recipe()
+        return this.recipes.find(recipe => recipe.dayWeek === day && recipe.mealTime === mealTime)?.recipe || new Recipe()
     }
     
 }

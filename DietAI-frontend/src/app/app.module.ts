@@ -84,7 +84,7 @@ const routes:Routes = [
     DietAdminComponent,
     ExerciseComponent,
     TrainingComponent,
-    FilterTrainingPipe,
+    FilterTrainingPipe
   ],
   imports: [
     HttpClientModule,

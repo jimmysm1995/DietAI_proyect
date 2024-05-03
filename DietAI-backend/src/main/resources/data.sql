@@ -308,14 +308,14 @@ VALUES ('Dieta Perdida 1800', 1800);
 -- Insertar datos en la tabla de relación recipe_diet
 INSERT INTO recipe_diet (id_diet, id_recipe, day_Week, meal_Time)
 VALUES
-(1, 1, 'MONDAY', 'DESAYUNO'),
-(1, 2, 'MONDAY', 'ALMUERZO'),
-(1, 3, 'MONDAY', 'SNACK'),
-(1, 4, 'MONDAY', 'CENA'),
-(1, 1, 'THURSDAY', 'DESAYUNO'),
-(1, 2, 'THURSDAY', 'ALMUERZO'),
-(1, 3, 'THURSDAY', 'SNACK'),
-(1, 4, 'THURSDAY', 'CENA');
+(1, 1, 'LUNES', 'DESAYUNO'),
+(1, 2, 'LUNES', 'ALMUERZO'),
+(1, 3, 'LUNES', 'SNACK'),
+(1, 4, 'LUNES', 'CENA'),
+(1, 1, 'JUEVES', 'DESAYUNO'),
+(1, 2, 'JUEVES', 'ALMUERZO'),
+(1, 3, 'JUEVES', 'SNACK'),
+(1, 4, 'JUEVES', 'CENA');
 
 
 
