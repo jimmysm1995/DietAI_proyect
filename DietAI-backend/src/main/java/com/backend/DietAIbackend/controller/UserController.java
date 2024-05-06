@@ -92,4 +92,11 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/getAuthorities/{userId}")
+    public ResponseEntity<List<String>> getAuthorities(@PathVariable Long userId){
+
+        return ResponseEntity.ok().body(userService.getAuthorities(userId));
+
+    }
+
 }

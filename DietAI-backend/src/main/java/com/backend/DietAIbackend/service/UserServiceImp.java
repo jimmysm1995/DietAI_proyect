@@ -6,6 +6,7 @@ import com.backend.DietAIbackend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,14 @@ public class UserServiceImp implements UserService {
     public User findByUsername(String username){
 
         return this.userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public List<String> getAuthorities(Long userId) {
+
+        User user = findById(userId);
+
+        return user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
     }
 
 }

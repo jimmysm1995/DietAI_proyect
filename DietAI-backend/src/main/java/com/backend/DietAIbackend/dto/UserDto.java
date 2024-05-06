@@ -1,8 +1,12 @@
 package com.backend.DietAIbackend.dto;
 
+import com.backend.DietAIbackend.model.UserAuthority;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,5 +29,8 @@ public class UserDto {
 
     @Schema(example = "foto", description = "Imagen de la foto de perfil el usuario")
     private String img;
+
+    @Schema(example = "USER", description = "Imagen de la foto de perfil el usuario")
+    private List<UserAuthority> authorities = new ArrayList<>();
 }
 
