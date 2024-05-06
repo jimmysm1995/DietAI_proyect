@@ -1,19 +1,45 @@
-
 <div class="headerBg">
     <header class="fixed-header">
-    <div class="logo-container">
-        <h1>DietAI Trainer</h1>
-    </div>
-    <nav>
-        <ul>
-            <li><a role="button" data-bs-toggle="modal"
-                data-bs-target="#updateProfileModal">Profile</a></li>
-            <li><a role="button" (click)="logout()">Log out</a></li>
-            <li><a href="/quienesSomos">Quienes somos</a></li>
-            <li><a href="/contacto">Contáctanos</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li *ngIf="isAdmin"><a href="/admin">Admin Panel</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo-container">
+            <h1>DietAI Trainer</h1>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a
+                        role="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#updateProfileModal"
+                        >Profile</a
+                    >
+                </li>
+                <li><a role="button" (click)="logout()">Log out</a></li>
+                <li><a href="/quienesSomos">Quienes somos</a></li>
+                <li><a href="/contacto">Contáctanos</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li *ngIf="isAdmin"><a href="/admin">Admin Panel</a></li>
+            </ul>
+        </nav>
+
+        <!-- Menú hamburguesa -->
+        <div class="menu-icon" (click)="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <!-- Menú desplegable -->
+        <div class="dropdown-menu">
+            <a
+                role="button"
+                data-bs-toggle="modal"
+                data-bs-target="#updateProfileModal"
+                >Profile</a
+            >
+            <a role="button" (click)="logout()">Log out</a>
+            <a href="/quienesSomos">Quienes somos</a>
+            <a href="/contacto">Contáctanos</a>
+            <a href="/blog">Blog</a>
+            <ng-container *ngIf="isAdmin">
+                <a href="/admin">Admin Panel</a>
+            </ng-container>
+        </div>
+    </header>
 </div>

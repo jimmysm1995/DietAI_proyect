@@ -1,47 +1,92 @@
-
-.bienvenida{
+.bienvenida {
     /* background-image: url(../../assets/IMG/landing.png); */
-    background-image: url(../../../assets/IMG/cemento.jpg);
+    background-image: url(../../../assets/IMG/fondoAcuarela2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 35rem;
+    height: 32rem;
     display: flex;
 }
 
-.bienvenida_pic{
+.bienvenida_pic {
     background-image: url(../../../assets/IMG/landingMujer.jpg);
     background-size: cover;
     background-position: center;
-    width: 25rem;
-    height: 23rem;
+    width: 30rem;
+    height: 27rem;
     margin-left: 12%;
-    margin-top: 1%;
-    border-radius: 5%;
+    margin-top: 2%;
+    border-radius: 50% / 103px 105px 0 0;
 }
 
-.message{
+.message {
     margin-left: 5%;
-    padding-top: 5%;
+    padding-top: 8%;
     width: 100%;
 }
 
-.message h1{
-    font-size: 2.8rem;
+.message h1 {
+    font-size: 3.8rem;
 }
 
-.message p{
+.message p {
     font-size: 1.5rem;
     margin: 0;
     padding: 0;
     margin-left: 3%;
-
 }
 
-.onda{
+.onda {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100vw;
     height: 10rem;
+}
 
+/* * PANTALLA PEQUEÑA * */
+
+@media screen and (max-width: 768px) {
+    .bienvenida_pic {
+        display: none; /* Oculta la sección de bienvenida en pantallas pequeñas */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .message {
+        margin-top: 2rem; /* Agrega espacio entre el título y el párrafo */
+        text-align: center; /* Centra el texto horizontalmente */
+    }
+
+    .message h1 {
+        font-size: 2.8rem; /* Reduce el tamaño del título en pantallas pequeñas */
+        margin-bottom: 2rem; /* Agrega espacio entre el título y el párrafo */
+        margin-right: 8%;
+    }
+
+    .message p {
+        font-size: 1.2rem; /* Reduce el tamaño del párrafo en pantallas pequeñas */
+        margin-right: 8%;
+    }
+
+    .bienvenida {
+        height: 25rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .bienvenida_pic {
+        display: block; 
+    }
+
+    .message h1 {
+        font-size: 2.8rem; 
+        margin-bottom: 2rem; 
+        margin-right: 8%;
+    }
+
+    .message p {
+        font-size: 1.2rem; 
+        margin-right: 8%;
+    }
 }

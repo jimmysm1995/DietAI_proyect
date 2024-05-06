@@ -7,3 +7,7 @@
     -webkit-box-orient: vertical;
     white-space: normal; /* Permite que el texto se muestre en múltiples líneas */
 }
+
+.blogs{
+    margin-bottom: 5rem;
+}
