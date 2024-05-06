@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  menuActive: boolean = false;
+  toggleMenu() {
+    const menuIcon = document.querySelector('.menu-icon');
+    menuIcon?.classList.toggle('active');
+  }
 }

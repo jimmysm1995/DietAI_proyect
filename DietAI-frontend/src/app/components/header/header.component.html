@@ -1,14 +1,29 @@
 <header class="fixed-header">
   <div class="logo-container">
-    <h1>DietAI Trainer</h1>
+      <h1>DietAI Trainer</h1>
   </div>
-  <nav class="nav-menu">
-    <ul class="nav-items">
-      <li><a href="/login">Log in</a></li>
-      <li><a href="/register">Sign Up</a></li>
-      <li><a href="/quienesSomos">Quienes somos</a></li>
-      <li><a href="/contacto">Contáctanos</a></li>
-      <li><a href="/blog">Blog</a></li>
-    </ul>
+  <nav class="nav-menu" [class.active]="menuActive">
+      <ul class="nav-items">
+          <li><a href="/login">Log in</a></li>
+          <li><a href="/register">Sign Up</a></li>
+          <li><a href="/quienesSomos">Quienes somos</a></li>
+          <li><a href="/contacto">Contáctanos</a></li>
+          <li><a href="/blog">Blog</a></li>
+      </ul>
   </nav>
+  <!-- Menú hamburguesa -->
+  <div class="menu-icon" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Menú desplegable -->
+  <div class="dropdown-menu" *ngIf="menuActive">
+      <ul>
+          <li><a href="/login">Log in</a></li>
+          <li><a href="/register">Sign Up</a></li>
+          <li><a href="/quienesSomos">Quienes somos</a></li>
+          <li><a href="/contacto">Contáctanos</a></li>
+          <li><a href="/blog">Blog</a></li>
+      </ul>
+  </div>
 </header>
