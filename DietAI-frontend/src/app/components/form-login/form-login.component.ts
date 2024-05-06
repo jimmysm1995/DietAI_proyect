@@ -49,7 +49,6 @@ export class FormLoginComponent {
             //cuadno el login es correcto guarda el token y redireciona a home
             .then((response: LoginResponse) => {
                 localStorage.setItem('sesion', response.token);
-                localStorage.setItem('autorities', response.authorities[0]);
                 this.router.navigate(['/home']);
             })
             .catch((error) => {

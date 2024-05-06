@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header-home',
@@ -9,8 +11,8 @@ import { Router } from '@angular/router';
 export class HeaderHomeComponent {
   constructor(
     private elementRef: ElementRef,
-    private router : Router) {}
-
+    private router : Router,
+    private userService : UserService) {}
     
   isAdmin: boolean = false; 
 
@@ -19,10 +21,13 @@ export class HeaderHomeComponent {
   }
 
   ngOnInit(): void {
-    const auth = localStorage.getItem('autorities');
-    if (auth === 'ADMIN') {
-      this.isAdmin = true;
-    }
+    this.userService.getCurrentUser().then((user: User) => {
+      this.userService.getAuthorities(user.idUser).then((authorities: string[]) => {
+        if (authorities.includes('ADMIN')) {
+          this.isAdmin = true;
+        }
+      })
+    });
   }
   
   closeProfileModal() {

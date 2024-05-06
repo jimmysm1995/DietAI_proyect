@@ -24,6 +24,10 @@ export class UserService {
     return axios.get(`${this.baseUrl}/${id}`).then((response) => response.data);
   }
 
+  getAuthorities(id?: number): Promise<string[]> {
+    return axios.get(`${this.baseUrl}/getAuthorities/${id}`).then((response) => response.data);
+  }
+
   getUserByUsername(username: string): Promise<User> {
     return axios.get(`${this.baseUrl}/user/${username}`).then((response) => response.data);
   }

@@ -7,5 +7,5 @@ export class User {
   password: string = "";
   client?: Client;
   img: string='';
-  
+  authorities?: any[] = [];
 }
