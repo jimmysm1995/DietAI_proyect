@@ -2,7 +2,12 @@
 <app-profile class="profile"></app-profile>
 
 <div class="trainingDiet">
-    <app-entrenameinto class="entrenameinto"></app-entrenameinto>
-    <app-diet></app-diet>
+    <h3>Entrenamiento</h3>
+    <button class="btn btn-success entrenamiento" (click)="verEntrenamiento()">Ver Entrenamiento</button>
+    <app-entrenameinto class="entrenamiento" *ngIf="showEntrenamiento"></app-entrenameinto>
+
+    <h3>Dieta</h3>
+    <button class="btn btn-primary dieta" (click)="verDieta()">Ver Dieta</button>
+    <app-diet *ngIf="showDieta" class="dieta"></app-diet>
 </div>
 <app-footer></app-footer>
