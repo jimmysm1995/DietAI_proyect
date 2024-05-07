@@ -20,13 +20,17 @@ public class DietServiceImp implements DietService {
     DietRepository dietRepository;
 
     @Autowired
-    RecipeDietServiceImp recipeDietService;
+    RecipeDietService recipeDietService;
 
     @Autowired
-    RecipeServiceImp recipeService;
+    RecipeService recipeService;
+
+    @Autowired
+    DietAllergyService dietAllergyService;
 
     @Transactional
-    public Diet save(Diet diet, List<RecipeInDiet> recipeInDietList) {
+    @Override
+    public Diet save(Diet diet, List<RecipeInDiet> recipeInDietList, List<Allergy> allergyList) {
 
         Diet dieta = dietRepository.save(diet);
 
@@ -41,12 +45,17 @@ public class DietServiceImp implements DietService {
                 recipeDietService.save(recipeDiet);
             }
         }
+
+        for (Allergy allergy : allergyList) {
+            dietAllergyService.save(diet,allergy);
+        }
         
         actualizarCalorias();
 
         return dieta;
     }
 
+    @Override
     public List<IngredientSummary> getListaCompra(Long id){
 
         return dietRepository.getIngredientSummaryByDietId(id);
@@ -56,6 +65,7 @@ public class DietServiceImp implements DietService {
         dietRepository.actualizarCalories();
     }
 
+    @Override
     public Diet findById(Long id){
         return dietRepository.findById(id).orElse(null);
     }
@@ -65,10 +75,13 @@ public class DietServiceImp implements DietService {
         return dietRepository.save(var1);
     }
 
+    @Override
     public List<Diet> findAll(){return dietRepository.findAll();}
 
+    @Override
     public void deleteById(Long id){ dietRepository.deleteById(id);}
 
+    @Override
     public Diet update(Diet diet) {
         try {
             dietRepository.findById(diet.getIdDiet());
@@ -79,6 +92,7 @@ public class DietServiceImp implements DietService {
         return dietRepository.save(diet);
     }
 
+    @Override
     public List<RecipeInDiet> findRecipesByDiet(Long id) {
 
         List<RecipeDiet> recipeDietList = recipeDietService.findAll();

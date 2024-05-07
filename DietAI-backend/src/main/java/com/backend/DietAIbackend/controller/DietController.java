@@ -1,8 +1,10 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.*;
+import com.backend.DietAIbackend.mapper.AllergyMapper;
 import com.backend.DietAIbackend.mapper.DietMapper;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
+import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.Diet;
 import com.backend.DietAIbackend.service.DietService;
 import com.backend.DietAIbackend.service.DietServiceImp;
@@ -28,6 +30,9 @@ public class DietController {
 
     @Autowired
     RecipeMapper recipeMapper;
+
+    @Autowired
+    AllergyMapper allergyMapper;
 
     @GetMapping
     public ResponseEntity<List<DietDto>>findAll(){
@@ -60,7 +65,9 @@ public class DietController {
 
         List<RecipeInDiet> recipeInDietList = request.getRecipeInDiet();
 
-        return ResponseEntity.ok().body(dietMapper.modelToDto(dietService.save(diet, recipeInDietList)));
+        List<Allergy> allergyList = allergyMapper.listDtoToModel(request.getDiet().getAllergy());
+
+        return ResponseEntity.ok().body(dietMapper.modelToDto(dietService.save(diet, recipeInDietList, allergyList)));
     }
 
     @DeleteMapping("/{idDiet}")

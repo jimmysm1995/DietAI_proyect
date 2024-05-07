@@ -8,6 +8,8 @@ import { RecipeWithIngredientsRequest } from '../../models/RecipeWithIngredients
 import { IngredientInRecipe } from '../../models/IngredientInRecipe';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from 'src/app/models/Recipe';
+import { AllergyService } from 'src/app/services/allergy.service';
+import { Allergy } from 'src/app/models/Allergy';
 
 
 @Component({
@@ -25,9 +27,10 @@ export class RecipeAdminComponent {
   public recipes : Recipe[] = [];
   public recipe : Recipe = new Recipe();
   public selectedRecipeId: number = 0;
+  public allergies : Allergy[] = [];
 
   constructor(private recipeAdminService: RecipeAdminService, private ingredientService: IngredientService,
-    private recipeService: RecipeService) { 
+    private recipeService: RecipeService, private allergyService: AllergyService) { 
   }
 
   ngOnInit(): void {
@@ -37,6 +40,9 @@ export class RecipeAdminComponent {
     this.recipeService.getAllRecipe().then((recipe) => {
         this.recipes = recipe;
     })
+    this.allergyService.getAllergies().then((allergies) => {
+      this.allergies = allergies;
+  });
 }
 
 registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
@@ -45,6 +51,7 @@ registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
 }
 
 registrarRecipe(recipe : Recipe) {
+  console.log(recipe);
   this.recipeWithIngredientsRequest.recipe = recipe;
   this.recipeWithIngredientsRequest.ingredientInRecipe = this.ingredientsInRecipe;
   this.recipeService.postRecipe(this.recipeWithIngredientsRequest).then((newRecipe) => {

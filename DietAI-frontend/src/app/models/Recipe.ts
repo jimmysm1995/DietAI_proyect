@@ -1,4 +1,4 @@
-import { Ingredient } from "./Ingredient";
+import { Allergy } from "./Allergy";
 import { IngredientInRecipe } from "./IngredientInRecipe";
 
 export class Recipe{
@@ -8,6 +8,7 @@ export class Recipe{
     steps: string = '';
     ingredients?: IngredientInRecipe[] = [];
     imageUrl?: string = '';
+    allergy?: Allergy[];
 }
 
 export class RecipeWithIngredients{

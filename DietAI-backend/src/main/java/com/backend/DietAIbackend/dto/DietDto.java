@@ -17,6 +17,9 @@ public class DietDto {
     @Schema(example = "2000", description = "Cantidad de calorías")
     private Integer calories;
 
+    @Schema(description = "Lista de alergias de la dieta")
+    private List<AllergyDto> allergy;
+
     @Schema(description = "Lista de recetas asociadas a la dieta")
     private List<RecipeDietDto> recipeDiets;
 

@@ -3,7 +3,9 @@ package com.backend.DietAIbackend.controller;
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeDto;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
+import com.backend.DietAIbackend.mapper.AllergyMapper;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
+import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.Recipe;
 import com.backend.DietAIbackend.service.RecipeService;
 import com.backend.DietAIbackend.service.RecipeServiceImp;
@@ -26,13 +28,17 @@ public class RecipeController {
     @Autowired
     RecipeMapper recipeMapper;
 
+    @Autowired
+    AllergyMapper allergyMapper;
+
     @PostMapping
     public ResponseEntity<RecipeDto> save(@RequestBody RecipeWithIngredientsRequest request) {
 
         Recipe recipe = recipeMapper.dtoToModel(request.getRecipe());
         List<IngredientInRecipe> ingredientInRecipeList = request.getIngredientInRecipe();
+        List<Allergy> allergyList = allergyMapper.listDtoToModel(request.getRecipe().getAllergy());
 
-        return ResponseEntity.ok().body(recipeMapper.modelToDto(recipeService.save(recipe, ingredientInRecipeList)));
+        return ResponseEntity.ok().body(recipeMapper.modelToDto(recipeService.save(recipe, ingredientInRecipeList, allergyList)));
     }
 
     @GetMapping

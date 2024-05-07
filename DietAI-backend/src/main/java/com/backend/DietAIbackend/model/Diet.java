@@ -28,6 +28,9 @@ public class Diet {
     @OneToMany(mappedBy = "diet" , cascade = CascadeType.ALL)
     private List<RecipeDiet> recipeDiets;
 
+    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
+    private List<DietAllergy> dietAllergy;
+
     @OneToMany(mappedBy = "diet")
     private List<Client> clients;
 }
