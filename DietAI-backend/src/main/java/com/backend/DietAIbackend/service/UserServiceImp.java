@@ -1,7 +1,6 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.model.User;
-import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.service.spi.ServiceException;
@@ -21,8 +20,6 @@ public class UserServiceImp implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    ClientRepository clientRepository;
 
     public List<User> findAll() {
         return userRepository.findAll();

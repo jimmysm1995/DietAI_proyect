@@ -29,8 +29,5 @@ public class UserDto {
 
     @Schema(example = "foto", description = "Imagen de la foto de perfil el usuario")
     private String img;
-
-    @Schema(example = "USER", description = "Imagen de la foto de perfil el usuario")
-    private List<UserAuthority> authorities = new ArrayList<>();
 }
 
