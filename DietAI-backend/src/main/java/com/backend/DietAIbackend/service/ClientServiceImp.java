@@ -96,10 +96,15 @@ public class ClientServiceImp implements ClientService {
             int edad = periodo.getYears();
             log.info(String.valueOf(edad));
 
-            if (client.getGender() == (Gender.MASCULINO)) {
+            if (client.getGender() == Gender.MASCULINO) {
                 tmb = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
-            } else {
+            } else if (client.getGender() == Gender.FEMENINO) {
                 tmb = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
+            } else {
+                // Para género "OTRO", calculamos la media entre la fórmula masculina y la femenina
+                Double tmbMasculino = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
+                Double tmbFemenino = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
+                tmb = (tmbMasculino + tmbFemenino) / 2;
             }
 
             // Obtener todas las dietas disponibles
