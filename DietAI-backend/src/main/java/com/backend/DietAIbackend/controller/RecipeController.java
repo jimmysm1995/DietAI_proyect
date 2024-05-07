@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.dto.AllergyDto;
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeDto;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
@@ -63,6 +64,12 @@ public class RecipeController {
             log.error("Ha habido un problema al borrar la receta");
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/allergies/{idRecipe}")
+    public ResponseEntity<List<AllergyDto>> findAllAllergiesInRecipe(@PathVariable Long idRecipe){
+
+        return ResponseEntity.ok().body(allergyMapper.listModelToDto(recipeService.findAllAllergiesInRecipe(idRecipe)));
     }
 
 }

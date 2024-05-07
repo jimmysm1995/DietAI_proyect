@@ -78,42 +78,56 @@ export class TrainingComponent {
     }
 
     async onTrainingSelected() {
-      switch (this.training.typeTraining) {
-          case 'GIMNASIO':
-              this.exercises = await this.filterByMuscle(await this.exerciseService.getGymExercises(), this.filterMuscle);
-              break;
-          case 'CASA':
-              this.exercises = await this.filterByMuscle(await this.exerciseService.getHomeExercises(), this.filterMuscle);
-              break;
-          case 'AMBOS':
-              this.exercises = await this.filterByMuscle(await this.exerciseService.getAllExercises(), this.filterMuscle);
-              break;
-          case "":
-              this.exercises = [];
-              break;
-      }
-  }
-    async filterByMuscle(exercises: Exercise[], filterMuscles: Muscle[]): Promise<Exercise[]> {
-      const filteredExercises: Exercise[] = [];
-  
-      // Iterar sobre cada ejercicio
-      for (const exercise of exercises) {
-          // Obtener los músculos del ejercicio
-          const muscles = await this.exerciseService.findAllMusclesInExercise(exercise.idExercise);
-  
-          // Verificar si el ejercicio contiene todos los músculos del filtro
-          const containsAllMuscles = filterMuscles.every(filterMuscle =>
-              muscles.some(muscle => muscle.idMuscle === filterMuscle.idMuscle)
-          );
-  
-          // Si el ejercicio contiene todos los músculos del filtro, agregarlo al array de ejercicios filtrados
-          if (containsAllMuscles) {
-              filteredExercises.push(exercise);
-          }
-      }
-  
-      return filteredExercises;
-  }
+        switch (this.training.typeTraining) {
+            case 'GIMNASIO':
+                this.exercises = await this.filterByMuscle(
+                    await this.exerciseService.getGymExercises(),
+                    this.filterMuscle
+                );
+                break;
+            case 'CASA':
+                this.exercises = await this.filterByMuscle(
+                    await this.exerciseService.getHomeExercises(),
+                    this.filterMuscle
+                );
+                break;
+            case 'AMBOS':
+                this.exercises = await this.filterByMuscle(
+                    await this.exerciseService.getAllExercises(),
+                    this.filterMuscle
+                );
+                break;
+            case '':
+                this.exercises = [];
+                break;
+        }
+    }
+    async filterByMuscle(
+        exercises: Exercise[],
+        filterMuscles: Muscle[]
+    ): Promise<Exercise[]> {
+        const filteredExercises: Exercise[] = [];
+        // Iterar sobre cada ejercicio
+        for (const exercise of exercises) {
+            // Obtener los músculos del ejercicio
+            const muscles = await this.exerciseService.findAllMusclesInExercise(
+                exercise.idExercise
+            );
+
+            // Verificar si el ejercicio contiene todos los músculos del filtro
+            const containsAllMuscles = filterMuscles.every((filterMuscle) =>
+                muscles.some(
+                    (muscle) => muscle.idMuscle === filterMuscle.idMuscle
+                )
+            );
+            // Si el ejercicio contiene todos los músculos del filtro, agregarlo al array de ejercicios filtrados
+            if (containsAllMuscles) {
+                filteredExercises.push(exercise);
+            }
+        }
+
+        return filteredExercises;
+    }
 
     addExercise() {
         if (this.exerciseInTraining.exercise.idExercise != 0) {

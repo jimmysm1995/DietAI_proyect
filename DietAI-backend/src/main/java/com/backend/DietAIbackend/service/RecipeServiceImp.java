@@ -1,11 +1,13 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.dto.AllergyDto;
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
 import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.model.Recipe;
+import com.backend.DietAIbackend.model.RecipeAllergy;
 import com.backend.DietAIbackend.repository.RecipeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -80,6 +82,20 @@ public class RecipeServiceImp implements RecipeService {
         request.setIngredientInRecipe(ingredients);
 
         return request;
+    }
+
+    @Override
+    public List<Allergy> findAllAllergiesInRecipe(Long idRecipe) {
+
+        Recipe recipe = findById(idRecipe);
+
+        List<Allergy> allergyList = new ArrayList<>();
+
+        for (RecipeAllergy recipeAllergy : recipe.getRecipeAllergy()){
+            allergyList.add(recipeAllergy.getAllergy());
+        }
+
+        return allergyList;
     }
 
     @Override
