@@ -38,6 +38,10 @@ export class ExerciseService {
     return axios.get(this.baseUrl+'/getHomeExercises').then((response) => response.data);
   }
 
+  findAllMusclesInExercise(idExercise: number): Promise<Muscle[]> {
+    return axios.get(this.baseUrl + '/muscles/' + idExercise).then((response) => response.data);
+  }
+
   getMuscles(): Promise<Muscle[]> {
     return axios.get(environment.apiUrl+'/api/muscles').then((response) => response.data);
   }

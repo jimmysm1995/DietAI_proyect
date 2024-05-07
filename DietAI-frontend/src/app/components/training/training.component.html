@@ -6,7 +6,7 @@
             <input type="text" id="name" name="name" [(ngModel)]="training.name" required /><br />
 
             <label for="typeTraining">Tipo de Entrenamiento:</label><br />
-            <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" (change)="onTypeTrainingSelected()" required>
+            <select id="typeTraining" name="typeTraining" [(ngModel)]="training.typeTraining" (change)="onTrainingSelected()" required>
                 <option value=""></option>
                 <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
             </select>
@@ -35,6 +35,12 @@
     </div>
     <div class="child">
         <form (submit)="addExercise()">
+            <div class="form-group select-group">
+                <label for="muscle">Musculos involucrados</label>
+                <ngx-select-dropdown [(ngModel)]="filterMuscle" name="muscle" (change)="onTrainingSelected()"
+                    [config]="{displayKey: 'name',  search: true, placeholder:'Selecionar'}" [multiple]="true"
+                    [options]="muscle" class="w-100"></ngx-select-dropdown>
+            </div>
             <div class="form-group col-md-6">
                 <label for="exercise">Ejercicios:</label>
                 <select name="exercise" id="exercise" class="form-control"  [(ngModel)]="exerciseInTraining.exercise">
