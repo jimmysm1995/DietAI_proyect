@@ -1,8 +1,10 @@
 package com.backend.DietAIbackend.model;
 
 public enum PreviusLevel {
-    NO_ENTRENO_NUNCA,
-    SUELO_ENTRENAR_ALGUNOS_DIAS,
-    SUELO_ENTRENAR_DIARIAMENTE
+    NUNCA_HE_ENTRENADO,
+    ENTRENO_POCO,
+    ENTRENO_BASTANTE,
+    ENTRENO_MUCHO,
+    ENTRENO_A_DIARIO
 
 }

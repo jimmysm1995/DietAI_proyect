@@ -129,14 +129,14 @@ public class ClientServiceImp implements ClientService {
             // Asignar la mejor dieta al cliente
             if (mejorDieta != null) {
                 client.setDiet(mejorDieta);
-                return clientRepository.save(client);
             } else {
                 log.error("No se pudo encontrar una dieta adecuada para el cliente.");
-                return null;
             }
+
+            return clientRepository.save(client);
         } catch (Exception e) {
             log.error("Ocurrió un error al asignar la dieta al cliente: " + e.getMessage());
-            return null;
+            throw new ServiceException("Ocurrió un error al asignar la dieta al cliente: " + e.getMessage());
         }
     }
 
@@ -152,19 +152,51 @@ public class ClientServiceImp implements ClientService {
         return false; // Si no se encuentra ninguna coincidencia, devolver false
     }
 
-    public Client asignarEntrenamiento(Client client){
+    public Client asignarEntrenamiento(Client client) {
+        try {
+            List<Training> trainingList = trainingRepository.findAll();
+            Integer clientLevel = 0;
 
-        List<Training> trainingList = trainingRepository.findAll();
-
-        for (Training training : trainingList) {
-            if (training.getDays() == client.getTrainingTime() && training.getTypeTraining() == client.getTypeTraining()){
-                client.setTraining(training);
+            switch (client.getPreviousLevel()) {
+                case NUNCA_HE_ENTRENADO:
+                    clientLevel = 1;
+                    break;
+                    case ENTRENO_POCO:
+                    clientLevel = 2;
+                    break;
+                case ENTRENO_BASTANTE:
+                    clientLevel = 3;
+                    break;
+                case ENTRENO_MUCHO:
+                    clientLevel = 4;
+                    break;
+                case ENTRENO_A_DIARIO:
+                    clientLevel = 5;
+                    break;
+                default:
+                    log.info("No se ha especificado el nivel, por lo que se deja el más bajo posible");
+                    break;
             }
+
+            for (Training training : trainingList) {
+                if (training.getDays() == client.getTrainingTime() &&
+                        training.getTypeTraining() == client.getTypeTraining() &&
+                        clientLevel == training.getDifficulty()) {
+                    client.setTraining(training);
+                }
+            }
+
+            if (client.getTraining() == null){
+                log.error("No se ha encontrado un entrenamiento adecuado para el cliente");
+            }
+
+            return clientRepository.save(client);
+        } catch (Exception e) {
+            log.error("Error al asignar entrenamiento: " + e.getMessage());
+            throw new ServiceException("Error al asignar entrenamiento: " + e.getMessage());
         }
-
-
-        return clientRepository.save(client);
     }
+
 
     public Client findCurrentClient(long userId){
         return this.clientRepository.findClientByUserId(userId);
