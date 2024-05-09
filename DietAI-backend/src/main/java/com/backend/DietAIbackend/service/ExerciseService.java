@@ -9,4 +9,5 @@ public interface ExerciseService extends ICrudService<Exercise, Long> {
     Exercise save(Exercise exercise, List<Muscle> muscleList);
     List<Exercise> findHomeExercises();
     List<Exercise> findGymExercises();
+    List<Muscle> findAllmusclesInExercise(Long id);
 }

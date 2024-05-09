@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { RecipeWithIngredientsRequest } from '../models/RecipeWithIngredientsRequest';
 import { Recipe, RecipeWithIngredients } from '../models/Recipe';
+import { Allergy } from '../models/Allergy';
 
 
 @Injectable({
@@ -19,6 +20,10 @@ export class RecipeService {
 
   getAllRecipe(): Promise<Recipe[]> {
     return axios.get(this.baseUrl).then((response) => response.data);
+  }
+
+  findAllergiesInRecipe(idRecipe: number): Promise<Allergy[]> {
+    return axios.get(this.baseUrl + "/allergies/" + idRecipe).then((response) => response.data);
   }
 
   deleteRecipe(id: number): Promise<void> {

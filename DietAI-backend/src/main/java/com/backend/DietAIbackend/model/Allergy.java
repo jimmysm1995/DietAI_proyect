@@ -19,4 +19,10 @@ public class Allergy {
 
     @OneToMany(mappedBy = "allergy")
     private List<ClientAllergy> clientAllergy;
+
+    @OneToMany(mappedBy = "allergy")
+    private List<RecipeAllergy> recipeAllergy;
+
+    @OneToMany(mappedBy = "allergy")
+    private List<DietAllergy> dietAllergy;
 }

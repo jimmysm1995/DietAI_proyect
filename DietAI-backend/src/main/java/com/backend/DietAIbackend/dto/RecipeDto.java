@@ -25,6 +25,9 @@ public class RecipeDto {
     @Schema(example = "remojar la pasta, añadir sal, ...", description = "Pasos para realizar la receta")
     private String steps;
 
+    @Schema(description = "Lista de alergias de la receta")
+    private List<AllergyDto> allergy;
+
     @Schema(description = "Lista de dietas que incluyen esta receta")
     private List<RecipeDietDto> recipeDiets;
 

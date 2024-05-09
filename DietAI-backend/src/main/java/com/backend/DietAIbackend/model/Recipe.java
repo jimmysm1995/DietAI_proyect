@@ -27,6 +27,9 @@ public class Recipe {
     @Column(name = "steps", length = 1000)
     private String steps;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private List<RecipeAllergy> recipeAllergy;
+
     @OneToMany(mappedBy = "recipe")
     @JsonIgnore
     private List<RecipeDiet> recipeDiets;

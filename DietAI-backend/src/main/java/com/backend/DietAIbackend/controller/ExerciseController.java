@@ -1,20 +1,18 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.ExerciseDto;
+import com.backend.DietAIbackend.dto.MuscleDto;
 import com.backend.DietAIbackend.mapper.ExerciseMapper;
 import com.backend.DietAIbackend.mapper.MuscleMapper;
 import com.backend.DietAIbackend.model.Exercise;
-import com.backend.DietAIbackend.model.ExerciseMuscle;
 import com.backend.DietAIbackend.model.Muscle;
 import com.backend.DietAIbackend.service.ExerciseService;
-import com.backend.DietAIbackend.service.ExerciseServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -67,18 +65,9 @@ public class ExerciseController {
     }
 
     @GetMapping("/muscles/{idExercise}")
-    public ResponseEntity<List<String>> findAllmusclesInExercise(@PathVariable Long idExercise){
+    public ResponseEntity<List<MuscleDto>> findAllMusclesInExercise(@PathVariable Long idExercise){
 
-        Exercise exercise = exerciseService.findById(idExercise);
-
-        List<String> muscleList = new ArrayList<>();
-
-        for (ExerciseMuscle exerciseMuscle: exercise.getExerciseMuscles()
-             ) {
-            muscleList.add(exerciseMuscle.getMuscle().getName());
-        }
-
-        return ResponseEntity.ok().body(muscleList);
+        return ResponseEntity.ok().body(muscleMapper.listModelToDto(exerciseService.findAllmusclesInExercise(idExercise)));
     }
 
     @DeleteMapping("/{id}")

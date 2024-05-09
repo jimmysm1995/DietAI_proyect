@@ -1,10 +1,13 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.dto.AllergyDto;
 import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
+import com.backend.DietAIbackend.model.Allergy;
 import com.backend.DietAIbackend.model.IngredientRecipe;
 import com.backend.DietAIbackend.model.Recipe;
+import com.backend.DietAIbackend.model.RecipeAllergy;
 import com.backend.DietAIbackend.repository.RecipeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -25,10 +28,14 @@ public class RecipeServiceImp implements RecipeService {
     IngredientRecipeService ingredientRecipeService;
 
     @Autowired
+    RecipeAllergyService recipeAllergyService;
+
+    @Autowired
     RecipeMapper recipeMapper;
 
     @Transactional
-    public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList) {
+    @Override
+    public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList, List<Allergy> allergyList) {
 
         Recipe recipe = recetaRepository.save(receta);
 
@@ -41,6 +48,10 @@ public class RecipeServiceImp implements RecipeService {
                 ingredientRecipe.setIngredient(ingredientInRecipe.getIngredient());
                 ingredientRecipeService.save(ingredientRecipe);
             }
+        }
+
+        for (Allergy allergy : allergyList) {
+            recipeAllergyService.save(recipe,allergy);
         }
 
         actualizarCalorias();
@@ -73,10 +84,26 @@ public class RecipeServiceImp implements RecipeService {
         return request;
     }
 
+    @Override
+    public List<Allergy> findAllAllergiesInRecipe(Long idRecipe) {
+
+        Recipe recipe = findById(idRecipe);
+
+        List<Allergy> allergyList = new ArrayList<>();
+
+        for (RecipeAllergy recipeAllergy : recipe.getRecipeAllergy()){
+            allergyList.add(recipeAllergy.getAllergy());
+        }
+
+        return allergyList;
+    }
+
+    @Override
     public void deleteById(Long id){
         recetaRepository.deleteById(id);
     }
 
+    @Override
     public Recipe findById(Long id){
         return recetaRepository.findById(id).orElse(null);
     }
@@ -86,10 +113,12 @@ public class RecipeServiceImp implements RecipeService {
         return recetaRepository.save(var1);
     }
 
+    @Override
     public List<Recipe> findAll(){
         return recetaRepository.findAll();
     }
 
+    @Override
     public Recipe update(Recipe recipe) {
         try {
             recetaRepository.findById(recipe.getIdRecipe());

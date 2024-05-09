@@ -1,6 +1,7 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.model.Exercise;
+import com.backend.DietAIbackend.model.ExerciseMuscle;
 import com.backend.DietAIbackend.model.Muscle;
 import com.backend.DietAIbackend.model.TypeTraining;
 import com.backend.DietAIbackend.repository.ExerciseRepository;
@@ -50,6 +51,7 @@ public class ExerciseServiceImp implements ExerciseService {
     @Override
     public List<Exercise> findAll(){return exerciseRepository.findAll();}
 
+    @Override
     public List<Exercise> findGymExercises(){
 
         List<Exercise> gymExercises = new ArrayList<>();
@@ -63,6 +65,22 @@ public class ExerciseServiceImp implements ExerciseService {
         return gymExercises;
     }
 
+    @Override
+    public List<Muscle> findAllmusclesInExercise(Long id) {
+
+        Exercise exercise = findById(id);
+
+        List<Muscle> muscleList = new ArrayList<>();
+
+        for (ExerciseMuscle exerciseMuscle: exercise.getExerciseMuscles()
+        ) {
+            muscleList.add(exerciseMuscle.getMuscle());
+        }
+
+        return muscleList;
+    }
+
+    @Override
     public List<Exercise> findHomeExercises(){
 
         List<Exercise> homeExercises = new ArrayList<>();
