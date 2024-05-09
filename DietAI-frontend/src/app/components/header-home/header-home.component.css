@@ -5,10 +5,9 @@ header {
     justify-content: space-between;
     height: 5rem;
     padding: 3rem;
-    background-color: rgb(107, 107, 107);
-    
-    
-
+    background-color: #38686A;
+    /* opacity: 0.94; */
+    /* position: sticky; */
 }
 
 .headerBg{
@@ -16,7 +15,7 @@ header {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
-    height: 70vh;
+    height: 60vh;
     color: aliceblue;
 }
 
@@ -41,4 +40,46 @@ header {
 }
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */
+  
+
+/* *Media query para pantallas pequeñas* */
+@media screen and (max-width: 768px) {
+    /* Ocultar el menú de navegación normal */
+    .fixed-header nav {
+      display: none;
+    }
+  
+    /* Estilos para el botón de menú hamburguesa */
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+      color: white;
+      font-size: 1.5rem;
+      padding: 10px;
+    }
+  
+    /* Estilos para el menú desplegable */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #38686A;
+      padding: 1rem;
+    }
+  
+    /* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
+    .menu-icon.active + .dropdown-menu {
+      display: block;
+    }
+  
+    /* Estilos para los enlaces en el menú desplegable */
+    .dropdown-menu a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      margin-bottom: 1rem;
+    }
+  }
   

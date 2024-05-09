@@ -59,4 +59,53 @@ h1{
   
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */
-  
+  /* *Media query para pantallas pequeñas* */
+@media screen and (max-width: 800px) {
+  /* Ocultar el menú de navegación normal */
+  .nav-menu {
+    display: none !important;
+  }
+
+  /* Estilos para el menú hamburguesa */
+.menu-icon {
+  display: block;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+/* Estilos para el menú desplegable */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #38686A;
+  padding: 1rem;
+}
+
+/* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
+.menu-icon.active + .dropdown-menu {
+  display: block;
+}
+
+/* Estilos para los enlaces en el menú desplegable */
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  margin-bottom: 1rem;
+}
+
+.dropdown-menu ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+}

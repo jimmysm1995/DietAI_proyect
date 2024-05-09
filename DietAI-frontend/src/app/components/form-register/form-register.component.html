@@ -34,7 +34,9 @@
             name="password"
             placeholder="************"
             ngModel required
+            minlength="8"
         />
+        
     </div>
     <!-- <div class="form-group">
         <label for="repeatPassword">Repeat Password</label>
@@ -55,6 +57,6 @@
     <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
     </div>
-    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Register</button>
+    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Register </button>
     <!-- <button type="submit" class="btn btn-secondary" routerLink="/landing">go back</button> -->
 </form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TrainingService } from 'src/app/services/training.service';
 import { Training, TrainingResponse } from 'src/app/models/Training';
 import { FilterTrainingPipe } from './entrenamientoPipe';
@@ -22,7 +22,7 @@ export class EntrenameintoComponent {
   ){ 
   }
 
-  verEntrenamiento(){
+  ngOnInit(): void {
     this.clientService.getTrainingByClient(this.clientStore.client.idClient || 0).then((training) => {
       this.trainingService.getById(training.idTraining || 0).then((trainings) => {
         this.dias = trainings.map((training) => training.orderWeek).filter((valor, indice, array) => {

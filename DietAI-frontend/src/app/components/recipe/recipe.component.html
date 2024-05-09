@@ -1,7 +1,7 @@
 
 <a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe" (click)="firstLoad()">{{ recipe.name }}</a>
 <div
-    class="modal fade" 
+    class="modal fade modal-backdrop" 
     [id]="'recipeModal' + recipe.idRecipe"
     tabindex="-1"
     role="dialog"
@@ -14,14 +14,15 @@
                 <h5 class="modal-title" id="recipeModalLabel">
                     {{ recipe.name }}
                 </h5>
-                <button
-                    type="button"
+                <a
+                    role="button"
+                    id="close"
                     class="close"
-                    data-dismiss="modal"
+                    data-bs-dismiss="modal"
                     aria-label="Close"
                 >
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    X
+                </a>
             </div>
             <div class="modal-body">
                 <img

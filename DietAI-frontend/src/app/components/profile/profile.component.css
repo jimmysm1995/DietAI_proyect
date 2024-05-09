@@ -1,9 +1,12 @@
 .profile{
-    background-color: rgb(255, 255, 255);
+    background-image: url(../../../assets/IMG/fondoAcuarela1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-position: center; */
     width: 80%;
     position: relative;
     top: -8rem;
-    z-index: 9999;
+    z-index: 1200;
     border-radius: 2rem;
     padding: 2rem;
     padding-top: 9rem;
@@ -44,6 +47,7 @@
 }
 
 .close{
+    font-weight: bold;
     cursor: pointer;
     width: 1.5rem;
     height: 1.5rem;
@@ -68,4 +72,14 @@
     text-align: center;
     padding: 2rem;
     max-width: 80%;
+}
+
+.btn {
+    background-color: #268F00;
+    border-color: #268F00;
+}
+
+.btn:hover {
+    background-color: #2CA300;
+    border-color: #2CA300;
 }

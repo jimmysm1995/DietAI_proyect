@@ -1,4 +1,4 @@
-.profile{
+.profile {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -7,10 +7,22 @@
     /* margin-top: 20rem; */
 }
 
-.entrenamiento{
-    margin-top: 100rem;
+.entrenamiento,
+.dieta {
+    margin-bottom: 3rem;
 }
 
-.trainingDiet{
-    padding: 5rem;
+.trainingDiet {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+}
+
+.btn {
+    background-color: #268F00;
+    border-color: #268F00;
+}
+.btn:hover {
+    background-color: #2CA300;
+    border-color: #2CA300;
 }

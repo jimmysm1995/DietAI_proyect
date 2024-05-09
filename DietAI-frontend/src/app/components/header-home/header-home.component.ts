@@ -40,6 +40,11 @@ export class HeaderHomeComponent {
     localStorage.removeItem('sesion');
     this.router.navigate(['/login']);
   }
+
+  toggleMenu() {
+    const menuIcon = document.querySelector('.menu-icon');
+    menuIcon?.classList.toggle('active');
+  }
 }
 
 
