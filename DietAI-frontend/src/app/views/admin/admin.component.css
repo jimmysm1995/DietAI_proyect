@@ -17,3 +17,11 @@
     flex-direction: column;
     align-items: center;
 }
+
+.goback{
+    display: flex;
+    flex-direction: column;
+    align-items:end;
+    font-size: large;
+    color: blue;
+}

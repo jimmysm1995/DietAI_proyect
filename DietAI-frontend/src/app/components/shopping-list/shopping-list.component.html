@@ -1,0 +1,40 @@
+<div
+    class="modal fade modal-backdrop" 
+    [id]="'shoppingListModal'"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="recipeModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recipeModalLabel">
+                    Lista de la Compra
+                </h5>
+                <a
+                    role="button"
+                    id="close"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    X
+                </a>
+            </div>
+            <div class="modal-body">
+                
+                <h6>Lista de la Compra:</h6>
+                <ul>
+                    <li *ngFor="let ingredient of shoppingList">
+                        <p>{{ ingredient.quantity * 100 }} gramos de {{ ingredient.name }}</p>
+                    </li>
+                </ul>
+                <h6>Pasos:</h6>
+                <ol>
+                    <li *ngFor="let step of steps">{{ step }}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

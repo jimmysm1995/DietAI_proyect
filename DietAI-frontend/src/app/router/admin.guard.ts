@@ -16,20 +16,22 @@ import { RoleStore } from '../store/roleStore';
 @Injectable({
     providedIn: 'root',
 })
-class AuthGuardService {
+class AdminGuardService {
     constructor(
         private router: Router,
         private userStore: UserStore,
         private userService: UserService,
         private clientService: ClientService,
         private clientStore: ClientStore,
-        private roleStore: RoleStore ) {}
+        private roleStore: RoleStore
+    ) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Promise<boolean> | boolean {
-        if (localStorage.getItem('sesion')) {
+        // que existe la sesión y que esta pertenece a un admin para que pueda acceder
+        if (localStorage.getItem('sesion') && this.roleStore.role === 'ADMIN') {
             if(!this.userStore.user.username){
                 return Promise.all([
                     this.userService.getCurrentUser(),this.clientService.getCurrentClient()
@@ -41,14 +43,14 @@ class AuthGuardService {
             }
             return true
         }
-        this.router.navigate(['/login']);
+        // al no cumplir primeras dos condiciones no deja acceder
         return false;
     }
 }
 
-export const AuthGuard: CanActivateFn = (
+export const AdminGuard: CanActivateFn = (
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ): Promise <boolean> | boolean => {
-    return inject(AuthGuardService).canActivate(next, state);
+    return inject(AdminGuardService).canActivate(next, state);
 };

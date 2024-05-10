@@ -29,8 +29,10 @@ export class RecipeAdminComponent {
   public selectedRecipeId: number = 0;
   public allergies : Allergy[] = [];
 
-  constructor(private recipeAdminService: RecipeAdminService, private ingredientService: IngredientService,
-    private recipeService: RecipeService, private allergyService: AllergyService) { 
+  constructor(private recipeAdminService: RecipeAdminService, 
+    private ingredientService: IngredientService,
+    private recipeService: RecipeService, 
+    private allergyService: AllergyService) { 
   }
 
   ngOnInit(): void {

@@ -40,6 +40,7 @@ import { ExerciseComponent } from './components/exercise/exercise.component';
 import { DietAdminComponent } from './components/diet-admin/diet-admin.component';
 import { TrainingComponent } from './components/training/training.component';
 import { FilterTrainingPipe } from './components/entrenameinto/entrenamientoPipe';
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -48,7 +49,7 @@ const routes:Routes = [
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'blog', component: BlogComponent},
-  {path: 'admin', component: AdminComponent}
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
 ]
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ const routes:Routes = [
     DietAdminComponent,
     ExerciseComponent,
     TrainingComponent,
-    FilterTrainingPipe
+    FilterTrainingPipe,
+    ShoppingListComponent
   ],
   imports: [
     HttpClientModule,
