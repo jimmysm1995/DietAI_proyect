@@ -119,7 +119,7 @@ public class ClientServiceImp implements ClientService {
                 Double diferencia = Math.abs(dieta.getCalories() - tmb);
                 if ((diferencia < menorDiferencia)) {
                     List<DietAllergy> dietAllergies = dieta.getDietAllergy();
-                    if (hasMatchingAllergy(clientAllergyList, dietAllergies)) {
+                    if (!hasMatchingAllergy(clientAllergyList, dietAllergies)) {
                         mejorDieta = dieta;
                         menorDiferencia = diferencia;
                     }
