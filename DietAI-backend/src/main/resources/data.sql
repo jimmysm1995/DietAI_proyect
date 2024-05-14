@@ -190,7 +190,7 @@ VALUES
 
 -- Insertar datos en la tabla training
 INSERT INTO training (name, type_training, difficulty, days, distribution)
-VALUES ('Entrenamiento prueba', 'GIMNASIO', 6, 3, 'Full body');
+VALUES ('Entrenamiento prueba', 'GIMNASIO', 3, 3, 'Full body');
 
 -- Insertar datos en la tabla TrainingExercise
 INSERT INTO training_exercise (sets, reps, order_day, order_week, id_training, id_exercise)

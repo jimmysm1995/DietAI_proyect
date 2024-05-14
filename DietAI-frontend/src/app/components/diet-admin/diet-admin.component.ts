@@ -100,7 +100,6 @@ export class DietAdminComponent {
               filteredRecipes.push(recipe);
           }
       }
-  
       this.recipes = filteredRecipes;
   }
   
