@@ -1,6 +1,7 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.UserDto;
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.mapper.ClientMapper;
 import com.backend.DietAIbackend.model.User;
@@ -28,21 +29,35 @@ public class UserController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
 
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
+        try {
+            return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUser(){
-
-        return ResponseEntity.ok().body(userMapper.listModelToDto(userService.findAll()));
+    public ResponseEntity<?> getAllUser(){
+        try {
+            return ResponseEntity.ok().body(userMapper.listModelToDto(userService.findAll()));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username){
 
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
+        try {
+            return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
 
     }
 
@@ -77,10 +92,15 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
-        User user = userMapper.dtoToModel(userDto);
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
+        try {
+            User user = userMapper.dtoToModel(userDto);
+            return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(user)));
+        }catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
 
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(user)));
     }
 
 
@@ -94,9 +114,20 @@ public class UserController {
 
     @GetMapping("/getAuthorities/{userId}")
     public ResponseEntity<List<String>> getAuthorities(@PathVariable Long userId){
-
         return ResponseEntity.ok().body(userService.getAuthorities(userId));
+    }
 
+    @PutMapping("/changeAuthorities/{userId}")
+    public ResponseEntity<?> changeAuthorities(
+            @RequestBody UserDto userDto,
+            @PathVariable Long userId){
+        try {
+            User user = userMapper.dtoToModel(userDto);
+            return ResponseEntity.ok().body(userMapper.modelToDto(userService.changeAuthorities(user, userId)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 
 }

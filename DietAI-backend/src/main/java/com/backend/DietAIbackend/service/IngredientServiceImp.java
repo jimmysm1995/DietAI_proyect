@@ -1,14 +1,18 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.model.Ingredient;
 import com.backend.DietAIbackend.repository.IngredientRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -17,15 +21,27 @@ public class IngredientServiceImp implements IngredientService {
     @Autowired
     IngredientRepository ingredientRepository;
 
-    public Ingredient save(Ingredient ingredient){
-        return ingredientRepository.save(ingredient);
+    @Transactional
+    @Override
+    public Ingredient save(Ingredient ingredient) {
+        try {
+            return ingredientRepository.save(ingredient);
+        } catch (ServiceException e) {
+            throw new ServiceException("El ingrediente ya existe en la base de datos", HttpStatus.CONFLICT.value());
+        }
     }
 
     public Ingredient findById(Long id){
-        return ingredientRepository.findById(id).orElse(null);
+        return ingredientRepository.findById(id).orElseThrow(
+                () -> new ServiceException("No se ha encontrado el ingrediente", HttpStatus.NOT_FOUND.value())
+        );
     }
 
-    public List<Ingredient> findAll(){return ingredientRepository.findAll();}
+    public List<Ingredient> findAll(){
+        if (ingredientRepository.findAllByOrderByNameAsc().isEmpty()){
+            throw new ServiceException("No se encuentran Ingredientes", HttpStatus.NOT_FOUND.value());
+        }
+        return ingredientRepository.findAllByOrderByNameAsc();}
 
     public void deleteById(Long id) {
         try {
