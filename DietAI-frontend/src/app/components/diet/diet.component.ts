@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, Input, OnInit, ViewChild  } from '@angular/core';
 import { DietService } from 'src/app/services/diet.service';
 import { Diet } from 'src/app/models/Diet';
 import { RecipeComponent } from '../recipe/recipe.component';
@@ -16,9 +16,8 @@ import { ShoppingListComponent } from '../shopping-list/shopping-list.component'
     styleUrls: ['./diet.component.css'],
 })
 export class DietComponent {
-    @ViewChild('shoppingList') shoppingList!: ShoppingListComponent;
 
-    shoppingListData: IngredientSummary[] = [];
+    public showShoppingList: boolean = false;
     constructor(
         private dietService: DietService,
         private clientStore: ClientStore,
@@ -43,13 +42,7 @@ export class DietComponent {
         return this.recipes.find(recipe => recipe.dayWeek === day && recipe.mealTime === mealTime)?.recipe || new Recipe()
     }
     
-
-    showShoppingList(){
-        try {
-            const id =1;
-            // this.shoppingListData = await this.shoppingListService.getShoppingList(id).toPromise();
-          } catch (error) {
-            console.error('Error al obtener la lista de compras:', error);
-          }
+    showShoppingListModal() {
+        this.showShoppingList = true;
     }
 }

@@ -1,5 +1,6 @@
 <div class="headerBg">
     <header class="fixed-header">
+
         <div class="logo-container">
             <h1>DietAI Trainer</h1>
         </div>
@@ -22,11 +23,11 @@
         </nav>
 
         <!-- Menú hamburguesa -->
-        <div class="menu-icon" (click)="toggleMenu()">
+        <div role="button" class="menu-icon" (click)="toggleMenu()">
             <i class="fas fa-bars"></i>
         </div>
         <!-- Menú desplegable -->
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" [ngClass]="{'active': menuActive}">
             <a
                 role="button"
                 data-bs-toggle="modal"
@@ -42,4 +43,5 @@
             </ng-container>
         </div>
     </header>
+    
 </div>

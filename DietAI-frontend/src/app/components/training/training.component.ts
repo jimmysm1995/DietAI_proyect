@@ -53,6 +53,7 @@ export class TrainingComponent {
                 this.exercisesInTraining = [];
                 this.exerciseInTraining = new ExerciseInTraining();
             });
+            window.location.reload();
     }
 
     limpiarLista() {

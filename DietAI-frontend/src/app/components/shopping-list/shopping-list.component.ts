@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IngredientSummary } from 'src/app/models/ShoppingList';
 import { ShoppingListService} from 'src/app/services/shopping-list.service';
 
@@ -8,6 +8,8 @@ import { ShoppingListService} from 'src/app/services/shopping-list.service';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent {
+  @Input()idDieta: number = 0;
+
   shoppingList: IngredientSummary[] = [];
   steps: string[] = [];
 
@@ -20,4 +22,6 @@ export class ShoppingListComponent {
       this.shoppingList = data;
     });
   }
+
+  
 }

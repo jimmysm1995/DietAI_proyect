@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./header-home.component.css']
 })
 export class HeaderHomeComponent {
+  public menuActive:boolean = true;
   constructor(
     private elementRef: ElementRef,
     private router : Router,
@@ -42,8 +43,8 @@ export class HeaderHomeComponent {
   }
 
   toggleMenu() {
-    const menuIcon = document.querySelector('.menu-icon');
-    menuIcon?.classList.toggle('active');
+    console.log("toggleMenu")
+    this.menuActive = !this.menuActive;
   }
 }
 

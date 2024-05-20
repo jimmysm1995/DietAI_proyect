@@ -61,6 +61,7 @@
         </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-success mt-2" (click)="showShoppingList()">Lista de la compra</button>
+<button type="button" class="btn btn-success mt-2" (click)="showShoppingListModal()">Lista de la compra</button>
+<app-shopping-list *ngIf="showShoppingList" ></app-shopping-list>
 <a href="mailto:xyz@example.com?Subject=Hello&body=links:  %0D 
          http://link1.com  %0D http://link1.com " target="_top">Share this diet by Mail</a>

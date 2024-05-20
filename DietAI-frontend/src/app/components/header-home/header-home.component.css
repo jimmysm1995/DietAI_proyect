@@ -19,6 +19,9 @@ header {
     color: aliceblue;
 }
 
+.fixed-header {
+    position: relative;
+}
 /* MENU NAVEGACIÓN SUPERIOR DERECHA */
 .fixed-header nav{
     width: fit-content;
@@ -70,8 +73,8 @@ header {
     }
   
     /* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
-    .menu-icon.active + .dropdown-menu {
-      display: block;
+    .dropdown-menu.active {
+      display: block !important;
     }
   
     /* Estilos para los enlaces en el menú desplegable */

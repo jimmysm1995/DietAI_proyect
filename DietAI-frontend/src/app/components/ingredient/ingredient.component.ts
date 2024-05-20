@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../../models/Ingredient';
 import { IngredientService } from '../../services/ingredient.service';
-
 @Component({
     selector: 'app-ingredient',
     templateUrl: './ingredient.component.html',
@@ -15,24 +14,29 @@ export class IngredientComponent {
     public selectedIngredientId: number = 0;
 
     ngOnInit(): void {
-        this.ingredientService.getAllIngredient().then(ingredients => {
+        this.ingredientService.getAllIngredient().then((ingredients) => {
             this.ingredients = ingredients;
         });
     }
 
     saveIngredient() {
-      this.ingredientService.postIngredient(this.ingredient).then(ingredient=>{
-          this.ingredient = new Ingredient
-          this.ngOnInit();
-      })
+        this.ingredientService
+            .postIngredient(this.ingredient)
+            .then((ingredient) => {
+                this.ingredient = new Ingredient();
+                this.ngOnInit();
+                window.location.reload();
+            });
     }
 
     deleteIngredient() {
-      console.log(this.selectedIngredientId);
-      this.ingredientService.deleteIngredient(this.selectedIngredientId).then(ingredient=>{
-          this.ingredient = new Ingredient
-          this.selectedIngredientId = 0
-          this.ngOnInit();
-      })
+        console.log(this.selectedIngredientId);
+        this.ingredientService
+            .deleteIngredient(this.selectedIngredientId)
+            .then((ingredient) => {
+                this.ingredient = new Ingredient();
+                this.selectedIngredientId = 0;
+                this.ngOnInit();
+            });
     }
 }

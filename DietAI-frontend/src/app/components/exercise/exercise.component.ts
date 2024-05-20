@@ -31,6 +31,7 @@ export class ExerciseComponent {
     saveExercise() {
         console.log(this.exercise);
         this.exerciseService.postExercise(this.exercise).then((exercise) => {});
+        window.location.reload();
     }
 
     findMuscle() {
