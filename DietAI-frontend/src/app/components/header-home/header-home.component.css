@@ -1,13 +1,13 @@
-
+/* titulo DIETAI header */
 header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 5rem;
     padding: 3rem;
     background-color: #38686A;
-    /* opacity: 0.94; */
-    /* position: sticky; */
+    align-items: center;
+    padding: 10px 20px;
+    height: 6rem;
 }
 
 .headerBg{
@@ -30,16 +30,22 @@ header {
 .fixed-header nav ul {
     list-style: none;
     display: flex;
+    align-items: center;
+    margin:0;
 }
 
 .fixed-header nav ul li {
-    margin-right: 10px;
+  margin-right: 20px;
 }
 
 .fixed-header nav a {
     text-decoration: none;
     color: aliceblue;
     /* color: #000000; */
+}
+
+.menu-icon {
+    display: none;
 }
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */
@@ -65,11 +71,13 @@ header {
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: 100%;
-      left: 0;
+      top: 99%;
+      right: 0;
+      z-index: 2000;
       width: 100%;
       background-color: #38686A;
-      padding: 1rem;
+      padding: 0;
+      width: fit-content;
     }
   
     /* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
@@ -79,10 +87,17 @@ header {
   
     /* Estilos para los enlaces en el menú desplegable */
     .dropdown-menu a {
+      text-align: center;
       display: block;
       text-decoration: none;
       color: white;
-      margin-bottom: 1rem;
+      padding: 0.5rem; 
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #79b7b9;
+      color: black;
+      
     }
   }
   

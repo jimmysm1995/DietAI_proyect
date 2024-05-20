@@ -41,6 +41,7 @@ import { DietAdminComponent } from './components/diet-admin/diet-admin.component
 import { TrainingComponent } from './components/training/training.component';
 import { FilterTrainingPipe } from './components/entrenameinto/entrenamientoPipe';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
+import { BuscadorEjerciciosComponent } from './components/buscador-ejercicios/buscador-ejercicios.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -86,7 +87,8 @@ const routes:Routes = [
     ExerciseComponent,
     TrainingComponent,
     FilterTrainingPipe,
-    ShoppingListComponent
+    ShoppingListComponent,
+    BuscadorEjerciciosComponent
   ],
   imports: [
     HttpClientModule,

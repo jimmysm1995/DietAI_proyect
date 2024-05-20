@@ -7,6 +7,15 @@
     /* margin-top: 20rem; */
 }
 
+.buscador{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    /* margin-top: 20rem; */
+}
+
 .entrenamiento,
 .dieta {
     margin-bottom: 3rem;

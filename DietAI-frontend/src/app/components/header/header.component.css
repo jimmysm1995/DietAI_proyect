@@ -56,6 +56,9 @@ h1{
     color: #000; 
     text-decoration: none;
   }
+  .menu-icon {
+    display: none;
+}
   
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */

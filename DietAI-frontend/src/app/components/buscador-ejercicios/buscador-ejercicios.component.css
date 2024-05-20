@@ -1,0 +1,13 @@
+.buscador{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+    
+}
+
+input{
+    padding: 0.5rem;
+    width: 50%;
+    border-radius: 10px;
+}
