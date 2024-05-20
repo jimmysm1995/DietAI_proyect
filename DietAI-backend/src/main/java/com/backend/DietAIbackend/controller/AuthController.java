@@ -3,6 +3,7 @@ package com.backend.DietAIbackend.controller;
 import com.backend.DietAIbackend.config.JwtTokenProvider;
 import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.repository.UserRepository;
@@ -52,36 +53,27 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
-
-        User userModel = userMapper.dtoToModel(userDTO);
-
-        if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
+        try {
+            User userModel = userMapper.dtoToModel(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    userMapper.modelToDto(userService.register(userModel, false)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
         }
-
-        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
-        }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.save(userModel)));
     }
 
     @PostMapping("/auth/register/admin")
     public ResponseEntity<?> registerAdmin(@RequestBody UserDto userDTO) {
 
-        User userModel = userMapper.dtoToModel(userDTO);
-
-        if (userRepository.findByUsername(userModel.getUsername()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
+        try {
+            User userModel = userMapper.dtoToModel(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    userMapper.modelToDto(userService.register(userModel, true)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
         }
-
-        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
-        }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                userMapper.modelToDto(userService.registerAdmin(userModel)));
     }
 
     @PostMapping("/auth/login")

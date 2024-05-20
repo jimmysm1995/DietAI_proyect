@@ -85,38 +85,66 @@ public class ClientServiceImp implements ClientService {
         return clientRepository.save(client);
     }
 
+    private Integer calcularTMB(Client client){
+
+        Double tmb;
+
+        //Se calcula la edad del cliente
+        Period periodo = Period.between(client.getBirthDate(), LocalDate.now());
+        int edad = periodo.getYears();
+
+        //Dependiendo del genero, se calcula cual es el TMB del cliente
+        if (client.getGender() == Gender.MASCULINO) {
+            tmb = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
+        } else if (client.getGender() == Gender.FEMENINO) {
+            tmb = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
+        } else {
+            // Para género "OTRO", calculamos la media entre la fórmula masculina y la femenina
+            Double tmbMasculino = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
+            Double tmbFemenino = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
+            tmb = (tmbMasculino + tmbFemenino) / 2;
+        }
+
+        //Dependiendo del tipo de trabajo, se modificará la cantidad de calorias recomendadas
+        switch (client.getJobType()){
+            case SEDENTARIO -> tmb += 100;
+            case MEDIO_ACTIVO -> tmb += 200;
+            case ACTIVO -> tmb += 300;
+            case MUY_ACTIVO -> tmb += 400;
+        }
+
+        //Dependiendo del objetivo, se modificará las cantidades de calorias recomendadas
+        if (client.getGoal() == Goal.PERDER_PESO) {
+            tmb -= 500;
+        }
+        if (client.getGoal() == Goal.GANAR_PESO) {
+            tmb += 500;
+        }
+
+        //Se devuelve el resultado sin decimales
+        return (int) Math.round(tmb);
+    }
+
     public Client asignarDieta(Client client) {
         try {
             List<ClientAllergy> clientAllergyList = client.getClientAllergy();
             log.info("Empieza la funcion");
 
             // Calcular TMB
-            Double tmb;
-            Period periodo = Period.between(client.getBirthDate(), LocalDate.now());
-            int edad = periodo.getYears();
-            log.info(String.valueOf(edad));
+            Integer caloriasRecomendadas = calcularTMB(client);
 
-            if (client.getGender() == Gender.MASCULINO) {
-                tmb = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
-            } else if (client.getGender() == Gender.FEMENINO) {
-                tmb = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
-            } else {
-                // Para género "OTRO", calculamos la media entre la fórmula masculina y la femenina
-                Double tmbMasculino = 66.5 + (13.75 * client.getWeight()) + (5.003 * client.getHeight()) - (6.75 * edad);
-                Double tmbFemenino = 655.1 + (9.563 * client.getWeight()) + (1.850 * client.getHeight()) - (4.676 * edad);
-                tmb = (tmbMasculino + tmbFemenino) / 2;
-            }
+            client.setRecommendedDailyCalories((int) Math.round(caloriasRecomendadas));
 
             // Obtener todas las dietas disponibles
             List<Diet> dietasDisponibles = dietRepository.findAll();
 
             // Inicializar variables para almacenar la mejor dieta y su diferencia de calorías
             Diet mejorDieta = null;
-            Double menorDiferencia = Double.MAX_VALUE;
+            Integer menorDiferencia = Integer.MAX_VALUE;
 
             // Calcular la diferencia de calorías para cada dieta
             for (Diet dieta : dietasDisponibles) {
-                Double diferencia = Math.abs(dieta.getCalories() - tmb);
+                Integer diferencia = Math.abs(dieta.getCalories() - caloriasRecomendadas);
                 if ((diferencia < menorDiferencia)) {
                     List<DietAllergy> dietAllergies = dieta.getDietAllergy();
                     if (hasMatchingAllergy(clientAllergyList, dietAllergies)) {

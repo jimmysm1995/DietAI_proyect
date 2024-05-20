@@ -10,9 +10,9 @@
         <label for="imageUrl">Enlace para la foto de la receta:</label>
         <input type="text" class="form-control" id="imageUrl" name="imageUrl" ngModel />
         <div class="form-group select-group">
-          <label for="allergy">Alergias</label>
+          <label for="allergy">Contiene:</label>
           <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="allergy"
-            [config]="{displayKey: 'name',  search: true, placeholder:'Alergias'}" [multiple]="true"
+            [config]="{displayKey: 'name',  search: true, placeholder:'Contiene:'}" [multiple]="true"
             [options]="allergies" class="w-100"></ngx-select-dropdown>
         </div>
       </div>

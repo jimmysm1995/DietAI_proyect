@@ -34,6 +34,9 @@ public class ClientDto {
     @Schema(example = "175.0", description = "Altura del cliente en centímetros")
     private Float height;
 
+    @Schema(example = "1800", description = "Calorias diarias recomendadas")
+    private Integer recommendedDailyCalories;
+
     @Schema(description = "Objetivo del cliente")
     private Goal goal;
 

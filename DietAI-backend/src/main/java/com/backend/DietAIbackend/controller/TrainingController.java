@@ -1,6 +1,7 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.*;
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.ExerciseMapper;
 import com.backend.DietAIbackend.mapper.TrainingMapper;
 import com.backend.DietAIbackend.model.*;
@@ -29,44 +30,66 @@ public class TrainingController {
     ExerciseMapper exerciseMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingDto> findTrainingById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.modelToDto(trainingService.findById(id)));
+    public ResponseEntity<?> findTrainingById(@PathVariable Long id){
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.modelToDto(trainingService.findById(id)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<TrainingDto>>findAllTraining(){
+    public ResponseEntity<?>findAllTraining(){
 
-        List<Training> trainingList = trainingService.findAll();
-        List<TrainingDto> trainingDtoList = trainingMapper.listModelToDto(trainingList);
-        return ResponseEntity.ok().body(trainingDtoList);
+        try{
+            List<Training> trainingList = trainingService.findAll();
+            List<TrainingDto> trainingDtoList = trainingMapper.listModelToDto(trainingList);
+            return ResponseEntity.ok().body(trainingDtoList);
+        }catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
+
+
     }
 
     @GetMapping("/exercises/{id}")
-    public ResponseEntity<List<ExercisesInTraining>> findExercisesById(@PathVariable Long id){
+    public ResponseEntity<?> findExercisesById(@PathVariable Long id){
 
-        List<ExercisesInTraining> exerciseList = trainingService.findExercisesById(id);
-
-        return ResponseEntity.ok().body(exerciseList);
+        try {
+            return ResponseEntity.ok().body(trainingService.findExercisesById(id));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping
-    public ResponseEntity<TrainingDto> save(@RequestBody TrainingWithExercisesRequest request){
+    public ResponseEntity<?> save(@RequestBody TrainingWithExercisesRequest request){
 
-        Training training = trainingMapper.dtoToModel(request.getTraining());
+        try {
+            Training training = trainingMapper.dtoToModel(request.getTraining());
 
-        List<ExercisesInTraining> exercisesInTrainingList = request.getExercisesInTraining();
+            List<ExercisesInTraining> exercisesInTrainingList = request.getExercisesInTraining();
 
-        return ResponseEntity.ok().body(trainingMapper.modelToDto(trainingService.save(training, exercisesInTrainingList)));
-    }
+            return ResponseEntity.ok().body(trainingMapper.modelToDto(trainingService.save(training, exercisesInTrainingList)));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
+
+        }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void>deleteTraining(@PathVariable Long id){
+    public ResponseEntity<?>deleteTraining(@PathVariable Long id){
         try {
             trainingService.deleteById(id);
-        } catch (Exception e){
-            log.error("Ha habido un problema al borrar el entrenamiento");
+            return ResponseEntity.noContent().build();
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
         }
-        return ResponseEntity.noContent().build();
     }
 
 }

@@ -36,6 +36,10 @@ public class Client {
     @Size(min = 0, message = "La altura no puede ser negativo")
     private Float height;
 
+    @Column(name = "recommendedDailyCalories", columnDefinition = "int")
+    @Size(min = 0, message = "Las calorias recomendadas no pueden ser 0")
+    private Integer recommendedDailyCalories;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "goal", columnDefinition = "varchar(255)")
     private Goal goal;

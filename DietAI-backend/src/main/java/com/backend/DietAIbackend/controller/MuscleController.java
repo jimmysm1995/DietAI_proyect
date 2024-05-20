@@ -1,9 +1,9 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.dto.MuscleDto;
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.MuscleMapper;
 import com.backend.DietAIbackend.service.MuscleService;
-import com.backend.DietAIbackend.service.MuscleServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +27,13 @@ public class MuscleController {
     MuscleMapper muscleMapper;
 
     @GetMapping
-    public ResponseEntity<List<MuscleDto>> findAll(){
+    public ResponseEntity<?> findAll(){
 
-        return ResponseEntity.ok().body(muscleMapper.listModelToDto(muscleService.findAll()));
-
+        try {
+            return ResponseEntity.ok().body(muscleMapper.listModelToDto(muscleService.findAll()));
+        } catch (ServiceException e){
+            return ResponseEntity.status(e.getHttpStatus())
+                    .body(e.getMessage());
+        }
     }
 }

@@ -112,6 +112,26 @@ export class DietAdminComponent {
 
         this.recipes = filteredRecipes;
     }
+      const filteredRecipes: Recipe[] = [];
+      const recipes = await this.recipeService.getAllRecipe();
+  
+      for (const recipe of recipes) {
+          const allergiesInRecipe = await this.recipeService.findAllergiesInRecipe(recipe.idRecipe || 0);
+          
+          // Verificar si la receta contiene al menos una alergia seleccionada
+          const containsAnyAllergy = this.filteredAllergies.some(filterAllergy =>
+              allergiesInRecipe.some(allergy => allergy.idAllergy === filterAllergy.idAllergy)
+          );
+  
+          // Si la receta no contiene ninguna alergia seleccionada, agregarla a la lista de recetas filtradas
+          if (!containsAnyAllergy) {
+              filteredRecipes.push(recipe);
+          }
+      }
+      this.recipes = filteredRecipes;
+  }
+  
+  
 
     deleteDiet() {
         console.log(this.selectedDietId);
