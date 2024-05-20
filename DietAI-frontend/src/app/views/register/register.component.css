@@ -1,7 +1,7 @@
 .container{
     display: flex;
     width: 100%;
-    max-width: 50%;
+    max-width: 70%;
     /* gap: 3rem; */
     justify-content: flex-start;
     align-items: center;
@@ -21,4 +21,50 @@ img{
     background-position: center;
     width: 50%;
     height: 100vh;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 90%; 
+    }
+    form {
+        padding: 4rem; 
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .imgRegistro, form {
+        width: 100%;
+    }
+    .imgRegistro {
+        height: 50vh; 
+    }
+    form {
+        padding: 2rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .imgRegistro {
+        display: none; 
+    }
+    form {
+        width: 100%; 
+        padding: 1rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .imgRegistro {
+        display: none; 
+    }
+    form {
+        width: 100%; 
+        padding: 1rem; 
+    }
 }
