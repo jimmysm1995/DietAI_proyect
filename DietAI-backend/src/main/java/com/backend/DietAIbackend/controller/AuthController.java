@@ -99,16 +99,21 @@ public class AuthController {
     @GetMapping("/auth/currentUser")
     public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
 
-        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
-            token = token.substring("Bearer ".length());
+        try {
+            if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
+                token = token.substring("Bearer ".length());
+            }
+
+            JwtParser validator = Jwts.parser()
+                    .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                    .build();
+
+            Claims claims = validator.parseClaimsJws(token).getBody();
+            claims.getId();
+            return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
+        } catch (Exception e){
+            throw new ServiceException("Ha habido un problema al buscar el usuario "+ e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        JwtParser validator = Jwts.parser()
-                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
-                .build();
-
-        Claims claims = validator.parseClaimsJws(token).getBody();
-        claims.getId();
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
     }
 }

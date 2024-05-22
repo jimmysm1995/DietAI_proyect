@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -37,20 +38,29 @@ public class JwtFilter extends OncePerRequestFilter {
         if (this.tokenProvider.isValidToken(token)){
 
             String username = this.tokenProvider.getUsernameFromToken(token);
-            UserDetails user =this.userService.loadUserByUsername(username);
+            try {
+                UserDetails user = this.userService.loadUserByUsername(username);
 
-            if (user != null){
-                Authentication auth = new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        user.getPassword(),
-                        user.getAuthorities());
+                if (user != null){
+                    Authentication auth = new UsernamePasswordAuthenticationToken(
+                            user.getUsername(),
+                            user.getPassword(),
+                            user.getAuthorities());
 
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                } else {
+                    response.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);
+                    return;
+                }
+            } catch (UsernameNotFoundException ex) {
+                response.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);
+                return;
             }
         }
 
         filterChain.doFilter(request, response);
     }
+
 
     private String extractToken(HttpServletRequest request){
 

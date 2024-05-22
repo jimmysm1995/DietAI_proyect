@@ -5,12 +5,19 @@ import com.backend.DietAIbackend.exception.ServiceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class DietAiController {
 
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ApiError> handleUsernameNotFoundException(){
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,HttpStatus.BAD_REQUEST.value(), "No existe el usuario");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
 
     @ExceptionHandler(ServiceException.class)
     public ResponseEntity<ApiError> handleServiceException(ServiceException ex){
