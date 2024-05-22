@@ -50,7 +50,7 @@ export class RecipeAdminComponent {
 registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
   this.ingredientsInRecipe.push(ingredientInRecipe);
   this.ingredientInRecipeForm.reset();
-  window.location.reload();
+
 }
 
 registrarRecipe(recipe : Recipe) {
