@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 5rem;
+    /* margin-bottom: 5rem; */
     
 }
 
@@ -11,3 +11,49 @@ input{
     width: 50%;
     border-radius: 10px;
 }
+
+/* Estilo para el contenedor del dropdown */
+.dropdown-container {
+    position: relative;
+  }
+  
+  .select-group {
+    width: 50%; /* Ancho deseado */
+    margin: auto; /* Centrar horizontalmente */
+}
+
+/* Estilo para el cuadro de búsqueda */
+.dropdown-search {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem; /* Separación inferior */
+}
+  
+  /* Estilo para el dropdown */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+  }
+  
+  /* Estilo para mostrar el dropdown cuando está abierto */
+  .open {
+    display: block;
+  }
+  

@@ -1,8 +1,22 @@
-<div class="buscador">
+<!-- <div class="buscador">
     <input
         type="text"
         [(ngModel)]="search"
         (ngModelChange)="onSearch()"
-        placeholder="Busca un entrenamiento"
+        placeholder="Buscar ejercicios de ..."
     />
+</div> -->
+
+<div class="form-group select-group">
+    <label for="muscle">Busca ejercicios específicos:</label>
+    <div class="dropdown-container">
+        <ngx-select-dropdown [(ngModel)]="exercise.muscle" name="muscle"
+            [config]="{displayKey: 'name',  search: true, placeholder:''}" [multiple]="true"
+            [options]="muscle" class="w-100"></ngx-select-dropdown>
+    </div>
 </div>
+
+
+
+
+
