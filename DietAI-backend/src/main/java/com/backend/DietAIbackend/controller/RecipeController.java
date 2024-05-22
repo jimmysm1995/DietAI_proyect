@@ -57,12 +57,7 @@ public class RecipeController {
 
     @DeleteMapping("/{idRecipe}")
     public ResponseEntity<Void>deleteRecipe(@PathVariable Long idRecipe){
-
-        try {
-            recipeService.deleteById(idRecipe);
-        } catch (Exception e){
-            log.error("Ha habido un problema al borrar la receta");
-        }
+        recipeService.deleteById(idRecipe);
         return ResponseEntity.noContent().build();
     }
 

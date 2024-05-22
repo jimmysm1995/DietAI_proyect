@@ -2,9 +2,10 @@ package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.dto.ExercisesInTraining;
 import com.backend.DietAIbackend.exception.ServiceException;
-import com.backend.DietAIbackend.model.*;
+import com.backend.DietAIbackend.model.Client;
+import com.backend.DietAIbackend.model.Training;
+import com.backend.DietAIbackend.model.TrainingExercise;
 import com.backend.DietAIbackend.repository.TrainingRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,19 +24,22 @@ public class TrainingServiceImp implements TrainingService {
     @Autowired
     TrainingExerciseService trainingExerciseService;
 
-    public Training save(Training training, List<ExercisesInTraining> exercisesInTrainingList){
+    @Autowired
+    private ClientService clientService;
 
-        Training entrenamiento = new Training();
+    public Training save(Training training, List<ExercisesInTraining> exercisesInTrainingList) {
+
+        Training entrenamiento;
 
         try {
             entrenamiento = trainingRepository.save(training);
         } catch (ServiceException e) {
-            throw new ServiceException("El entrenamiento ya existe en la base de datos", HttpStatus.CONFLICT.value());
+            throw new ServiceException("El entrenamiento ya existe en la base de datos", HttpStatus.CONFLICT);
         }
 
-        for (ExercisesInTraining exercisesInTraining: exercisesInTrainingList
-             ) {
-            if (exercisesInTraining != null){
+        for (ExercisesInTraining exercisesInTraining : exercisesInTrainingList
+        ) {
+            if (exercisesInTraining != null) {
                 TrainingExercise trainingExercise = new TrainingExercise();
                 trainingExercise.setTraining(training);
                 trainingExercise.setExercise(exercisesInTraining.exercise());
@@ -50,13 +54,31 @@ public class TrainingServiceImp implements TrainingService {
         return entrenamiento;
     }
 
-    public void deleteById(Long id){
-        trainingRepository.deleteById(id);
+    public void deleteById(Long id) {
+
+        try {
+            if (!trainingRepository.existsById(id)) {
+                throw new ServiceException("No se encontró el entrenamiento para eliminar", HttpStatus.NOT_FOUND);
+            }
+
+            // Disociar los clients
+            for (Client client : findById(id).getClients()) {
+                client.setTraining(null);
+                clientService.save(client);
+            }
+
+            trainingRepository.deleteById(id);
+        } catch (ServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("Error al eliminar el entrenamiento: ", e);
+            throw new ServiceException("Ocurrió un error al eliminar la dieta " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    public Training findById(Long id){
+    public Training findById(Long id) {
         return trainingRepository.findById(id).orElseThrow(
-                () -> new ServiceException("No se ha encontrado el entrenamiento", HttpStatus.NOT_FOUND.value())
+                () -> new ServiceException("No se ha encontrado el entrenamiento", HttpStatus.NOT_FOUND)
         );
     }
 
@@ -65,19 +87,15 @@ public class TrainingServiceImp implements TrainingService {
         return trainingRepository.save(var1);
     }
 
-    public List<Training> findAll(){
-        if (trainingRepository.findAllByOrderByNameAsc().isEmpty()){
-            throw new ServiceException("La lista esta vacia", HttpStatus.NOT_FOUND.value());
+    public List<Training> findAll() {
+        if (trainingRepository.findAllByOrderByNameAsc().isEmpty()) {
+            throw new ServiceException("No se encuentran Entrenamientos", HttpStatus.NOT_FOUND);
         }
         return trainingRepository.findAllByOrderByNameAsc();
     }
 
     public Training update(Training training) {
-        try {
-            trainingRepository.findById(training.getIdTraining());
-        } catch (ServiceException e){
-            throw new ServiceException("No existe el entrenamiento en cuestion", HttpStatus.NOT_FOUND.value());
-        }
+        findById(training.getIdTraining());
         return save(training);
     }
 
@@ -87,7 +105,7 @@ public class TrainingServiceImp implements TrainingService {
 
         List<ExercisesInTraining> exercisesInTrainings = new ArrayList<>();
 
-        for (TrainingExercise trainingExercise: training.getTrainingExercises()
+        for (TrainingExercise trainingExercise : training.getTrainingExercises()
         ) {
             exercisesInTrainings.add(new ExercisesInTraining(
                     trainingExercise.getExercise(),
@@ -98,12 +116,10 @@ public class TrainingServiceImp implements TrainingService {
             ));
         }
 
-        if (exercisesInTrainings.isEmpty()){
-            throw new ServiceException("La lista esta vacia", HttpStatus.NOT_FOUND.value());
+        if (exercisesInTrainings.isEmpty()) {
+            throw new ServiceException("La lista esta vacia", HttpStatus.NOT_FOUND);
         }
 
         return exercisesInTrainings;
     }
-
-
 }

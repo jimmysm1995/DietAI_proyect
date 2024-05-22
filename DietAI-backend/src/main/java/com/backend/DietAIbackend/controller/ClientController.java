@@ -52,16 +52,15 @@ public class ClientController {
     @Autowired
     private TrainingMapper trainingMapper;
 
-    @GetMapping("/{idClient}")
+    @GetMapping("/{id}")
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.findById(id)));
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findById(id)));
     }
 
     @GetMapping
     public ResponseEntity<List<ClientDto>>findAllClient(){
-        List<Client> clientList = clientService.findAll();
-        List<ClientDto> clientDtoList = clientMapper.listModelToDto(clientList);
-        return ResponseEntity.ok().body(clientDtoList);
+
+        return ResponseEntity.ok().body(clientMapper.listModelToDto(clientService.findAll()));
     }
 
     @PostMapping
@@ -75,9 +74,6 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(clientMapper.modelToDto(clientService.save(client, allergyList, injuryList)));
     }
 
-
-
-
     @PutMapping
     public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
 
@@ -88,9 +84,10 @@ public class ClientController {
     }
 
     @DeleteMapping("/{idClient}")
-    public void deleteClient(@PathVariable Long idClient){
+    public ResponseEntity<Void> deleteClient(@PathVariable Long idClient){
 
         clientService.deleteById(idClient);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/diet/{idClient}")

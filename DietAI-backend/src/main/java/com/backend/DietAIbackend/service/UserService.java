@@ -10,5 +10,7 @@ public interface UserService extends ICrudService<User, Long>{
 
     List<String> getAuthorities(Long userId);
 
+    User updateImagenUser(User user, Long id);
+
     User changeAuthorities(User user, Long userId);
 }

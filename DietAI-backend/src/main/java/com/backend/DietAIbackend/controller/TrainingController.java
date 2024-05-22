@@ -30,66 +30,41 @@ public class TrainingController {
     ExerciseMapper exerciseMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findTrainingById(@PathVariable Long id){
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.modelToDto(trainingService.findById(id)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
+    public ResponseEntity<TrainingDto> findTrainingById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.CREATED).body(trainingMapper.modelToDto(trainingService.findById(id)));
     }
 
     @GetMapping
-    public ResponseEntity<?>findAllTraining(){
+    public ResponseEntity<List<TrainingDto>>findAllTraining(){
 
-        try{
             List<Training> trainingList = trainingService.findAll();
             List<TrainingDto> trainingDtoList = trainingMapper.listModelToDto(trainingList);
             return ResponseEntity.ok().body(trainingDtoList);
-        }catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
 
 
     }
 
     @GetMapping("/exercises/{id}")
-    public ResponseEntity<?> findExercisesById(@PathVariable Long id){
+    public ResponseEntity<List<ExercisesInTraining>> findExercisesById(@PathVariable Long id){
 
-        try {
-            return ResponseEntity.ok().body(trainingService.findExercisesById(id));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
+        return ResponseEntity.ok().body(trainingService.findExercisesById(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody TrainingWithExercisesRequest request){
+    public ResponseEntity<TrainingDto> save(@RequestBody TrainingWithExercisesRequest request){
 
-        try {
             Training training = trainingMapper.dtoToModel(request.getTraining());
 
             List<ExercisesInTraining> exercisesInTrainingList = request.getExercisesInTraining();
 
             return ResponseEntity.ok().body(trainingMapper.modelToDto(trainingService.save(training, exercisesInTrainingList)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
 
         }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?>deleteTraining(@PathVariable Long id){
-        try {
+    public ResponseEntity<Void>deleteTraining(@PathVariable Long id){
             trainingService.deleteById(id);
             return ResponseEntity.noContent().build();
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
 }

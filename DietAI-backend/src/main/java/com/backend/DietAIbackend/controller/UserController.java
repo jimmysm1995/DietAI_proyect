@@ -29,35 +29,19 @@ public class UserController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
-
-        try {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllUser(){
-        try {
+    public ResponseEntity<List<UserDto>> getAllUser(){
             return ResponseEntity.ok().body(userMapper.listModelToDto(userService.findAll()));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<?> getUserByUsername(@PathVariable String username){
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
 
-        try {
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
 
     }
 
@@ -77,29 +61,13 @@ public class UserController {
 
         User user = userMapper.dtoToModel(userDto);
 
-        // Verifica si el usuario que se está actualizando es el mismo que se proporciona en el cuerpo de la solicitud
-        if (user.getIdUser() == null || !user.getIdUser().equals(userId)) {
-            throw new IllegalArgumentException("User ID in path variable must match user ID in request body");
-        }
-
-        User realUser = userService.findById(userId);
-
-        realUser.setImg(user.getImg());
-
-        // Realiza la actualización del usuario en la base de datos
-
-        return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(realUser)));
+        return ResponseEntity.ok().body(userMapper.modelToDto(userService.updateImagenUser(user,userId)));
     }
 
     @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
-        try {
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
             User user = userMapper.dtoToModel(userDto);
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(user)));
-        }catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
 
     }
 
@@ -108,7 +76,6 @@ public class UserController {
     public ResponseEntity<Void> deleteByID(@PathVariable Long userId){
 
         userService.deleteById(userId);
-
         return ResponseEntity.noContent().build();
     }
 
@@ -121,13 +88,7 @@ public class UserController {
     public ResponseEntity<?> changeAuthorities(
             @RequestBody UserDto userDto,
             @PathVariable Long userId){
-        try {
             User user = userMapper.dtoToModel(userDto);
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.changeAuthorities(user, userId)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
-
 }

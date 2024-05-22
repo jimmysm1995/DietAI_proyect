@@ -1,13 +1,15 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.ClientRepository;
 import com.backend.DietAIbackend.repository.DietRepository;
 import com.backend.DietAIbackend.repository.TrainingRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -36,33 +38,41 @@ public class ClientServiceImp implements ClientService {
     @Autowired
     UserService userService;
 
-    public Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList){
+    @Override
+    public Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList) {
+        try {
+            User user = userService.findById(client.getUser().getIdUser());
 
-        User user = userService.findById(client.getUser().getIdUser());
+            client.setUser(user);
+            client.setIdClient(user.getIdUser());
 
-        client.setUser(user);
-        client.setIdClient(user.getIdUser());
+            user.setClient(client);
 
-        user.setClient(client);
+            userService.update(user);
 
-        userService.update(user);
+            clientRepository.save(client);
 
-        clientRepository.save(client);
+            for (Allergy allergy : allergyList) {
+                clientAllergyService.save(client, allergy);
+            }
 
+            for (Injury injury : injuryList) {
+                clientInjuryService.save(client, injury);
+            }
 
-        for (Allergy allergy : allergyList) {
-            clientAllergyService.save(client,allergy);
+            return client;
+        } catch (DataIntegrityViolationException e) {
+            throw new ServiceException("Ha habido un problema al guardar al cliente en la base de datos", HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error inesperado al guardar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        for (Injury injury : injuryList) {
-            clientInjuryService.save(client,injury);
-        }
-
-        return client;
     }
 
+
     public Client findById(Long id){
-        return clientRepository.findById(id).orElse(null);
+        return clientRepository.findById(id).orElseThrow(
+                () -> new ServiceException("No se ha encontrado el cliente", HttpStatus.NOT_FOUND)
+        );
     }
 
     @Override
@@ -70,20 +80,50 @@ public class ClientServiceImp implements ClientService {
         return clientRepository.save(client);
     }
 
-    public List<Client> findAll(){return clientRepository.findAll();}
-    public void delete(Client client){ clientRepository.delete(client);}
+    @Override
+    public List<Client> findAll() {
+        try {
+            List<Client> clientList = clientRepository.findAll();
+            if (clientList.isEmpty()) {
+                throw new ServiceException("No se encuentran clientes", HttpStatus.NOT_FOUND);
+            }
+            return clientList;
+        } catch (ServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error inesperado al obtener los clientes: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    public void deleteById(Long id){ clientRepository.deleteById(id);}
 
+
+    @Override
+    public void deleteById(Long id) {
+        try {
+            findById(id); // Este método lanza ServiceException si no se encuentra el cliente.
+            clientRepository.deleteById(id);
+        } catch (ServiceException e) {
+            throw e;
+        } catch (DataIntegrityViolationException e) {
+            throw new ServiceException("Ha habido un problema al eliminar al cliente de la base de datos", HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error inesperado al eliminar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @Override
     public Client update(Client client) {
         try {
-            clientRepository.findById(client.getIdClient());
-        } catch (EntityNotFoundException e){
-            throw new ServiceException("No existe el cliente en cuestion");
+            findById(client.getIdClient());
+            return clientRepository.save(client);
+        } catch (ServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error inesperado al actualizar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return clientRepository.save(client);
     }
+
 
     private Integer calcularTMB(Client client){
 
@@ -125,48 +165,44 @@ public class ClientServiceImp implements ClientService {
         return (int) Math.round(tmb);
     }
 
+    @Override
     public Client asignarDieta(Client client) {
         try {
             List<ClientAllergy> clientAllergyList = client.getClientAllergy();
-            log.info("Empieza la funcion");
+            log.info("Empieza la función");
 
-            // Calcular TMB
             Integer caloriasRecomendadas = calcularTMB(client);
+            client.setRecommendedDailyCalories(caloriasRecomendadas);
 
-            client.setRecommendedDailyCalories((int) Math.round(caloriasRecomendadas));
-
-            // Obtener todas las dietas disponibles
             List<Diet> dietasDisponibles = dietRepository.findAll();
 
-            // Inicializar variables para almacenar la mejor dieta y su diferencia de calorías
             Diet mejorDieta = null;
             Integer menorDiferencia = Integer.MAX_VALUE;
 
-            // Calcular la diferencia de calorías para cada dieta
             for (Diet dieta : dietasDisponibles) {
                 Integer diferencia = Math.abs(dieta.getCalories() - caloriasRecomendadas);
-                if ((diferencia < menorDiferencia)) {
-                    List<DietAllergy> dietAllergies = dieta.getDietAllergy();
-                    if (hasMatchingAllergy(clientAllergyList, dietAllergies)) {
-                        mejorDieta = dieta;
-                        menorDiferencia = diferencia;
-                    }
+                if (diferencia < menorDiferencia && !hasMatchingAllergy(clientAllergyList, dieta.getDietAllergy())) {
+                    mejorDieta = dieta;
+                    menorDiferencia = diferencia;
                 }
             }
 
-            // Asignar la mejor dieta al cliente
             if (mejorDieta != null) {
                 client.setDiet(mejorDieta);
             } else {
                 log.error("No se pudo encontrar una dieta adecuada para el cliente.");
+                throw new ServiceException("No se ha encontrado una dieta adecuada para el cliente", HttpStatus.NOT_FOUND);
             }
 
             return clientRepository.save(client);
+        } catch (ServiceException e) {
+            throw e;
         } catch (Exception e) {
             log.error("Ocurrió un error al asignar la dieta al cliente: " + e.getMessage());
-            throw new ServiceException("Ocurrió un error al asignar la dieta al cliente: " + e.getMessage());
+            throw new ServiceException("Ocurrió un error al asignar la dieta al cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 
     private boolean hasMatchingAllergy(List<ClientAllergy> clientAllergies, List<DietAllergy> dietAllergies) {
@@ -180,58 +216,62 @@ public class ClientServiceImp implements ClientService {
         return false; // Si no se encuentra ninguna coincidencia, devolver false
     }
 
+    @Override
     public Client asignarEntrenamiento(Client client) {
         try {
             List<Training> trainingList = trainingRepository.findAll();
-            Integer clientLevel = 0;
-
-            switch (client.getPreviousLevel()) {
-                case NUNCA_HE_ENTRENADO:
-                    clientLevel = 1;
-                    break;
-                    case ENTRENO_POCO:
-                    clientLevel = 2;
-                    break;
-                case ENTRENO_BASTANTE:
-                    clientLevel = 3;
-                    break;
-                case ENTRENO_MUCHO:
-                    clientLevel = 4;
-                    break;
-                case ENTRENO_A_DIARIO:
-                    clientLevel = 5;
-                    break;
-                default:
-                    log.info("No se ha especificado el nivel, por lo que se deja el más bajo posible");
-                    break;
-            }
+            Integer clientLevel = obtenerNivelCliente(client.getPreviousLevel());
 
             for (Training training : trainingList) {
                 if (training.getDays() == client.getTrainingTime() &&
                         training.getTypeTraining() == client.getTypeTraining() &&
-                        clientLevel == training.getDifficulty()) {
+                        clientLevel.equals(training.getDifficulty())) {
                     client.setTraining(training);
                 }
             }
 
-            if (client.getTraining() == null){
+            if (client.getTraining() == null) {
                 log.error("No se ha encontrado un entrenamiento adecuado para el cliente");
+                throw new ServiceException("No se ha encontrado un entrenamiento adecuado para el cliente", HttpStatus.NOT_FOUND);
             }
 
             return clientRepository.save(client);
+        } catch (ServiceException e) {
+            throw e;
         } catch (Exception e) {
             log.error("Error al asignar entrenamiento: " + e.getMessage());
-            throw new ServiceException("Error al asignar entrenamiento: " + e.getMessage());
+            throw new ServiceException("Error al asignar entrenamiento", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
-    public Client findCurrentClient(long userId){
-        return this.clientRepository.findClientByUserId(userId);
+    private Integer obtenerNivelCliente(PreviusLevel previousLevel) {
+        switch (previousLevel) {
+            case NUNCA_HE_ENTRENADO:
+                return 1;
+            case ENTRENO_POCO:
+                return 2;
+            case ENTRENO_BASTANTE:
+                return 3;
+            case ENTRENO_MUCHO:
+                return 4;
+            case ENTRENO_A_DIARIO:
+                return 5;
+            default:
+                log.info("No se ha especificado el nivel, por lo que se deja el más bajo posible");
+                return 0;
+        }
+    }
+    @Override
+    public Client findCurrentClient(long userId) {
+        try {
+            return clientRepository.findClientByUserId(userId);
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error al buscar el cliente actual", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    @Override
     public Diet getDietByUser(Client client) {
-
         return client.getDiet();
     }
 
@@ -239,4 +279,5 @@ public class ClientServiceImp implements ClientService {
     public Training getTrainingByClient(Client client) {
         return client.getTraining();
     }
+
 }

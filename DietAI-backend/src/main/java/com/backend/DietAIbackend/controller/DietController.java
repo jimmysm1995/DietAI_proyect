@@ -28,8 +28,6 @@ public class DietController {
     @Autowired
     DietMapper dietMapper;
 
-    @Autowired
-    RecipeMapper recipeMapper;
 
     @Autowired
     AllergyMapper allergyMapper;
@@ -72,11 +70,7 @@ public class DietController {
 
     @DeleteMapping("/{idDiet}")
     public ResponseEntity<Void>deleteDiet(@PathVariable Long idDiet){
-        try {
-            dietService.deleteById(idDiet);
-        } catch (Exception e){
-            log.error("Ha habido un problema al borrar la dieta");
-        }
+        dietService.deleteById(idDiet);
         return ResponseEntity.noContent().build();
     }
 

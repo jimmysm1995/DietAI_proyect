@@ -33,78 +33,41 @@ public class ExerciseController {
     MuscleMapper muscleMapper;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody ExerciseDto exerciseDto){
-        try {
+    public ResponseEntity<ExerciseDto> save(@RequestBody ExerciseDto exerciseDto){
             List<Muscle> muscleList = muscleMapper.listDtoToModel(exerciseDto.getMuscle());
             Exercise exercise = exerciseMapper.dtoToModel(exerciseDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(exerciseMapper.modelToDto(exerciseService.save(exercise, muscleList)));
-        } catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
 
     @GetMapping("/{idExercise}")
-    public ResponseEntity<?> findClientById(@PathVariable Long idExercise){
-        try {
+    public ResponseEntity<ExerciseDto> findClientById(@PathVariable Long idExercise){
             return ResponseEntity.ok().body(exerciseMapper.modelToDto(exerciseService.findById(idExercise)));
-        }catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @GetMapping
-    public ResponseEntity<?>findAllExercise(){
-        try {
+    public ResponseEntity<List<ExerciseDto>>findAllExercise(){
             return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findAll()));
-        }catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @GetMapping("/getGymExercises")
-    public ResponseEntity<?>findGymExercises(){
-
-        try {
+    public ResponseEntity<List<ExerciseDto>>findGymExercises(){
             return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findGymExercises()));
-        }catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
-
     }
 
     @GetMapping("/getHomeExercises")
-    public ResponseEntity<?>findHomeExercises(){
-        try {
+    public ResponseEntity<List<ExerciseDto>>findHomeExercises(){
             return ResponseEntity.ok().body(exerciseMapper.listModelToDto(exerciseService.findHomeExercises()));
-        }catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
-
     }
 
     @GetMapping("/muscles/{idExercise}")
-    public ResponseEntity<?> findAllMusclesInExercise(@PathVariable Long idExercise){
-        try {
+    public ResponseEntity<List<MuscleDto>> findAllMusclesInExercise(@PathVariable Long idExercise){
             return ResponseEntity.ok().body(muscleMapper.listModelToDto(exerciseService.findAllmusclesInExercise(idExercise)));
-        }catch (ServiceException e) {
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>deleteTraining(@PathVariable Long id){
-        try {
-            exerciseService.deleteById(id);
-        } catch (Exception e){
-            log.error("Ha habido un problema al borrar el ejercicio");
-        }
+        exerciseService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
