@@ -16,7 +16,7 @@ public class MuscleServiceImp implements MuscleService {
     MuscleRepository muscleRepository;
 
     public List<Muscle> findAll(){
-        if (muscleRepository.findAll().isEmpty()){
+        if (muscleRepository.findAllByOrderByNameAsc().isEmpty()){
             throw new ServiceException("No se encuentran musculos en la lista", HttpStatus.NOT_FOUND);
         }
         return muscleRepository.findAll();

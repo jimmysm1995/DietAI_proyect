@@ -53,27 +53,16 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
-        try {
             User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     userMapper.modelToDto(userService.register(userModel, false)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @PostMapping("/auth/register/admin")
     public ResponseEntity<?> registerAdmin(@RequestBody UserDto userDTO) {
-
-        try {
             User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     userMapper.modelToDto(userService.register(userModel, true)));
-        } catch (ServiceException e){
-            return ResponseEntity.status(e.getHttpStatus())
-                    .body(e.getMessage());
-        }
     }
 
     @PostMapping("/auth/login")

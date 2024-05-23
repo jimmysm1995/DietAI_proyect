@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -41,14 +42,20 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User register(User user, boolean isAdmin){
-        try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User registerUser = new User(user.getUsername(), user.getEmail(), user.getPassword() ,isAdmin);
-            return userRepository.save(registerUser);
-        } catch (ServiceException e) {
-            throw new ServiceException("El usuario ya existe", HttpStatus.CONFLICT);
+    public User register(User user, boolean isAdmin) {
+
+        // Verificar si el nombre de usuario o el correo electrónico ya existen
+        Optional<User> existingUser = userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new ServiceException("El nombre de usuario o correo electrónico ya están en uso", HttpStatus.CONFLICT);
         }
+
+        // Hashear la contraseña antes de almacenarla
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // Crear un nuevo usuario y guardarlo en la base de datos
+        User registerUser = new User(user.getUsername(), user.getEmail(), user.getPassword(), isAdmin);
+        return userRepository.save(registerUser);
     }
     public User update(User user) {
         try {

@@ -61,7 +61,7 @@ public class ExerciseServiceImp implements ExerciseService {
 
     @Override
     public List<Exercise> findAll() {
-        List<Exercise> exercises = exerciseRepository.findAll();
+        List<Exercise> exercises = exerciseRepository.findAllByOrderByNameAsc();
         if (exercises.isEmpty()) {
             throw new ServiceException("No se encuentran ejercicios", HttpStatus.NOT_FOUND);
         }
