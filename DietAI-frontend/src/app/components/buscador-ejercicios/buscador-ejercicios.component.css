@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     /* margin-bottom: 5rem; */
-    
 }
 
 input{
@@ -56,4 +55,36 @@ input{
   .open {
     display: block;
   }
-  
+
+  .modal {
+    z-index: 1300 ;
+}
+
+.modal-backdrop {
+    --bs-backdrop-bg: #00000049; 
+    --bs-backdrop-opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog{
+    background-color: white !important;
+    opacity: 1 !important;
+}
+
+.modal-content{
+    background-color: white  !important;
+}
+
+.close{
+    font-weight: bold;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}

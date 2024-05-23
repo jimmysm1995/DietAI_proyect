@@ -3,13 +3,6 @@ import { Exercise, Muscle } from 'src/app/models/Exercise';
 import { ExerciseService } from 'src/app/services/exercise.service';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { MuscleInExercise, TypeTraining } from '../../models/Exercise';
-import { TrainingService } from 'src/app/services/training.service';
-import { Training, TrainingResponse } from 'src/app/models/Training';
-import { FilterTrainingPipe } from '../entrenameinto/entrenamientoPipe';
-import { ClientStore } from 'src/app/store/clientStore';
-import { Client } from '../../models/Client';
-import { ClientService } from 'src/app/services/client.service';
 
 @Component({
     selector: 'app-buscador-ejercicios',
@@ -17,21 +10,23 @@ import { ClientService } from 'src/app/services/client.service';
     styleUrls: ['./buscador-ejercicios.component.css'],
 })
 export class BuscadorEjerciciosComponent {
-    @ViewChild('muscleForm') muscleForm!: NgForm;
+limpiarLista() {
+   this.filteredExercises = [];
+}
 
+    @ViewChild('muscleForm') muscleForm!: NgForm;
     constructor(
       private exerciseService: ExerciseService,
     ) {}
 
-    public exercise: Exercise = new Exercise();
+    public selectedExercise: Exercise = new Exercise();
     public exercises: Exercise[] = [];
     public muscle: Muscle[] = [];
-    public typeTraining: string[] = [];
-    public selectedExerciseId: number = 0;
+    public filterMuscle: Muscle[] = [];
+    public filteredExercises: Exercise[] = [];
 
     ngOnInit(): void {
         this.findMuscle();
-        this.findTypeTraining();
         this.exerciseService.getAllExercises().then((exercises: Exercise[]) => {
             this.exercises = exercises;
         });
@@ -43,17 +38,29 @@ export class BuscadorEjerciciosComponent {
         });
     }
 
-    findTypeTraining() {
-        this.exerciseService
-            .getTypeTraining()
-            .then((typeTraining: string[]) => {
-                this.typeTraining = typeTraining;
-            });
+    async buscarEjercicios() {
+        this.filteredExercises = [];
+        for (const exercise of this.exercises) {
+            // Obtener los músculos del ejercicio
+            const muscles = await this.exerciseService.findAllMusclesInExercise(
+                exercise.idExercise
+            );
+            // Verificar si el ejercicio contiene todos los músculos del filtro
+            const containsAllMuscles = this.filterMuscle.every((filterMuscle) =>
+                muscles.some(
+                    (muscle) => muscle.idMuscle === filterMuscle.idMuscle
+                )
+            );
+            // Si el ejercicio contiene todos los músculos del filtro, agregarlo al array de ejercicios filtrados
+            if (containsAllMuscles) {
+                this.filteredExercises.push(exercise);
+            }
+        }
     }
 
-    // mostrarEjercicios(){
-    //   this.exerciseService.getAllExercises(this.exercise.muscle).then((exercises: Exercise[]) => {
-    //     this.exercises = exercises;
-    //   })
-    // }
+    
+    mostrarEjercicio(ejercicio: Exercise) {
+        this.selectedExercise = ejercicio
+    }
+
 }

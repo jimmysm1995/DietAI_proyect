@@ -126,7 +126,6 @@ export class TrainingComponent {
                 filteredExercises.push(exercise);
             }
         }
-
         return filteredExercises;
     }
 
