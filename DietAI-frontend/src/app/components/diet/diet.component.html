@@ -61,7 +61,43 @@
         </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-success mt-2" (click)="showShoppingListModal()">Lista de la compra</button>
-<app-shopping-list *ngIf="showShoppingList" ></app-shopping-list>
+
+<button type="button" class="btn btn-success mt-2"
+    data-bs-toggle="modal"
+    data-bs-target="#shoppingList"
+    (click)="onOpenModal()"
+    >Lista de la compra</button>
+
+    <div
+    class="modal fade"
+    id="shoppingList"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lista de la compra</h5>
+                <a
+                    role="button"
+                    id="close"
+                    class="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                >
+                    X
+                </a>
+            </div>
+            <div class="modal-body">
+                <app-shopping-list 
+                [isOpened]="isModalOpened"
+                (aceptarFormulario)="cerrarModal()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <a href="mailto:xyz@example.com?Subject=Hello&body=links:  %0D 
          http://link1.com  %0D http://link1.com " target="_top">Share this diet by Mail</a>
