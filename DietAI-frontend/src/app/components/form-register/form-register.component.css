@@ -9,7 +9,11 @@ input{
     border: none;
     border-bottom: 1px solid rgb(183, 183, 183);
 }
-
+.warning{
+    font-size: 0.85rem;
+    color: red;
+    margin-top: 0.4rem;
+}
 
 /*Para pantallas grandes */
 @media (min-width: 1600px) {

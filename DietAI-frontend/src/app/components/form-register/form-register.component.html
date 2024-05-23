@@ -36,11 +36,11 @@
             ngModel required
             minlength="8"
         />
-        <!-- <div *ngIf="userForm.get('myField').invalid && userForm.get('myField').touched">
-            El campo está incompleto
-        </div> -->
+        <div class="warning" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+            La contraseña debe tener al menos 8 caracteres
+        </div>
     </div>
-    <!-- <div class="form-group">
+    <div class="form-group">
         <label for="repeatPassword">Repeat Password</label>
         <input
             type="password"
@@ -49,7 +49,7 @@
             placeholder="************"
             required
         />
-    </div> -->
+    </div>
     <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="agreeCheckbox" required />
         <label class="form-check-label" for="agreeCheckbox"
