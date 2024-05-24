@@ -289,7 +289,7 @@ VALUES
 
 
 -- Insertar datos en la tabla de relación ingredient_recipe
-INSERT INTO ingredient_recipe (quantity, ingredient_id, recipe_id)
+INSERT INTO ingredient_recipe (quantity, id_ingredient, id_recipe)
 VALUES (2, 1, 1), -- 200 gramos de pollo para la receta 1
        (1, 2, 1), -- 80 gramos de pasta para la receta 1
        (1, 16, 2), -- 100 gramos de huevo para la receta 2

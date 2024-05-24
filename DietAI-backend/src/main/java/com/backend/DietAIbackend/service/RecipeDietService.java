@@ -8,4 +8,8 @@ public interface RecipeDietService {
     RecipeDiet save(RecipeDiet recipeDiet);
 
     List<RecipeDiet> findAll();
+
+    List<RecipeDiet> findByRecipeIdRecipe(Long idRecipe);
+
+    void delete(RecipeDiet recipeDiet);
 }

@@ -24,5 +24,14 @@ public class RecipeDietServiceImp implements RecipeDietService{
         return recipeDietRepository.findAll();
     }
 
+    @Override
+    public List<RecipeDiet> findByRecipeIdRecipe(Long idRecipe) {
+        return recipeDietRepository.findByRecipeIdRecipe(idRecipe);
+    }
 
+    @Override
+    public void delete(RecipeDiet recipeDiet) {
+
+        recipeDietRepository.delete(recipeDiet);
+    }
 }

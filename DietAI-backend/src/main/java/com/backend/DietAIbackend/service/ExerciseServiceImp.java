@@ -1,12 +1,8 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.exception.ServiceException;
-import com.backend.DietAIbackend.model.Exercise;
-import com.backend.DietAIbackend.model.ExerciseMuscle;
-import com.backend.DietAIbackend.model.Muscle;
-import com.backend.DietAIbackend.model.TypeTraining;
+import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.ExerciseRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,9 @@ public class ExerciseServiceImp implements ExerciseService {
 
     @Autowired
     ExerciseMuscleService exerciseMuscleService;
+
+    @Autowired
+    TrainingExerciseService trainingExerciseService;
 
     @Transactional
     @Override
@@ -108,9 +107,19 @@ public class ExerciseServiceImp implements ExerciseService {
     }
 
     @Override
-    public void deleteById(Long id){
-        findById(id);
-        exerciseRepository.deleteById(id);}
+    public void deleteById(Long id) {
+        // Verificar si el ejercicio existe
+        Exercise exercise = findById(id);
+
+        // Eliminar manualmente los registros en training_exercise relacionados con este ejercicio
+        List<TrainingExercise> trainingExercises = trainingExerciseService.findByExerciseIdExercise(id);
+        for (TrainingExercise trainingExercise : trainingExercises) {
+            trainingExerciseService.delete(trainingExercise);
+        }
+
+        // Finalmente, eliminar el ejercicio
+        exerciseRepository.delete(exercise);
+    }
 
     @Override
     public Exercise update(Exercise exercise) {

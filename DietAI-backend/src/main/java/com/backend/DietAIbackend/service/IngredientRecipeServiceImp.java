@@ -21,5 +21,13 @@ public class IngredientRecipeServiceImp implements IngredientRecipeService {
         return ingredientRecipeRepository.findAll();
     }
 
+    @Override
+    public List<IngredientRecipe> findByIngredientIdIngredient(Long idIngredient) {
+        return ingredientRecipeRepository.findByIngredientIdIngredient(idIngredient);
+    }
 
+    @Override
+    public void delete(IngredientRecipe ingredientRecipe) {
+        ingredientRecipeRepository.delete(ingredientRecipe);
+    }
 }

@@ -4,10 +4,7 @@ import com.backend.DietAIbackend.dto.IngredientInRecipe;
 import com.backend.DietAIbackend.dto.RecipeWithIngredientsRequest;
 import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.RecipeMapper;
-import com.backend.DietAIbackend.model.Allergy;
-import com.backend.DietAIbackend.model.IngredientRecipe;
-import com.backend.DietAIbackend.model.Recipe;
-import com.backend.DietAIbackend.model.RecipeAllergy;
+import com.backend.DietAIbackend.model.*;
 import com.backend.DietAIbackend.repository.RecipeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +19,7 @@ import java.util.stream.Collectors;
 public class RecipeServiceImp implements RecipeService {
 
     @Autowired
-    RecipeRepository recetaRepository;
+    RecipeRepository recipeRepository;
 
     @Autowired
     IngredientRecipeService ingredientRecipeService;
@@ -33,11 +30,14 @@ public class RecipeServiceImp implements RecipeService {
     @Autowired
     RecipeMapper recipeMapper;
 
+    @Autowired
+    RecipeDietService recipeDietService;
+
     @Transactional
     @Override
     public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList, List<Allergy> allergyList) {
         try {
-            Recipe recipe = recetaRepository.save(receta);
+            Recipe recipe = recipeRepository.save(receta);
 
             for (IngredientInRecipe ingredientInRecipe : ingredientInRecipeList) {
                 if (ingredientInRecipe.getIngredient() != null) {
@@ -117,33 +117,35 @@ public class RecipeServiceImp implements RecipeService {
 
     @Override
     public void deleteById(Long id) {
-        try {
-            findById(id); // Este método lanza ServiceException si no se encuentra la receta.
-            recetaRepository.deleteById(id);
-        } catch (ServiceException e) {
-            throw e;
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Ocurrió un error inesperado al eliminar la receta");
+        Recipe recipe = findById(id);
+
+        // Eliminar manualmente los registros en ingredient_recipe relacionados con este ingrediente
+        List<RecipeDiet> recipeDietList = recipeDietService.findByRecipeIdRecipe(id);
+        for (RecipeDiet recipeDiet : recipeDietList) {
+            recipeDietService.delete(recipeDiet);
         }
+
+        // Finalmente, eliminar el ingrediente
+        recipeRepository.delete(recipe);
     }
 
 
     @Override
     public Recipe findById(Long id){
-        return recetaRepository.findById(id).orElseThrow(
+        return recipeRepository.findById(id).orElseThrow(
                 () -> new ServiceException("No se ha encontrado la receta", HttpStatus.NOT_FOUND)
         );
     }
 
     @Override
     public Recipe save(Recipe var1) {
-        return recetaRepository.save(var1);
+        return recipeRepository.save(var1);
     }
 
     @Override
     public List<Recipe> findAll() {
         try {
-            List<Recipe> recipes = recetaRepository.findAll();
+            List<Recipe> recipes = recipeRepository.findAll();
             if (recipes.isEmpty()) {
                 throw new ServiceException("No se encuentran recetas", HttpStatus.NOT_FOUND);
             }
@@ -158,7 +160,7 @@ public class RecipeServiceImp implements RecipeService {
     public Recipe update(Recipe recipe) {
         try {
             findById(recipe.getIdRecipe()); // Este método lanza ServiceException si no se encuentra la receta.
-            return recetaRepository.save(recipe);
+            return recipeRepository.save(recipe);
         } catch (ServiceException e) {
             throw e;
         } catch (Exception e) {
@@ -168,7 +170,7 @@ public class RecipeServiceImp implements RecipeService {
 
     private void actualizarCalorias() {
         try {
-            recetaRepository.actualizarCalories();
+            recipeRepository.actualizarCalories();
         } catch (Exception e) {
             throw new ServiceException("Ocurrió un error inesperado al actualizar las calorías", HttpStatus.INTERNAL_SERVER_ERROR);
         }
