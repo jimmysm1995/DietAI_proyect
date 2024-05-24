@@ -26,12 +26,12 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f0f0f0; /* Color de fondo gris claro */
+    background-color: #38686A;
     padding: 10px 20px;
   }
   
   .logo-container h1 {
-    color: #000; /* Color del texto en negro */
+    color: #ffffff;
     margin: 0;
     padding: 1rem;
     width: 100%;
@@ -65,7 +65,7 @@ h1{
   }
   
   .nav-items li a {
-    color: #000; 
+    color: #ffffff; 
     text-decoration: none;
   }
   

@@ -10,13 +10,17 @@ header {
     height: 6rem;
 }
 
+.header {
+  color: aliceblue;
+
+}
+
 .headerBg{
     background-image: url(../../../assets/IMG/home-bc.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
     height: 60vh;
-    color: aliceblue;
 }
 
 .fixed-header {

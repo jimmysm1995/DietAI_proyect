@@ -1,4 +1,4 @@
-<div class="headerBg">
+<div class="header" [ngClass]="{'headerBg': enableBackground}">
     <header class="fixed-header">
 
         <div class="logo-container">
@@ -6,15 +6,10 @@
         </div>
         <nav>
             <ul>
-                <li>
-                    <a
-                        role="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#updateProfileModal"
-                        >Profile</a
-                    >
-                </li>
-                <li><a role="button" (click)="logout()">Log out</a></li>
+                <li *ngIf="isLoggedIn"><a href="/home" >Profile</a></li>
+                <li *ngIf="isLoggedIn"><a role="button" (click)="logout()">Log out</a></li>
+                <li *ngIf="!isLoggedIn"><a href="/login">Login</a></li>
+                <li *ngIf="!isLoggedIn"><a href="/register">Sign Up</a></li>
                 <li><a href="/quienesSomos">Quienes somos</a></li>
                 <li><a href="/contacto">Contáctanos</a></li>
                 <li><a href="/blog">Blog</a></li>
@@ -34,7 +29,7 @@
                 data-bs-target="#updateProfileModal"
                 >Profile</a
             >
-            <a role="button" (click)="logout()">Log out</a>
+            <a *ngIf="isLoggedIn" role="button" (click)="logout()">Log out</a>
             <a href="/quienesSomos">Quienes somos 2</a>
             <a href="/contacto">Contáctanos</a>
             <a href="/blog">Blog</a>

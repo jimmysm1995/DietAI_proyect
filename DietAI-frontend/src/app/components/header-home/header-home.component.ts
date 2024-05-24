@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
@@ -16,6 +16,9 @@ export class HeaderHomeComponent {
     private userService : UserService) {}
     
   isAdmin: boolean = false; 
+  isLoggedIn: boolean = false;
+  @Input()
+  public enableBackground: boolean = false;
 
   openProfileModal() {
     
@@ -23,6 +26,11 @@ export class HeaderHomeComponent {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().then((user: User) => {
+
+      if (user) {
+        this.isLoggedIn = true;
+      }
+
       this.userService.getAuthorities(user.idUser).then((authorities: string[]) => {
         if (authorities.includes('ADMIN')) {
           this.isAdmin = true;

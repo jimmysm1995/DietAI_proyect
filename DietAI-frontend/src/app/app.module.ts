@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { InfoComponent } from './components/info/info.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -55,7 +54,6 @@ const routes:Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     BienvenidaComponent,
     InfoComponent,
     FooterComponent,
