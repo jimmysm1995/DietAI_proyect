@@ -16,10 +16,10 @@ public class IngredientRecipe {
     private double quantity;
 
     @ManyToOne
-    @JoinColumn(name = "ingredient_id")
+    @JoinColumn(name = "idIngredient")
     private Ingredient ingredient;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "idRecipe")
     private Recipe recipe;
 }

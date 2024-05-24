@@ -2,6 +2,8 @@ package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.model.Ingredient;
+import com.backend.DietAIbackend.model.IngredientRecipe;
+import com.backend.DietAIbackend.repository.IngredientRecipeRepository;
 import com.backend.DietAIbackend.repository.IngredientRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,9 @@ public class IngredientServiceImp implements IngredientService {
 
     @Autowired
     IngredientRepository ingredientRepository;
+
+    @Autowired
+    IngredientRecipeService ingredientRecipeService;
 
     @Transactional
     @Override
@@ -46,13 +51,19 @@ public class IngredientServiceImp implements IngredientService {
 
     @Override
     public void deleteById(Long id) {
-        ingredientRepository.findById(id).ifPresentOrElse(
-                ingredientRepository::delete,
-                () -> {
-                    throw new ServiceException("El ingrediente no existe", HttpStatus.NOT_FOUND);
-                }
-        );
+        // Verificar si el ingrediente existe
+        Ingredient ingredient = findById(id);
+
+        // Eliminar manualmente los registros en ingredient_recipe relacionados con este ingrediente
+        List<IngredientRecipe> ingredientRecipes = ingredientRecipeService.findByIngredientIdIngredient(id);
+        for (IngredientRecipe ingredientRecipe : ingredientRecipes) {
+            ingredientRecipeService.delete(ingredientRecipe);
+        }
+
+        // Finalmente, eliminar el ingrediente
+        ingredientRepository.delete(ingredient);
     }
+
 
     @Override
     public Ingredient update(Ingredient ingredient) {
