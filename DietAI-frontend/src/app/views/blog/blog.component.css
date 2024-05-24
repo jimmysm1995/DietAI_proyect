@@ -22,13 +22,7 @@ h1{
 }
 
 /**ESTILOS MENU NAVEGACIÓN**/
-.fixed-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #38686A;
-    padding: 10px 20px;
-  }
+
   
   .logo-container h1 {
     color: #ffffff;
