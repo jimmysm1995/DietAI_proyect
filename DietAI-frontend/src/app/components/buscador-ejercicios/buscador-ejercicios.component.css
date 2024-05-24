@@ -1,11 +1,13 @@
-.buscador{
+.buscador {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    font-weight: 600;
+    font-size: 20px;
     /* margin-bottom: 5rem; */
 }
 
-input{
+input {
     padding: 0.5rem;
     width: 50%;
     border-radius: 10px;
@@ -14,10 +16,11 @@ input{
 /* Estilo para el contenedor del dropdown */
 .dropdown-container {
     position: relative;
-  }
-  
-  .select-group {
-    width: 50%; /* Ancho deseado */
+}
+
+
+.select-group {
+    width: 25%; /* Ancho deseado */
     margin: auto; /* Centrar horizontalmente */
 }
 
@@ -29,9 +32,9 @@ input{
     border: 1px solid #ccc;
     margin-bottom: 1rem; /* Separación inferior */
 }
-  
-  /* Estilo para el dropdown */
-  .dropdown-menu {
+
+/* Estilo para el dropdown */
+.dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -39,44 +42,63 @@ input{
     display: none;
     float: left;
     min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
     font-size: 1rem;
     color: #212529;
     text-align: left;
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
-  }
-  
-  /* Estilo para mostrar el dropdown cuando está abierto */
-  .open {
-    display: block;
-  }
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
 
-  .modal {
-    z-index: 1300 ;
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    gap: 3rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    
+}
+
+.pic {
+    display: block; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 200px;
+}
+
+/* Estilo para mostrar el dropdown cuando está abierto */
+.open {
+    display: block;
+}
+
+.modal {
+    z-index: 1300;
 }
 
 .modal-backdrop {
-    --bs-backdrop-bg: #00000049; 
+    --bs-backdrop-bg: #00000049;
     --bs-backdrop-opacity: 1;
     width: 100%;
     height: 100%;
 }
 
-.modal-dialog{
+.modal-dialog {
     background-color: white !important;
     opacity: 1 !important;
 }
 
-.modal-content{
-    background-color: white  !important;
+.modal-content {
+    background-color: white !important;
 }
 
-.close{
+.close {
     font-weight: bold;
     cursor: pointer;
     width: 1.5rem;
@@ -87,4 +109,11 @@ input{
     text-align: center;
     padding: 0;
     text-decoration: none;
+}
+
+@media screen and (min-width: 1324px) {
+    .pic {
+        height: 300px;
+        width: 300px;
+    }
 }

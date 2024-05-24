@@ -10,14 +10,12 @@ import { ViewChild } from '@angular/core';
     styleUrls: ['./buscador-ejercicios.component.css'],
 })
 export class BuscadorEjerciciosComponent {
-limpiarLista() {
-   this.filteredExercises = [];
-}
+    limpiarLista() {
+        this.filteredExercises = [];
+    }
 
     @ViewChild('muscleForm') muscleForm!: NgForm;
-    constructor(
-      private exerciseService: ExerciseService,
-    ) {}
+    constructor(private exerciseService: ExerciseService) {}
 
     public selectedExercise: Exercise = new Exercise();
     public exercises: Exercise[] = [];
@@ -25,6 +23,12 @@ limpiarLista() {
     public filterMuscle: Muscle[] = [];
     public filteredExercises: Exercise[] = [];
 
+    public config = {
+        displayKey: 'name',
+        search: true,
+        placeholder: 'Seleccionar',
+        selectAllLabel: 'Seleccionar todos',
+    };
     ngOnInit(): void {
         this.findMuscle();
         this.exerciseService.getAllExercises().then((exercises: Exercise[]) => {
@@ -58,9 +62,7 @@ limpiarLista() {
         }
     }
 
-    
     mostrarEjercicio(ejercicio: Exercise) {
-        this.selectedExercise = ejercicio
+        this.selectedExercise = ejercicio;
     }
-
 }

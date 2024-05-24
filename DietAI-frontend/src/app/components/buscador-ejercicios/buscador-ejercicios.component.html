@@ -1,13 +1,15 @@
 <!-- Formulario para buscar ejercicios -->
 <form (submit)="buscarEjercicios()">
     <div class="form-group select-group">
-        <label for="filterMuscle">Busca ejercicios específicos:</label>
-        <ngx-select-dropdown [(ngModel)]="filterMuscle" name="filterMuscle"
-            [config]="{displayKey: 'name',  search: true, placeholder:'Selecionar'}" [multiple]="true"
-            [options]="muscle" class="w-100"></ngx-select-dropdown>
+        <label class="buscador" for="filterMuscle">Busca ejercicios específicos:</label>
+        <ngx-select-dropdown 
+            [(ngModel)]="filterMuscle"
+            name="filterMuscle"
+            [config]="config" [multiple]="true"
+            [options]="muscle" class="w-50 filterMuscle"></ngx-select-dropdown>
     </div>
     <button type="submit" class="btn btn-primary mt-2">
-        Buscar Ejercicios
+        <span class="fas fa-search"></span>
     </button>    
 </form>
 <button (click)="limpiarLista()" class="btn btn-danger mt-2">
@@ -21,7 +23,7 @@
         <div class="col-md-4" *ngFor="let exercise of filteredExercises; let i = index;">
             <a (click)="mostrarEjercicio(exercise)" role="button" data-bs-toggle="modal"
                 data-bs-target="#modalEjercicio">
-                <img [src]="exercise.imgExercise" alt="{{exercise.name}}" class="pic">
+                <div class="pic" [ngStyle]="{'background-image': 'url(' + exercise.imgExercise + ')'}"></div>
                 <p class="exerciseData"><b>{{exercise.name}}</b></p>
             </a>
             <!-- Agregar un salto de línea después de cada tercer ejercicio -->

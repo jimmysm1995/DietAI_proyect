@@ -58,3 +58,10 @@
     padding: 0;
     text-decoration: none;
 }
+
+@media screen and (min-width: 1324px) {
+    .pic {
+        height: 300px;
+        width: 300px;
+    }
+}
