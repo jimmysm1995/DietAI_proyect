@@ -22,3 +22,11 @@
     border: 2px solid #468486;
     color: white;
 }
+
+.btn.btn-icon {
+    padding: 0;
+    line-height: 16px;
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+}
