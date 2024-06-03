@@ -31,7 +31,7 @@ export class ShoppingListComponent {
   steps: string[] = [];
 
   constructor(
-    private shoppingListService: ShoppingListService,
+    private shoppingListService: ShoppingListService
   ) { 
     this._isOpened = false;
   }
