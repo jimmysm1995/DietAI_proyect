@@ -15,7 +15,6 @@ export class ProfileComponent {
   public user: User = new User();
   public frase: string = '';
   constructor(
-    private userService: UserService,
     private userStore: UserStore,
     private quotesService: QuotesService
     ) {}
@@ -30,7 +29,9 @@ export class ProfileComponent {
     })
   }
   cerrarModal() {
-    document.getElementById('close')?.click();
+      let element = document.getElementById('close')
+      
+      element?.click();
   }
 
   obtenerDieta() {

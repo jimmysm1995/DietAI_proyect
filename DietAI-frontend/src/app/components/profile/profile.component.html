@@ -29,7 +29,9 @@
             </div>
         </div>
     </div>
-    <app-update-img></app-update-img>
+    <app-update-img
+        (onCloseModal)="cerrarModal()"
+    ></app-update-img>
     <img
         class="pic"
         [src]="user.img"

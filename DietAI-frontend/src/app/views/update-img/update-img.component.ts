@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserStore } from 'src/app/store/userStore';
 import { ImagenProfileService } from '../../services/imagen-profile.service';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,9 @@ import { User } from 'src/app/models/User';
 export class UpdateImgComponent {
     public urls: string[] = [];
 
-    constructor(
+    @Output() onCloseModal = new EventEmitter();
+
+    constructor(    
         public userStore: UserStore,
         private imagenProfileService: ImagenProfileService,
         private userService: UserService
@@ -53,6 +55,7 @@ export class UpdateImgComponent {
                 .then((updatedUser: User) => {
                     // Actualiza el usuario en el userStore con los datos actualizados
                     this.userStore.user.img = updatedUser.img;
+                    this.onCloseModal.emit();
                 })
                 .catch((error) => {
                     console.error('Error updating user:', error);
