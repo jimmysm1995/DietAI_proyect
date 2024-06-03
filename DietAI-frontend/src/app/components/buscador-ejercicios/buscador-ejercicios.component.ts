@@ -11,6 +11,7 @@ import { ViewChild } from '@angular/core';
 })
 export class BuscadorEjerciciosComponent {
     limpiarLista() {
+        this.filterMuscle = [];
         this.filteredExercises = [];
     }
 

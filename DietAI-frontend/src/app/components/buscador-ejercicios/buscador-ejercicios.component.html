@@ -1,88 +1,72 @@
 <!-- Formulario para buscar ejercicios -->
-<form (submit)="buscarEjercicios()">
+<form (submit)="buscarEjercicios()" class="formulario">
     <div class="form-group select-group">
         <label class="buscador" for="filterMuscle">Busca ejercicios específicos:</label>
-        <ngx-select-dropdown 
-            [(ngModel)]="filterMuscle"
-            name="filterMuscle"
-            [config]="config" [multiple]="true"
+        <ngx-select-dropdown [(ngModel)]="filterMuscle" name="filterMuscle" [config]="config" [multiple]="true"
             [options]="muscle" class="w-50 filterMuscle"></ngx-select-dropdown>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">
-        <span class="fas fa-search"></span>
-    </button>    
+    <div class="btns">
+        <button type="submit" class="btn btn-primary mt-2">
+            <span class="fas fa-search"></span>
+        </button>
+        <button type="button" (click)="limpiarLista()" class="btn btn-danger mt-2 close">
+            <span class="fas fa-times-circle"></span>
+        </button>
+    </div>
 </form>
-<button (click)="limpiarLista()" class="btn btn-danger mt-2">
-    Limpiar
-</button>
 
 <!-- Lista de ejercicios filtrados -->
 <div class="container">
     <!-- Iterar sobre los ejercicios filtrados y mostrarlos -->
     <div class="row">
-        <div class="col-md-4" *ngFor="let exercise of filteredExercises; let i = index;">
+        <div class="col-md-4 entrenamientoCard" *ngFor="let exercise of filteredExercises; let i = index">
             <a (click)="mostrarEjercicio(exercise)" role="button" data-bs-toggle="modal"
                 data-bs-target="#modalEjercicio">
                 <div class="pic" [ngStyle]="{'background-image': 'url(' + exercise.imgExercise + ')'}"></div>
-                <p class="exerciseData"><b>{{exercise.name}}</b></p>
+                <p class="exerciseData">
+                    <b>{{ exercise.name }}</b>
+                </p>
             </a>
-            <!-- Agregar un salto de línea después de cada tercer ejercicio -->
-            <div *ngIf="(i + 1) % 3 === 0" class="w-100"></div>
+
         </div>
     </div>
 </div>
 
-
-<div
-    class="modal fade modal-backdrop"
-    id="modalEjercicio"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
->
+<div class="modal fade modal-backdrop" id="modalEjercicio" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Entrenamiento</h5>
 
-                <a
-                    role="button"
-                    id="close"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    X
-                </a>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger mt-2 close">
+                    <span class="fas fa-times-circle"></span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <img
-                                    style="
+                                <img style="
                                         width: 100%;
                                         margin-right: 25px;
                                         margin-bottom: 5px;
                                         border: 1px solid lightgrey;
-                                    "
-                                    src={{selectedExercise.imgExercise}}
-                                    alt="Aperturas de pectoral Trx"
-                                />
+                                    " src="{{ selectedExercise.imgExercise }}" alt="Aperturas de pectoral Trx" />
                             </div>
                             <div class="col-md-12" style="text-align: justify">
                                 <p></p>
                                 <p><strong>POSICIÓN INICIAL:</strong></p>
                                 <p>
-                                    {{selectedExercise.initialPosition}}
+                                    {{ selectedExercise.initialPosition }}
                                 </p>
                                 <p><strong> EJECUCIÓN:</strong></p>
                                 <p>
-                                    {{selectedExercise.execution}}
+                                    {{ selectedExercise.execution }}
                                 </p>
-                                <strong>CONSEJOS:</strong> {{selectedExercise.advices}}
+                                <strong>CONSEJOS:</strong>
+                                {{ selectedExercise.advices }}
                                 <p></p>
                             </div>
                         </div>

@@ -7,33 +7,60 @@
     /* margin-bottom: 5rem; */
 }
 
+.formulario{
+    display: flex;
+    gap: 2rem;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.btns{
+    display: flex ;
+    gap: 1rem;
+
+    button {
+        padding: 0;
+        line-height: 16px;
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        margin-top: 12px !important;
+    }
+}
+
+.close{
+    background-color: grey;
+    border-color: grey;;
+}
+.close:hover{
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 input {
     padding: 0.5rem;
     width: 50%;
     border-radius: 10px;
 }
 
-/* Estilo para el contenedor del dropdown */
 .dropdown-container {
     position: relative;
 }
 
 
 .select-group {
-    width: 25%; /* Ancho deseado */
-    margin: auto; /* Centrar horizontalmente */
+    width: 25%; 
 }
 
-/* Estilo para el cuadro de búsqueda */
 .dropdown-search {
     width: 100%;
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid #ccc;
-    margin-bottom: 1rem; /* Separación inferior */
+    margin-bottom: 1rem;
 }
 
-/* Estilo para el dropdown */
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -69,11 +96,12 @@ input {
     display: block; 
     background-size: contain;
     background-repeat: no-repeat;
+    background-position-y: bottom;
     height: 200px;
     width: 200px;
 }
 
-/* Estilo para mostrar el dropdown cuando está abierto */
+/** Estilo para mostrar el dropdown cuando está abierto **/
 .open {
     display: block;
 }
@@ -92,24 +120,25 @@ input {
 .modal-dialog {
     background-color: white !important;
     opacity: 1 !important;
+
+    .close {
+            padding: 0;
+            line-height: 16px;
+            box-sizing: border-box;
+            width: 32px;
+            height: 32px;
+    }
 }
 
 .modal-content {
     background-color: white !important;
 }
 
-.close {
-    font-weight: bold;
-    cursor: pointer;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    padding: 0;
-    text-decoration: none;
+.entrenamientoCard {
+    display: flex;
+    justify-content: center;
 }
+
 
 @media screen and (min-width: 1324px) {
     .pic {
