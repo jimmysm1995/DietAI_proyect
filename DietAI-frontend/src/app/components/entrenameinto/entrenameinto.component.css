@@ -1,4 +1,4 @@
-*{
+.modal, .modal-content, .modal-dialog, .modal-body {
     border-radius: 8px;
 }
 

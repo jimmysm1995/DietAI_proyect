@@ -28,7 +28,7 @@ deleteUser() {
   ngOnInit(): void {
     this.userService.getCurrentUser().then((user: User) => {
       this.user = user;
-      console.log("hola que ase2", this.user);
+      console.log(this.user);
     });
 
   }

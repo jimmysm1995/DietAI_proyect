@@ -49,3 +49,11 @@ table {
     padding: 0;
     text-decoration: none;
 }
+
+.buttons {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+}
