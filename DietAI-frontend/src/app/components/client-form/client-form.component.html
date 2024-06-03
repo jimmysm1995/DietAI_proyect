@@ -1,17 +1,8 @@
 <form (ngSubmit)="registrarCliente(clientForm.value)" class="form" #clientForm="ngForm">
     <div class="form-group select-group">
-        
-        <label for="edad">Fecha de nacimiento</label>
-        <input
-            name="fecha de nacimiento"
-            type="date"
-            class="form-control"
-            id="birthDate"
-            name="birthDate"
-            placeholder="Edad"
-            ngModel
-            required
-        />
+
+        <label for="birthDate">Fecha de nacimiento</label>
+        <input type="date" class="form-control" id="birthDate" name="birthDate" ngModel required />
     </div>
 
     <div class="form-group select-group">
@@ -25,33 +16,15 @@
 
     <div class="form-group select-group">
         <label for="weight">Peso</label>
-        <input
-            name="weight"
-            type="number"
-            class="form-control"
-            id="weight"
-            name="weight"
-            placeholder="Peso (kg)"
-            ngModel
-            required
-        />
+        <input type="number" class="form-control" id="weight" name="weight" placeholder="Peso (kg)" ngModel required />
     </div>
 
     <div class="form-group select-group">
         <label for="height">Altura</label>
-        <input
-            name="height"
-            type="number"
-            class="form-control"
-            id="height"
-            name="height"
-            placeholder="Altura(cm)"
-            ngModel
-            required
-        />
+        <input type="number" class="form-control" id="height" name="height" placeholder="Altura(cm)" ngModel required />
     </div>
 
-    <div class="form-group select-group" >
+    <div class="form-group select-group">
         <label for="objetivo">Objetivo</label>
         <select name="goal" id="goal" class="form-control" ngModel required>
             <option value=""></option>
@@ -62,12 +35,16 @@
 
     <div class="form-group select-group">
         <label for="injury">Lesiones</label>
-        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="injury" [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries" class="w-100" ></ngx-select-dropdown>
+        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="injury"
+            [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries"
+            class="w-100"></ngx-select-dropdown>
     </div>
-    
-    <div class="form-group select-group" >
+
+    <div class="form-group select-group">
         <label for="allergy">Alergias</label>
-        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="allergy" [config]="{displayKey: 'name',  search: true, placeholder:'Alergias'}" [multiple]="true" [options]="allergies" class="w-100" ></ngx-select-dropdown>
+        <ngx-select-dropdown ngModel [instanceId]="'instance1'" name="allergy"
+            [config]="{displayKey: 'name',  search: true, placeholder:'Alergias'}" [multiple]="true"
+            [options]="allergies" class="w-100"></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
@@ -132,10 +109,7 @@
         <i class="fas fa-caret-down flecha"></i>
     </div> -->
 
-    <button
-        type="submit"
-        class="btn btn-primary btnAceptar"
-    >
+    <button type="submit" class="btn btn-primary btnAceptar">
         Aceptar
     </button>
 </form>

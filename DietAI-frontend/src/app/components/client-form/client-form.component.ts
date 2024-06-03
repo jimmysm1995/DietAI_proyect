@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
-import { Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { UserStore } from 'src/app/store/userStore';
 import { InjuryService } from 'src/app/services/injury.service';
@@ -18,7 +17,6 @@ import { GenderService } from '../../services/gender-controller.service';
 import { Goal } from 'src/app/models/Goal';
 import { GoalService } from '../../services/goal.service';
 import { ClientStore } from 'src/app/store/clientStore';
-import { TypeTraining } from '../../models/Exercise';
 import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
@@ -28,7 +26,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 })
 export class ClientFormComponent {
     @ViewChild('clientForm') clientForm!: NgForm;
-    errorMessage: string = '';
+    errorMessage: string = 'HOLA CARACOLA MEGA ES EL MÁS GUAY DEL MUNDO';
     idUser: string = '';
     @Output() aceptarFormulario = new EventEmitter();
 
@@ -44,7 +42,6 @@ export class ClientFormComponent {
     constructor(
         private clientService: ClientService,
         private userStore: UserStore,
-        private router: Router,
         private injuryService: InjuryService,
         private allergyService: AllergyService,
         private jobTypeService: JobTypeService,
@@ -83,6 +80,12 @@ export class ClientFormComponent {
         this.exerciseService.getTypeTraining().then((typeTraining) => {
             this.typeTraining = typeTraining;
         });
+
+        this.clientService.getCurrentClient().then((client) => {
+            
+            this.clientForm.setValue({'weight': client.weight});
+
+        })
     }
 
     aceptar() {
@@ -104,11 +107,10 @@ export class ClientFormComponent {
                 await this.clientService.asignarEntrenamiento(
                     this.clientStore.client.idClient ?? 0
                 );
-            this.aceptar();
-        } catch (error) {
-            if (error instanceof Error) {
-                this.errorMessage = error.message;
-            }
+            //this.aceptar();
+        } catch (error:any) {
+            this.errorMessage = error.message;
         }
+        this.aceptar();
     }
 }
