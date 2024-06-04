@@ -26,7 +26,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 })
 export class ClientFormComponent {
     @ViewChild('clientForm') clientForm!: NgForm;
-    errorMessage: string = 'HOLA CARACOLA MEGA ES EL MÁS GUAY DEL MUNDO';
+    errorMessage: string = '';
     idUser: string = '';
     @Output() aceptarFormulario = new EventEmitter();
 
