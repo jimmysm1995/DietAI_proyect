@@ -31,6 +31,6 @@ public class Diet {
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
     private List<DietAllergy> dietAllergy;
 
-    @OneToMany(mappedBy = "diet")
+    @OneToMany(fetch =  FetchType.LAZY ,mappedBy = "diet")
     private List<Client> clients;
 }

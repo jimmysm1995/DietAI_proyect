@@ -31,7 +31,7 @@ public class Training {
     @Column(name = "distribution", columnDefinition = "Varchar(50)")
     private String distribution;
 
-    @OneToMany(mappedBy = "training")
+    @OneToMany(fetch =  FetchType.LAZY ,mappedBy = "training")
     private List<Client> clients;
 
     @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
