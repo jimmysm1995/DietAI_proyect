@@ -110,6 +110,8 @@ export class ClientFormComponent {
             //this.aceptar();
         } catch (error:any) {
             this.errorMessage = error.message;
+            this.aceptar();
+
         }
         this.aceptar();
     }
