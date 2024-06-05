@@ -41,10 +41,11 @@ public class RecipeServiceImp implements RecipeService {
 
             for (IngredientInRecipe ingredientInRecipe : ingredientInRecipeList) {
                 if (ingredientInRecipe.getIngredient() != null) {
-                    IngredientRecipe ingredientRecipe = new IngredientRecipe();
-                    ingredientRecipe.setRecipe(recipe);
-                    ingredientRecipe.setQuantity(ingredientInRecipe.getQuantity());
-                    ingredientRecipe.setIngredient(ingredientInRecipe.getIngredient());
+                    IngredientRecipe ingredientRecipe = IngredientRecipe.builder()
+                            .recipe(recipe)
+                            .quantity(ingredientInRecipe.getQuantity())
+                            .ingredient(ingredientInRecipe.getIngredient())
+                            .build();
                     ingredientRecipeService.save(ingredientRecipe);
                 }
             }
@@ -74,9 +75,10 @@ public class RecipeServiceImp implements RecipeService {
             List<IngredientInRecipe> ingredients = ingredientRecipeService.findAll().stream()
                     .filter(ingredientRecipe -> ingredientRecipe.getRecipe().equals(recipe))
                     .map(ingredientRecipe -> {
-                        IngredientInRecipe ingredient = new IngredientInRecipe();
-                        ingredient.setIngredient(ingredientRecipe.getIngredient());
-                        ingredient.setQuantity(ingredientRecipe.getQuantity());
+                        IngredientInRecipe ingredient = IngredientInRecipe.builder()
+                                .ingredient(ingredientRecipe.getIngredient())
+                                .quantity(ingredientRecipe.getQuantity())
+                                .build();
                         return ingredient;
                     })
                     .collect(Collectors.toList());

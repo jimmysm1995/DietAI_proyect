@@ -21,6 +21,13 @@ public class IngredientRecipeServiceImp implements IngredientRecipeService {
         return ingredientRecipeRepository.findAll();
     }
 
+    /**
+     *
+     * devuelve las relaciones que estan relacionadas con el ingrediente que se envia
+     *
+     * @param idIngredient
+     * @return
+     */
     @Override
     public List<IngredientRecipe> findByIngredientIdIngredient(Long idIngredient) {
         return ingredientRecipeRepository.findByIngredientIdIngredient(idIngredient);

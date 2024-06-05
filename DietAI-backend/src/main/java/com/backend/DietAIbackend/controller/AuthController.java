@@ -37,12 +37,6 @@ public class AuthController {
     private UserMapper userMapper;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired

@@ -40,13 +40,14 @@ public class TrainingServiceImp implements TrainingService {
         for (ExercisesInTraining exercisesInTraining : exercisesInTrainingList
         ) {
             if (exercisesInTraining != null) {
-                TrainingExercise trainingExercise = new TrainingExercise();
-                trainingExercise.setTraining(training);
-                trainingExercise.setExercise(exercisesInTraining.exercise());
-                trainingExercise.setSets(exercisesInTraining.sets());
-                trainingExercise.setReps(exercisesInTraining.reps());
-                trainingExercise.setOrderDay(exercisesInTraining.orderDay());
-                trainingExercise.setOrderWeek(exercisesInTraining.orderWeek());
+                TrainingExercise trainingExercise = TrainingExercise.builder()
+                        .training(training)
+                        .exercise(exercisesInTraining.exercise())
+                        .sets(exercisesInTraining.sets())
+                        .reps(exercisesInTraining.reps())
+                        .orderDay(exercisesInTraining.orderDay())
+                        .orderWeek(exercisesInTraining.orderWeek())
+                .build();
                 trainingExerciseService.save(trainingExercise);
             }
         }

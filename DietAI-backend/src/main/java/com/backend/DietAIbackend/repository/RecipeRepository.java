@@ -14,11 +14,11 @@ public interface RecipeRepository extends JpaRepository <Recipe,Long> {
             "SET re.calories = " +
             "(SELECT SUM(ing.calories * inre.quantity) AS totalCalories " +
             "FROM ingredient ing " +
-            "INNER JOIN ingredient_recipe inre ON ing.id_ingredient = inre.ingredient_id " +
-            "WHERE re.id_recipe = inre.recipe_id " +
-            "GROUP BY inre.recipe_id) " +
+            "INNER JOIN ingredient_recipe inre ON ing.id_ingredient = inre.id_ingredient " +
+            "WHERE re.id_recipe = inre.id_recipe " +
+            "GROUP BY inre.id_recipe) " +
             "WHERE re.id_recipe IN (" +
-            "SELECT recipe_id " +
+            "SELECT id_recipe " +
             "FROM ingredient_recipe)", nativeQuery = true)
     void actualizarCalories();
 }
