@@ -1,0 +1,40 @@
+
+
+.blog-container {
+    font-family: Arial, sans-serif;
+    color: #4a4a4a;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 60%;
+    margin: 0 auto;
+
+    h1 {
+        color: --primary;
+        font-weight: bold;
+    }
+
+    h2,
+    h3 {
+        color: --primary;
+        padding-top: 2rem;
+    }
+
+    ul,
+    ol {
+        margin-left: 20px;
+    }
+
+    .image-container {
+        margin: 20px 0;
+        text-align: center;
+        display: flex;
+        gap: 3rem;
+        justify-content: center;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+}

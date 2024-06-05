@@ -1,0 +1,16 @@
+<app-header-home></app-header-home>
+<div>
+    
+</div>
+<div class="blog-container">
+    <h1>{{content[index].title}}</h1>
+    <p>
+        {{content[index].subtitle}}
+    </p>
+
+    <div class="content" [innerHTML]="content[index].content">
+        
+    </div>
+</div>
+
+<app-footer></app-footer>

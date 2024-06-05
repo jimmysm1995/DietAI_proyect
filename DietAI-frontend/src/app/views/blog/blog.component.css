@@ -21,6 +21,15 @@ h1{
     white-space: normal; /* Permite que el texto se muestre en múltiples líneas */
 }
 
+.card {
+  cursor: pointer;
+  transition: all ease-in-out 0.2;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px gray;
+}
+
 /**ESTILOS MENU NAVEGACIÓN**/
 
   

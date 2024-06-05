@@ -1,5 +1,6 @@
 // blog.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -70,4 +71,10 @@ export class BlogComponent {
     },
 
   ];
+
+  constructor(private router: Router) { }
+
+  goToPage(index: number) {
+    this.router.navigate([`/entradaBlog/${index}`]);
+  }
 }

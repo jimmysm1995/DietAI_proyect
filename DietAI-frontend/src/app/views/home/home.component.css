@@ -22,8 +22,9 @@
 }
 
 .trainingDiet {
-    padding-left: 5rem;
-    padding-right: 5rem;
+
     padding-bottom: 5rem;
+    width: 60%;
+    margin: 0 auto;
 }
 
