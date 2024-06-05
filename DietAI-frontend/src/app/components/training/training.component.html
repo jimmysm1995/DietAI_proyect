@@ -36,7 +36,7 @@
     <div class="child">
         <form (submit)="addExercise()">
             <div class="form-group select-group">
-                <label for="muscle">Musculos involucrados</label>
+                <label for="muscle">Músculos involucrados</label>
                 <ngx-select-dropdown [(ngModel)]="filterMuscle" name="muscle" (change)="onTrainingSelected()"
                     [config]="{displayKey: 'name',  search: true, placeholder:'Selecionar'}" [multiple]="true"
                     [options]="muscle" class="w-100"></ngx-select-dropdown>
@@ -78,4 +78,4 @@
         </select>
     </div>
     <button type="submit" class="btn btn-danger">Eliminar</button>
-  </form>
+</form>

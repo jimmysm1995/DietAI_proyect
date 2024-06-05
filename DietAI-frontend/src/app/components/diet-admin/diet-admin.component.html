@@ -7,7 +7,7 @@
                 <input type="text" class="form-control" id="name" name="name" ngModel>
             </div>
             <div class="form-group select-group">
-                <label for="allergy">La dieta no contendra:</label>
+                <label for="allergy">La dieta no contendrá:</label>
                 <ngx-select-dropdown [(ngModel)]="filteredAllergies" name="allergy" (change)="onAllergySelected()"
                     [config]="{displayKey: 'name',  search: true, placeholder:'No Contiene'}" [multiple]="true"
                     [options]="allergies" class="w-100"></ngx-select-dropdown>

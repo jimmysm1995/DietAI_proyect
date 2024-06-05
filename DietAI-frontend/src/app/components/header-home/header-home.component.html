@@ -6,14 +6,14 @@
         </div>
         <nav>
             <ul>
-                <li *ngIf="isLoggedIn"><a href="/home" >Profile</a></li>
-                <li *ngIf="isLoggedIn"><a role="button" (click)="logout()">Log out</a></li>
-                <li *ngIf="!isLoggedIn"><a href="/login">Login</a></li>
-                <li *ngIf="!isLoggedIn"><a href="/register">Sign Up</a></li>
+                <li *ngIf="isLoggedIn"><a href="/home" >Perfil</a></li>
+                <li *ngIf="isLoggedIn"><a role="button" (click)="logout()">Cerrar sesión</a></li>
+                <li *ngIf="!isLoggedIn"><a href="/login">Iniciar sesión</a></li>
+                <li *ngIf="!isLoggedIn"><a href="/register">Crear cuenta</a></li>
                 <li><a href="/quienesSomos">Quienes somos</a></li>
                 <li><a href="/contacto">Contáctanos</a></li>
                 <li><a href="/blog">Blog</a></li>
-                <li *ngIf="isAdmin"><a href="/admin">Admin Panel</a></li>
+                <li *ngIf="isAdmin"><a href="/admin">Panel Admin</a></li>
             </ul>
         </nav>
 
@@ -27,14 +27,14 @@
                 role="button"
                 data-bs-toggle="modal"
                 data-bs-target="#updateProfileModal"
-                >Profile</a
+                >Perfil</a
             >
-            <a *ngIf="isLoggedIn" role="button" (click)="logout()">Log out</a>
+            <a *ngIf="isLoggedIn" role="button" (click)="logout()">Cerrar sesión</a>
             <a href="/quienesSomos">Quienes somos 2</a>
             <a href="/contacto">Contáctanos</a>
             <a href="/blog">Blog</a>
             <ng-container *ngIf="isAdmin">
-                <a href="/admin">Admin Panel</a>
+                <a href="/admin">Panel Admin</a>
             </ng-container>
         </div>
     </header>

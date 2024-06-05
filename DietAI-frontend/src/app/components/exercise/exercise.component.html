@@ -14,7 +14,7 @@
             <textarea id="execution" name="execution" [(ngModel)]="exercise.execution" rows="4"
                 cols="40"></textarea><br />
 
-            <label for="advices">Advice:</label><br />
+            <label for="advices">Consejos:</label><br />
             <textarea id="advices" name="advices" [(ngModel)]="exercise.advices" rows="4" 
             cols="40" required></textarea><br />
 
@@ -28,9 +28,9 @@
             </select>
 
             <div class="form-group select-group">
-                <label for="muscle">Musculos involucrados</label>
+                <label for="muscle">Músculos involucrados</label>
                 <ngx-select-dropdown [(ngModel)]="exercise.muscle" name="muscle"
-                    [config]="{displayKey: 'name',  search: true, placeholder:'Selecionar'}" [multiple]="true"
+                    [config]="{displayKey: 'name', search: true, placeholder:'Selecionar'}" [multiple]="true"
                     [options]="muscle" class="w-100"></ngx-select-dropdown>
             </div>
             <button type="submit" class="btn btn-primary mt-2">
@@ -40,7 +40,7 @@
     </div>
     <form class="exercise-select-form" (ngSubmit)="deleteExercise()">
         <div class="form-group">
-            <label for="exerciseSelect">Selecciona un exercise para eliminar:</label>
+            <label for="exerciseSelect">Selecciona un ejercicio para eliminar:</label>
             <select class="form-control" id="exerciseSelect" [(ngModel)]="selectedExerciseId" name="exerciseSelect">
                 <option *ngFor="let exercise of exercises" [value]="exercise.idExercise">{{ exercise.name }}</option>
             </select>
