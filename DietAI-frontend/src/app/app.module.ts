@@ -28,6 +28,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { LoginGuard } from './router/login.guard';
 import { TransformadorEnumPipe } from './transformador-enum.pipe';
 import { EntradasBlogComponent } from './components/entradas-blog/entradas-blog.component';
+import { EntradaBlogComponent } from './components/entrada-blog/entrada-blog.component';
 import { UtilidadesComponent } from './components/utilidades/utilidades.component';
 import { EntrenameintoComponent } from './components/entrenameinto/entrenameinto.component';
 import { DietComponent } from './components/diet/diet.component';
@@ -49,7 +50,9 @@ const routes:Routes = [
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'blog', component: BlogComponent},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  {path: 'entradaBlog/:index', component: EntradaBlogComponent}
+
 ]
 @NgModule({
   declarations: [
@@ -86,7 +89,8 @@ const routes:Routes = [
     TrainingComponent,
     FilterTrainingPipe,
     ShoppingListComponent,
-    BuscadorEjerciciosComponent
+    BuscadorEjerciciosComponent,
+    EntradaBlogComponent
   ],
   imports: [
     HttpClientModule,
