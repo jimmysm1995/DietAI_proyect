@@ -1,12 +1,12 @@
 .info{
     /* background-color: aquamarine; */
-    padding-top: 3%;
+    padding-top: 6rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding-bottom: 3%;
+    padding-bottom: 4rem;
 }
 
 .info h3{
