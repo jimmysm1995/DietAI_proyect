@@ -42,6 +42,7 @@ import { TrainingComponent } from './components/training/training.component';
 import { FilterTrainingPipe } from './components/entrenameinto/entrenamientoPipe';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { BuscadorEjerciciosComponent } from './components/buscador-ejercicios/buscador-ejercicios.component';
+import { AdminGuard } from './router/admin.guard';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
@@ -50,7 +51,7 @@ const routes:Routes = [
   {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'blog', component: BlogComponent},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
   {path: 'entradaBlog/:index', component: EntradaBlogComponent}
 
 ]

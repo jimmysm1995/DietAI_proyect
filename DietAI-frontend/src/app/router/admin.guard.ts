@@ -44,6 +44,7 @@ class AdminGuardService {
             return true
         }
         // al no cumplir primeras dos condiciones no deja acceder
+        this.router.navigate(['/home']);
         return false;
     }
 }
