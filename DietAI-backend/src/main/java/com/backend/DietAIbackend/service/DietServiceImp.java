@@ -41,11 +41,12 @@ public class DietServiceImp implements DietService {
 
             for (RecipeInDiet recipeInDiet : recipeInDietList) {
                 if (recipeInDiet.recipe() != null) {
-                    RecipeDiet recipeDiet = new RecipeDiet();
-                    recipeDiet.setDiet(savedDiet);
-                    recipeDiet.setRecipe(recipeInDiet.recipe());
-                    recipeDiet.setDayWeek(recipeInDiet.dayWeek());
-                    recipeDiet.setMealTime(recipeInDiet.mealTime());
+                    RecipeDiet recipeDiet = RecipeDiet.builder()
+                            .diet(savedDiet)
+                            .recipe(recipeInDiet.recipe())
+                            .dayWeek(recipeInDiet.dayWeek())
+                            .mealTime(recipeInDiet.mealTime())
+                            .build();
                     recipeDietService.save(recipeDiet);
                 }
             }

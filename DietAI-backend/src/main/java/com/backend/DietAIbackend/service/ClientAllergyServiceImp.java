@@ -17,6 +17,15 @@ public class ClientAllergyServiceImp implements ClientAllergyService {
     @Autowired
     ClientAllergyRepository clientAllergyRepository;
 
+    /**
+     *
+     * Guarda la relación entre el cliente y sus alergias
+     *
+     * @param client
+     * @param allergy
+     *
+     * @return ClientAllergy
+     */
     public ClientAllergy save(Client client, Allergy allergy){
 
         ClientAllergy clientAllergy = new ClientAllergy();
@@ -27,20 +36,13 @@ public class ClientAllergyServiceImp implements ClientAllergyService {
         return clientAllergyRepository.save(clientAllergy);
     }
 
-    public ClientAllergy findById(Long id){
-        return clientAllergyRepository.findById(id).orElse(null);
-    }
-
-    public List<ClientAllergy> findAll(){return clientAllergyRepository.findAll();}
-    public void deleteById(Long id){ clientAllergyRepository.deleteById(id);}
-
-    public ClientAllergy update(ClientAllergy clientAllergy) {
-        try {
-            clientAllergyRepository.findById(clientAllergy.getIdClientAllergy());
-        } catch (EntityNotFoundException e){
-            throw new ServiceException("No exista la alergia en cuestion");
-        }
-
-        return clientAllergyRepository.save(clientAllergy);
+    /**
+     *
+     * Borra todas las relaciones que contenga al cliente
+     * @param client
+     */
+    @Override
+    public void deleteAllByClient(Client client) {
+        clientAllergyRepository.deleteAllByClient(client);
     }
 }

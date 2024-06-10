@@ -38,6 +38,13 @@ public class ClientServiceImp implements ClientService {
     @Autowired
     UserService userService;
 
+    /**
+     * Metodo para guardar al cliente junto a sus alergias y lesiones
+     * @param client
+     * @param allergyList
+     * @param injuryList
+     * @return Client
+     */
     @Override
     public Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList) {
         try {
@@ -52,6 +59,11 @@ public class ClientServiceImp implements ClientService {
 
             clientRepository.save(client);
 
+            // Eliminar las relaciones existentes
+            clientAllergyService.deleteAllByClient(client);
+            clientInjuryService.deleteAllByClient(client);
+
+            // Guarda las relaciones
             for (Allergy allergy : allergyList) {
                 clientAllergyService.save(client, allergy);
             }
@@ -64,11 +76,17 @@ public class ClientServiceImp implements ClientService {
         } catch (DataIntegrityViolationException e) {
             throw new ServiceException("Ha habido un problema al guardar al cliente en la base de datos", HttpStatus.CONFLICT);
         } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al guardar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ServiceException("Ocurrió un error inesperado al guardar el cliente" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
 
+    /**
+     *
+     * Encuentra el cliente por el id.
+     * @param id
+     * @return Client
+     */
     public Client findById(Long id){
         return clientRepository.findById(id).orElseThrow(
                 () -> new ServiceException("No se ha encontrado el cliente", HttpStatus.NOT_FOUND)
@@ -80,6 +98,12 @@ public class ClientServiceImp implements ClientService {
         return clientRepository.save(client);
     }
 
+    /**
+     *
+     * Devuelve una lista con todos los clientes
+     *
+     * @return List<Client>
+     */
     @Override
     public List<Client> findAll() {
         try {
@@ -96,7 +120,11 @@ public class ClientServiceImp implements ClientService {
     }
 
 
-
+    /**
+     *
+     * Elimina al cliente por el id
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         try {
@@ -112,6 +140,13 @@ public class ClientServiceImp implements ClientService {
     }
 
 
+    /**
+     *
+     * Modifica al cliente
+     *
+     * @param client
+     * @return Client
+     */
     @Override
     public Client update(Client client) {
         try {
@@ -125,6 +160,13 @@ public class ClientServiceImp implements ClientService {
     }
 
 
+    /**
+     *
+     * Metodo para calcular el TMB, para saber las calorias recomendadas para el cliente
+     *
+     * @param client
+     * @return
+     */
     private Integer calcularTMB(Client client){
 
         Double tmb;
@@ -165,6 +207,12 @@ public class ClientServiceImp implements ClientService {
         return (int) Math.round(tmb);
     }
 
+    /**
+     * Metodo para asignar la dieta al cliente
+     *
+     * @param client
+     * @return
+     */
     @Override
     public Client asignarDieta(Client client) {
         try {
@@ -204,18 +252,33 @@ public class ClientServiceImp implements ClientService {
     }
 
 
-
+    /**
+     *
+     * Metodo para comprueba que dietas son compatibles para el cliente segun la alergia
+     * @param clientAllergies
+     * @param dietAllergies
+     * @return
+     */
     private boolean hasMatchingAllergy(List<ClientAllergy> clientAllergies, List<DietAllergy> dietAllergies) {
-        for (ClientAllergy clientAllergy : clientAllergies) {
-            for (DietAllergy dietAllergy : dietAllergies) {
-                if (clientAllergy.getAllergy().getIdAllergy().equals(dietAllergy.getAllergy().getIdAllergy())) {
-                    return true; // Si hay una coincidencia de alergia, devolver true
+        // Si no se encuentra ninguna coincidencia, devolver false
+        if (!clientAllergies.isEmpty()) {
+            for (ClientAllergy clientAllergy : clientAllergies) {
+                for (DietAllergy dietAllergy : dietAllergies) {
+                    if (clientAllergy.getAllergy().getIdAllergy().equals(dietAllergy.getAllergy().getIdAllergy())) {
+                        return true; // Si hay una coincidencia de alergia, devolver true
+                    }
                 }
             }
         }
-        return false; // Si no se encuentra ninguna coincidencia, devolver false
+        return false; // En el caso de que el cliente no tenga ninguna alergia, devuelve true para todas las recetas
     }
 
+    /**
+     * Metodo para asignar el entrenamiento al cliente
+     *
+     * @param client
+     * @return
+     */
     @Override
     public Client asignarEntrenamiento(Client client) {
         try {
@@ -244,6 +307,12 @@ public class ClientServiceImp implements ClientService {
         }
     }
 
+    /**
+     *
+     * Metodo para obtener el nivel de entrenamiento del cliente para asignar un entrenamiento acorde.
+     * @param previousLevel
+     * @return
+     */
     private Integer obtenerNivelCliente(PreviusLevel previousLevel) {
         switch (previousLevel) {
             case NUNCA_HE_ENTRENADO:
@@ -261,6 +330,12 @@ public class ClientServiceImp implements ClientService {
                 return 0;
         }
     }
+
+    /**
+     * Metodo que devuelve el client segun el usuario
+     * @param userId
+     * @return
+     */
     @Override
     public Client findCurrentClient(long userId) {
         try {
@@ -270,11 +345,23 @@ public class ClientServiceImp implements ClientService {
         }
     }
 
+    /**
+     *
+     * Metodo para devolver la dieta del usuario
+     * @param client
+     * @return
+     */
     @Override
     public Diet getDietByUser(Client client) {
         return client.getDiet();
     }
 
+    /**
+     *
+     * Metodo para devolver el entrenamiento del usuario
+     * @param client
+     * @return
+     */
     @Override
     public Training getTrainingByClient(Client client) {
         return client.getTraining();

@@ -17,15 +17,6 @@ public class DietAllergyServiceImp implements DietAllergyService{
 
     @Autowired
     DietAllergyRepository dietAllergyRepository;
-    @Override
-    public List<DietAllergy> findAll() {
-        return dietAllergyRepository.findAll();
-    }
-
-    @Override
-    public DietAllergy findById(Long var1) {
-        return dietAllergyRepository.findById(var1).orElse(null);
-    }
 
     @Override
     public DietAllergy save(Diet diet, Allergy allergy) {
@@ -37,19 +28,4 @@ public class DietAllergyServiceImp implements DietAllergyService{
         return dietAllergyRepository.save(dietAllergy);
     }
 
-    @Override
-    public void deleteById(Long var1) {
-        dietAllergyRepository.deleteById(var1);
-    }
-
-    @Override
-    public DietAllergy update(DietAllergy var1) {
-        try {
-            dietAllergyRepository.findById(var1.getIdDietAllergy());
-        } catch (EntityNotFoundException e){
-            throw new ServiceException("No exista la relación en cuestion");
-        }
-
-        return dietAllergyRepository.save(var1);
-    }
 }
