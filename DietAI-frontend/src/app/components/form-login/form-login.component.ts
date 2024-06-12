@@ -52,7 +52,7 @@ export class FormLoginComponent {
             .then((response: LoginResponse) => {
                 localStorage.setItem('sesion', response.token);
                 //al tener almacenado en roleStore el role del usuario así se puede controlar desde adminGuarth. y authGuard
-                this.roleStore.role = response.authorities[0];
+                this.roleStore.saveRole(response.authorities[0]);
                 //comprobamos si user es admin o no
                 if(response.authorities[0]=="ADMIN"){
                     this.router.navigate(['/admin']);

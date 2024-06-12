@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { RoleStore } from 'src/app/store/roleStore';
 
 @Component({
   selector: 'app-header-home',
@@ -13,7 +14,8 @@ export class HeaderHomeComponent {
   constructor(
     private elementRef: ElementRef,
     private router : Router,
-    private userService : UserService) {}
+    private userService : UserService,
+    private roleStore: RoleStore) {}
     
   isAdmin: boolean = false; 
   isLoggedIn: boolean = false;
@@ -31,11 +33,11 @@ export class HeaderHomeComponent {
         this.isLoggedIn = true;
       }
 
-      this.userService.getAuthorities(user.idUser).then((authorities: string[]) => {
-        if (authorities.includes('ADMIN')) {
+      
+        if (this.roleStore.getRole() === 'ADMIN') {
           this.isAdmin = true;
         }
-      })
+      
     });
   }
   

@@ -8,5 +8,11 @@ import { Client } from '../models/Client';
 })
 export class RoleStore {
     //se crea un nuevo store para el usuario para poder utilizarlo en todos los componentes
-    role: string = "";
+    saveRole(role:string) {
+        localStorage.setItem('authorities', role);
+    }
+
+    getRole() {
+        return localStorage.getItem('authorities');
+    }
 }

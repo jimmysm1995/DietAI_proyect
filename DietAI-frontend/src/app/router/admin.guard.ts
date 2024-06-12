@@ -31,7 +31,7 @@ class AdminGuardService {
         state: RouterStateSnapshot
     ): Promise<boolean> | boolean {
         // que existe la sesión y que esta pertenece a un admin para que pueda acceder
-        if (localStorage.getItem('sesion') && this.roleStore.role === 'ADMIN') {
+        if (localStorage.getItem('sesion') && this.roleStore.getRole() === 'ADMIN') {
             if(!this.userStore.user.username){
                 return Promise.all([
                     this.userService.getCurrentUser(),this.clientService.getCurrentClient()
