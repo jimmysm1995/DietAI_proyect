@@ -4,6 +4,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { MuscleInExercise, TypeTraining } from '../../models/Exercise';
+import { ApiError } from 'src/app/models/ApiError';
 
 @Component({
     selector: 'app-exercise',
@@ -11,6 +12,7 @@ import { MuscleInExercise, TypeTraining } from '../../models/Exercise';
     styleUrls: ['./exercise.component.css'],
 })
 export class ExerciseComponent {
+    errorMessage: string = '';
     @ViewChild('muscleForm') muscleForm!: NgForm;
 
     constructor(private exerciseService: ExerciseService) {}
@@ -30,8 +32,12 @@ export class ExerciseComponent {
     }
     saveExercise() {
         console.log(this.exercise);
-        this.exerciseService.postExercise(this.exercise).then((exercise) => {});
-        window.location.reload();
+        this.exerciseService.postExercise(this.exercise).then((exercise) => {
+            this.exercise = new Exercise();
+            this.ngOnInit();
+        }).catch((error: ApiError) => {
+            this.errorMessage = error.message;
+        });
     }
 
     findMuscle() {

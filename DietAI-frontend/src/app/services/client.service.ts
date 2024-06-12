@@ -5,6 +5,7 @@ import { Client } from '../models/Client';
 import { AltaCliente } from '../models/AltaCliente';
 import { Diet } from '../models/Diet';
 import { Training } from '../models/Training';
+import { ApiError } from '../models/ApiError';
 
 @Injectable({
   providedIn: 'root'
@@ -34,15 +35,16 @@ export class ClientService {
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
-          return Promise.reject(error.response.data);
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
       } else {
           return Promise.reject('Error desconocido');
-      }
-  });
+      } 
+    });
   }
   
   getCurrentClient():Promise<Client>{
-    return axios.get(`${this.baseUrl}/currentClient`).then((response) => response.data);
+    return axios.get(`${environment.apiUrl}/auth/currentUser`).then((response) => response.data);
   }
 
   asignarDieta(idClient: number):Promise<Client>{

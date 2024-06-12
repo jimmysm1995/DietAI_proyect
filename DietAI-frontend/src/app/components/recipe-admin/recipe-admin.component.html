@@ -17,6 +17,9 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
     </form>
     <ul class="list-group mt-3">
       <li class="list-group-item" *ngFor="let addedIngredient of ingredientsInRecipe">

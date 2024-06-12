@@ -6,6 +6,8 @@ import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.mapper.ClientMapper;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "${cors.allowed.origin}")
+@Tag(name = "UserController", description = "Endpoint para los usuarios")
 @Slf4j
 public class UserController {
     @Autowired
@@ -29,16 +32,19 @@ public class UserController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
+    @Operation(summary = "Devuelve un usuario según su id")
+    public ResponseEntity<UserDto> findById(@PathVariable Long userId) {
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(userId)));
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUser(){
+    @Operation(summary = "Devuelve una lista con todos los usuarios")
+    public ResponseEntity<List<UserDto>> findAll(){
             return ResponseEntity.ok().body(userMapper.listModelToDto(userService.findAll()));
     }
 
     @GetMapping("/username/{username}")
+    @Operation(summary = "Devuelve un usuario según su id")
     public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
 
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.findByUsername(username)));
@@ -46,6 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/imagen/{username}")
+    @Operation(summary = "Devuelve la foto de perfil del usuario")
     public ResponseEntity<String> obtenerImagen(@PathVariable String username) {
 
         User user = userService.findByUsername(username);
@@ -57,6 +64,7 @@ public class UserController {
 
 
     @PutMapping("/{userId}")
+    @Operation(summary = "Cambia la foto de perfil del usuario")
     public ResponseEntity<UserDto> updateImagenUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
 
         User user = userMapper.dtoToModel(userDto);
@@ -65,7 +73,8 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
+    @Operation(summary = "Actualiza el usuario")
+    public ResponseEntity<UserDto> update(@RequestBody UserDto userDto){
             User user = userMapper.dtoToModel(userDto);
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.update(user)));
 
@@ -73,18 +82,21 @@ public class UserController {
 
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteByID(@PathVariable Long userId){
+    @Operation(summary = "Elimina el usuario")
+    public ResponseEntity<Void> deleteById(@PathVariable Long userId){
 
         userService.deleteById(userId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/getAuthorities/{userId}")
+    @Operation(summary = "Obtiene los permisos del usuario")
     public ResponseEntity<List<String>> getAuthorities(@PathVariable Long userId){
         return ResponseEntity.ok().body(userService.getAuthorities(userId));
     }
 
     @PutMapping("/changeAuthorities/{userId}")
+    @Operation(summary = "Le da permisos de administrador al usuario")
     public ResponseEntity<?> changeAuthorities(
             @RequestBody UserDto userDto,
             @PathVariable Long userId){

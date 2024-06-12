@@ -24,7 +24,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         try {
             log.debug("loadUserByUsername {}", username);
-            return this.userService.findByUsername(username);
+            return this.userService.findByUsernameOrEmail(username, username);
         } catch (ServiceException e){
             throw new UsernameNotFoundException("No se encuentra en la base de datos");
         }

@@ -13,6 +13,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,7 @@ import java.util.List;
 @RequestMapping("/api/clients")
 @CrossOrigin(origins = "${cors.allowed.origin}")
 @Slf4j
+@Tag(name = "ClientController", description = "Endpoint para los clientes")
 public class ClientController {
     @Value("${app.security.jwt.secret}")
     private String jwtSecret;
@@ -53,17 +56,20 @@ public class ClientController {
     private TrainingMapper trainingMapper;
 
     @GetMapping("/{id}")
+    @Operation(summary = "Encuentra un cliente por el id")
     public ResponseEntity<ClientDto> findClientById(@PathVariable Long id){
         return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findById(id)));
     }
 
     @GetMapping
+    @Operation(summary = "Devuelve toda la lista de los clientes")
     public ResponseEntity<List<ClientDto>>findAllClient(){
 
         return ResponseEntity.ok().body(clientMapper.listModelToDto(clientService.findAll()));
     }
 
     @PostMapping
+    @Operation(summary = "Guarda al cliente")
     public ResponseEntity<ClientDto> registerClient(@RequestBody ClientDto clientDto){
 
         List<Allergy> allergyList = allergyMapper.listDtoToModel(clientDto.getAllergy());
@@ -75,6 +81,7 @@ public class ClientController {
     }
 
     @PutMapping
+    @Operation(summary = "Modifica al cliente")
     public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
 
         Client client = clientMapper.dtoToModel(clientDto);
@@ -84,6 +91,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{idClient}")
+    @Operation(summary = "Elimina un cliente por el id")
     public ResponseEntity<Void> deleteClient(@PathVariable Long idClient){
 
         clientService.deleteById(idClient);
@@ -91,6 +99,7 @@ public class ClientController {
     }
 
     @PostMapping("/diet/{idClient}")
+    @Operation(summary = "Asigna una dieta al cliente")
     public ResponseEntity<ClientDto> asignarDieta(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);
@@ -100,6 +109,7 @@ public class ClientController {
     }
 
     @PostMapping("/training/{idClient}")
+    @Operation(summary = "Asigna un entrenamiento al cliente")
     public ResponseEntity<ClientDto> asignarEntrenamiento(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);
@@ -108,23 +118,8 @@ public class ClientController {
 
     }
 
-    @GetMapping("/currentClient")
-    public ResponseEntity<ClientDto> getCurrentClient(@RequestHeader("Authorization") String token){
-
-        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
-            token = token.substring("Bearer ".length());
-        }
-
-        JwtParser validator = Jwts.parser()
-                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
-                .build();
-
-        Claims claims = validator.parseClaimsJws(token).getBody();
-        claims.getId();
-        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getSubject()))));
-    }
-
     @GetMapping("/getDiet/{idClient}")
+    @Operation(summary = "Devuelve la dieta del cliente")
     public ResponseEntity<DietDto> getDietByClient(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);
@@ -133,6 +128,7 @@ public class ClientController {
     }
 
     @GetMapping("/getTraining/{idClient}")
+    @Operation(summary = "Devuelve el entrenamiento del cliente")
     public ResponseEntity<TrainingDto> getTrainingByClient(@PathVariable Long idClient){
 
         Client client = clientService.findById(idClient);

@@ -15,9 +15,14 @@ public class MuscleServiceImp implements MuscleService {
     @Autowired
     MuscleRepository muscleRepository;
 
+    /**
+     * Devuelve una lista con todos los musculos
+     *
+      * @return
+     */
     public List<Muscle> findAll(){
         if (muscleRepository.findAllByOrderByNameAsc().isEmpty()){
-            throw new ServiceException("No se encuentran musculos en la lista", HttpStatus.NOT_FOUND);
+            throw new ServiceException("No se encuentran musculos", HttpStatus.NOT_FOUND);
         }
         return muscleRepository.findAll();
     }

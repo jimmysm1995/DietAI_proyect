@@ -9,14 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Clase que se encarga de controlar las excepciones y mandar una respuesta
+ * correcta que será gestionada por el front
+ */
 @RestControllerAdvice
 public class DietAiController {
 
-
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<ApiError> handleUsernameNotFoundException(){
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,HttpStatus.BAD_REQUEST.value(), "No existe el usuario");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleException(Exception ex){
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+        return ResponseEntity.status(apiError.getCode()).body(apiError);
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -27,8 +30,7 @@ public class DietAiController {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiError> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
-        String mensajePersonalizado = "Ha ocurrido un error de integridad de datos en la base de datos. " +
-                "Por favor, revise los datos enviados.";
+        String mensajePersonalizado = "Ha ocurrido un error. Por favor, revise los datos.";
 
         // Aquí podrías extraer detalles específicos del error si es necesario.
         String detalle = ex.getMostSpecificCause().getMessage();

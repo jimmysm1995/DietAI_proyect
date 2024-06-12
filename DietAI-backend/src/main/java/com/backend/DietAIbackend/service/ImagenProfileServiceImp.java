@@ -13,6 +13,11 @@ public class ImagenProfileServiceImp implements ImagenProfileService {
     @Autowired
     private ImagenProfileRepository imagenProfileRepository;
 
+    /**
+     * Devuelve todas las imagenes de perfil
+     *
+     * @return
+     */
     public List<ImagenProfile> getAllImagenProfile(){
         return imagenProfileRepository.findAll();
     }

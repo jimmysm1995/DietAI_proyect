@@ -15,6 +15,14 @@ public class ClientInjuryServiceImp implements ClientInjuryService {
     @Autowired
     ClientInjuryRepository clientInjuryRepository;
 
+    /**
+     *
+     * Guarda la relación entre cliente y sus alergias
+     *
+     * @param client
+     * @param injury
+     * @return
+     */
     public ClientInjury save(Client client, Injury injury){
 
         ClientInjury clientInjury = new ClientInjury();
@@ -25,6 +33,12 @@ public class ClientInjuryServiceImp implements ClientInjuryService {
         return clientInjuryRepository.save(clientInjury);
     }
 
+    /**
+     *
+     * Elimina todas las alergias de un cliente
+     *
+     * @param client
+     */
     @Override
     public void deleteAllByClient(Client client) {
         clientInjuryRepository.deleteAllByClient(client);

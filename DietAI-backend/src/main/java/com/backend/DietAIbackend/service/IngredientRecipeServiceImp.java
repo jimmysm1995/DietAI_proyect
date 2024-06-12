@@ -12,10 +12,21 @@ public class IngredientRecipeServiceImp implements IngredientRecipeService {
     @Autowired
     IngredientRecipeRepository ingredientRecipeRepository;
 
+    /**
+     * Guarda la relacion entre ingredientes y recetas
+     *
+     * @param ingredientRecipe
+     * @return
+     */
     public IngredientRecipe save(IngredientRecipe ingredientRecipe){
         return ingredientRecipeRepository.save(ingredientRecipe);
     }
 
+    /**
+     * Encuentra todas las relaciones
+     *
+     * @return
+     */
     @Override
     public List<IngredientRecipe> findAll() {
         return ingredientRecipeRepository.findAll();
@@ -23,7 +34,7 @@ public class IngredientRecipeServiceImp implements IngredientRecipeService {
 
     /**
      *
-     * devuelve las relaciones que estan relacionadas con el ingrediente que se envia
+     * Devuelve las relaciones que están relacionadas con el ingrediente que se envia
      *
      * @param idIngredient
      * @return
@@ -33,6 +44,11 @@ public class IngredientRecipeServiceImp implements IngredientRecipeService {
         return ingredientRecipeRepository.findByIngredientIdIngredient(idIngredient);
     }
 
+    /**
+     * Elimina la relación
+     *
+     * @param ingredientRecipe
+     */
     @Override
     public void delete(IngredientRecipe ingredientRecipe) {
         ingredientRecipeRepository.delete(ingredientRecipe);

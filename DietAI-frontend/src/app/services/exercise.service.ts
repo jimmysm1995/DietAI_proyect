@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Exercise } from '../models/Exercise';
 import { Muscle } from '../models/Exercise';
+import { ApiError } from '../models/ApiError';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,14 @@ export class ExerciseService {
 
   postExercise(exercise: Exercise) {
     return axios.post(this.baseUrl, exercise)
-    .then((response) => response.data)
-    .catch((error) => {
+    .then((response) => response.data).catch((error) => {
       if (error.response && error.response.data) {
-          return Promise.reject(error.response.data);
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
       } else {
           return Promise.reject('Error desconocido');
       }
-  });
+    })
   }
 
   getAllExercises() {

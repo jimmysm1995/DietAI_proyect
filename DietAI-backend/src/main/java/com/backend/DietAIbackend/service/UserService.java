@@ -13,4 +13,6 @@ public interface UserService extends ICrudService<User, Long>{
     User updateImagenUser(User user, Long id);
 
     User changeAuthorities(User user, Long userId);
+
+    User findByUsernameOrEmail(String username, String email);
 }

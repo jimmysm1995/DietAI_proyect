@@ -27,6 +27,13 @@ public class ExerciseServiceImp implements ExerciseService {
     @Autowired
     TrainingExerciseService trainingExerciseService;
 
+    /**
+     * Guarda el ejercicio junto a su lista de musculos
+     *
+     * @param exercise
+     * @param muscleList
+     * @return
+     */
     @Transactional
     @Override
     public Exercise save(Exercise exercise, List<Muscle> muscleList) {
@@ -36,12 +43,18 @@ public class ExerciseServiceImp implements ExerciseService {
                 exerciseMuscleService.save(savedExercise, muscle);
             }
             return savedExercise;
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Ha habido un problema al guardar en la base de datos");
+        } catch (Exception e) {
+            throw e;
         }
     }
 
 
+    /**
+     * Encuentra un ejercicio por su id
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Exercise findById(Long id){
         return exerciseRepository.findById(id).orElseThrow(
@@ -49,15 +62,12 @@ public class ExerciseServiceImp implements ExerciseService {
         );
     }
 
-    @Override
-    public Exercise save(Exercise var1) {
-        try {
-            return exerciseRepository.save(var1);
-        } catch (ServiceException e){
-            throw new ServiceException("El Ejercicio ya existe en la base de datos", HttpStatus.CONFLICT);
-        }
-    }
 
+    /**
+     * Devuelve una lista con todos los ejercicios
+     *
+     * @return
+     */
     @Override
     public List<Exercise> findAll() {
         List<Exercise> exercises = exerciseRepository.findAllByOrderByNameAsc();
@@ -67,6 +77,11 @@ public class ExerciseServiceImp implements ExerciseService {
         return exercises;
     }
 
+    /**
+     * Devuelve una lista con todos los ejercicios de gimnasio
+     *
+     * @return
+     */
     @Override
     public List<Exercise> findGymExercises() {
         List<Exercise> gymExercises = exerciseRepository.findAll().stream()
@@ -79,6 +94,11 @@ public class ExerciseServiceImp implements ExerciseService {
         return gymExercises;
     }
 
+    /**
+     * Devuelve una lista con todos los ejercicios de casa
+     *
+     * @return
+     */
     @Override
     public List<Exercise> findHomeExercises() {
         List<Exercise> homeExercises = exerciseRepository.findAll().stream()
@@ -91,6 +111,12 @@ public class ExerciseServiceImp implements ExerciseService {
         return homeExercises;
     }
 
+    /**
+     * Encuentra todos los musculos de un ejercicio
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<Muscle> findAllmusclesInExercise(Long id) {
 
@@ -106,6 +132,11 @@ public class ExerciseServiceImp implements ExerciseService {
         return muscleList;
     }
 
+    /**
+     * Elimina un ejercicio
+     *
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         // Verificar si el ejercicio existe
@@ -121,6 +152,12 @@ public class ExerciseServiceImp implements ExerciseService {
         exerciseRepository.delete(exercise);
     }
 
+    /**
+     * Actualiza un ejercicio
+     *
+     * @param exercise
+     * @return
+     */
     @Override
     public Exercise update(Exercise exercise) {
         findById(exercise.getIdExercise());

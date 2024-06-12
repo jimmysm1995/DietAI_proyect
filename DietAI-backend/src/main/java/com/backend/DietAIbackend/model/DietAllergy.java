@@ -1,11 +1,17 @@
 package com.backend.DietAIbackend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "dietAllergy")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DietAllergy {
 
     @Id

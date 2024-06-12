@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/loginResponse';
 import { Client } from '../models/Client';
+import { ApiError } from '../models/ApiError';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,8 @@ export class UserService {
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
-          return Promise.reject(error.response.data);
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
       } else {
           return Promise.reject('Error desconocido');
       }
@@ -62,11 +64,12 @@ export class UserService {
 
   registerUser(userData: User): Promise<User>{
     console.log("registerUser");
-    return axios.post(`${environment.apiUrl}/auth/register`, userData)
+    return axios.post(`${environment.apiUrl}/auth/register/admin`, userData)
     .then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
-          return Promise.reject(error.response.data);
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
       } else {
           return Promise.reject('Error desconocido');
       }

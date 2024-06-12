@@ -22,9 +22,6 @@ public class ClientDto {
     @Schema(example = "1990-01-01", description = "Fecha de nacimiento del cliente")
     private LocalDate birthDate;
 
-    @Schema(description = "Plan del cliente")
-    private Plan plan;
-
     @Schema(description = "Género del cliente")
     private Gender gender;
 

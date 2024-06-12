@@ -28,12 +28,17 @@ public class ClientAllergyServiceImp implements ClientAllergyService {
      */
     public ClientAllergy save(Client client, Allergy allergy){
 
-        ClientAllergy clientAllergy = new ClientAllergy();
+        try {
+            ClientAllergy clientAllergy = ClientAllergy.builder()
+                    .client(client)
+                    .allergy(allergy)
+                    .build();
 
-        clientAllergy.setClient(client);
-        clientAllergy.setAllergy(allergy);
+            return clientAllergyRepository.save(clientAllergy);
+        } catch (Exception e){
+            throw e;
+        }
 
-        return clientAllergyRepository.save(clientAllergy);
     }
 
     /**

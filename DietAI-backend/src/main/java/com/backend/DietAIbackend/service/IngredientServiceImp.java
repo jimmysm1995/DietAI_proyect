@@ -24,22 +24,39 @@ public class IngredientServiceImp implements IngredientService {
     @Autowired
     IngredientRecipeService ingredientRecipeService;
 
+    /**
+     * Guarda el ingrediente
+     *
+     * @param ingredient
+     * @return
+     */
     @Transactional
     @Override
     public Ingredient save(Ingredient ingredient) {
         try {
             return ingredientRepository.save(ingredient);
-        } catch (DataIntegrityViolationException e) {
-            throw new ServiceException("Ya existe un ingrediente con este nombre", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            throw e;
         }
     }
 
+    /**
+     * Encuentra el ingrediente por su id
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Ingredient findById(Long id) {
         return ingredientRepository.findById(id)
                 .orElseThrow(() -> new ServiceException("No se ha encontrado el ingrediente", HttpStatus.NOT_FOUND));
     }
 
+    /**
+     * Devuelve una lista con todos los ingredientes
+     *
+     * @return
+     */
     @Override
     public List<Ingredient> findAll() {
         List<Ingredient> ingredients = ingredientRepository.findAllByOrderByNameAsc();
@@ -49,6 +66,11 @@ public class IngredientServiceImp implements IngredientService {
         return ingredients;
     }
 
+    /**
+     * Elimina un ingrediente por el id
+     *
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         // Verificar si el ingrediente existe
@@ -65,6 +87,12 @@ public class IngredientServiceImp implements IngredientService {
     }
 
 
+    /**
+     * Actualiza un ingrediente
+     *
+     * @param ingredient
+     * @return
+     */
     @Override
     public Ingredient update(Ingredient ingredient) {
         if (!ingredientRepository.existsById(ingredient.getIdIngredient())) {

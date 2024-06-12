@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import java.util.Date;
 
+/**
+ * Se encarga de generar tokens JWT cuando un usuario inicia sesión satisfactoriamente
+ */
 @Component
 public class JwtTokenProvider {
 

@@ -33,6 +33,15 @@ public class DietServiceImp implements DietService {
     @Autowired
     private ClientService clientService;
 
+    /**
+     *
+     * Guarda la dieta
+     *
+     * @param diet
+     * @param recipeInDietList
+     * @param allergyList
+     * @return
+     */
     @Transactional
     @Override
     public Diet save(Diet diet, List<RecipeInDiet> recipeInDietList, List<Allergy> allergyList) {
@@ -64,6 +73,12 @@ public class DietServiceImp implements DietService {
         }
     }
 
+    /**
+     * Obtiene la lista de la compra de la dieta
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<IngredientSummary> getListaCompra(Long id) {
         try {
@@ -74,6 +89,9 @@ public class DietServiceImp implements DietService {
         }
     }
 
+    /**
+     * Actualiza las calorias de las dietas
+     */
     private void actualizarCalorias() {
         try {
             dietRepository.actualizarCalories();
@@ -83,22 +101,24 @@ public class DietServiceImp implements DietService {
         }
     }
 
+    /**
+     * Buscar la dieta por el id
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Diet findById(Long id) {
         return dietRepository.findById(id)
                 .orElseThrow(() -> new ServiceException("No se ha encontrado la dieta", HttpStatus.NOT_FOUND));
     }
 
-    @Override
-    public Diet save(Diet diet) {
-        try {
-            return dietRepository.save(diet);
-        } catch (Exception e) {
-            log.error("Error al guardar la dieta: ", e);
-            throw new ServiceException("Ocurrió un error al guardar la dieta", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
+    /**
+     * Devuelve una lista con todas las dietas
+     *
+     * @return List<Diet>
+     */
     @Override
     public List<Diet> findAll() {
         try {
@@ -107,14 +127,16 @@ public class DietServiceImp implements DietService {
                 throw new ServiceException("No se encuentran dietas", HttpStatus.NOT_FOUND);
             }
             return diets;
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Error al obtener las dietas: ", e);
-            throw new ServiceException("Ocurrió un error al obtener las dietas", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
+    /**
+     * Borra la dieta por el id
+     *
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         try {
@@ -125,18 +147,21 @@ public class DietServiceImp implements DietService {
             // Disociar los clients
             for (Client client : findById(id).getClients()) {
                 client.setDiet(null);
-                clientService.save(client);
+                clientService.update(client);
             }
 
             dietRepository.deleteById(id);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Error al eliminar la dieta: ", e);
-            throw new ServiceException("Ocurrió un error al eliminar la dieta " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
+    /**
+     * Actualiza la dieta
+     *
+     * @param diet
+     * @return
+     */
     @Override
     public Diet update(Diet diet) {
         try {
@@ -144,14 +169,17 @@ public class DietServiceImp implements DietService {
                 throw new ServiceException("No se encontró la dieta para actualizar", HttpStatus.NOT_FOUND);
             }
             return dietRepository.save(diet);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Error al actualizar la dieta: ", e);
-            throw new ServiceException("Ocurrió un error al actualizar la dieta", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
+    /**
+     * Devuelve una lista con las recetas en la dieta junto a sus horarios
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<RecipeInDiet> findRecipesByDiet(Long id) {
         try {
@@ -173,11 +201,8 @@ public class DietServiceImp implements DietService {
             }
 
             return recipeList;
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Error al encontrar recetas para la dieta: ", e);
-            throw new ServiceException("Ocurrió un error al encontrar recetas para la dieta" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 }

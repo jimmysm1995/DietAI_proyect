@@ -10,6 +10,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from 'src/app/models/Recipe';
 import { AllergyService } from 'src/app/services/allergy.service';
 import { Allergy } from 'src/app/models/Allergy';
+import { ApiError } from 'src/app/models/ApiError';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { Allergy } from 'src/app/models/Allergy';
   styleUrls: ['./recipe-admin.component.css']
 })
 export class RecipeAdminComponent {
+  errorMessage: string = '';
   @ViewChild('recipeForm') recipeForm!: NgForm;
   @ViewChild('ingredientInRecipeForm') ingredientInRecipeForm!: NgForm;
 
@@ -50,19 +52,19 @@ export class RecipeAdminComponent {
 registraIngredientInRecipe(ingredientInRecipe: IngredientInRecipe) {
   this.ingredientsInRecipe.push(ingredientInRecipe);
   this.ingredientInRecipeForm.reset();
-
 }
 
 registrarRecipe(recipe : Recipe) {
-  console.log(recipe);
   this.recipeWithIngredientsRequest.recipe = recipe;
   this.recipeWithIngredientsRequest.ingredientInRecipe = this.ingredientsInRecipe;
   this.recipeService.postRecipe(this.recipeWithIngredientsRequest).then((newRecipe) => {
     this.recipeForm.reset();
     this.ingredientsInRecipe = [];
     this.ingredientInRecipeForm.reset();
-  })
-  window.location.reload();
+    window.location.reload();
+  }).catch((error: ApiError) => {
+    this.errorMessage = error.message;
+  });
 }
 
 limpiarLista() {

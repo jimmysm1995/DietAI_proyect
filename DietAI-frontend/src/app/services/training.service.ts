@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { Training,  TrainingRequest, TrainingResponse} from '../models/Training';
 import { TrainingWithExercisesRequest } from '../models/TrainingWithExercisesRequest';
+import { ApiError } from '../models/ApiError';
 
 
 
@@ -15,7 +16,14 @@ export class TrainingService {
   constructor() { }
 
   postTraining(training: TrainingWithExercisesRequest) {
-    return axios.post(this.baseUrl, training).then((response) => response.data);
+    return axios.post(this.baseUrl, training).then((response) => response.data).catch((error) => {
+      if (error.response && error.response.data) {
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
+      } else {
+          return Promise.reject('Error desconocido');
+      }
+    });
   }
 
   deleteTraining(id: number): Promise<void> {

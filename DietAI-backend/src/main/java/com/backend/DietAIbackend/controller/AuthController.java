@@ -1,17 +1,22 @@
 package com.backend.DietAIbackend.controller;
 
 import com.backend.DietAIbackend.config.JwtTokenProvider;
+import com.backend.DietAIbackend.dto.ClientDto;
 import com.backend.DietAIbackend.dto.LoginResponse;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.exception.ServiceException;
+import com.backend.DietAIbackend.mapper.ClientMapper;
 import com.backend.DietAIbackend.mapper.UserMapper;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.repository.UserRepository;
+import com.backend.DietAIbackend.service.ClientService;
 import com.backend.DietAIbackend.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "${cors.allowed.origin}")
+@Tag(name = "AuthController", description = "Endpoint para la autentificación y creación de los usuarios")
 @Slf4j
 public class AuthController {
 
@@ -35,6 +41,12 @@ public class AuthController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    ClientMapper clientMapper;
+
+    @Autowired
+    ClientService clientService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,21 +58,32 @@ public class AuthController {
     private String jwtSecret;
 
     @PostMapping("/auth/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserDto userDTO) {
+    @Operation(summary = "Registrar el usuario")
+    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDTO) {
+        try {
             User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     userMapper.modelToDto(userService.register(userModel, false)));
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<?> registerAdmin(@RequestBody UserDto userDTO) {
+    @Operation(summary = "Registrar el usuario que sera administrador")
+    public ResponseEntity<UserDto> registerAdmin(@RequestBody UserDto userDTO) {
+        try {
             User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
                     userMapper.modelToDto(userService.register(userModel, true)));
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody UserDto userDto){
+    @Operation(summary = "Logear el usuario")
+    public ResponseEntity<LoginResponse> login(@RequestBody UserDto userDto){
         try {
             Authentication authDTO = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword());
 
@@ -75,11 +98,12 @@ public class AuthController {
                     token));
 
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("The access has been denied");
+            throw new ServiceException("Acceso denegado" ,HttpStatus.CONFLICT);
         }
     }
 
     @GetMapping("/auth/currentUser")
+    @Operation(summary = "Devuelve el usuario que manda el token")
     public ResponseEntity<UserDto> getCurrentUser(@RequestHeader("Authorization") String token){
 
         try {
@@ -92,11 +116,27 @@ public class AuthController {
                     .build();
 
             Claims claims = validator.parseClaimsJws(token).getBody();
-            claims.getId();
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.findById(Long.parseLong(claims.getSubject()))));
         } catch (Exception e){
             throw new ServiceException("Ha habido un problema al buscar el usuario "+ e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @GetMapping("/auth/currentClient")
+    @Operation(summary = "Devuelve el cliente que manda el token")
+    public ResponseEntity<ClientDto> getCurrentClient(@RequestHeader("Authorization") String token){
+
+        if (StringUtils.hasLength(token) && token.startsWith("Bearer")){
+            token = token.substring("Bearer ".length());
+        }
+
+        JwtParser validator = Jwts.parser()
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build();
+
+        Claims claims = validator.parseClaimsJws(token).getBody();
+        claims.getId();
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.findCurrentClient(Long.parseLong(claims.getSubject()))));
     }
 }

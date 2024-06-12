@@ -4,6 +4,7 @@ import { User } from 'src/app/models/User';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ApiError } from 'src/app/models/ApiError';
 
 @Component({
     selector: 'app-form-register',
@@ -19,8 +20,8 @@ export class FormRegisterComponent {
     registrarUsuario(userData: User): void {
         this.userService.registerUser(userData).then((User: User) => {
             this.router.navigate(['/login']);
-        }).catch((error) => {
-            this.errorMessage = error;
+        }).catch((error: ApiError) => {
+            this.errorMessage = error.message;
             this.userForm.resetForm();
         })
     }

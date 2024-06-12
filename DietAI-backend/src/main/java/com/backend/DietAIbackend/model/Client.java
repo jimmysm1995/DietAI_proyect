@@ -21,10 +21,6 @@ public class Client {
     private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "plan", columnDefinition = "varchar(10)")
-    private Plan plan;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "gender", columnDefinition = "varchar(10)", nullable = false)
     private Gender gender;
 

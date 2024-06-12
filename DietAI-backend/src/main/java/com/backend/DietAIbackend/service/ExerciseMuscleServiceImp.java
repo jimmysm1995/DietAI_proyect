@@ -11,13 +11,25 @@ public class ExerciseMuscleServiceImp implements ExerciseMuscleService {
     @Autowired
     ExerciseMuscleRepository exerciseMuscleRepository;
 
+    /**
+     * Guarda la relacion entre los ejercicios y los musculos
+     *
+     * @param exercise
+     * @param muscle
+     * @return
+     */
     public ExerciseMuscle save(Exercise exercise, Muscle muscle){
 
-        ExerciseMuscle exerciseMuscle = new ExerciseMuscle();
+        try {
+            ExerciseMuscle exerciseMuscle = ExerciseMuscle.builder()
+                    .exercise(exercise)
+                    .muscle(muscle)
+                    .build();
 
-        exerciseMuscle.setExercise(exercise);
-        exerciseMuscle.setMuscle(muscle);
+            return exerciseMuscleRepository.save(exerciseMuscle);
+        } catch (Exception e){
+            throw e;
+        }
 
-        return exerciseMuscleRepository.save(exerciseMuscle);
     }
 }

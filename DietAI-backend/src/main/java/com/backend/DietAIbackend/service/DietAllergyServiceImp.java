@@ -18,14 +18,27 @@ public class DietAllergyServiceImp implements DietAllergyService{
     @Autowired
     DietAllergyRepository dietAllergyRepository;
 
+    /**
+     *
+     * Guarda las alergias que contiene la dieta
+     *
+     * @param diet
+     * @param allergy
+     * @return
+     */
     @Override
     public DietAllergy save(Diet diet, Allergy allergy) {
-        DietAllergy dietAllergy = new DietAllergy();
+        try {
+            DietAllergy dietAllergy = DietAllergy.builder()
+                    .diet(diet)
+                    .allergy(allergy)
+                    .build();
 
-        dietAllergy.setDiet(diet);
-        dietAllergy.setAllergy(allergy);
+            return dietAllergyRepository.save(dietAllergy);
+        } catch (Exception e){
+            throw e;
+        }
 
-        return dietAllergyRepository.save(dietAllergy);
     }
 
 }

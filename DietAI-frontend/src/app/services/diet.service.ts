@@ -5,6 +5,7 @@ import { Diet } from '../models/Diet';
 import { DietWithRecipesRequest } from '../models/DietWithRecipesRequest';
 import { Recipe } from '../models/Recipe';
 import { RecipeInDietResponse } from '../models/RecipeInDiet';
+import { ApiError } from '../models/ApiError';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,15 @@ export class DietService {
   }
 
   createDiet(diet: DietWithRecipesRequest): Promise<Diet> {
-    return axios.post(this.baseUrl, diet).then((response) => response.data);
+    return axios.post(this.baseUrl, diet).then((response) => response.data).catch((error) => {
+      
+      if (error.response && error.response.data) {
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
+      } else {
+          return Promise.reject('Error desconocido');
+      }
+    });
   }
 
   updateDiet(diet: Diet): Promise<Diet> {

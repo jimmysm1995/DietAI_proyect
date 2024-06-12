@@ -40,6 +40,9 @@
             <button type="submit" class="btn btn-primary mt-2">
                 Guardar Entrenamiento
             </button>
+            <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+            </div>
         </form>
         <ul class="list-group mt-6">
             <li class="list-group-item" *ngFor="let addedExercise of exercisesInTraining">

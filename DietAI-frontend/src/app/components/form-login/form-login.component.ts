@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { LoginResponse } from 'src/app/models/loginResponse';
 import { UserStore } from 'src/app/store/userStore';
 import { RoleStore } from '../../store/roleStore';
+import { ApiError } from 'src/app/models/ApiError';
 
 
 @Component({
@@ -61,8 +62,8 @@ export class FormLoginComponent {
                 }
                 
             })
-            .catch((error) => {
-                this.errorMessage = error;
+            .catch((error: ApiError) => {
+                this.errorMessage = error.message;
                 this.userForm.resetForm();
             });
     }

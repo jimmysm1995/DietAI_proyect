@@ -27,14 +27,21 @@ public class TrainingServiceImp implements TrainingService {
     @Autowired
     private ClientService clientService;
 
+    /**
+     * Guarda el entrenamiento
+     *
+     * @param training
+     * @param exercisesInTrainingList
+     * @return
+     */
     public Training save(Training training, List<ExercisesInTraining> exercisesInTrainingList) {
 
         Training entrenamiento;
 
         try {
             entrenamiento = trainingRepository.save(training);
-        } catch (ServiceException e) {
-            throw new ServiceException("El entrenamiento ya existe en la base de datos", HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            throw e;
         }
 
         for (ExercisesInTraining exercisesInTraining : exercisesInTrainingList
@@ -55,6 +62,11 @@ public class TrainingServiceImp implements TrainingService {
         return entrenamiento;
     }
 
+    /**
+     * Elimina por el id
+     *
+     * @param id
+     */
     public void deleteById(Long id) {
 
         try {
@@ -65,7 +77,7 @@ public class TrainingServiceImp implements TrainingService {
             // Disociar los clients
             for (Client client : findById(id).getClients()) {
                 client.setTraining(null);
-                clientService.save(client);
+                clientService.update(client);
             }
 
             trainingRepository.deleteById(id);
@@ -77,17 +89,24 @@ public class TrainingServiceImp implements TrainingService {
         }
     }
 
+    /**
+     * Encuentra por el id
+     *
+     * @param id
+     * @return
+     */
     public Training findById(Long id) {
         return trainingRepository.findById(id).orElseThrow(
                 () -> new ServiceException("No se ha encontrado el entrenamiento", HttpStatus.NOT_FOUND)
         );
     }
 
-    @Override
-    public Training save(Training var1) {
-        return trainingRepository.save(var1);
-    }
 
+    /**
+     * Devuelve una lista con todos los entrenamientos
+     *
+     * @return
+     */
     public List<Training> findAll() {
         if (trainingRepository.findAllByOrderByNameAsc().isEmpty()) {
             throw new ServiceException("No se encuentran Entrenamientos", HttpStatus.NOT_FOUND);
@@ -95,11 +114,23 @@ public class TrainingServiceImp implements TrainingService {
         return trainingRepository.findAllByOrderByNameAsc();
     }
 
+    /**
+     * Actualiza el entrenamiento
+     *
+     * @param training
+     * @return
+     */
     public Training update(Training training) {
         findById(training.getIdTraining());
-        return save(training);
+        return trainingRepository.save(training);
     }
 
+    /**
+     * Devuelve un entrenamiento con sus ejercicios
+     *
+     * @param id
+     * @return
+     */
     public List<ExercisesInTraining> findExercisesById(Long id) {
 
         Training training = findById(id);
@@ -118,7 +149,7 @@ public class TrainingServiceImp implements TrainingService {
         }
 
         if (exercisesInTrainings.isEmpty()) {
-            throw new ServiceException("La lista esta vacia", HttpStatus.NOT_FOUND);
+            throw new ServiceException("El entrenamiento no tiene ejercicios", HttpStatus.NOT_FOUND);
         }
 
         return exercisesInTrainings;

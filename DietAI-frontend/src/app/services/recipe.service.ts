@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { RecipeWithIngredientsRequest } from '../models/RecipeWithIngredientsRequest';
 import { Recipe, RecipeWithIngredients } from '../models/Recipe';
 import { Allergy } from '../models/Allergy';
+import { ApiError } from '../models/ApiError';
 
 
 @Injectable({
@@ -31,17 +32,17 @@ export class RecipeService {
   }
 
   postRecipe(recipe: RecipeWithIngredientsRequest) {
-    return axios.post(this.baseUrl, recipe)
-    .then((response) => response.data)
+    return axios.post(this.baseUrl, recipe).then((response) => response.data)
     .catch((error) => {
       if (error.response && error.response.data) {
-          return Promise.reject(error.response.data);
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
       } else {
           return Promise.reject('Error desconocido');
       }
-  });
+    });
   }
   getRecipeWithIngredients(idRecipe: number) : Promise<RecipeWithIngredients> {
-    return axios.get(this.baseUrl + /recipesWithIngredient/ + idRecipe).then((response) => response.data);
+    return axios.get(this.baseUrl + "/recipesWithIngredient/" + idRecipe).then((response) => response.data);
   }
 }

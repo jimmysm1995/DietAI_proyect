@@ -73,10 +73,8 @@ public class ClientServiceImp implements ClientService {
             }
 
             return client;
-        } catch (DataIntegrityViolationException e) {
-            throw new ServiceException("Ha habido un problema al guardar al cliente en la base de datos", HttpStatus.CONFLICT);
         } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al guardar el cliente" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
@@ -84,6 +82,7 @@ public class ClientServiceImp implements ClientService {
     /**
      *
      * Encuentra el cliente por el id.
+     *
      * @param id
      * @return Client
      */
@@ -91,11 +90,6 @@ public class ClientServiceImp implements ClientService {
         return clientRepository.findById(id).orElseThrow(
                 () -> new ServiceException("No se ha encontrado el cliente", HttpStatus.NOT_FOUND)
         );
-    }
-
-    @Override
-    public Client save(Client client) {
-        return clientRepository.save(client);
     }
 
     /**
@@ -112,10 +106,8 @@ public class ClientServiceImp implements ClientService {
                 throw new ServiceException("No se encuentran clientes", HttpStatus.NOT_FOUND);
             }
             return clientList;
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al obtener los clientes: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
@@ -130,10 +122,6 @@ public class ClientServiceImp implements ClientService {
         try {
             findById(id); // Este método lanza ServiceException si no se encuentra el cliente.
             clientRepository.deleteById(id);
-        } catch (ServiceException e) {
-            throw e;
-        } catch (DataIntegrityViolationException e) {
-            throw new ServiceException("Ha habido un problema al eliminar al cliente de la base de datos", HttpStatus.CONFLICT);
         } catch (Exception e) {
             throw new ServiceException("Ocurrió un error inesperado al eliminar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -152,8 +140,6 @@ public class ClientServiceImp implements ClientService {
         try {
             findById(client.getIdClient());
             return clientRepository.save(client);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
             throw new ServiceException("Ocurrió un error inesperado al actualizar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -243,11 +229,8 @@ public class ClientServiceImp implements ClientService {
             }
 
             return clientRepository.save(client);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Ocurrió un error al asignar la dieta al cliente: " + e.getMessage());
-            throw new ServiceException("Ocurrió un error al asignar la dieta al cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
@@ -299,11 +282,8 @@ public class ClientServiceImp implements ClientService {
             }
 
             return clientRepository.save(client);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            log.error("Error al asignar entrenamiento: " + e.getMessage());
-            throw new ServiceException("Error al asignar entrenamiento", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 

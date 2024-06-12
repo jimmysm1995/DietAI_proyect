@@ -35,6 +35,9 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
 </form>
 <form class="ingredient-select-form" (ngSubmit)="deleteIngredient()">
     <div class="form-group">

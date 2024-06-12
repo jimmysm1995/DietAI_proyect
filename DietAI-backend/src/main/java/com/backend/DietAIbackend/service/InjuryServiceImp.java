@@ -13,6 +13,11 @@ public class InjuryServiceImp implements InjuryService {
     @Autowired
     InjuryRepository injuryRepository;
 
+    /**
+     * Devuelve todas las lesiones
+     *
+     * @return
+     */
     public List<Injury> findAll(){return injuryRepository.findAll();}
 
 }

@@ -33,12 +33,19 @@ public class RecipeServiceImp implements RecipeService {
     @Autowired
     RecipeDietService recipeDietService;
 
+    /**
+     * Guarda la receta
+     *
+     * @param receta
+     * @param ingredientInRecipeList
+     * @param allergyList
+     * @return
+     */
     @Transactional
     @Override
     public Recipe save(Recipe receta, List<IngredientInRecipe> ingredientInRecipeList, List<Allergy> allergyList) {
         try {
             Recipe recipe = recipeRepository.save(receta);
-
             for (IngredientInRecipe ingredientInRecipe : ingredientInRecipeList) {
                 if (ingredientInRecipe.getIngredient() != null) {
                     IngredientRecipe ingredientRecipe = IngredientRecipe.builder()
@@ -49,26 +56,26 @@ public class RecipeServiceImp implements RecipeService {
                     ingredientRecipeService.save(ingredientRecipe);
                 }
             }
-
             for (Allergy allergy : allergyList) {
                 recipeAllergyService.save(recipe, allergy);
             }
-
             actualizarCalorias();
-
             return recipe;
-        } catch (DataIntegrityViolationException e) {
-            throw new ServiceException("Ha habido un problema al guardar la receta en la base de datos", HttpStatus.CONFLICT);
-        } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al guardar la receta", HttpStatus.INTERNAL_SERVER_ERROR);
+        }  catch (Exception e) {
+            throw e;
         }
     }
 
 
+    /**
+     * Devuelve la receta con sus ingredientes y cantidades
+     *
+     * @param idRecipe
+     * @return
+     */
     @Override
     public RecipeWithIngredientsRequest getRecipeWithIngredients(Long idRecipe) {
         try {
-            RecipeWithIngredientsRequest request = new RecipeWithIngredientsRequest();
 
             Recipe recipe = findById(idRecipe); // Este método ya lanza ServiceException si no encuentra la receta.
 
@@ -83,20 +90,24 @@ public class RecipeServiceImp implements RecipeService {
                     })
                     .collect(Collectors.toList());
 
-            request.setRecipe(recipeMapper.modelToDto(recipe));
-            request.setIngredientInRecipe(ingredients);
+            RecipeWithIngredientsRequest request = RecipeWithIngredientsRequest.builder()
+                    .recipe(recipeMapper.modelToDto(recipe))
+                    .ingredientInRecipe(ingredients)
+                    .build();
 
             return request;
-        } catch (ServiceException e) {
-            // Si `findById` lanza una `ServiceException`, simplemente la dejamos pasar
-            throw e;
         } catch (Exception e) {
-            // Capturamos cualquier otra excepción inesperada
-            throw new ServiceException("Ocurrió un error al obtener la receta con ingredientes", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
 
+    /**
+     * Devuelve todas las alergias que tiene una receta
+     *
+     * @param idRecipe
+     * @return
+     */
     @Override
     public List<Allergy> findAllAllergiesInRecipe(Long idRecipe) {
         try {
@@ -107,16 +118,16 @@ public class RecipeServiceImp implements RecipeService {
                     .collect(Collectors.toList());
 
             return allergyList;
-        } catch (ServiceException e) {
-            // Si `findById` lanza una `ServiceException`, simplemente la dejamos pasar.
-            throw e;
         } catch (Exception e) {
-            // Capturamos cualquier otra excepción inesperada.
-            throw new ServiceException("Ocurrió un error al obtener las alergias de la receta", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
-
+    /**
+     * Elimina la receta
+     *
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         Recipe recipe = findById(id);
@@ -132,6 +143,12 @@ public class RecipeServiceImp implements RecipeService {
     }
 
 
+    /**
+     * Encuentra la receta por el id
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Recipe findById(Long id){
         return recipeRepository.findById(id).orElseThrow(
@@ -139,11 +156,11 @@ public class RecipeServiceImp implements RecipeService {
         );
     }
 
-    @Override
-    public Recipe save(Recipe var1) {
-        return recipeRepository.save(var1);
-    }
-
+    /**
+     * Devuelve una lista con las recetas
+     *
+     * @return
+     */
     @Override
     public List<Recipe> findAll() {
         try {
@@ -153,20 +170,24 @@ public class RecipeServiceImp implements RecipeService {
             }
             return recipes;
         } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al obtener las recetas", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
 
+    /**
+     * Actualiza las recetas
+     *
+     * @param recipe
+     * @return
+     */
     @Override
     public Recipe update(Recipe recipe) {
         try {
             findById(recipe.getIdRecipe()); // Este método lanza ServiceException si no se encuentra la receta.
             return recipeRepository.save(recipe);
-        } catch (ServiceException e) {
-            throw e;
         } catch (Exception e) {
-            throw new ServiceException("Ocurrió un error inesperado al actualizar la receta", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 

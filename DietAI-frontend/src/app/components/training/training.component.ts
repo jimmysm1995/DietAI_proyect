@@ -8,6 +8,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 import { ExerciseInTraining } from 'src/app/models/ExercisesInTraining';
 import { TrainingWithExercisesRequest } from 'src/app/models/TrainingWithExercisesRequest';
 import { Muscle } from 'src/app/models/Muscles';
+import { ApiError } from 'src/app/models/ApiError';
 
 @Component({
     selector: 'app-training',
@@ -15,6 +16,7 @@ import { Muscle } from 'src/app/models/Muscles';
     styleUrls: ['./training.component.css'],
 })
 export class TrainingComponent {
+    errorMessage: string = '';
     @ViewChild('trainingExerciseForm') trainingExerciseForm!: NgForm;
 
     constructor(
@@ -52,8 +54,10 @@ export class TrainingComponent {
                 this.training = new Training();
                 this.exercisesInTraining = [];
                 this.exerciseInTraining = new ExerciseInTraining();
+                window.location.reload();
+            }).catch((error: ApiError) => {
+                this.errorMessage = error.message;
             });
-            window.location.reload();
     }
 
     limpiarLista() {
