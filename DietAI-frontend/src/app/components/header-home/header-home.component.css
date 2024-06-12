@@ -14,6 +14,13 @@ header {
   color: aliceblue;
 
 }
+h1 > a:active, h1 > a:hover, h1 > a:visited, h1 > a:link {
+  text-decoration: none;
+  color: var(--bs-heading-color);
+}
+
+
+
 
 .headerBg{
     background-image: url(../../../assets/IMG/home-bc.jpg);
