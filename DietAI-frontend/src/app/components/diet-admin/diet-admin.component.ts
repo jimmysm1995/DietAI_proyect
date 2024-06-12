@@ -72,7 +72,6 @@ export class DietAdminComponent {
             dayWeek: dayOfWeek,
             mealTime: mealTime,
         });
-        window.location.reload();
     }
     registrarDiet(formData: any) {
         this.dietWithRecipes.diet.name = formData.name;

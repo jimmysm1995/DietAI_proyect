@@ -14,6 +14,9 @@ export class IngredientComponent {
     public selectedIngredientId: number = 0;
 
     ngOnInit(): void {
+        this.getIngredients();
+    }
+    getIngredients () {
         this.ingredientService.getAllIngredient().then((ingredients) => {
             this.ingredients = ingredients;
         });
@@ -24,7 +27,7 @@ export class IngredientComponent {
             .postIngredient(this.ingredient)
             .then((ingredient) => {
                 this.ingredient = new Ingredient();
-                this.ngOnInit();
+                this.getIngredients();
                 window.location.reload();
             });
     }
