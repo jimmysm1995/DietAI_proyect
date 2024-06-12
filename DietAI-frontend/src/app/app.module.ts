@@ -14,7 +14,6 @@ import { LoginComponent } from './views/login/login.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
-import { ContactoComponent } from './components/contacto/contacto.component';
 import { HomeComponent } from './views/home/home.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -43,16 +42,17 @@ import { FilterTrainingPipe } from './components/entrenameinto/entrenamientoPipe
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { BuscadorEjerciciosComponent } from './components/buscador-ejercicios/buscador-ejercicios.component';
 import { AdminGuard } from './router/admin.guard';
+import { QuienesSomosComponent } from './views/quienes-somos/quienes-somos.component';
 
 const routes:Routes = [
   {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [LoginGuard]},
-  {path: 'contacto', component: ContactoComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'blog', component: BlogComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
-  {path: 'entradaBlog/:index', component: EntradaBlogComponent}
+  {path: 'entradaBlog/:index', component: EntradaBlogComponent},
+  {path: 'quienesSomos', component: QuienesSomosComponent}
 
 ]
 @NgModule({
@@ -66,7 +66,6 @@ const routes:Routes = [
     LandingComponent,
     FormRegisterComponent,
     FormLoginComponent,
-    ContactoComponent,
     HomeComponent,
     HeaderHomeComponent,
     ProfileComponent,
@@ -91,7 +90,8 @@ const routes:Routes = [
     FilterTrainingPipe,
     ShoppingListComponent,
     BuscadorEjerciciosComponent,
-    EntradaBlogComponent
+    EntradaBlogComponent,
+    QuienesSomosComponent
   ],
   imports: [
     HttpClientModule,

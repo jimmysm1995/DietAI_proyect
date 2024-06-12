@@ -1,0 +1,200 @@
+.info{
+    /* background-color: aquamarine; */
+    padding-top: 6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 4rem;
+}
+
+.info h3{
+    text-align: center;
+    font-size: 30px;
+}
+
+.text{
+    font-size: 24px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bienvenida {
+    /* background-image: url(../../assets/IMG/landing.png); */
+    background-image: url(../../../assets/IMG/fondoAcuarela1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 32rem;
+    display: flex;
+}
+
+.bienvenida_pic {
+    background-image: url(../../../assets/IMG/dietista1.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 30rem;
+    height: 27rem;
+    margin-left: 12%;
+    margin-top: 2%;
+    border-radius: 50% / 103px 105px 0 0;
+}
+
+.message {
+    margin-left: 5%;
+    padding-top: 8%;
+    width: 100%;
+}
+
+.message h1 {
+    font-size: 3.8rem;
+}
+
+.message p {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    /* margin-left: 3%; */
+}
+
+.onda {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 10rem;
+}
+
+/* * PANTALLA PEQUEÑA * */
+
+@media screen and (max-width: 768px) {
+    .bienvenida_pic {
+        display: none; /* Oculta la sección de bienvenida en pantallas pequeñas */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .message {
+        margin-top: 2rem; /* Agrega espacio entre el título y el párrafo */
+        text-align: center; /* Centra el texto horizontalmente */
+    }
+
+    .message h1 {
+        font-size: 2.8rem; /* Reduce el tamaño del título en pantallas pequeñas */
+        margin-bottom: 2rem; /* Agrega espacio entre el título y el párrafo */
+        margin-right: 8%;
+    }
+
+    .message p {
+        font-size: 1.2rem; /* Reduce el tamaño del párrafo en pantallas pequeñas */
+        margin-right: 8%;
+    }
+
+    .bienvenida {
+        height: 25rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .bienvenida_pic {
+        display: block; 
+    }
+
+    .message h1 {
+        font-size: 2.8rem; 
+        margin-bottom: 2rem; 
+        margin-right: 8%;
+    }
+
+    .message p {
+        font-size: 1.2rem; 
+        margin-right: 8%;
+    }
+}
+
+
+/** DIV  QUÉ OFREFCEMOS**/
+.img1{
+    background-image: url(../../../assets/IMG/enrenador.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 45vh;
+    width: 45vh;
+    border-radius: 15px;
+}
+.quienesSomos1 {
+    display: flex;
+    gap: 115px; 
+    align-items: center;
+}
+
+.quienesSomos1 img, .quienesSomos1 p {
+    flex: 1; 
+    max-width: 50%; 
+}
+
+.quienesSomos1 img {
+    height: auto;
+    object-fit: cover; 
+}
+
+.quienesSomos1 p {
+    margin: 0;
+    text-align: justify;
+}
+
+/** FIN DIV  QUÉ OFREFCEMOS**/
+/** DIV NUESTRA MISIÓN*/
+.img2{
+    background-image: url(../../../assets/IMG/dietista.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 45vh;
+    width: 45vh;
+    border-radius: 15px;
+}
+.quienesSomos2 {
+    display: flex;
+    gap: 115px; 
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.quienesSomos2 img, .quienesSomos2 p {
+    flex: 1; 
+    max-width: 50%; 
+}
+
+.quienesSomos2 img {
+    height: auto;
+    object-fit: cover; 
+}
+
+.quienesSomos2 p {
+    margin: 0;
+    text-align: justify;
+}
+
+/** Media Query para pantallas pequeñas **/
+@media (max-width: 1320px) {
+    .quienesSomos1, .quienesSomos2 {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .quienesSomos1 img, .quienesSomos2 img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+    }
+
+    .quienesSomos1 p, .quienesSomos2 p {
+        max-width: 100%;
+        text-align: center;
+    }
+}
