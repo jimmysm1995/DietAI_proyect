@@ -29,9 +29,14 @@ export class ProfileComponent {
     })
   }
   cerrarModal() {
-      let element = document.getElementById('close')
+      let element = document.getElementById('close');
       
       element?.click();
+  }
+
+  cerrarUpdateProfile() {
+    let element = document.getElementById('closeUpdateProfile');
+    element?.click();
   }
 
   obtenerDieta() {

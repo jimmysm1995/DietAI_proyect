@@ -37,7 +37,9 @@
         data-bs-toggle="modal"
         data-bs-target="#modalImgUpdate"
     />
-    <app-update-profile></app-update-profile>
+    <app-update-profile
+        (onCloseModal)="cerrarUpdateProfile()"
+    ></app-update-profile>
     <div class="info">
         <h1>{{ user.username }} <a 
             role="button"

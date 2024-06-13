@@ -15,4 +15,8 @@ export class RoleStore {
     getRole() {
         return localStorage.getItem('authorities');
     }
+
+    deleteRole() {
+        localStorage.removeItem('authorities');
+    }
 }
