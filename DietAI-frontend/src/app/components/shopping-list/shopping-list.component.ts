@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IngredientSummary } from 'src/app/models/ShoppingList';
+import { ClientService } from 'src/app/services/client.service';
 import { ShoppingListService } from 'src/app/services/shopping-list.service';
+import { ClientStore } from 'src/app/store/clientStore';
 
 @Component({
   selector: 'app-shopping-list',
@@ -8,7 +10,7 @@ import { ShoppingListService } from 'src/app/services/shopping-list.service';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent {
-  @Input() idDieta: number = 1;
+  @Input() idClient: number = 1;
   private _isOpened: boolean;
     
   @Input() 
@@ -16,9 +18,12 @@ export class ShoppingListComponent {
     this._isOpened = value;
 
     if(this._isOpened)
-      this.shoppingListService.getShoppingList(this.idDieta).subscribe(data => {
+      this.idClient = parseInt(this.clientStore.getRole() || '0');
+    this.clientService.getDietByClient(this.idClient).then((diet) => {
+      this.shoppingListService.getShoppingList(diet.idDiet || 0).subscribe(data => {
         this.shoppingList = data;
       });
+    })
   
   }
   get isOpened(): boolean {
@@ -31,7 +36,9 @@ export class ShoppingListComponent {
   steps: string[] = [];
 
   constructor(
-    private shoppingListService: ShoppingListService
+    private shoppingListService: ShoppingListService,
+    private clientStore: ClientStore,
+    private clientService: ClientService
   ) { 
     this._isOpened = false;
   }
