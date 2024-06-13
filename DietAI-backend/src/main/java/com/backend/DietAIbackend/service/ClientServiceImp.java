@@ -129,6 +129,11 @@ public class ClientServiceImp implements ClientService {
         }
     }
 
+    @Override
+    public Client update(Client client) {
+        return null;
+    }
+
 
     /**
      *
@@ -138,10 +143,26 @@ public class ClientServiceImp implements ClientService {
      * @return Client
      */
     @Override
-    public Client update(Client client) {
+    public Client update(Client client, List<Allergy> allergyList, List<Injury> injuryList) {
         try {
             findById(client.getIdClient());
-            return clientRepository.save(client);
+            Client result =  clientRepository.save(client);
+
+
+            // Eliminar las relaciones existentes
+            clientAllergyService.deleteAllByClient(client);
+            clientInjuryService.deleteAllByClient(client);
+
+            // Guarda las relaciones
+            for (Allergy allergy : allergyList) {
+                clientAllergyService.save(client, allergy);
+            }
+
+            for (Injury injury : injuryList) {
+                clientInjuryService.save(client, injury);
+            }
+
+            return result;
         } catch (Exception e) {
             throw new ServiceException("Ocurrió un error inesperado al actualizar el cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }

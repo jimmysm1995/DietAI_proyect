@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ClientService extends ICrudService <Client, Long>{
     Client save(Client client, List<Allergy> allergyList, List<Injury> injuryList);
+
+    Client update(Client client, List<Allergy> allergyList, List<Injury> injuryList);
     Client asignarDieta(Client client);
     Client asignarEntrenamiento(Client client);
     Client findCurrentClient(long userId);

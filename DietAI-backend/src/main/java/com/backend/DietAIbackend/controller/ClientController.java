@@ -84,9 +84,13 @@ public class ClientController {
     @Operation(summary = "Modifica al cliente")
     public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto clientDto){
 
+        List<Allergy> allergyList = allergyMapper.listDtoToModel(clientDto.getAllergy());
+
+        List<Injury> injuryList = injuryMapper.listDtoToModel(clientDto.getInjury());
+
         Client client = clientMapper.dtoToModel(clientDto);
 
-        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.update(client)));
+        return ResponseEntity.ok().body(clientMapper.modelToDto(clientService.update(client, allergyList, injuryList)));
 
     }
 
