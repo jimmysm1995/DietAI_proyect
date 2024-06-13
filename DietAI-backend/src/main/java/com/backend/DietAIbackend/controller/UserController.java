@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.controller;
 
+import com.backend.DietAIbackend.dto.ClientDto;
 import com.backend.DietAIbackend.dto.UserDto;
 import com.backend.DietAIbackend.exception.ServiceException;
 import com.backend.DietAIbackend.mapper.UserMapper;
@@ -102,5 +103,12 @@ public class UserController {
             @PathVariable Long userId){
             User user = userMapper.dtoToModel(userDto);
             return ResponseEntity.ok().body(userMapper.modelToDto(userService.changeAuthorities(user, userId)));
+    }
+
+    @GetMapping("/client/{id}")
+    @Operation(summary = "Devuelve el cliente del usuario")
+    public ResponseEntity<ClientDto> getClient(@PathVariable Long id){
+        log.info("Pasa por aqui");
+        return ResponseEntity.ok().body(clientMapper.modelToDto(userService.getClient(id)));
     }
 }

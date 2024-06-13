@@ -21,6 +21,21 @@ export class ClientStore {
         this.notifySubscribers();
     }
 
+    saveClient(client: Client) {
+        if (client.idClient && client.idClient !== undefined) {
+            console.log(client);
+            localStorage.setItem('client', client.idClient?.toString());
+            console.log(localStorage.getItem('client'));
+        } else {
+            localStorage.removeItem('client'); // O puedes establecer un valor predeterminado, como 'null' o 'undefined'
+        }
+    }
+
+    getRole() {
+        return localStorage.getItem('client');
+    }
+    
+
     subscribeClient(subscriber: (estado: Client) => void) {
         this.subscribers.push(subscriber);
     }

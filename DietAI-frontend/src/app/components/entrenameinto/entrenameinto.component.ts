@@ -5,6 +5,7 @@ import { FilterTrainingPipe } from './entrenamientoPipe';
 import { ClientStore } from 'src/app/store/clientStore';
 import { Client } from '../../models/Client';
 import { ClientService } from 'src/app/services/client.service';
+import { UserStore } from 'src/app/store/userStore';
 
 @Component({
   selector: 'app-entrenameinto',
@@ -18,12 +19,14 @@ export class EntrenameintoComponent {
   constructor( 
     private trainingService: TrainingService,
     private clientStore: ClientStore,
+    private userStore: UserStore,
     private clientService: ClientService
   ){ 
   }
 
   ngOnInit(): void {
-    this.clientService.getTrainingByClient(this.clientStore.client.idClient || 0).then((training) => {
+    let idClient: number = parseInt(this.clientStore.getRole() || '0');
+    this.clientService.getTrainingByClient(idClient).then((training) => {
       this.trainingService.getById(training.idTraining || 0).then((trainings) => {
         this.dias = trainings.map((training) => training.orderWeek).filter((valor, indice, array) => {
           return array.indexOf(valor) === indice;

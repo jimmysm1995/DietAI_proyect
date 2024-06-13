@@ -1,5 +1,6 @@
 package com.backend.DietAIbackend.service;
 
+import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.User;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface UserService extends ICrudService<User, Long>{
     User changeAuthorities(User user, Long userId);
 
     User findByUsernameOrEmail(String username, String email);
+
+    Client getClient(Long id);
 }

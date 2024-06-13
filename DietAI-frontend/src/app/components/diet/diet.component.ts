@@ -29,11 +29,10 @@ export class DietComponent {
     public mailtoStr = "";
 
     ngOnInit(): void {
-        if (this.clientStore.client.idClient !== undefined) {
-            this.clientService.getDietByClient(this.clientStore.client.idClient || 0).then((diet) => {
-
+        let idClient: number = parseInt(this.clientStore.getRole() || '0');
+        if (idClient !== undefined) {
+            this.clientService.getDietByClient(idClient).then((diet) => {
                 this.selectedDiet = diet;
-
                 this.dietService.getRecipesByDiet(diet.idDiet || 0).then((recipes: RecipeInDietResponse[]) => {
                     this.recipes = recipes;
                 });

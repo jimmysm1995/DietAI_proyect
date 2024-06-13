@@ -88,6 +88,7 @@ export class ClientFormComponent {
     }
 
     aceptar() {
+        this.clientStore.saveClient(this.clientStore.client);
         this.aceptarFormulario.emit();
     }
 

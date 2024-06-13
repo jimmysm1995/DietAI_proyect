@@ -7,6 +7,7 @@ import { LoginResponse } from 'src/app/models/loginResponse';
 import { UserStore } from 'src/app/store/userStore';
 import { RoleStore } from '../../store/roleStore';
 import { ApiError } from 'src/app/models/ApiError';
+import { ClientStore } from 'src/app/store/clientStore';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class FormLoginComponent {
         private router: Router,
         //mediante el constructor la instancia que está en el registro se inyecta en este componente
         private userStore: UserStore,
-        private roleStore: RoleStore
+        private roleStore: RoleStore,
+        private clientStore: ClientStore
     ) {}
 
     logearUsuario(userData: User): void {
@@ -54,6 +56,11 @@ export class FormLoginComponent {
                 localStorage.setItem('sesion', response.token);
                 //al tener almacenado en roleStore el role del usuario así se puede controlar desde adminGuarth. y authGuard
                 this.roleStore.saveRole(response.authorities[0]);
+                this.userService.getClient(response.idUser).then((client) => {
+                    this.clientStore.saveClient(client);
+                }).catch((error) => {
+                    console.log(error);
+                })
                 //comprobamos si user es admin o no
                 if(response.authorities[0]=="ADMIN"){
                     this.router.navigate(['/admin']);

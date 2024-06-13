@@ -1,9 +1,11 @@
 package com.backend.DietAIbackend.service;
 
 import com.backend.DietAIbackend.exception.ServiceException;
+import com.backend.DietAIbackend.model.Client;
 import com.backend.DietAIbackend.model.User;
 import com.backend.DietAIbackend.model.UserAuthority;
 import com.backend.DietAIbackend.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImp implements UserService {
 
     @Autowired
@@ -184,5 +187,17 @@ public class UserServiceImp implements UserService {
     public User findByUsernameOrEmail(String username, String email) {
         return this.userRepository.findByUsernameOrEmail(username, email).orElseThrow(
                 () -> new ServiceException("No se ha encontrado el usuario", HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * Devuelve el cliente del usuario
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Client getClient(Long id) {
+        User user = findById(id);
+        return user.getClient();
     }
 }

@@ -79,4 +79,9 @@ export class UserService {
   getCurrentUser():Promise<User>{
     return axios.get(`${environment.apiUrl}/auth/currentUser`).then((response) => response.data);
   }
+
+  getClient(id: number): Promise<Client> {
+    return axios.get(`${this.baseUrl}/client/${id}`).then((response) => response.data);
+}
+
 }
