@@ -42,6 +42,20 @@ export class ClientService {
       } 
     });
   }
+
+  updateClient(userData: Client): Promise<Client>{
+    return axios.put(this.baseUrl, userData)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
+      } else {
+          return Promise.reject('Error desconocido');
+      } 
+    });
+  }
+
   
   getCurrentClient():Promise<Client>{
     return axios.get(`${environment.apiUrl}/auth/currentUser`).then((response) => response.data);

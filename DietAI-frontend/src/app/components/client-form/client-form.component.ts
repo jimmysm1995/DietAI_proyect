@@ -18,6 +18,7 @@ import { Goal } from 'src/app/models/Goal';
 import { GoalService } from '../../services/goal.service';
 import { ClientStore } from 'src/app/store/clientStore';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-client-form',
@@ -39,8 +40,11 @@ export class ClientFormComponent {
     public goal: Goal[] = [];
     public typeTraining: string[] = [];
 
+    public currentClient: Client = new Client();
+
     constructor(
         private clientService: ClientService,
+        private userService: UserService,
         private userStore: UserStore,
         private injuryService: InjuryService,
         private allergyService: AllergyService,
@@ -81,10 +85,7 @@ export class ClientFormComponent {
             this.typeTraining = typeTraining;
         });
 
-        this.clientService.getCurrentClient().then((client) => {
-            
-            this.clientForm.setValue({'weight': client.weight});
-        })
+        this.loadClient();
     }
 
     aceptar() {
@@ -92,14 +93,33 @@ export class ClientFormComponent {
         this.aceptarFormulario.emit();
     }
 
+    loadClient() {
+        this.clientService.getCurrentClient().then((client: any) => {
+            
+            this.userService.getClient(client.idUser).then(c => {
+                this.currentClient = c;
+            });
+        })
+    }
+
     async registrarCliente(clientData: Client) {
         console.log(clientData);
         clientData.user = this.userStore.user;
+        clientData.idClient = this.currentClient.idClient;
         //Para asignar client a clientStore espera a que la petición responda.
         try {
-            this.clientStore.client = await this.clientService.registerClient(
-                clientData
-            );
+
+            if(clientData.idClient){
+                this.clientStore.client = await this.clientService.updateClient(
+                    clientData
+                )
+            } else {
+                this.clientStore.client = await this.clientService.registerClient(
+                    clientData
+                );
+            }
+
+            this.currentClient = this.clientStore.client;
             await this.clientService.asignarDieta(
                 this.clientStore.client.idClient ?? 0
             );
@@ -108,8 +128,8 @@ export class ClientFormComponent {
                     this.clientStore.client.idClient ?? 0
                 );
         } catch (error:any) {
-            this.errorMessage = error.message;
-       }
+            // this.errorMessage = error.message;
+        }
         this.aceptar();
     }
 

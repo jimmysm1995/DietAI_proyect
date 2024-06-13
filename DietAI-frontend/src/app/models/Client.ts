@@ -1,6 +1,7 @@
 import { Allergy } from './Allergy';
 import { ConsumedSubstances } from './ConsumedSubstances';
 import { Diet } from './Diet';
+import { TypeTraining } from './Exercise';
 import { Gender } from './Gender';
 import { Goal } from './Goal';
 import { Injury } from './Injury';
@@ -19,10 +20,11 @@ export class Client {
     goal?: string = "";
     injury?: Injury[];
     allergy?: Allergy[];
-    jobTypes?: string = "";
+    jobType?: string = "";
     previousLevel?: string = "";
     consumedSubstances?: string = "";
     trainingTime?: number = 1;
+    typeTraining?: string = "";
     user?: User;
     training?: Training;
     diet?: Diet;
