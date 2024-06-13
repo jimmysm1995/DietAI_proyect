@@ -69,7 +69,7 @@ public class DietServiceImp implements DietService {
             return savedDiet;
         } catch (Exception e) {
             log.error("Error al guardar la dieta: ", e);
-            throw new ServiceException("Ocurrió un error al guardar la dieta", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ServiceException("Ocurrió un error al guardar la dieta", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -85,7 +85,7 @@ public class DietServiceImp implements DietService {
             return dietRepository.getIngredientSummaryByDietId(id);
         } catch (Exception e) {
             log.error("Error al obtener la lista de compra: ", e);
-            throw new ServiceException("Ocurrió un error al obtener la lista de compra", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ServiceException("Ocurrió un error al obtener la lista de compra", HttpStatus.BAD_REQUEST);
         }
     }
 

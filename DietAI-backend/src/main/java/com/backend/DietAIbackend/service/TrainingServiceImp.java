@@ -36,30 +36,31 @@ public class TrainingServiceImp implements TrainingService {
      */
     public Training save(Training training, List<ExercisesInTraining> exercisesInTrainingList) {
 
-        Training entrenamiento;
 
         try {
-            entrenamiento = trainingRepository.save(training);
-        } catch (Exception e) {
-            throw e;
-        }
+            trainingRepository.save(training);
 
-        for (ExercisesInTraining exercisesInTraining : exercisesInTrainingList
-        ) {
-            if (exercisesInTraining != null) {
-                TrainingExercise trainingExercise = TrainingExercise.builder()
-                        .training(training)
-                        .exercise(exercisesInTraining.exercise())
-                        .sets(exercisesInTraining.sets())
-                        .reps(exercisesInTraining.reps())
-                        .orderDay(exercisesInTraining.orderDay())
-                        .orderWeek(exercisesInTraining.orderWeek())
-                .build();
-                trainingExerciseService.save(trainingExercise);
+            for (ExercisesInTraining exercisesInTraining : exercisesInTrainingList
+            ) {
+                if (exercisesInTraining != null) {
+                    TrainingExercise trainingExercise = TrainingExercise.builder()
+                            .training(training)
+                            .exercise(exercisesInTraining.exercise())
+                            .sets(exercisesInTraining.sets())
+                            .reps(exercisesInTraining.reps())
+                            .orderDay(exercisesInTraining.orderDay())
+                            .orderWeek(exercisesInTraining.orderWeek())
+                            .build();
+                    trainingExerciseService.save(trainingExercise);
+                }
             }
+
+            return training;
+        } catch (Exception e) {
+            throw new ServiceException("Ocurrió un error al guardar el entrenamiento", HttpStatus.BAD_REQUEST);
         }
 
-        return entrenamiento;
+
     }
 
     /**
