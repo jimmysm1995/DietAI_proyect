@@ -35,8 +35,12 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
+    
     <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
+        <button type="button" (click)="clearErrorMessage()" class="btn btn-danger btn-icon mt-2 close">
+            <span class="fas fa-times-circle"></span>
+        </button>
     </div>
 </form>
 <form class="ingredient-select-form" (ngSubmit)="deleteIngredient()">

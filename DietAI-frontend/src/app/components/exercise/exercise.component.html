@@ -37,7 +37,6 @@
 
                 <label for="typeTraining" class="col-sm.2 col-form-label">Tipo de Entrenamiento:</label>
                 <select id="typeTraining" class="form-control" name="typeTraining" [(ngModel)]="exercise.typeTraining" required>
-                    <option value=""></option>
                     <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
                 </select>
             </div>
@@ -53,6 +52,9 @@
             </button>
             <div *ngIf="errorMessage" class="alert alert-danger">
                 {{ errorMessage }}
+                <button type="button" (click)="clearErrorMessage()" class="btn btn-danger btn-icon mt-2 close">
+                    <span class="fas fa-times-circle"></span>
+                </button>
             </div>
         </form>
     </div>

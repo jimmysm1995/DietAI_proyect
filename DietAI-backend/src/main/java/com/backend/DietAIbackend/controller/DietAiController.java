@@ -5,6 +5,7 @@ import com.backend.DietAIbackend.exception.ServiceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,6 +29,23 @@ public class DietAiController {
         return ResponseEntity.status(ex.getHttpStatus()).body(apiError);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiError> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
+        String mensajePersonalizado = "Hay algun campo vacio, por favor revise el formulario.";
+
+        // Aquí podrías extraer detalles específicos del error si es necesario.
+        String detalle = ex.getMostSpecificCause().getMessage();
+
+        ApiError apiError = new ApiError(
+                HttpStatus.BAD_REQUEST,
+                HttpStatus.BAD_REQUEST.value(),
+                mensajePersonalizado
+        );
+        apiError.setDetalle(detalle);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiError> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         String mensajePersonalizado = "Ha ocurrido un error. Por favor, revise los datos.";
@@ -44,6 +62,4 @@ public class DietAiController {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
-
-
 }

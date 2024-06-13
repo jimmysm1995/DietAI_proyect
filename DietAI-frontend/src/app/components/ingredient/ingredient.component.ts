@@ -18,7 +18,7 @@ export class IngredientComponent {
     ngOnInit(): void {
         this.getIngredients();
     }
-    getIngredients () {
+    getIngredients() {
         this.ingredientService.getAllIngredient().then((ingredients) => {
             this.ingredients = ingredients;
         });
@@ -31,7 +31,8 @@ export class IngredientComponent {
                 this.ingredient = new Ingredient();
                 this.getIngredients();
                 window.location.reload();
-            }).catch((error: ApiError) => {
+            })
+            .catch((error: ApiError) => {
                 this.errorMessage = error.message;
             });
     }
@@ -45,5 +46,9 @@ export class IngredientComponent {
                 this.selectedIngredientId = 0;
                 this.ngOnInit();
             });
+    }
+
+    clearErrorMessage() {
+        this.errorMessage = '';
     }
 }

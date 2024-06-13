@@ -59,11 +59,11 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     @Operation(summary = "Registrar el usuario")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDTO) {
+    public ResponseEntity<UserDto> registerUser(@RequestBody User userDTO) {
         try {
-            User userModel = userMapper.dtoToModel(userDTO);
+//            User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
-                    userMapper.modelToDto(userService.register(userModel, false)));
+                    userMapper.modelToDto(userService.register(userDTO, false)));
         } catch (Exception e) {
             throw e;
         }
@@ -71,11 +71,11 @@ public class AuthController {
 
     @PostMapping("/auth/register/admin")
     @Operation(summary = "Registrar el usuario que sera administrador")
-    public ResponseEntity<UserDto> registerAdmin(@RequestBody UserDto userDTO) {
+    public ResponseEntity<UserDto> registerAdmin(@RequestBody User userDTO) {
         try {
-            User userModel = userMapper.dtoToModel(userDTO);
+//            User userModel = userMapper.dtoToModel(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(
-                    userMapper.modelToDto(userService.register(userModel, true)));
+                    userMapper.modelToDto(userService.register(userDTO, true)));
         } catch (Exception e) {
             throw e;
         }
@@ -83,7 +83,7 @@ public class AuthController {
 
     @PostMapping("/auth/login")
     @Operation(summary = "Logear el usuario")
-    public ResponseEntity<LoginResponse> login(@RequestBody UserDto userDto){
+    public ResponseEntity<LoginResponse> login(@RequestBody User userDto){
         try {
             Authentication authDTO = new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword());
 

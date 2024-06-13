@@ -48,11 +48,25 @@ export class ClientService {
   }
 
   asignarDieta(idClient: number):Promise<Client>{
-    return axios.post(`${this.baseUrl}/diet/${idClient}`).then((response) => response.data);
+    return axios.post(`${this.baseUrl}/diet/${idClient}`).then((response) => response.data).catch((error) => {
+      if (error.response && error.response.data) {
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
+      } else {
+          return Promise.reject('Error desconocido');
+      } 
+    });
   }
 
   asignarEntrenamiento(idClient: number):Promise<Client>{
-    return axios.post(`${this.baseUrl}/training/${idClient}`).then((response) => response.data);
+    return axios.post(`${this.baseUrl}/training/${idClient}`).then((response) => response.data).catch((error) => {
+      if (error.response && error.response.data) {
+        const apiError = new ApiError(error.response.data);
+        return Promise.reject(apiError);
+      } else {
+          return Promise.reject('Error desconocido');
+      } 
+    });
   }
 
   getDietByClient(idClient: number):Promise<Diet>{

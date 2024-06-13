@@ -7,8 +7,8 @@ export class Training {
     idTraining: number=0;
     name: string = '';
     typeTraining: string = '';
-    difficulty: number=0;
-    days: number=0;
+    difficulty: number=1;
+    days: number=1;
     distribution: string='';
     clients?: Client[]=[]; 
 }
@@ -18,10 +18,10 @@ export class TrainingRequest{
 }
 
 export class TrainingResponse{
-    sets: number=0;
-    reps: number=0;
-    orderDay: number=0;
-    orderWeek: number=0;
+    sets: number=1;
+    reps: number=1;
+    orderDay: number=1;
+    orderWeek: number=1;
     exercise: Exercise = new Exercise();
 }
 

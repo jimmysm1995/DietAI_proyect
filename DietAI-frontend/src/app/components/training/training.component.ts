@@ -45,19 +45,28 @@ export class TrainingComponent {
     }
 
     saveTraining() {
-        this.trainingWithExerciseRequest.training = this.training;
-        this.trainingWithExerciseRequest.exercisesInTraining =
-            this.exercisesInTraining;
-        this.trainingService
-            .postTraining(this.trainingWithExerciseRequest)
-            .then((newTraining) => {
-                this.training = new Training();
-                this.exercisesInTraining = [];
-                this.exerciseInTraining = new ExerciseInTraining();
-                window.location.reload();
-            }).catch((error: ApiError) => {
-                this.errorMessage = error.message;
-            });
+        if (this.training.typeTraining === '') {
+            this.errorMessage = 'Debe seleccionar un tipo de Entrenamiento';
+            return
+        } else if (this.exercisesInTraining.length === 0) {
+            this.errorMessage = 'Debe registrar al menos un Ejercicio';
+            return
+        } 
+        else {
+            this.trainingWithExerciseRequest.training = this.training;
+            this.trainingWithExerciseRequest.exercisesInTraining =
+                this.exercisesInTraining;
+            this.trainingService
+                .postTraining(this.trainingWithExerciseRequest)
+                .then((newTraining) => {
+                    this.training = new Training();
+                    this.exercisesInTraining = [];
+                    this.exerciseInTraining = new ExerciseInTraining();
+                    window.location.reload();
+                }).catch((error: ApiError) => {
+                    this.errorMessage = error.message;
+                });
+        }
     }
 
     limpiarLista() {
@@ -156,5 +165,9 @@ export class TrainingComponent {
         this.exerciseService.getMuscles().then((muscles: Muscle[]) => {
             this.muscle = muscles;
         });
+    }
+
+    clearErrorMessage() {
+        this.errorMessage = "";
     }
 }

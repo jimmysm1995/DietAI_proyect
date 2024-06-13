@@ -84,7 +84,6 @@ export class ClientFormComponent {
         this.clientService.getCurrentClient().then((client) => {
             
             this.clientForm.setValue({'weight': client.weight});
-
         })
     }
 
@@ -107,10 +106,14 @@ export class ClientFormComponent {
                 await this.clientService.asignarEntrenamiento(
                     this.clientStore.client.idClient ?? 0
                 );
-            //this.aceptar();
+            this.aceptar();
         } catch (error:any) {
             this.errorMessage = error.message;
        }
-        this.aceptar();
+        // this.aceptar();
+    }
+
+        clearErrorMessage() {
+        this.errorMessage = '';
     }
 }

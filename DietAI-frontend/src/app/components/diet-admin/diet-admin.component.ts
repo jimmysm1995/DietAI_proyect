@@ -129,4 +129,8 @@ export class DietAdminComponent {
         this.recipesInDiet = [];
         this.dietForm.reset();
     }
+
+    clearErrorMessage() {
+        this.errorMessage = "";
+    }
 }

@@ -19,6 +19,9 @@
       <button type="submit" class="btn btn-primary mt-2">Guardar</button>
       <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
+        <button type="button" (click)="clearErrorMessage()" class="btn btn-danger btn-icon mt-2 close">
+          <span class="fas fa-times-circle"></span>
+        </button>
       </div>
     </form>
     <ul class="list-group mt-3">

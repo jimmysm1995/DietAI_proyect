@@ -21,8 +21,8 @@ public class UserDto {
     @Schema(example = "email", description = "Email del usuario")
     private String email;
 
-    @Schema(example = "password", description = "Contraseña del usuario")
-    private String password;
+//    @Schema(example = "password", description = "Contraseña del usuario")
+//    private String password;
 
     @Schema(description = "Datos del cliente con el que esta relacionado")
     private ClientDto client;

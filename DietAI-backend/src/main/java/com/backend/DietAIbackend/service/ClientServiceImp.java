@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -215,7 +217,7 @@ public class ClientServiceImp implements ClientService {
 
             for (Diet dieta : dietasDisponibles) {
                 Integer diferencia = Math.abs(dieta.getCalories() - caloriasRecomendadas);
-                if (diferencia < menorDiferencia && !hasMatchingAllergy(clientAllergyList, dieta.getDietAllergy())) {
+                if (diferencia < menorDiferencia && hasMatchingAllergy(clientAllergyList, dieta.getDietAllergy())) {
                     mejorDieta = dieta;
                     menorDiferencia = diferencia;
                 }
@@ -236,25 +238,57 @@ public class ClientServiceImp implements ClientService {
 
 
     /**
-     *
      * Metodo para comprueba que dietas son compatibles para el cliente segun la alergia
+     *
      * @param clientAllergies
      * @param dietAllergies
      * @return
      */
     private boolean hasMatchingAllergy(List<ClientAllergy> clientAllergies, List<DietAllergy> dietAllergies) {
-        // Si no se encuentra ninguna coincidencia, devolver false
-        if (!clientAllergies.isEmpty()) {
-            for (ClientAllergy clientAllergy : clientAllergies) {
-                for (DietAllergy dietAllergy : dietAllergies) {
-                    if (clientAllergy.getAllergy().getIdAllergy().equals(dietAllergy.getAllergy().getIdAllergy())) {
-                        return true; // Si hay una coincidencia de alergia, devolver true
-                    }
-                }
+        // Si no hay alergias del cliente, consideramos que la dieta es segura
+        if (clientAllergies.isEmpty()) {
+            return true;
+        }
+
+        // Crear un conjunto de ids de alergias de la dieta para una búsqueda más eficiente
+        Set<Long> dietAllergyIds = dietAllergies.stream()
+                .map(dietAllergy -> dietAllergy.getAllergy().getIdAllergy())
+                .collect(Collectors.toSet());
+
+        // Verificar si todas las alergias del cliente están en la lista de alergias de la dieta
+        for (ClientAllergy clientAllergy : clientAllergies) {
+            if (!dietAllergyIds.contains(clientAllergy.getAllergy().getIdAllergy())) {
+                return false; // Si alguna alergia del cliente no está en la dieta, la dieta no es segura
             }
         }
-        return false; // En el caso de que el cliente no tenga ninguna alergia, devuelve true para todas las recetas
+
+        // Si todas las alergias del cliente están en la lista de alergias de la dieta, la dieta es segura
+        return true;
     }
+
+
+//    private boolean hasMatchingAllergy(List<ClientAllergy> clientAllergies, List<DietAllergy> dietAllergies) {
+//        //Creamos un contador para ir contando las alergias que coinciden
+//        int dietSafe = 0;
+//        // Si no se encuentra ninguna coincidencia, devolver false
+//        if (clientAllergies.isEmpty()) {
+//            return true;
+//        }
+//
+//        for (ClientAllergy clientAllergy : clientAllergies) {
+//            for (DietAllergy dietAllergy : dietAllergies) {
+//                if (clientAllergy.getAllergy().getIdAllergy().equals(dietAllergy.getAllergy().getIdAllergy())) {
+//                    // Si hay una coincidencia de alergia, añadimos a la lista
+//                    dietSafe++;
+//                }
+//            }
+//        }
+//        // Si el total de las alergias del cliente coinciden con las de la dieta, devuelve true
+//        if (clientAllergies.size() == dietSafe){
+//            return true;
+//        }
+//        return false; // En el caso de que el cliente no tenga ninguna alergia, devuelve false para todas las recetas
+//    }
 
     /**
      * Metodo para asignar el entrenamiento al cliente

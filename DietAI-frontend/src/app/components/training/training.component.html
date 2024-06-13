@@ -12,22 +12,19 @@
                 <label for="typeTraining" class="form-label">Tipo de Entrenamiento:</label>
                 <select id="typeTraining" class="form-control" name="typeTraining" [(ngModel)]="training.typeTraining"
                     (change)="onTrainingSelected()" required>
-                    <option value=""></option>
                     <option *ngFor="let item of typeTraining" value="{{item}}">{{item | transformadorEnum}}</option>
                 </select>
             </div>
 
             <div class="form-group row">
-
                 <label for="difficulty" class="form-label">Dificultad:</label>
-                <input type="number" class="form-control" id="difficulty" min="0" max="5" name="difficulty"
+                <input type="number" class="form-control" id="difficulty" min="1" max="5" name="difficulty"
                     [(ngModel)]="training.difficulty" required />
             </div>
-
             <div class="form-group row">
 
                 <label for="days" class="form-label">Días:</label>
-                <input type="number" class="form-control" id="days" name="days" [(ngModel)]="training.days" required />
+                <input type="number" class="form-control" id="days" min="1" max="7" name="days" [(ngModel)]="training.days" required />
 
             </div>
 
@@ -42,6 +39,9 @@
             </button>
             <div *ngIf="errorMessage" class="alert alert-danger">
                 {{ errorMessage }}
+                <button type="button" (click)="clearErrorMessage()" class="btn btn-danger btn-icon mt-2 close">
+                    <span class="fas fa-times-circle"></span>
+                </button>
             </div>
         </form>
         <ul class="list-group mt-6">

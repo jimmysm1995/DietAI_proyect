@@ -77,13 +77,11 @@
     <div class="form-group select-group">
         <label for="trainingTime">Tiempo para entrenar</label>
         <select name="trainingTime" id="trainingTime" class="form-control" ngModel>
-            <option value=""></option>
             <option value="1">1 día a la semana</option>
             <option value="2">2 días a la semana</option>
             <option value="3">3 días a la semana</option>
             <option value="4">4 días a la semana</option>
             <option value="5">5 días a la semana</option>
-            <option value="6">Todos los días de la semana</option>
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
@@ -96,19 +94,12 @@
         </select>
         <i class="fas fa-caret-down flecha"></i>
     </div>
-
-    <!-- <div class="form-group select-group">
-        <label for="crearTabla"
-            >Cada cuánto quieres crear <br> una dieta y ejercicios</label
-        >
-        <select name="crearTabla" id="" class="form-control" [(ngModel)]="altaCliente.plan" [ngModelOptions]="{standalone: true}">
-            <option value=""></option>
-            <option value="1">Todos los meses</option>
-            <option value="2">Cada dos semanas</option>
-        </select>
-        <i class="fas fa-caret-down flecha"></i>
-    </div> -->
-
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+        <button type="button" (click)="clearErrorMessage()" class="btn btn-danger btn-icon mt-2 close">
+          <span class="fas fa-times-circle"></span>
+        </button>
+      </div>
     <button type="submit" class="btn btn-primary btnAceptar">
         Aceptar
     </button>

@@ -22,7 +22,7 @@ export class Client {
     jobTypes?: string = "";
     previousLevel?: string = "";
     consumedSubstances?: string = "";
-    trainingTime?: number = 0;
+    trainingTime?: number = 1;
     user?: User;
     training?: Training;
     diet?: Diet;
