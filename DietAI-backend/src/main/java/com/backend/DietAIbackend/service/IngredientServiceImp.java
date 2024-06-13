@@ -36,7 +36,7 @@ public class IngredientServiceImp implements IngredientService {
         try {
             return ingredientRepository.save(ingredient);
         } catch (Exception e) {
-            throw e;
+            throw new ServiceException("Ocurrió un error al guardar el ingrediente", HttpStatus.BAD_REQUEST);
         }
     }
 

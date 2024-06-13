@@ -62,7 +62,7 @@ public class RecipeServiceImp implements RecipeService {
             actualizarCalorias();
             return recipe;
         }  catch (Exception e) {
-            throw e;
+            throw new ServiceException("Ocurrió un error al guardar la receta", HttpStatus.BAD_REQUEST);
         }
     }
 

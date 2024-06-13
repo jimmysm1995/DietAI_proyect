@@ -44,7 +44,7 @@ public class ExerciseServiceImp implements ExerciseService {
             }
             return savedExercise;
         } catch (Exception e) {
-            throw e;
+            throw new ServiceException("Ocurrió un error al guardar el ejercicio", HttpStatus.BAD_REQUEST);
         }
     }
 
