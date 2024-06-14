@@ -90,3 +90,10 @@
         margin-right: 8%;
     }
 }
+@media screen and (max-width: 768px) {
+    .message h1{
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        margin-right: 8%;
+    }
+}
