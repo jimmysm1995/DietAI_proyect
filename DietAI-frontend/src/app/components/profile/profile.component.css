@@ -78,3 +78,21 @@
     max-width: 80%;
 }
 
+@media screen and (max-width: 400px) {
+    .quote{
+        font-size: 1rem;
+    }
+
+    .profile{
+        width: 90%;
+    }
+
+    .formularioCliente{
+        margin: auto;
+    }
+
+    .icon{
+        font-size: 0.8rem;
+    }
+}
+
