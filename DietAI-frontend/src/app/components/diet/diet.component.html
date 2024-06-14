@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
     <thead>
         <tr>
             <th></th>
@@ -75,6 +75,62 @@
                     [isOpened]="isModalOpened"
                     (aceptarFormulario)="cerrarModal()"
                 />
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+ <table class="table-responsive diet-table">
+    <thead>
+        <tr>
+            <th></th>
+            <th *ngFor="let mealType of mealTime">{{ mealType | transformadorEnum }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let day of dayOfWeek">
+            <tr>
+                <td>{{ day | transformadorEnum }}</td>
+                <ng-container *ngFor="let mealTime of mealTime">
+                    <td>
+                        <app-recipe
+                            *ngIf="this.recipes.length > 0"
+                            class="recipe"
+                            [recipe]="findRecipe(day, mealTime)"
+                        ></app-recipe>
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<div class="buttons">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shoppingList" (click)="onOpenModal()">
+        Lista de la compra
+    </button>
+    <button class="btn btn-primary btn-icon" (click)="generateEmail()">
+        <i class="far fa-envelope"></i>
+    </button>
+    <a id="mailLink" [href]="mailtoStr" target="_top"></a>
+</div>
+
+<div class="modal fade" id="shoppingList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lista de la compra</h5>
+                <div>
+                    <button class="btn btn-primary btn-icon" (click)="copyToClipboard()">
+                        <i class="far fa-clipboard"></i>
+                    </button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-icon ms-2">
+                        <span class="fas fa-times-circle"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <app-shopping-list [isOpened]="isModalOpened" (aceptarFormulario)="cerrarModal()"></app-shopping-list>
             </div>
         </div>
     </div>

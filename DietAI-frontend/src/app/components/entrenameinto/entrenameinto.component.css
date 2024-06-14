@@ -1,4 +1,4 @@
-.modal, .modal-content, .modal-dialog, .modal-body {
+/* .modal, .modal-content, .modal-dialog, .modal-body {
     border-radius: 8px;
 }
 
@@ -67,5 +67,87 @@
     .pic {
         height: 300px;
         width: 300px;
+    }
+} */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Espacio entre elementos */
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.pic {
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 10px; /* Espacio debajo de cada imagen */
+}
+
+.exerciseData {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .pic {
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .pic {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+.modal, .modal-content, .modal-dialog, .modal-body {
+    border-radius: 8px;
+}
+
+.modal-dialog {
+    max-width: 90%; /* Para asegurar que el modal no sea demasiado ancho */
+}
+
+.modal-content {
+    padding: 15px;
+    background-color: white !important;
+}
+
+.close {
+    font-weight: bold;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}
+
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-backdrop {
+    --bs-backdrop-bg: #00000049;
+    --bs-backdrop-opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .pic {
+        height: 150px;
+        width: 150px;
     }
 }

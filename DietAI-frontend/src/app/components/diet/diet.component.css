@@ -1,10 +1,10 @@
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     /* border-radius: 8px; */
-  }
+  /* } */
   
-  th, td {
+  /* th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -47,8 +47,8 @@ table {
     border-radius: 50%;
     text-align: center;
     padding: 0;
-    text-decoration: none;
-}
+    text-decoration: none; */
+/* }
 
 .buttons {
   margin-top: .5rem;
@@ -56,4 +56,142 @@ table {
   justify-content: flex-end;
   gap: 1rem;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+      display: block;
+  }
+  th, td {
+      box-sizing: border-box;
+      width: 100%;
+  }
+  thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  tr {
+      margin: 0 0 1rem 0;
+  }
+  tr:nth-child(odd) {
+      background: #f4f4f4;
+  } */
+  /* td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+  }
+  td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 45%;
+      padding-left: 15px;
+      font-weight: bold;
+      text-align: left;
+  }
+}  */
+
+/* Tabla */
+.diet-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.diet-table th,
+.diet-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.diet-table th {
+  background-color: #f2f2f2;
+}
+
+.diet-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.diet-table tr:hover {
+  background-color: #ccd9ca;
+}
+
+.diet-table .recipe {
+  width: 100px;
+  height: 100px;
+}
+
+/* Botones */
+.buttons {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Modal */
+.modal-dialog {
+  max-width: 90%;
+}
+
+.modal-content {
+  padding: 15px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .diet-table, .diet-table thead, .diet-table tbody, .diet-table th, .diet-table td, .diet-table tr {
+      display: block;
+  }
+  .diet-table th, .diet-table td {
+      box-sizing: border-box;
+      width: 100%;
+  }
+  .diet-table thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  .diet-table tr {
+      margin: 0 0 1rem 0;
+  }
+  .diet-table tr:nth-child(odd) {
+      background: #f4f4f4;
+  }
+  .diet-table td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+  }
+  .diet-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 45%;
+      padding-left: 15px;
+      font-weight: bold;
+      text-align: left;
+  }
+}
+
+/* Modal y contenido */
+.modal-dialog {
+  max-width: 90%;
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  padding: 15px;
+}
+
+@media (max-width: 600px) {
+  .modal-dialog {
+      max-width: 100%;
+      margin: 0;
+  }
 }
