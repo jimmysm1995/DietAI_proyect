@@ -137,10 +137,10 @@ export class ClientFormComponent {
                 await this.clientService.asignarEntrenamiento(
                     this.clientStore.client.idClient ?? 0
                 );
+                this.aceptar();
         } catch (error: any) {
-            // this.errorMessage = error.message;
+            this.errorMessage = error.message;
         }
-        this.aceptar();
     }
 
     clearErrorMessage() {

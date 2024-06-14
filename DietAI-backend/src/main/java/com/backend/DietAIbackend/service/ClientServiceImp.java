@@ -249,7 +249,6 @@ public class ClientServiceImp implements ClientService {
                 client.setDiet(mejorDieta);
             } else {
                 log.error("No se pudo encontrar una dieta adecuada para el cliente.");
-                throw new ServiceException("No se ha encontrado una dieta adecuada para el cliente", HttpStatus.NOT_FOUND);
             }
 
             return clientRepository.save(client);
@@ -312,7 +311,6 @@ public class ClientServiceImp implements ClientService {
 
             if (client.getTraining() == null) {
                 log.error("No se ha encontrado un entrenamiento adecuado para el cliente");
-                throw new ServiceException("No se ha encontrado un entrenamiento adecuado para el cliente", HttpStatus.NOT_FOUND);
             }
 
             return clientRepository.save(client);
