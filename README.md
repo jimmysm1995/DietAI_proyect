@@ -16,6 +16,9 @@ https://www.youtube.com/watch?v=2QOlcys-Afc&t=7s
 # Enlace con la URL de la aplicación
 https://dietai.duckdns.org
 
+# Enlace Swagger
+https://dietai.duckdns.org:8080/swagger-ui/index.html
+
 # Enlace con la URL del diseño de la aplicación
 https://www.figma.com/design/UJVd1MiDsGRj4DnYsFGRrV/Dietai?node-id=0-1&t=z1e5TH1WsnFlCBAJ-1
 
