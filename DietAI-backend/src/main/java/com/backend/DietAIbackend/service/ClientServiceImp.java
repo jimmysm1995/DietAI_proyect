@@ -301,10 +301,11 @@ public class ClientServiceImp implements ClientService {
             List<Training> trainingList = trainingRepository.findAll();
             Integer clientLevel = obtenerNivelCliente(client.getPreviousLevel());
 
+            //Busca el entrenamiento perfecto segun los dias que puede entrenar, la dificultad
             for (Training training : trainingList) {
                 if (training.getDays() == client.getTrainingTime() &&
-                        training.getTypeTraining() == client.getTypeTraining() &&
-                        clientLevel.equals(training.getDifficulty())) {
+                        (training.getTypeTraining() == client.getTypeTraining() || client.getTypeTraining().equals(TypeTraining.AMBOS)) &&
+                        clientLevel <= training.getDifficulty()) {
                     client.setTraining(training);
                 }
             }

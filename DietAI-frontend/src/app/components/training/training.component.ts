@@ -90,25 +90,22 @@ export class TrainingComponent {
                 this.ngOnInit();
             });
     }
-
+    
     async onTrainingSelected() {
         switch (this.training.typeTraining) {
             case 'GIMNASIO':
-                this.exercises = await this.filterByMuscle(
-                    await this.exerciseService.getGymExercises(),
-                    this.filterMuscle
+                this.exercises = await this.loadExercises(
+                    this.exerciseService.getGymExercises()
                 );
                 break;
             case 'CASA':
-                this.exercises = await this.filterByMuscle(
-                    await this.exerciseService.getHomeExercises(),
-                    this.filterMuscle
+                this.exercises = await this.loadExercises(
+                    this.exerciseService.getHomeExercises()
                 );
                 break;
             case 'AMBOS':
-                this.exercises = await this.filterByMuscle(
-                    await this.exerciseService.getAllExercises(),
-                    this.filterMuscle
+                this.exercises = await this.loadExercises(
+                    this.exerciseService.getAllExercises()
                 );
                 break;
             case '':
@@ -116,6 +113,13 @@ export class TrainingComponent {
                 break;
         }
     }
+    
+    private async loadExercises(exercisePromise: Promise<any>) {
+        const exercises = await exercisePromise;
+        return this.filterByMuscle(exercises, this.filterMuscle);
+    }
+    
+
     async filterByMuscle(
         exercises: Exercise[],
         filterMuscles: Muscle[]
@@ -127,7 +131,6 @@ export class TrainingComponent {
             const muscles = await this.exerciseService.findAllMusclesInExercise(
                 exercise.idExercise
             );
-
             // Verificar si el ejercicio contiene todos los músculos del filtro
             const containsAllMuscles = filterMuscles.every((filterMuscle) =>
                 muscles.some(

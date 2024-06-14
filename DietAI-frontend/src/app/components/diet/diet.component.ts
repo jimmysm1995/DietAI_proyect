@@ -7,6 +7,10 @@ import { ClientService } from 'src/app/services/client.service';
 import { SharingService } from '../../services/sharing.service';
 import { Diet } from '../../models/Diet';
 import { UserStore } from 'src/app/store/userStore';
+import { MealTimeService } from 'src/app/services/meal-time.service';
+import { DayOfWeekService } from 'src/app/services/day-of-week.service';
+import { DayOfWeek } from 'src/app/models/DayOfWeek';
+import { MealTime } from 'src/app/models/MealTime';
 
 @Component({
     selector: 'app-diet',
@@ -21,14 +25,24 @@ export class DietComponent {
         private clientStore: ClientStore,
         private clientService: ClientService,
         private userStore: UserStore,
+        private mealTimeService: MealTimeService,
+        private daysOfWeekService: DayOfWeekService,
         private sharingService: SharingService) {}
 
     public recipes: RecipeInDietResponse [] = [];
     public isModalOpened: boolean = false;
     private selectedDiet?: Diet;
     public mailtoStr = "";
+    public dayOfWeek: string[] = [];
+    public mealTime: string[] = [];
 
     ngOnInit(): void {
+        this.mealTimeService.getMealTimes().then((mealTimes) => {
+            this.mealTime = mealTimes;
+        })
+        this.daysOfWeekService.getDayOfWeek().then((daysOfWeek) => {
+            this.dayOfWeek = daysOfWeek;
+        })
         let idClient: number = parseInt(this.clientStore.getRole() || '0');
         if (idClient !== undefined) {
             this.clientService.getDietByClient(idClient).then((diet) => {
