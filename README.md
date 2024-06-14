@@ -4,6 +4,9 @@ Proyecto fin de grado Desarrollo de Aplicaciones Web 2022-2024
 # Branch Code  
 [Develope](https://github.com/jimmysm1995/DietAI_proyect/tree/develop)
 
+# Video explicativo del proyecto
+https://youtu.be/0kJax6wkEYE
+
 # PDF con el historial de los commits
 [Historial_Commits_DietAI.pdf](https://github.com/user-attachments/files/15837483/Historial_Commits_DietAI.pdf)
 
