@@ -55,7 +55,7 @@ export class ClientFormComponent {
         private goalService: GoalService,
         private clientStore: ClientStore,
         private exerciseService: ExerciseService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.injuryService.getInjuries().then((injuries) => {
@@ -95,9 +95,19 @@ export class ClientFormComponent {
 
     loadClient() {
         this.clientService.getCurrentClient().then((client: any) => {
-            
+
             this.userService.getClient(client.idUser).then(c => {
                 this.currentClient = c;
+
+
+                this.clientService.getAllergiesByClient(c.idClient || 0).then((allergies) => {
+                    this.currentClient.allergy = allergies;
+                });
+
+                this.clientService.getInjuriesByClient(c.idClient || 0).then((injuries) => {
+                    this.currentClient.injury = injuries;
+                });
+
             });
         })
     }
@@ -109,7 +119,7 @@ export class ClientFormComponent {
         //Para asignar client a clientStore espera a que la petición responda.
         try {
 
-            if(clientData.idClient){
+            if (clientData.idClient) {
                 this.clientStore.client = await this.clientService.updateClient(
                     clientData
                 )
@@ -127,13 +137,13 @@ export class ClientFormComponent {
                 await this.clientService.asignarEntrenamiento(
                     this.clientStore.client.idClient ?? 0
                 );
-        } catch (error:any) {
+        } catch (error: any) {
             // this.errorMessage = error.message;
         }
         this.aceptar();
     }
 
-        clearErrorMessage() {
+    clearErrorMessage() {
         this.errorMessage = '';
     }
 }

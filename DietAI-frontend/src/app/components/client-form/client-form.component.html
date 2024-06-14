@@ -2,12 +2,12 @@
     <div class="form-group select-group">
 
         <label for="birthDate">Fecha de nacimiento</label>
-        <input type="date" class="form-control" id="birthDate" name="birthDate" ngModel [(ngModel)]="currentClient.birthDate" required />
+        <input type="date" class="form-control" id="birthDate" name="birthDate" [(ngModel)]="currentClient.birthDate" required />
     </div>
 
     <div class="form-group select-group">
         <label for="gender">Género</label>
-        <select name="gender" id="gender" class="form-control" ngModel [(ngModel)]="currentClient.gender" required>
+        <select name="gender" id="gender" class="form-control" [(ngModel)]="currentClient.gender" required>
             <option value=""></option>
             <option *ngFor="let item of gender" value="{{item}}">{{item | transformadorEnum}}</option>
         </select>
@@ -16,17 +16,17 @@
 
     <div class="form-group select-group">
         <label for="weight">Peso</label>
-        <input type="number" class="form-control" id="weight" name="weight" placeholder="Peso (kg)" ngModel [(ngModel)]="currentClient.weight" required />
+        <input type="number" class="form-control" id="weight" name="weight" placeholder="Peso (kg)" [(ngModel)]="currentClient.weight" required />
     </div>
 
     <div class="form-group select-group">
         <label for="height">Altura</label>
-        <input type="number" class="form-control" id="height" name="height" placeholder="Altura(cm)" ngModel [(ngModel)]="currentClient.height" required />
+        <input type="number" class="form-control" id="height" name="height" placeholder="Altura(cm)" [(ngModel)]="currentClient.height" required />
     </div>
 
     <div class="form-group select-group">
         <label for="objetivo">Objetivo</label>
-        <select name="goal" id="goal" class="form-control" ngModel [(ngModel)]="currentClient.goal" required>
+        <select name="goal" id="goal" class="form-control" [(ngModel)]="currentClient.goal" required>
             <option value=""></option>
             <option *ngFor="let item of goal" value="{{item}}">{{item | transformadorEnum}}</option>
         </select>
@@ -35,21 +35,21 @@
 
     <div class="form-group select-group">
         <label for="injury">Lesiones</label>
-        <ngx-select-dropdown ngModel [(ngModel)]="currentClient.injury" [instanceId]="'instance1'" name="injury"
+        <ngx-select-dropdown [(ngModel)]="currentClient.injury" [instanceId]="'instance1'" name="injury"
             [config]="{displayKey: 'name', search: true, placeholder:'Lesiones'}" [multiple]="true" [options]="injuries"
             class="w-100"></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
         <label for="allergy">Alergias</label>
-        <ngx-select-dropdown ngModel [(ngModel)]="currentClient.allergy" [instanceId]="'instance1'" name="allergy"
-            [config]="{displayKey: 'name',  search: true, placeholder:'Alergias'}" [multiple]="true"
+        <ngx-select-dropdown [(ngModel)]="currentClient.allergy" [instanceId]="'instance1'" name="allergy"
+            [config]="{displayKey: 'name', search: true, placeholder:'Alergias'}" [multiple]="true"
             [options]="allergies" class="w-100"></ngx-select-dropdown>
     </div>
 
     <div class="form-group select-group">
         <label for="tipoDeTrabajo">Tipo de trabajo</label>
-        <select name="jobType" id="jobType" class="form-control" ngModel [(ngModel)]="currentClient.jobType">
+        <select name="jobType" id="jobType" class="form-control" [(ngModel)]="currentClient.jobType">
             <option value=""></option>
             <option *ngFor="let item of jobTypes" [value]="item">{{item | transformadorEnum}}</option>
         </select>
@@ -58,7 +58,7 @@
 
     <div class="form-group select-group">
         <label for="consumo">¿Consumes alguna de estas sustancias? </label>
-        <select name="consumedSubstances" id="consumedSubstances" class="form-control" ngModel [(ngModel)]="currentClient.consumedSubstances">
+        <select name="consumedSubstances" id="consumedSubstances" class="form-control" [(ngModel)]="currentClient.consumedSubstances">
             <option value=""></option>
             <option *ngFor="let item of consumedSubstances" [value]="item">{{item | transformadorEnum}}</option>
         </select>
@@ -67,7 +67,7 @@
 
     <div class="form-group select-group">
         <label for="nivelPrevio">Nivel Previo</label>
-        <select name="previousLevel" class="form-control" ngModel [(ngModel)]="currentClient.previousLevel">
+        <select name="previousLevel" class="form-control" [(ngModel)]="currentClient.previousLevel">
             <option value=""></option>
             <option *ngFor="let item of previusLevel" [value]="item">{{item | transformadorEnum}}</option>
         </select>
@@ -76,7 +76,7 @@
 
     <div class="form-group select-group">
         <label for="trainingTime">Tiempo para entrenar</label>
-        <select name="trainingTime" id="trainingTime" class="form-control" ngModel [(ngModel)]="currentClient.trainingTime">
+        <select name="trainingTime" id="trainingTime" class="form-control" [(ngModel)]="currentClient.trainingTime">
             <option value="1">1 día a la semana</option>
             <option value="2">2 días a la semana</option>
             <option value="3">3 días a la semana</option>
@@ -88,7 +88,7 @@
 
     <div class="form-group select-group">
         <label for="typeTraining">Lugar donde entrenar</label>
-        <select name="typeTraining" id="typeTraining" class="form-control" ngModel [(ngModel)]="currentClient.typeTraining">
+        <select name="typeTraining" id="typeTraining" class="form-control" [(ngModel)]="currentClient.typeTraining">
             <option value=""></option>
             <option *ngFor="let item of typeTraining" [value]="item">{{item | transformadorEnum}}</option>
         </select>

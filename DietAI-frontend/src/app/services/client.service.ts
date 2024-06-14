@@ -6,6 +6,8 @@ import { AltaCliente } from '../models/AltaCliente';
 import { Diet } from '../models/Diet';
 import { Training } from '../models/Training';
 import { ApiError } from '../models/ApiError';
+import { Allergy } from '../models/Allergy';
+import { Injury } from '../models/Injury';
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +91,14 @@ export class ClientService {
 
   getTrainingByClient(idClient: number):Promise<Training>{
     return axios.get(`${this.baseUrl}/getTraining/${idClient}`).then((response) => response.data);
+  }
+
+  getAllergiesByClient(idClient: number): Promise<Allergy[]> {
+    return axios.get(`${this.baseUrl}/getAllergies/${idClient}`).then((response) => response.data);
+  }
+
+  getInjuriesByClient(idClient: number): Promise<Injury[]> {
+    return axios.get(`${this.baseUrl}/getInjuries/${idClient}`).then((response) => response.data);
   }
 
 }
