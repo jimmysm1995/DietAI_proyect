@@ -6,7 +6,7 @@
         </div>
         <nav>
             <ul>
-                <li *ngIf="isLoggedIn"><a href="/home" >Perfil</a></li>
+                <li *ngIf="isLoggedIn"><a href="/home">Perfil</a></li>
                 <li *ngIf="isLoggedIn"><a role="button" (click)="logout()">Cerrar sesión</a></li>
                 <li *ngIf="!isLoggedIn"><a href="/login">Iniciar sesión</a></li>
                 <li *ngIf="!isLoggedIn"><a href="/register">Crear cuenta</a></li>
@@ -22,22 +22,17 @@
         </div>
         <!-- Menú desplegable -->
         <div class="dropdown-menu" [ngClass]="{'active': menuActive}">
-            <a
-            *ngIf="isLoggedIn"
-                role="button"
-                data-bs-toggle="modal"
-                data-bs-target="#updateProfileModal"
-                >Perfil</a
-            >
+            <a *ngIf="isLoggedIn" role="button" data-bs-toggle="modal" data-bs-target="#updateProfileModal" href="/home">
+            Perfil</a>
             <a *ngIf="isLoggedIn" role="button" (click)="logout()">Cerrar sesión</a>
-            <li *ngIf="!isLoggedIn"><a href="/login">Iniciar sesión</a></li>
-            <li *ngIf="!isLoggedIn"><a href="/register">Crear cuenta</a></li>
-            <a href="/quienesSomos">Quienes somos 2</a>
+            <a *ngIf="!isLoggedIn" href="/login">Iniciar sesión</a>
+            <a *ngIf="!isLoggedIn" href="/register">Crear cuenta</a>
+            <a href="/quienesSomos">Quienes somos</a>
             <a href="/blog">Blog</a>
             <ng-container *ngIf="isAdmin">
                 <a href="/admin">Panel Admin</a>
             </ng-container>
         </div>
     </header>
-    
+
 </div>

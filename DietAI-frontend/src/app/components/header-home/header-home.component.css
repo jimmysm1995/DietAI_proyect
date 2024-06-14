@@ -61,25 +61,24 @@ h1 > a:active, h1 > a:hover, h1 > a:visited, h1 > a:link {
 
 /* FIN MENÚ NAVEGACIÓN SUPERIOR DERECHA */
   
-
 /* *Media query para pantallas pequeñas* */
-/* @media screen and (max-width: 768px) { */
+@media screen and (max-width: 768px) {
     /* Ocultar el menú de navegación normal */
-    /* .fixed-header nav {
+    .fixed-header nav {
       display: none;
-    } */
+    }
   
     /* Estilos para el botón de menú hamburguesa */
-    /* .menu-icon {
+    .menu-icon {
       display: block;
       cursor: pointer;
       color: white;
       font-size: 1.5rem;
       padding: 10px;
-    } */
+    }
   
     /* Estilos para el menú desplegable */
-    /* .dropdown-menu {
+    .dropdown-menu {
       display: none;
       position: absolute;
       top: 99%;
@@ -89,15 +88,15 @@ h1 > a:active, h1 > a:hover, h1 > a:visited, h1 > a:link {
       background-color: #38686A;
       padding: 0;
       width: fit-content;
-    } */
+    }
   
     /* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
-    /* .dropdown-menu.active {
+    .dropdown-menu.active {
       display: block !important;
-    } */
+    }
   
     /* Estilos para los enlaces en el menú desplegable */
-    /* .dropdown-menu a {
+    .dropdown-menu a {
       text-align: center;
       display: block;
       text-decoration: none;
@@ -110,57 +109,6 @@ h1 > a:active, h1 > a:hover, h1 > a:visited, h1 > a:link {
       color: black;
       
     }
-  } */
-
-  /* Media query para pantallas pequeñas */
-@media screen and (max-width: 768px) {
-  /* Ocultar el menú de navegación normal */
-  .fixed-header nav {
-      display: none;
   }
-
-  /* Estilos para el botón de menú hamburguesa */
-  .menu-icon {
-      display: block;
-      cursor: pointer;
-      color: white;
-      font-size: 1.5rem;
-      padding: 10px;
-      position: relative; /* Para posicionar mejor el menú desplegable */
-  }
-
-  /* Estilos para el menú desplegable */
-  .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      z-index: 1120;
-      width: 100%; /* Asegura que el menú ocupe todo el ancho disponible */
-      background-color: #38686A;
-      padding: 0;
-      margin: 0;
-  }
-
-  /* Mostrar el menú desplegable cuando el botón de menú hamburguesa es clickeado */
-  .dropdown-menu.active {
-      display: block !important;
-  }
-
-  /* Estilos para los enlaces en el menú desplegable */
-  .dropdown-menu a {
-      text-align: center;
-      display: block;
-      text-decoration: none;
-      color: white;
-      padding: 0.75rem 1rem; /* Ajuste del padding para mejor usabilidad */
-      border-bottom: 1px solid #79b7b9; /* Añadir borde para separar los enlaces */
-  }
-
-  .dropdown-menu a:hover {
-      background-color: #79b7b9;
-      color: black;
-  }
-}
-
+  
   
