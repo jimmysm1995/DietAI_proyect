@@ -152,7 +152,6 @@ public class ClientController {
     @Operation(summary = "Obtiene las lesiones del cliente")
     public ResponseEntity<List<InjuryDto>> getInjuriesByClient(@PathVariable Long id){
         Client client = clientService.findById(id);
-
         return ResponseEntity.ok().body(injuryMapper.listModelToDto(clientService.getInjuriesByClient(client)));
     }
 
