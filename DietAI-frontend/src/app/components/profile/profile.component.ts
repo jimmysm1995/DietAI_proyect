@@ -11,7 +11,7 @@ import { QuotesService } from '../../services/quotes.service';
   styleUrls: ['./profile.component.css'],
 
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   public user: User = new User();
   public frase: string = '';
   constructor(
@@ -37,12 +37,6 @@ export class ProfileComponent {
   cerrarUpdateProfile() {
     let element = document.getElementById('closeUpdateProfile');
     element?.click();
-  }
-
-  obtenerDieta() {
-    // this.dietServicce.getDieta().then(dieta => {
-      
-    // })
   }
 
 }

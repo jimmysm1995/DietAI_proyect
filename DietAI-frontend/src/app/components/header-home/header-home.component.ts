@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { RoleStore } from 'src/app/store/roleStore';
+import { UserStore } from 'src/app/store/userStore';
+
 
 @Component({
   selector: 'app-header-home',
@@ -15,7 +17,8 @@ export class HeaderHomeComponent {
     private elementRef: ElementRef,
     private router : Router,
     private userService : UserService,
-    private roleStore: RoleStore) {}
+    private roleStore: RoleStore,
+    private userStore: UserStore) {}
     
   isAdmin: boolean = false; 
   isLoggedIn: boolean = false;
@@ -49,6 +52,8 @@ export class HeaderHomeComponent {
 
   logout() {
     localStorage.removeItem('sesion');
+    this.roleStore.deleteRole();
+    this.userStore.updateUser(new User());
     this.router.navigate(['/login']);
   }
 
