@@ -5,7 +5,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Limita el número de líneas a mostrar */
     -webkit-box-orient: vertical;
-    white-space: normal; /* Permite que el texto se muestre en múltiples líneas */
+    white-space: normal; /* El texto se muestra en múltiples líneas */
 }
 
 .blogs{

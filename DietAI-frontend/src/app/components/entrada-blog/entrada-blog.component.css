@@ -9,13 +9,13 @@
     margin: 0 auto;
 
     h1 {
-        color: --primary;
+        color: #38686A;
         font-weight: bold;
     }
 
     h2,
     h3 {
-        color: --primary;
+        color: #38686A;
         padding-top: 2rem;
     }
 
