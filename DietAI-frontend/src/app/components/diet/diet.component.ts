@@ -56,11 +56,11 @@ export class DietComponent {
 
     generateEmail() {
 
-        this.mailtoStr = `mailto:${this.userStore.user.email}?Subject=Take a look to my shopping list&body=`;
-        
+        this.mailtoStr = `mailto:${this.userStore.user.email}?Subject="Take a look to my shopping list"&body=`;
+
         this.sharingService.generateEmailBody(this.selectedDiet?.idDiet || 0).then((emailBody) => {
             this.mailtoStr += emailBody;
-            document.getElementById('mailLink')?.click();
+            setTimeout(() => document.getElementById('mailLink')?.click(), 0);
         });
     }
 
