@@ -140,4 +140,20 @@ public class ClientController {
         return ResponseEntity.ok().body(trainingMapper.modelToDto(clientService.getTrainingByClient(client)));
     }
 
+    @GetMapping("/getAllergies/{id}")
+    @Operation(summary = "Obtiene las alergias del cliente")
+    public ResponseEntity<List<AllergyDto>> getAllergiesByClient(@PathVariable Long id){
+        Client client = clientService.findById(id);
+
+        return ResponseEntity.ok().body(allergyMapper.listModelToDto(clientService.getAllergiesByClient(client)));
+    }
+
+    @GetMapping("/getInjuries/{id}")
+    @Operation(summary = "Obtiene las lesiones del cliente")
+    public ResponseEntity<List<InjuryDto>> getInjuriesByClient(@PathVariable Long id){
+        Client client = clientService.findById(id);
+
+        return ResponseEntity.ok().body(injuryMapper.listModelToDto(clientService.getInjuriesByClient(client)));
+    }
+
 }

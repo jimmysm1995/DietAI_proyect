@@ -11,8 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /*
+DESARROLLO
 http://localhost:8080/v3/api-docs
 http://localhost:8080/swagger-ui/index.html
+***********************************************
+PRODUCCION
+https://dietai.duckdns.org:8080/v3/api-docs
+https://dietai.duckdns.org:8080/swagger-ui/index.html
  */
 @Configuration
 public class OpenApiConf {

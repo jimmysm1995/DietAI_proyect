@@ -81,22 +81,24 @@ public class UserServiceImp implements UserService {
      * @return
      */
     public User update(User user) {
-        try {
-            userRepository.findById(user.getIdUser());
-        } catch (ServiceException e){
+        // Verificar que el usuario existe
+        Optional<User> existingUserOptional = userRepository.findById(user.getIdUser());
+        if (!existingUserOptional.isPresent()) {
             throw new ServiceException("No existe el Usuario en cuestión", HttpStatus.NOT_FOUND);
         }
 
+        // Verificar que el nombre de usuario no esté en conflicto con otro usuario existente
         List<User> userList = userRepository.findAll();
-
-        userList.forEach(usuario -> {
-            if (usuario.getUsername().equals(user.getUsername()) && (!usuario.getIdUser().equals(user.getIdUser()))){
+        for (User existingUser : userList) {
+            if (existingUser.getUsername().equals(user.getUsername()) && !existingUser.getIdUser().equals(user.getIdUser())) {
                 throw new ServiceException("Ya existe un usuario con ese nombre", HttpStatus.CONFLICT);
             }
-        });
+        }
 
+        // Guardar y retornar el usuario actualizado
         return userRepository.save(user);
     }
+
 
     /**
      * Elimina al usuario

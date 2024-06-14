@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -288,29 +289,6 @@ public class ClientServiceImp implements ClientService {
     }
 
 
-//    private boolean hasMatchingAllergy(List<ClientAllergy> clientAllergies, List<DietAllergy> dietAllergies) {
-//        //Creamos un contador para ir contando las alergias que coinciden
-//        int dietSafe = 0;
-//        // Si no se encuentra ninguna coincidencia, devolver false
-//        if (clientAllergies.isEmpty()) {
-//            return true;
-//        }
-//
-//        for (ClientAllergy clientAllergy : clientAllergies) {
-//            for (DietAllergy dietAllergy : dietAllergies) {
-//                if (clientAllergy.getAllergy().getIdAllergy().equals(dietAllergy.getAllergy().getIdAllergy())) {
-//                    // Si hay una coincidencia de alergia, añadimos a la lista
-//                    dietSafe++;
-//                }
-//            }
-//        }
-//        // Si el total de las alergias del cliente coinciden con las de la dieta, devuelve true
-//        if (clientAllergies.size() == dietSafe){
-//            return true;
-//        }
-//        return false; // En el caso de que el cliente no tenga ninguna alergia, devuelve false para todas las recetas
-//    }
-
     /**
      * Metodo para asignar el entrenamiento al cliente
      *
@@ -343,8 +321,8 @@ public class ClientServiceImp implements ClientService {
     }
 
     /**
-     *
      * Metodo para obtener el nivel de entrenamiento del cliente para asignar un entrenamiento acorde.
+     *
      * @param previousLevel
      * @return
      */
@@ -368,6 +346,7 @@ public class ClientServiceImp implements ClientService {
 
     /**
      * Metodo que devuelve el client segun el usuario
+     *
      * @param userId
      * @return
      */
@@ -381,8 +360,8 @@ public class ClientServiceImp implements ClientService {
     }
 
     /**
-     *
      * Metodo para devolver la dieta del usuario
+     *
      * @param client
      * @return
      */
@@ -392,14 +371,47 @@ public class ClientServiceImp implements ClientService {
     }
 
     /**
-     *
      * Metodo para devolver el entrenamiento del usuario
+     *
      * @param client
      * @return
      */
     @Override
     public Training getTrainingByClient(Client client) {
         return client.getTraining();
+    }
+
+    /**
+     * Metodo para devolver las alergias del usuario
+     *
+     * @param client
+     * @return
+     */
+    @Override
+    public List<Allergy> getAllergiesByClient(Client client) {
+
+        List<Allergy> allergyList = new ArrayList<>();
+        for (ClientAllergy clientAllergy: client.getClientAllergy()
+        ) {
+            allergyList.add(clientAllergy.getAllergy());
+        }
+        return allergyList;
+    }
+
+    /**
+     * Metodo para devolver las lesiones del usuario
+     *
+     * @param client
+     * @return
+     */
+    @Override
+    public List<Injury> getInjuriesByClient(Client client) {
+        List<Injury> injuryList = new ArrayList<>();
+        for (ClientInjury clientInjury: client.getClientInjury()
+        ) {
+            injuryList.add(clientInjury.getInjury());
+        }
+        return injuryList;
     }
 
 }

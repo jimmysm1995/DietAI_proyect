@@ -13,4 +13,7 @@ public interface ClientService extends ICrudService <Client, Long>{
     Client findCurrentClient(long userId);
     Diet getDietByUser(Client client);
     Training getTrainingByClient(Client client);
+    List<Allergy> getAllergiesByClient(Client client);
+
+    List<Injury> getInjuriesByClient(Client client);
 }

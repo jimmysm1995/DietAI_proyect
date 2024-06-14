@@ -43,17 +43,16 @@ public class SecurityConfig {
         http.sessionManagement((sessionManagement) ->
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        try {
+        http.authorizeHttpRequests()
+                .requestMatchers("/auth/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .anyRequest()
+                .authenticated();
+
+//        try {
             http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        } catch (SecurityException e){
-            throw e;
-        }
-
-
-//        http.authorizeHttpRequests()
-//                .requestMatchers("/auth/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
-//                .anyRequest()
-//                .authenticated();
+//        } catch (SecurityException e){
+//            throw e;
+//        }
 
         return http.build();
     }
