@@ -1,70 +1,56 @@
-
-<div *ngFor="let dia of dias">
-    <h4>Día: {{dia}}</h4>
-    <div class="container">
-        <a *ngFor="let training of trainings | filterTraining: dia" 
-            (click)="mostrarEntrenamiento(training)"
-            role="button"
-            data-bs-toggle="modal"
-            data-bs-target="#modalEntrenamiento"
-        >
-        <div class="pic" [ngStyle]="{'background-image': 'url(' + training.exercise.imgExercise + ')'}"></div>
-        <p class="exerciseData"><b>{{training.exercise.name}}</b></p>
-        <p class="exerciseData">Sets: {{training.sets}}</p>
-        <p class="exerciseData">Repeticiones: {{training.reps}}</p>
-        </a>
-    </div>
+<div *ngIf="errorMessage" class="alert alert-danger errorMessage">
+    {{ errorMessage }}
 </div>
+<div *ngIf="!errorMessage">
+    <div *ngFor="let dia of dias">
+        <h4>Día: {{dia}}</h4>
+        <div class="container">
+            <a *ngFor="let training of trainings | filterTraining: dia" (click)="mostrarEntrenamiento(training)"
+                role="button" data-bs-toggle="modal" data-bs-target="#modalEntrenamiento">
+                <div class="pic" [ngStyle]="{'background-image': 'url(' + training.exercise.imgExercise + ')'}"></div>
+                <p class="exerciseData"><b>{{training.exercise.name}}</b></p>
+                <p class="exerciseData">Sets: {{training.sets}}</p>
+                <p class="exerciseData">Repeticiones: {{training.reps}}</p>
+            </a>
+        </div>
+    </div>
 
-<div
-    class="modal fade modal-backdrop"
-    id="modalEntrenamiento"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Entrenamiento</h5>
+    <div class="modal fade modal-backdrop" id="modalEntrenamiento" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Entrenamiento</h5>
 
-                <button
-                    type="button"
-                    data-bs-dismiss="modal"
-                    class="btn btn-danger btn-icon ms-2"
-                >
-                    <span class="fas fa-times-circle"></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <img
-                                    style="
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-icon ms-2">
+                        <span class="fas fa-times-circle"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img style="
                                         width: 100%;
                                         margin-right: 25px;
                                         margin-bottom: 5px;
                                         border: 1px solid lightgrey;
-                                    "
-                                    src={{training.exercise.imgExercise}}
-                                    alt="Aperturas de pectoral Trx"
-                                />
-                            </div>
-                            <div class="col-md-12" style="text-align: justify">
-                                <p></p>
-                                <p><strong>POSICIÓN INICIAL:</strong></p>
-                                <p>
-                                    {{training.exercise.initialPosition}}
-                                </p>
-                                <p><strong> EJECUCIÓN:</strong></p>
-                                <p>
-                                    {{training.exercise.execution}}
-                                </p>
-                                <strong>CONSEJOS:</strong> {{training.exercise.advices}}
-                                <p></p>
+                                    " src={{training.exercise.imgExercise}} alt="Aperturas de pectoral Trx" />
+                                </div>
+                                <div class="col-md-12" style="text-align: justify">
+                                    <p></p>
+                                    <p><strong>POSICIÓN INICIAL:</strong></p>
+                                    <p>
+                                        {{training.exercise.initialPosition}}
+                                    </p>
+                                    <p><strong> EJECUCIÓN:</strong></p>
+                                    <p>
+                                        {{training.exercise.execution}}
+                                    </p>
+                                    <strong>CONSEJOS:</strong> {{training.exercise.advices}}
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
                     </div>

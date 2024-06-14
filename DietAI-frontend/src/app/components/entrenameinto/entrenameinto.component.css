@@ -59,6 +59,10 @@
     text-decoration: none;
 }
 
+.errorMessage {
+    display: flex;
+}
+
 @media screen and (min-width: 1324px) {
     .pic {
         height: 300px;

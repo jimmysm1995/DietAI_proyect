@@ -1,43 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component } from '@angular/core';
 import { TrainingService } from 'src/app/services/training.service';
-import { Training, TrainingResponse } from 'src/app/models/Training';
-import { FilterTrainingPipe } from './entrenamientoPipe';
-import { ClientStore } from 'src/app/store/clientStore';
-import { Client } from '../../models/Client';
+import { TrainingResponse } from 'src/app/models/Training';
 import { ClientService } from 'src/app/services/client.service';
-import { UserStore } from 'src/app/store/userStore';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-entrenameinto',
   templateUrl: './entrenameinto.component.html',
   styleUrls: ['./entrenameinto.component.css']
 })
-export class EntrenameintoComponent {
-  public training : TrainingResponse = new TrainingResponse();
-  public trainings: TrainingResponse[] =[];
-  public dias: number[]=[];
-  constructor( 
+export class EntrenameintoComponent implements AfterViewInit {
+  public training: TrainingResponse = new TrainingResponse();
+  public trainings: TrainingResponse[] = [];
+  public dias: number[] = [];
+  public errorMessage = '';
+
+  constructor(
     private trainingService: TrainingService,
-    private clientStore: ClientStore,
-    private userStore: UserStore,
+    private userService: UserService,
     private clientService: ClientService
-  ){ 
+  ) {
   }
 
-  ngOnInit(): void {
-    let idClient: number = parseInt(this.clientStore.getRole() || '0');
-    this.clientService.getTrainingByClient(idClient).then((training) => {
-      this.trainingService.getById(training.idTraining || 0).then((trainings) => {
-        this.dias = trainings.map((training) => training.orderWeek).filter((valor, indice, array) => {
-          return array.indexOf(valor) === indice;
-        }).sort();
-        this.trainings = trainings
+  ngAfterViewInit(): void {
+    this.errorMessage = '';
+
+    this.clientService.getCurrentClient().then((user: any) => {
+
+      this.userService.getClient(user.idUser).then((client) => {
+
+        this.clientService.getTrainingByClient(client.idClient || 0).then((training) => {
+
+          if (!training) {
+            this.errorMessage = 'No se han encontrado entrenamientos.';
+            return;
+          }
+
+
+          this.trainingService.getById(training.idTraining || 0).then((trainings) => {
+            this.dias = trainings.map((training) => training.orderWeek).filter((valor, indice, array) => {
+              return array.indexOf(valor) === indice;
+            }).sort();
+            this.trainings = trainings
+          })
+
+        })
+
       })
+      
     })
+
   }
 
-  mostrarEntrenamiento(training: TrainingResponse){
+  mostrarEntrenamiento(training: TrainingResponse) {
     this.training = training
+  }
+
+  clearErrorMessage() {
+    this.errorMessage = '';
   }
 
 }
