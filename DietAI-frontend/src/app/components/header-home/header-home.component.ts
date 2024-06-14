@@ -12,7 +12,7 @@ import { UserStore } from 'src/app/store/userStore';
   styleUrls: ['./header-home.component.css']
 })
 export class HeaderHomeComponent {
-  public menuActive:boolean = true;
+  public menuActive:boolean = false;
   constructor(
     private elementRef: ElementRef,
     private router : Router,
