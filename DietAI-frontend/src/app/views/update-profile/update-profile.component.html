@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Actualizar Perfil</h5>
+                <h5 class="modal-title">Perfil</h5>
                 <button
                 type="button"
                 data-bs-dismiss="modal"
@@ -16,21 +16,16 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="username">Editar nombre de usuario:</label>
-                        <input type="text" class="form-control" id="username" placeholder="" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
+                        <label for="username">Nombre de usuario:</label>
+                        <input type="text" class="form-control" id="username" placeholder="" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" disabled="true">
                     </div>
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
                         <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" disabled="true">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="password">Editar Contraseña:</label>
-                        <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
-                    </div> -->
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
                 <button type="button" class="btn btn-danger" (click)="deleteUser()">Eliminar Perfil</button>
             </div>
         </div>
