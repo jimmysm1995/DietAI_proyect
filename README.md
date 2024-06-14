@@ -12,3 +12,10 @@ https://chain-foe-b55.notion.site/99ee2e2441354e6f9132996a8a9f636c?v=d786020c440
 
 # Enlace al video del ckeckpoint
 https://www.youtube.com/watch?v=2QOlcys-Afc&t=7s
+
+# Enlace con la URL de la aplicación
+https://dietai.duckdns.org
+
+# Enlace con la URL del diseño de la aplicación
+https://www.figma.com/design/UJVd1MiDsGRj4DnYsFGRrV/Dietai?node-id=0-1&t=z1e5TH1WsnFlCBAJ-1
+
