@@ -10,7 +10,7 @@ import { RecipeWithIngredientsRequest } from 'src/app/models/RecipeWithIngredien
   styleUrls: ['./recipe.component.css']
 })
 
-export class RecipeComponent {
+export class RecipeComponent implements OnInit {
   @Input() recipe: Recipe = new Recipe(); // Recibe la receta como entrada desde el componente padre
 
   public isDataLoaded: boolean = false;
@@ -18,7 +18,7 @@ export class RecipeComponent {
   public steps: string[] = [];
 
   ngOnInit() {
-    
+    this.firstLoad();
   }
 
   public recipeEjemplo = {
@@ -39,7 +39,6 @@ export class RecipeComponent {
       this.steps = this.dividirPasos(recipe.recipe.steps);
       this.isDataLoaded = true;
       this.completeRecipe = recipe;
-      console.log(this.completeRecipe)
     })
   }
 

@@ -1,35 +1,19 @@
-
-<a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe" (click)="firstLoad()">{{ recipe.name }}</a>
-<div
-    class="modal fade modal-backdrop" 
-    [id]="'recipeModal' + recipe.idRecipe"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="recipeModalLabel"
-    aria-hidden="true"
->
+<a class="recipeButton" role="button" data-bs-toggle="modal" [attr.data-bs-target]="'#recipeModal' + recipe.idRecipe"
+    (click)="firstLoad()">{{ recipe.name }}</a>
+<div class="modal fade modal-backdrop" [id]="'recipeModal' + recipe.idRecipe" tabindex="-1" role="dialog"
+    aria-labelledby="recipeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="recipeModalLabel">
                     {{ recipe.name }}
                 </h5>
-                <a
-                    role="button"
-                    id="close"
-                    class="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    X
-                </a>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-icon ms-2">
+                    <span class="fas fa-times-circle"></span>
+                </button>
             </div>
             <div class="modal-body">
-                <img
-                    [src]="completeRecipe.recipe.imageUrl"
-                    alt="{{ recipe.name }}"
-                    class="img-fluid mb-3"
-                />
+                <img [src]="completeRecipe.recipe.imageUrl" alt="{{ recipe.name }}" class="img-fluid mb-3" />
                 <p>{{ completeRecipe.recipe.calories }} calorías</p>
                 <h6>Ingredientes:</h6>
                 <ul>
