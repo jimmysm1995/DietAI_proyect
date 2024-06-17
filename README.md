@@ -25,3 +25,6 @@ https://dietai.duckdns.org:8080/swagger-ui/index.html
 # Enlace con la URL del diseño de la aplicación
 https://www.figma.com/design/UJVd1MiDsGRj4DnYsFGRrV/Dietai?node-id=0-1&t=z1e5TH1WsnFlCBAJ-1
 
+# Enlace presentación
+https://view.genially.com/666ff0d1a1658800142daf3b/presentation-presentacion-dietai
+
